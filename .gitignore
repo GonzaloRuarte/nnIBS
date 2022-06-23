@@ -27,3 +27,6 @@ visualsearch/utils/deepgaze/centerbias.npy
 
 # Target similarity maps
 data/target_similarity_maps
+
+# Saliency maps
+data/saliency
