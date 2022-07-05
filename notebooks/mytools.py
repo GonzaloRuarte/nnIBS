@@ -58,3 +58,20 @@ def add_responses(scanpaths_path, responses_path, calculate_features=True):
                 #break
             with open(os.path.join(responses_path, 'human_scanpaths', file), "w") as outfile:
                 json.dump(subject_scanpaths, outfile, cls=NpEncoder)
+
+def get_responses_features(subjs):
+    df = []
+    for subj, imgs in subjs.items():
+        for img, data in imgs.items():
+            upd = {'subj': subj, 
+                    'img': img,
+                    'max_fixations': data['max_fixations'],
+                    'target_found': data['target_found'],
+                    'target_found_response': data['target_found_response'],
+                    'response_size': data['response_size'],
+                    'distance_to_target': data['distance_to_target'],
+                    'delta_time_response': data['delta_time_response']
+                    }
+            df.append(upd)
+    return df
+    
