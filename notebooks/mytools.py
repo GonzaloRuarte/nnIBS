@@ -1,10 +1,9 @@
-from distutils import dist
 import os
 import json
 from turtle import screensize
 import numpy as np
 import pandas as pd
-from scripts.loader import load_dict_from_json
+from scripts.loader import load_dict_from_json, load_human_scanpaths
 
 #class Interiors():
 #    def __init__(self) -> None:
@@ -36,7 +35,27 @@ def distance_to_target(trial):
 def target_found_response(target_box, response, response_size):
     x1, y1, x2, y2 = target_box
     return None
-        
+
+def dimensions_check(scanpaths_path, img_size_height=768, img_size_width=1024):
+    subjs = load_human_scanpaths(scanpaths_path)
+    lim_sup_x, lim_inf_x, lim_sup_y, lim_inf_y = [], [], [], []
+    for subj in subjs.keys():
+        for img in subjs[subj].keys():
+            if np.array(subjs[subj][img]['X']).max() > img_size_width:
+                lim_sup_x.append((subj, img))
+            if np.array(subjs[subj][img]['X']).min() < 0:
+                lim_inf_x.append((subj, img))
+            if np.array(subjs[subj][img]['Y']).max() > img_size_height:
+                lim_sup_y.append((subj, img))
+            if np.array(subjs[subj][img]['Y']).min() < 0:
+                lim_inf_y.append((subj, img))
+    if any(map(lambda x: len(x) > 0, [lim_sup_x, lim_inf_x, lim_sup_y, lim_inf_y])):
+        print('There are some subjects with some images with coordinates out of bounds. Potentially wrong indexes X and Y.')
+        return lim_sup_x, lim_inf_x, lim_sup_y, lim_inf_y       
+    else:
+        print('Dimesions are OK, X: columns, Y: rows')
+        return None
+
 def add_responses(scanpaths_path, responses_path, calculate_features=True):
     responses = pd.read_csv(os.path.join(responses_path, 'responses_data.csv')).set_index(['subj_id','image'])
     for file in os.listdir(scanpaths_path):
