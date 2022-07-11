@@ -24,18 +24,20 @@ def distance_to_target(trial):
     y_target = (trial['target_bbox'][3] - trial['target_bbox'][1]) / 2 + trial['target_bbox'][1]
     try:
         #return float(np.sqrt((x_target - trial['response_X'])**2 + (y_target - trial['response_Y'])**2 ))
-        return np.linalg.norm(np.array([x_target, y_target]) - np.array([trial['response_X'], trial['response_Y']]))
+        return np.linalg.norm(np.array([x_target, y_target]) - np.array([trial['response_x'], trial['response_y']]))
     except TypeError:
         print(trial['X'])
-        print(trial['response_X'])
-        print(type(trial['response_X']))
+        print(trial['response_x'])
+        print('Tipo de dato de response X: ', type(trial['response_X']))
         print(x_target)
         print(type(x_target))
 
-def target_found_response(target_box, response, response_size):
-    x1, y1, x2, y2 = target_box
-    return None
-
+def target_found_response(trial):
+    x1, y1, x2, y2  = trial['target_bbox']
+    side_target_x, side_target_y = x2 - x1, y2 - y1
+    assert side_target_x == side_target_y; 'Target box is not a square'
+    return bool(trial['distance_to_target'] <= (side_target_x/2 + trial['response_size']))
+    
 def dimensions_check(scanpaths_path, img_size_height=768, img_size_width=1024):
     subjs = load_human_scanpaths(scanpaths_path)
     lim_sup_x, lim_inf_x, lim_sup_y, lim_inf_y = [], [], [], []
@@ -72,8 +74,12 @@ def add_responses(scanpaths_path, responses_path, calculate_features=True):
                 screen_height, screen_width = float(val['screen_height']), float(val['screen_width'])
                 image_height, image_width   = float(val['image_height']), float(val['image_width'])
                 offset_height, offset_width = (screen_height - image_height)/2, (screen_width-image_width)/2
-                val['response_X']           = float(responses.loc[subj_id, img]['response_x']) - offset_width
-                val['response_Y']           = float(responses.loc[subj_id, img]['response_y']) - offset_height
+                val['response_x'] = float(responses.loc[subj_id, img]['response_x']) - offset_width
+                val['response_y'] = float(responses.loc[subj_id, img]['response_y']) - offset_height
+                #val['response_X'] = list(val['X']).append(val['response_x'])
+                #print('Tipo de dato de X: ', type(val['X']))
+                #break
+                #val['response_Y'] = list(val['Y']).append(val['response_y'])
                 # previo a la correccion por offset
                 #val['response_X']      = float(responses.loc[subj_id, img]['response_x'])
                 #val['response_Y']      = float(responses.loc[subj_id, img]['response_y'])
@@ -82,10 +88,9 @@ def add_responses(scanpaths_path, responses_path, calculate_features=True):
                 val['response_circle'] = responses.loc[subj_id, img]['response_time_circle']
                 if calculate_features:
                     val['distance_to_target']  = distance_to_target(val)
-                    val['target_found_response'] = bool(val['distance_to_target']  <= val['response_size']) #target_found_response(val)
-                    #val['confidence_score']    = 0
+                    val['target_found_response'] = target_found_response(val)
+                    #val['surface_covered']    = 0
                     val['delta_time_response'] = val['response_circle'] - val['response_click']
-                # update dict - no estoy seguro que sea necesario
                 
                 subject_scanpaths[img].update(val)
                 #print(subject_scanpaths[img])
@@ -105,9 +110,16 @@ def get_responses_features(subjs):
                     'response_size': data['response_size'],
                     'distance_to_target': data['distance_to_target'],
                     'delta_time_response': data['delta_time_response'],
-                    'response_x': data['response_X'],
-                    'response_y': data['response_Y'], 
+                    'response_x': data['response_x'],
+                    'response_y': data['response_y'], 
                     }
             df.append(upd)
     return pd.DataFrame(df)
+
+def get_trial_scanpath_numpy(subject, image):
+    pass
+
+def plot_response(subject, image, ax=None):
+    
+    pass
     
