@@ -1,13 +1,21 @@
 import os
 import json
+import glob
 from turtle import screensize
 import numpy as np
 import pandas as pd
-from scripts.loader import load_dict_from_json, load_human_scanpaths
+import cv2 as cv
+import matplotlib.pyplot as plt
+
+from scripts.loader import load_dict_from_json, load_human_scanpaths, load_trials_properties
+from matplotlib.patches import Rectangle, Circle
 
 #class Interiors():
 #    def __init__(self) -> None:
 
+def str2list(s):
+    ls = s.lstrip('[').rstrip(']').split(',')
+    return [float(x) for x in ls]
 class NpEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, np.integer):
@@ -38,7 +46,7 @@ def target_found_response(trial):
     assert side_target_x == side_target_y; 'Target box is not a square'
     return bool(trial['distance_to_target'] <= (side_target_x/2 + trial['response_size']))
     
-def dimensions_check(scanpaths_path, img_size_height=768, img_size_width=1024):
+def dimensions_check_scapaths(scanpaths_path, img_size_height=768, img_size_width=1024):
     subjs = load_human_scanpaths(scanpaths_path)
     lim_sup_x, lim_inf_x, lim_sup_y, lim_inf_y = [], [], [], []
     for subj in subjs.keys():
@@ -57,18 +65,29 @@ def dimensions_check(scanpaths_path, img_size_height=768, img_size_width=1024):
     else:
         print('Dimesions are OK, X: columns, Y: rows')
         return None
+    
+def dimensions_check_response():
+    # las respuestas son el 0,0 abajo a la izquierda o arriba a la izquierda?
+    pass
+
+def dimensions_check_target_bbox():
+    pass
 
 def add_responses(scanpaths_path, responses_path, calculate_features=True):
     responses = pd.read_csv(os.path.join(responses_path, 'responses_data.csv')).set_index(['subj_id','image'])
+    trials_data = load_trials_properties(os.path.join(responses_path, '..', 'trials_properties.json'))
+    trials_data = pd.DataFrame(trials_data).set_index('image')
     for file in os.listdir(scanpaths_path):
         if file.endswith(".json"):
             scanpaths_file = os.path.join(scanpaths_path, file)
             subj_id = int(file.split('_')[-2][-2:])
             print('subj_id:', subj_id)
-            print(scanpaths_file)
+            print('file: ', scanpaths_file)
             subject_scanpaths = load_dict_from_json(scanpaths_file)
             for img, val in subject_scanpaths.items():
                 val['subject_name']    = responses.loc[subj_id, img]['subj']
+                val['initial_fixation_row'] = trials_data.loc[img, 'initial_fixation_row']
+                val['initial_fixation_column'] = trials_data.loc[img, 'initial_fixation_column']
                 # necesito corregir por el tamaño de la pantalla
                 # DUDA: el target bbox esta en tamaño pantalla?
                 screen_height, screen_width = float(val['screen_height']), float(val['screen_width'])
@@ -119,7 +138,55 @@ def get_responses_features(subjs):
 def get_trial_scanpath_numpy(subject, image):
     pass
 
-def plot_response(subject, image, ax=None):
+# plot funcs
+# TODO sacar el hardcodeo del tamaño de la pantalla en alto
+def plot_trial_subject_response(subj, image_name, data_path, resp_path, y_correction = False,
+                                show_scanpath = True, ax=None):
+    #if ax is not None:
+    #    #ax = plt.gca()
     
+
+    #subj = 41
+    #image_name = 'grayscale_100_oliva.jpg' 
+    subjs_response = load_human_scanpaths(os.path.join(resp_path, 'human_scanpaths'))
+    target_f = subjs_response[subj][image_name]['target_found']
+    max_fix  = subjs_response[subj][image_name]['max_fixations']-1
+    ty, tx = subjs_response[subj][image_name]['target_bbox'][:2]
+    ry, rx = subjs_response[subj][image_name]['response_x'], subjs_response[subj][image_name]['response_y']
+    r = subjs_response[subj][image_name]['response_size']
+    scanpath_x = np.array(subjs_response[subj][image_name]['X'])
+    scanpath_y = np.array(subjs_response[subj][image_name]['Y'])
+
+    img = cv.imread(os.path.join(data_path, 'images',image_name))
+    tmp_files = glob.glob(os.path.join(data_path, 'templates', image_name[:-4] + '*'))
+    tmp = cv.imread(tmp_files[0])
+    
+    if ax is None:
+        _, ax = plt.subplots(1,2, figsize=(15,10), gridspec_kw={'width_ratios': [3, 1]})
+    ax[0].imshow(img, cmap='gray');
+    ax[0].add_patch(Rectangle((tx,ty), tmp.shape[1], tmp.shape[0], fill=False, edgecolor='red', linewidth=3))
+    if y_correction:
+        ax[0].add_patch(Circle((rx,768-ry), r, fill=True, edgecolor='blue', linewidth=3, alpha=0.5))
+    else:
+        ax[0].add_patch(Circle((rx,ry), r, fill=True, edgecolor='blue', linewidth=3, alpha=0.5))    
+    if show_scanpath:
+        for n, (x, y) in enumerate(zip(scanpath_x, scanpath_y)):
+            ax[0].plot(x, y, 'bo',alpha=0.9, markersize=10)
+            if n != 0:
+                ax[0].plot([x_prev, x], [y_prev, y], 'r--', alpha=0.9, linewidth=2)
+            x_prev, y_prev = x, y
+        
+        ax[0].text(3, 8, f'Target found: {target_f}', style='italic',
+                    bbox={'facecolor': 'blue', 'alpha': 0.4, 'pad': 10})
+        ax[1].text(3, 8, f'Saccadic threshold: {max_fix}', style='italic',
+                    bbox={'facecolor': 'blue', 'alpha': 0.4, 'pad': 10})
+        
+    #ax[0].plot(x_init, y_init, 'g')
+    ax[1].imshow(tmp, cmap='gray');
+    
+def plot_image_responses():
+    pass
+
+def plot_all_responses():
     pass
     
