@@ -99,17 +99,17 @@ def load_human_scanpaths(human_scanpaths_dir, human_subject=None):
 
     return human_scanpaths
 
-def load_trials_properties(trials_properties_file, image_name, image_range, human_scanpaths, checkpoint):
+def load_trials_properties(trials_properties_file, image_name=None, image_range=None, human_scanpaths=None, checkpoint=None):
     trials_properties = load_dict_from_json(trials_properties_file)
     
-    if checkpoint:
+    if checkpoint is not None:
         trials_properties = checkpoint['trials_properties']
     elif image_name is not None:
         trials_properties = get_trial_properties_for_image(trials_properties, image_name)
     elif image_range is not None:
         trials_properties = get_trial_properties_in_range(trials_properties, image_range)
     
-    if human_scanpaths:
+    if human_scanpaths is not None:
         trials_properties = get_trial_properties_for_subject(trials_properties, human_scanpaths)
 
     return trials_properties
