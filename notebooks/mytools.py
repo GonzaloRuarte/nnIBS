@@ -17,6 +17,7 @@ from matplotlib.patches import Rectangle, Circle
 def str2list(s):
     ls = s.lstrip('[').rstrip(']').split(',')
     return [float(x) for x in ls]
+
 class NpEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, np.integer):
@@ -26,6 +27,11 @@ class NpEncoder(json.JSONEncoder):
         if isinstance(obj, np.ndarray):
             return obj.tolist()
         return super(NpEncoder, self).default(obj)
+
+def distance_to_last_fix(trial):
+    x_target = trial['X'][-1]
+    y_target = trial['Y'][-1]
+    return np.linalg.norm(np.array([x_target, y_target]) - np.array([trial['response_x'], trial['response_y']]))
 
 def distance_to_target(trial):
     # trial is the json file of a single trial
@@ -108,6 +114,8 @@ def add_responses(scanpaths_path, responses_path, calculate_features=True):
                 val['response_circle'] = responses.loc[subj_id, img]['response_time_circle']
                 if calculate_features:
                     val['distance_to_target']  = distance_to_target(val)
+                    val['distance_to_last_fix'] = distance_to_last_fix(val)
+                    val['last_fix_dur'] = -1
                     val['target_found_response'] = target_found_response(val)
                     #val['surface_covered']    = 0
                     val['delta_time_response'] = val['response_circle'] - val['response_click']
@@ -129,6 +137,7 @@ def get_responses_features(subjs):
                     'target_found_response': data['target_found_response'],
                     'response_size': data['response_size'],
                     'distance_to_target': data['distance_to_target'],
+                    'distance_to_last_fix': data['distance_to_last_fix'],
                     'delta_time_response': data['delta_time_response'],
                     'response_x': data['response_y'],
                     'response_y': data['response_x'], 
@@ -234,7 +243,7 @@ def plot_image_responses(image_name, data_path, resp_path, y_correction = False,
                 raise ValueError('use must be one of "all", "target_found", "target_not_found"')
             
     ax.text(20,30, f'N. subjs: {n_subjs}, considerados: {use}', style='normal', fontsize=14, 
-                bbox={'facecolor': 'red', 'alpha': 0.7, 'pad': 10})
+                bbox={'facecolor': 'red', 'alpha': 0.7, 'pad': 10});
     return fig, ax
 
     
