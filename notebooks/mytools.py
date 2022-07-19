@@ -4,9 +4,9 @@ import glob
 from turtle import screensize
 import numpy as np
 import pandas as pd
-import cv2 as cv
+import cv2
+from itertools import chain
 import matplotlib.pyplot as plt
-from sqlalchemy import case
 
 from scripts.loader import load_dict_from_json, load_human_scanpaths, load_trials_properties
 from matplotlib.patches import Rectangle, Circle
@@ -150,6 +150,127 @@ def get_responses_features(subjs):
 def get_trial_scanpath_numpy(subject, image):
     pass
 
+# plot density map
+def gaussian_mask(sizex,sizey, sigma=33, center=None,fix=1):
+    """
+    sizex  : mask width
+    sizey  : mask height
+    sigma  : gaussian Sd
+    center : gaussian mean
+    fix    : gaussian max
+    return gaussian mask
+    """
+    x = np.arange(0, sizex, 1, float)
+    y = np.arange(0, sizey, 1, float)
+    x, y = np.meshgrid(x,y)
+    
+    if center is None:
+        x0 = sizex // 2
+        y0 = sizey // 2
+    else:
+        if np.isnan(center[0])==False and np.isnan(center[1])==False:            
+            x0 = center[0]
+            y0 = center[1]        
+        else:
+            return np.zeros((sizey,sizex))
+
+    return fix*np.exp(-4*np.log(2) * ((x-x0)**2 + (y-y0)**2) / sigma**2)
+
+def fixpos2densemap(fix_arr, width, height, imgfile, alpha=0.5, threshold=10):
+    """
+    fix_arr   : fixation array number of subjects x 3(x,y,fixation)
+    width     : output image width
+    height    : output image height
+    imgfile   : image file (optional)
+    alpha     : marge rate imgfile and heatmap (optional)
+    threshold : heatmap threshold(0~255)
+    return heatmap 
+    """
+    
+    heatmap = np.zeros((height,width), np.float32)
+    for n_subject in range(fix_arr.shape[0]):
+        heatmap += gaussian_mask(width, height, 33, (fix_arr[n_subject,0],fix_arr[n_subject,1]),
+                                fix_arr[n_subject,2])
+
+    # Normalization
+    heatmap = heatmap/np.amax(heatmap)
+    heatmap = heatmap*255
+    heatmap = heatmap.astype("uint8")
+    
+    if imgfile.any():
+        # Resize heatmap to imgfile shape 
+        h, w, _ = imgfile.shape
+        heatmap = cv2.resize(heatmap, (w, h))
+        heatmap_color = cv2.applyColorMap(heatmap, cv2.COLORMAP_JET)
+        
+        # Create mask
+        mask = np.where(heatmap<=threshold, 1, 0)
+        mask = np.reshape(mask, (h, w, 1))
+        mask = np.repeat(mask, 3, axis=2)
+
+        # Marge images
+        marge = imgfile*mask + heatmap_color*(1-mask)
+        marge = marge.astype("uint8")
+        marge = cv2.addWeighted(imgfile, 1-alpha, marge,alpha,0)
+        return marge
+
+    else:
+        heatmap = cv2.applyColorMap(heatmap, cv2.COLORMAP_JET)
+        return heatmap
+
+def plot_fixposmap(data, image_file=None, image_path = None, plot_save_path=None, name=''):
+    """_summary_
+
+    Args:
+        image_file (str): image file name to plot
+        data (dict): the data loaded from the json file into a dictionary
+        plot_save_path (_type_, optional): _description_. Defaults to None.
+        image_path (str): image path
+    """
+    fix_list = []
+    subj_num = 0
+    if image_file is not None:
+        if image_path is None:
+            image_path = os.path.join(os.getcwd(), 'images')
+        print('entro')
+        # Load image file
+        img = cv2.imread(os.path.join(image_path,image_file))
+        H, W, _ = img.shape
+        for subj in data.keys():
+            if image_file in data[subj].keys():
+                fix_list.append([(subj,idx,x,y,1) for idx, (x,y,t) in enumerate(zip(data[subj][image_file]['X'], 
+                                                                                    data[subj][image_file]['Y'],
+                                                                                    data[subj][image_file]['T']))])
+                subj_num=subj
+    else:
+        img = np.zeros([768,1024,3],dtype=np.uint8)
+        img.fill(255)
+        H, W, _ = (1024,768,1)
+        #image_file= 'grayscale_9_other.jpg'
+        for subj in data.keys():
+            for image_file in data[subj].keys():
+                fix_list.append([(subj,idx,x,y,1) for idx, (x,y,t) in enumerate(zip(data[subj][image_file]['X'], 
+                                                                                    data[subj][image_file]['Y'],
+                                                                                    data[subj][image_file]['T']))])
+    # Create heatmap
+    fix_arr = pd.DataFrame(chain.from_iterable(fix_list)).iloc[:,2:5]
+    heatmap = fixpos2densemap(fix_arr.to_numpy(), W, H, img, 0.4, 5)
+    plt.imshow(heatmap)
+    if image_file is None:
+        print('fue none')
+        if plot_save_path is not None:
+            cv2.imwrite(os.path.join(plot_save_path, f'fixs_{name}.jpg'), heatmap)
+        else:
+            pass
+    else: 
+        print('no fue none')
+        # plt.plot(data[subj_num][image_file]['initial_fixation_column'],
+        #     data[subj_num][image_file]['initial_fixation_row'],'purple',
+        #     marker='+',markersize=20, markeredgewidth=5);
+        if plot_save_path is not None:
+            cv2.imwrite(os.path.join(plot_save_path, image_file), heatmap)
+    return heatmap
+
 # plot funcs
 # TODO sacar el hardcodeo del tamaño de la pantalla en alto
 # TODO pensar si sacar el resp path y agregar direcatamente el dataframe
@@ -167,9 +288,9 @@ def plot_trial_subject_response(subj, image_name, data_path, resp_path, y_correc
     scanpath_x = np.array(subjs_response[subj][image_name]['X'])
     scanpath_y = np.array(subjs_response[subj][image_name]['Y'])
 
-    img = cv.imread(os.path.join(data_path, 'images',image_name))
+    img = cv2.imread(os.path.join(data_path, 'images',image_name))
     tmp_files = glob.glob(os.path.join(data_path, 'templates', image_name[:-4] + '*'))
-    tmp = cv.imread(tmp_files[0])
+    tmp = cv2.imread(tmp_files[0])
     
     if ax is None:
         fig, ax = plt.subplots(1,2, figsize=(15,10), gridspec_kw={'width_ratios': [3, 1]})
@@ -199,7 +320,7 @@ def plot_trial_subject_response(subj, image_name, data_path, resp_path, y_correc
 def plot_image_responses(image_name, data_path, resp_path, y_correction = False, use='all',ax=None):
     
     # plot image and overlay target box
-    img = cv.imread(os.path.join(data_path, 'images',image_name))
+    img = cv2.imread(os.path.join(data_path, 'images',image_name))
     subjs_response = load_human_scanpaths(os.path.join(resp_path, 'human_scanpaths'))
     ty, tx = subjs_response[list(subjs_response.keys())[0]][image_name]['target_bbox'][:2]
     

@@ -20,7 +20,6 @@ Todo el repo parece estar indexado en términos de imagenes.
 - **CHEQUEAR** Hay algunos sujetos que parecen tener 4 max_fixations cuando los valores deberían ser 3, 5, 9 y 13.
 - **CHEQUEAR** Duda, cuando pongo el ´stat=percent´ y ´common_norm=False´ esta efectivamente normalizando por grupos?
 
-
 ## TODOs
 
 - Chequear datos de sujetos, si los ids son los mismos
