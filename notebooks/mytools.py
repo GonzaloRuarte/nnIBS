@@ -245,16 +245,16 @@ def plot_fixposmap(data, image_file=None, image_path = None, plot_save_path=None
     else:
         img = np.zeros([768,1024,3],dtype=np.uint8)
         img.fill(255)
-        H, W, _ = (1024,768,1)
+        H, W, _ = (768,1024,1)
         #image_file= 'grayscale_9_other.jpg'
         for subj in data.keys():
-            for image_file in data[subj].keys():
-                fix_list.append([(subj,idx,x,y,1) for idx, (x,y,t) in enumerate(zip(data[subj][image_file]['X'], 
-                                                                                    data[subj][image_file]['Y'],
-                                                                                    data[subj][image_file]['T']))])
+            for image_f in data[subj].keys():
+                fix_list.append([(subj,idx,x,y,1) for idx, (x,y,t) in enumerate(zip(data[subj][image_f]['X'], 
+                                                                                    data[subj][image_f]['Y'],
+                                                                                    data[subj][image_f]['T']))])
     # Create heatmap
     fix_arr = pd.DataFrame(chain.from_iterable(fix_list)).iloc[:,2:5]
-    heatmap = fixpos2densemap(fix_arr.to_numpy(), W, H, img, 0.4, 5)
+    heatmap = fixpos2densemap(fix_arr.to_numpy(), W, H, img, 0.5, 5)
     plt.imshow(heatmap)
     if image_file is None:
         print('fue none')

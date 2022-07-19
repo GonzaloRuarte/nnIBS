@@ -85,7 +85,7 @@ def gaussian(x, sx, y=None, sy=None):
 
     return M
 
-def draw_heatmap(gazepoints, dispsize, imagefile=None, alpha=0.5, savefilename=None, gaussianwh=200, gaussiansd=None):
+def draw_heatmap(gazepoints, dispsize=(1024,768), imagefile=None, alpha=0.5, savefilename=None, gaussianwh=200, gaussiansd=None):
     """Draws a heatmap of the provided fixations, optionally drawn over an
     image, and optionally allocating more weight to fixations with a higher
     duration.
