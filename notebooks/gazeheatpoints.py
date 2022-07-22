@@ -25,6 +25,7 @@ def draw_display(dispsize, imagefile=None):
     """
 
     # construct screen (black background)
+    #screen = np.ones((dispsize[1], dispsize[0], 3), dtype='float32')*255
     screen = np.zeros((dispsize[1], dispsize[0], 3), dtype='float32')
     # if an image location has been passed, draw the image
     if imagefile != None:
@@ -33,7 +34,6 @@ def draw_display(dispsize, imagefile=None):
             raise Exception("ERROR in draw_display: imagefile not found at '%s'" % imagefile)
         # load image
         img = mpl.image.imread(imagefile)
-
         # width and height of the image
         w, h = len(img[0]), len(img)
         # x and y position of the image on the display
@@ -41,10 +41,17 @@ def draw_display(dispsize, imagefile=None):
         y = dispsize[1] / 2 - h / 2
         # draw the image on the screen
         screen[y:y + h, x:x + w, :] += img
+    #else:
+        # white background
+    #    img = np.zeros([dispsize[1], dispsize[0],3],dtype=np.uint8)
+    #    img.fill(255)
+    
+  
     # dots per inch
-    dpi = 100.0
+    dpi = 150.0
     # determine the figure size in inches
     figsize = (dispsize[0] / dpi, dispsize[1] / dpi)
+    #figsize = (10.28, 7.68)
     # create a figure
     fig = plt.figure(figsize=figsize, dpi=dpi, frameon=False)
     ax = plt.Axes(fig, [0, 0, 1, 1])
@@ -85,7 +92,14 @@ def gaussian(x, sx, y=None, sy=None):
 
     return M
 
-def draw_heatmap(gazepoints, dispsize=(1024,768), imagefile=None, alpha=0.5, savefilename=None, gaussianwh=200, gaussiansd=None):
+def draw_heatmap(gazepoints,
+                 dispsize=(1024,768),
+                 imagefile=None,
+                 alpha=0.5,
+                 savefilename=None,
+                 gaussianwh=100,
+                 gaussiansd=None,
+                 title=''):
     """Draws a heatmap of the provided fixations, optionally drawn over an
     image, and optionally allocating more weight to fixations with a higher
     duration.
@@ -110,6 +124,13 @@ def draw_heatmap(gazepoints, dispsize=(1024,768), imagefile=None, alpha=0.5, sav
                     heatmap
     """
 
+    if not isinstance(gazepoints, np.ndarray):
+        # asumo que es pandas
+        gazepoints = gazepoints.to_numpy()
+    if gazepoints.shape[1]==2:
+        # tiene solo dos columnas le agrego a mano la de la duracion
+        gazepoints = np.concatenate((gazepoints, np.ones((gazepoints.shape[0],1))), axis=1)
+
     # IMAGE
     fig, ax = draw_display(dispsize, imagefile=imagefile)
 
@@ -120,13 +141,18 @@ def draw_heatmap(gazepoints, dispsize=(1024,768), imagefile=None, alpha=0.5, sav
     gaus = gaussian(gwh, gsdwh)
     # matrix of zeroes
     strt = gwh / 2
-    heatmapsize = dispsize[1] + 2 * strt, dispsize[0] + 2 * strt
+    #print(dispsize[1] + 2 * strt)
+    #print(dispsize[0] + 2 * strt)
+    heatmapsize = int(dispsize[1] + 2 * strt), int(dispsize[0] + 2 * strt)
     heatmap = np.zeros(heatmapsize, dtype=float)
     # create heatmap
     for i in range(0, len(gazepoints)):
         # get x and y coordinates
-        x = strt + gazepoints[i][0] - int(gwh / 2)
-        y = strt + gazepoints[i][1] - int(gwh / 2)
+        #if i ==0:
+        #    print(strt + gazepoints[i][0] - int(gwh / 2))
+        #    print(type(strt + gazepoints[i][0] - int(gwh / 2)))
+        x = int(strt + gazepoints[i][0] - int(gwh / 2))
+        y = int(strt + gazepoints[i][1] - int(gwh / 2))
         # correct Gaussian size if either coordinate falls outside of
         # display boundaries
         if (not 0 < x < dispsize[0]) or (not 0 < y < dispsize[1]):
@@ -151,19 +177,24 @@ def draw_heatmap(gazepoints, dispsize=(1024,768), imagefile=None, alpha=0.5, sav
         else:
             # add Gaussian to the current heatmap
             heatmap[y:y + gwh, x:x + gwh] += gaus * gazepoints[i][2]
+    #print(f'strt: {strt}, with type: {type({strt})}')
+    
     # resize heatmap
+    strt = int(strt)
     heatmap = heatmap[strt:dispsize[1] + strt, strt:dispsize[0] + strt]
     # remove zeros
     lowbound = np.mean(heatmap[heatmap > 0])
     heatmap[heatmap < lowbound] = np.NaN
+
     # draw heatmap on top of image
     ax.imshow(heatmap, cmap='jet', alpha=alpha)
 
-    # FINISH PLOT
     # invert the y axis, as (0,0) is top left on a display
     ax.invert_yaxis()
     # save the figure if a file name was provided
     if savefilename != None:
         fig.savefig(savefilename)
+    ax.set_axis_on()
+    ax.set_title(title)
 
-    return fig
+    return fig, heatmap

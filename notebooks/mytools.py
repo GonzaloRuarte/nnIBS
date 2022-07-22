@@ -35,8 +35,8 @@ def distance_to_last_fix(trial):
 
 def distance_to_target(trial):
     # trial is the json file of a single trial
-    x_target = (trial['target_bbox'][2] - trial['target_bbox'][0]) / 2 + trial['target_bbox'][0]
-    y_target = (trial['target_bbox'][3] - trial['target_bbox'][1]) / 2 + trial['target_bbox'][1]
+    y_target = (trial['target_bbox'][2] - trial['target_bbox'][0]) / 2 + trial['target_bbox'][0]
+    x_target = (trial['target_bbox'][3] - trial['target_bbox'][1]) / 2 + trial['target_bbox'][1]
     try:
         #return float(np.sqrt((x_target - trial['response_X'])**2 + (y_target - trial['response_Y'])**2 ))
         return np.linalg.norm(np.array([x_target, y_target]) - np.array([trial['response_x'], trial['response_y']]))
@@ -48,12 +48,12 @@ def distance_to_target(trial):
         print(type(x_target))
 
 def target_found_response(trial):
-    x1, y1, x2, y2  = trial['target_bbox']
+    y1, x1, y2, x2  = trial['target_bbox']
     side_target_x, side_target_y = x2 - x1, y2 - y1
-    assert side_target_x == side_target_y; 'Target box is not a square'
+    assert (side_target_x == side_target_y) & (side_target_y>0) & (side_target_x>0), 'Target box is not a square'
     return bool(trial['distance_to_target'] <= (side_target_x/2 + trial['response_size']))
     
-def dimensions_check_scapaths(scanpaths_path, img_size_height=768, img_size_width=1024):
+def dimensions_check_scanpaths_dict(scanpaths_path, img_size_height=768, img_size_width=1024):
     subjs = load_human_scanpaths(scanpaths_path)
     lim_sup_x, lim_inf_x, lim_sup_y, lim_inf_y = [], [], [], []
     for subj in subjs.keys():
@@ -70,7 +70,7 @@ def dimensions_check_scapaths(scanpaths_path, img_size_height=768, img_size_widt
         print('There are some subjects with some images with coordinates out of bounds. Potentially wrong indexes X and Y.')
         return lim_sup_x, lim_inf_x, lim_sup_y, lim_inf_y       
     else:
-        print('Dimesions are OK, X: columns, Y: rows')
+        print('Dimesions are OK, X: columns/widht, Y: rows/heigth')
         return None
     
 def dimensions_check_response():
@@ -100,8 +100,11 @@ def add_responses(scanpaths_path, responses_path, calculate_features=True):
                 screen_height, screen_width = float(val['screen_height']), float(val['screen_width'])
                 image_height, image_width   = float(val['image_height']), float(val['image_width'])
                 offset_height, offset_width = (screen_height - image_height)/2, (screen_width-image_width)/2
-                val['response_x'] = float(responses.loc[subj_id, img]['response_x']) - offset_width
-                val['response_y'] = float(responses.loc[subj_id, img]['response_y']) - offset_height
+                assert responses.loc[subj_id, img]['response_x'] <= screen_height, f'Se fue del ancho en el dato {subj_id},{img}'
+                assert responses.loc[subj_id, img]['response_y'] <= screen_width, f'Se fue del ancho en el dato {subj_id},{img},'
+                # estan cambiados en matlab, los cruzo
+                val['response_y'] = float(responses.loc[subj_id, img]['response_x']) - offset_width
+                val['response_x'] = float(responses.loc[subj_id, img]['response_y']) - offset_height
                 #val['response_X'] = list(val['X']).append(val['response_x'])
                 #print('Tipo de dato de X: ', type(val['X']))
                 #break
@@ -139,17 +142,136 @@ def get_responses_features(subjs):
                     'distance_to_target': data['distance_to_target'],
                     'distance_to_last_fix': data['distance_to_last_fix'],
                     'delta_time_response': data['delta_time_response'],
-                    'response_x': data['response_y'],
-                    'response_y': data['response_x'], 
+                    'response_x': data['response_x'],
+                    'response_y': data['response_y'], 
                     'target_bbox_x': data['target_bbox'][1],
-                    'target_bbox_y': data['target_bbox'][0]
+                    'target_bbox_y': data['target_bbox'][0],
+                    'response_target_relative_x': data['target_bbox'][1] - data['response_x'],
+                    'response_target_relative_y': data['target_bbox'][0] - data['response_y']
                     }
             df.append(upd)
     return pd.DataFrame(df)
 
-def get_trial_scanpath_numpy(subject, image):
+def create_scanpaths_df(dict_data, use_response='False'):
+    scanpath_df = []
+    for subj in dict_data.keys():
+        for img_f in dict_data[subj].keys():
+            f = dict_data[subj][img_f]['target_found']
+            scanpath_df.append([(subj,img_f,idx,x,y,t,f) for idx, (x,y,t) in enumerate(zip(dict_data[subj][img_f]['X'], 
+                                                                                        dict_data[subj][img_f]['Y'],
+                                                                                        dict_data[subj][img_f]['T']))])
+            if use_response:
+                # agregar a la ultima lista la respuesta marcada como r
+                scanpath_df[-1].append((subj,img_f,'r', dict_data[subj][img_f]['response_x'],
+                                                        dict_data[subj][img_f]['response_y'],
+                                                        dict_data[subj][img_f]['response_size'],f))
+            
+    scanpaths_df = pd.DataFrame(list(chain(*scanpath_df)), columns=('subj', 'img', 'fix_order', 'x', 'y', 't','target_found'))
+    return scanpaths_df
+
+##############
+# plot funcs
+# TODO sacar el hardcodeo del tamaño de la pantalla en alto
+# TODO pensar si sacar el resp path y agregar direcatamente el dataframe
+def plot_trial_subject_response(subj, image_name, data_path, resp_path, y_correction = False,
+                                show_scanpath = True, ax=None):
+
+    #subj = 41
+    #image_name = 'grayscale_100_oliva.jpg' 
+    subjs_response = load_human_scanpaths(os.path.join(resp_path, 'human_scanpaths'))
+    target_f = subjs_response[subj][image_name]['target_found']
+    max_fix  = subjs_response[subj][image_name]['max_fixations']-1
+    ty, tx = subjs_response[subj][image_name]['target_bbox'][:2]
+    rx, ry = subjs_response[subj][image_name]['response_x'], subjs_response[subj][image_name]['response_y']
+    r = subjs_response[subj][image_name]['response_size']
+    scanpath_x = np.array(subjs_response[subj][image_name]['X'])
+    scanpath_y = np.array(subjs_response[subj][image_name]['Y'])
+
+    img = cv2.imread(os.path.join(data_path, 'images',image_name))
+    tmp_files = glob.glob(os.path.join(data_path, 'templates', image_name[:-4] + '*'))
+    tmp = cv2.imread(tmp_files[0])
+    
+    if ax is None:
+        fig, ax = plt.subplots(1,2, figsize=(15,10), gridspec_kw={'width_ratios': [3, 1]})
+    ax[0].imshow(img, cmap='gray');
+    ax[0].add_patch(Rectangle((tx,ty), tmp.shape[1], tmp.shape[0], fill=False, edgecolor='red', linewidth=3))
+    if y_correction:
+        ax[0].add_patch(Circle((rx,768-ry), r, fill=True, edgecolor='blue', linewidth=3, alpha=0.5))
+    else:
+        ax[0].add_patch(Circle((rx,ry), r, fill=True, edgecolor='blue', linewidth=3, alpha=0.5))    
+    if show_scanpath:
+        for n, (x, y) in enumerate(zip(scanpath_x, scanpath_y)):
+            ax[0].plot(x, y, 'co',alpha=0.9, markersize=10)
+            if n != 0:
+                ax[0].plot([x_prev, x], [y_prev, y], 'r--', alpha=0.9, linewidth=2)
+            x_prev, y_prev = x, y
+        
+        ax[0].text(835,745, f'Target found: {target_f}', style='normal', fontsize=10, 
+                    bbox={'facecolor': 'red', 'alpha': 0.7, 'pad': 10})
+        ax[1].text(4, 8, f'Saccadic threshold: {max_fix}', style='italic',
+                    bbox={'facecolor': 'red', 'alpha': 0.7, 'pad': 10})
+        
+    #ax[0].plot(x_init, y_init, 'g')
+    ax[1].imshow(tmp, cmap='gray');
+    
+    return fig, ax
+
+def plot_image_responses(image_name, data_path, resp_path, y_correction = False, use='all',ax=None):
+    
+    # plot image and overlay target box
+    img = cv2.imread(os.path.join(data_path, 'images',image_name))
+    subjs_response = load_human_scanpaths(os.path.join(resp_path, 'human_scanpaths'))
+    ty, tx = subjs_response[list(subjs_response.keys())[0]][image_name]['target_bbox'][:2]
+    
+    if ax is None:
+        fig, ax = plt.subplots(1,1,figsize=(15,10))
+    ax.imshow(img,cmap='gray');
+    ax.add_patch(Rectangle((tx,ty), 72, 72, fill=False, edgecolor='red', linewidth=3))
+    
+    # plot all responses circles
+    n_subjs = 0
+    for subj in subjs_response.keys():
+        if image_name in subjs_response[subj].keys():
+            target_f = subjs_response[subj][image_name]['target_found']
+            if use=='all':   
+                rx, ry = subjs_response[subj][image_name]['response_x'], subjs_response[subj][image_name]['response_y']
+                r = subjs_response[subj][image_name]['response_size']
+                if y_correction:
+                    ax.add_patch(Circle((rx,768-ry), r, fill=True, edgecolor='blue', linewidth=3, alpha=0.5))
+                else:
+                    ax.add_patch(Circle((rx,ry), r, fill=True, edgecolor='blue', linewidth=3, alpha=0.5))
+                n_subjs+=1
+            elif use=='target_found':
+                if target_f:
+                    rx, ry = subjs_response[subj][image_name]['response_x'], subjs_response[subj][image_name]['response_y']
+                    r = subjs_response[subj][image_name]['response_size']
+                    if y_correction:
+                        ax.add_patch(Circle((rx,768-ry), r, fill=True, edgecolor='blue', linewidth=3, alpha=0.5))
+                    else:
+                        ax.add_patch(Circle((rx,ry), r, fill=True, edgecolor='blue', linewidth=3, alpha=0.5))
+                    n_subjs+=1
+            elif use=='target_not_found':
+                if not target_f:
+                    rx, ry = subjs_response[subj][image_name]['response_x'], subjs_response[subj][image_name]['response_y']
+                    r = subjs_response[subj][image_name]['response_size']
+                    if y_correction:
+                        ax.add_patch(Circle((rx,768-ry), r, fill=True, edgecolor='blue', linewidth=3, alpha=0.5))
+                    else:
+                        ax.add_patch(Circle((rx,ry), r, fill=True, edgecolor='blue', linewidth=3, alpha=0.5))
+                    n_subjs+=1
+            else:
+                raise ValueError('use must be one of "all", "target_found", "target_not_found"')
+            
+    ax.text(20,30, f'N. subjs: {n_subjs}, considerados: {use}', style='normal', fontsize=14, 
+                bbox={'facecolor': 'red', 'alpha': 0.7, 'pad': 10});
+    return fig, ax
+
+    
+def plot_responses_vs_target_all(responses_df):
     pass
 
+#####
+# BORRAR Y REEMPLAZAR POR GAZEHEATPOINTS
 # plot density map
 def gaussian_mask(sizex,sizey, sigma=33, center=None,fix=1):
     """
@@ -270,103 +392,3 @@ def plot_fixposmap(data, image_file=None, image_path = None, plot_save_path=None
         if plot_save_path is not None:
             cv2.imwrite(os.path.join(plot_save_path, image_file), heatmap)
     return heatmap
-
-# plot funcs
-# TODO sacar el hardcodeo del tamaño de la pantalla en alto
-# TODO pensar si sacar el resp path y agregar direcatamente el dataframe
-def plot_trial_subject_response(subj, image_name, data_path, resp_path, y_correction = False,
-                                show_scanpath = True, ax=None):
-
-    #subj = 41
-    #image_name = 'grayscale_100_oliva.jpg' 
-    subjs_response = load_human_scanpaths(os.path.join(resp_path, 'human_scanpaths'))
-    target_f = subjs_response[subj][image_name]['target_found']
-    max_fix  = subjs_response[subj][image_name]['max_fixations']-1
-    ty, tx = subjs_response[subj][image_name]['target_bbox'][:2]
-    ry, rx = subjs_response[subj][image_name]['response_x'], subjs_response[subj][image_name]['response_y']
-    r = subjs_response[subj][image_name]['response_size']
-    scanpath_x = np.array(subjs_response[subj][image_name]['X'])
-    scanpath_y = np.array(subjs_response[subj][image_name]['Y'])
-
-    img = cv2.imread(os.path.join(data_path, 'images',image_name))
-    tmp_files = glob.glob(os.path.join(data_path, 'templates', image_name[:-4] + '*'))
-    tmp = cv2.imread(tmp_files[0])
-    
-    if ax is None:
-        fig, ax = plt.subplots(1,2, figsize=(15,10), gridspec_kw={'width_ratios': [3, 1]})
-    ax[0].imshow(img, cmap='gray');
-    ax[0].add_patch(Rectangle((tx,ty), tmp.shape[1], tmp.shape[0], fill=False, edgecolor='red', linewidth=3))
-    if y_correction:
-        ax[0].add_patch(Circle((rx,768-ry), r, fill=True, edgecolor='blue', linewidth=3, alpha=0.5))
-    else:
-        ax[0].add_patch(Circle((rx,ry), r, fill=True, edgecolor='blue', linewidth=3, alpha=0.5))    
-    if show_scanpath:
-        for n, (x, y) in enumerate(zip(scanpath_x, scanpath_y)):
-            ax[0].plot(x, y, 'co',alpha=0.9, markersize=10)
-            if n != 0:
-                ax[0].plot([x_prev, x], [y_prev, y], 'r--', alpha=0.9, linewidth=2)
-            x_prev, y_prev = x, y
-        
-        ax[0].text(835,745, f'Target found: {target_f}', style='normal', fontsize=10, 
-                    bbox={'facecolor': 'red', 'alpha': 0.7, 'pad': 10})
-        ax[1].text(4, 8, f'Saccadic threshold: {max_fix}', style='italic',
-                    bbox={'facecolor': 'red', 'alpha': 0.7, 'pad': 10})
-        
-    #ax[0].plot(x_init, y_init, 'g')
-    ax[1].imshow(tmp, cmap='gray');
-    
-    return fig, ax
-
-def plot_image_responses(image_name, data_path, resp_path, y_correction = False, use='all',ax=None):
-    
-    # plot image and overlay target box
-    img = cv2.imread(os.path.join(data_path, 'images',image_name))
-    subjs_response = load_human_scanpaths(os.path.join(resp_path, 'human_scanpaths'))
-    ty, tx = subjs_response[list(subjs_response.keys())[0]][image_name]['target_bbox'][:2]
-    
-    if ax is None:
-        fig, ax = plt.subplots(1,1,figsize=(15,10))
-    ax.imshow(img,cmap='gray');
-    ax.add_patch(Rectangle((tx,ty), 72, 72, fill=False, edgecolor='red', linewidth=3))
-    
-    # plot all responses circles
-    n_subjs = 0
-    for subj in subjs_response.keys():
-        if image_name in subjs_response[subj].keys():
-            target_f = subjs_response[subj][image_name]['target_found']
-            if use=='all':   
-                ry, rx = subjs_response[subj][image_name]['response_x'], subjs_response[subj][image_name]['response_y']
-                r = subjs_response[subj][image_name]['response_size']
-                if y_correction:
-                    ax.add_patch(Circle((rx,768-ry), r, fill=True, edgecolor='blue', linewidth=3, alpha=0.5))
-                else:
-                    ax.add_patch(Circle((rx,ry), r, fill=True, edgecolor='blue', linewidth=3, alpha=0.5))
-                n_subjs+=1
-            elif use=='target_found':
-                if target_f:
-                    ry, rx = subjs_response[subj][image_name]['response_x'], subjs_response[subj][image_name]['response_y']
-                    r = subjs_response[subj][image_name]['response_size']
-                    if y_correction:
-                        ax.add_patch(Circle((rx,768-ry), r, fill=True, edgecolor='blue', linewidth=3, alpha=0.5))
-                    else:
-                        ax.add_patch(Circle((rx,ry), r, fill=True, edgecolor='blue', linewidth=3, alpha=0.5))
-                    n_subjs+=1
-            elif use=='target_not_found':
-                if not target_f:
-                    ry, rx = subjs_response[subj][image_name]['response_x'], subjs_response[subj][image_name]['response_y']
-                    r = subjs_response[subj][image_name]['response_size']
-                    if y_correction:
-                        ax.add_patch(Circle((rx,768-ry), r, fill=True, edgecolor='blue', linewidth=3, alpha=0.5))
-                    else:
-                        ax.add_patch(Circle((rx,ry), r, fill=True, edgecolor='blue', linewidth=3, alpha=0.5))
-                    n_subjs+=1
-            else:
-                raise ValueError('use must be one of "all", "target_found", "target_not_found"')
-            
-    ax.text(20,30, f'N. subjs: {n_subjs}, considerados: {use}', style='normal', fontsize=14, 
-                bbox={'facecolor': 'red', 'alpha': 0.7, 'pad': 10});
-    return fig, ax
-
-    
-def plot_responses_vs_target_all(responses_df):
-    pass
