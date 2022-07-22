@@ -152,7 +152,7 @@ def get_responses_features(subjs):
             df.append(upd)
     return pd.DataFrame(df)
 
-def create_scanpaths_df(dict_data, use_response='False'):
+def create_scanpaths_df(dict_data, use_response=False):
     scanpath_df = []
     for subj in dict_data.keys():
         for img_f in dict_data[subj].keys():

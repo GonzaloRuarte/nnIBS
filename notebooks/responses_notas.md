@@ -37,3 +37,5 @@ Todo el repo parece estar indexado en términos de imagenes.
 - Armar un codiguito para ver los sujetos que lo encontraron al target pero en la respuesta parece que no
 - Calcular área cubierta?
 - Agregar duración de la ultima fdjación o de la fijación en target
+- Agregar una función para plotear la distribución de los targets
+- d
