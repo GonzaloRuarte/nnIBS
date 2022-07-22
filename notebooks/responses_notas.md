@@ -1,6 +1,6 @@
 # Responses
 
-Todo el repo parece estar indexado en términos de imagenes.
+Todo el repo esta indexado en términos de imagenes.
 
 ## Notas
 
