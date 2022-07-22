@@ -1,6 +1,4 @@
 import os
-import cv2
-import csv
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib as mpl
@@ -96,7 +94,7 @@ def draw_heatmap(gazepoints,
                  dispsize=(1024,768),
                  imagefile=None,
                  alpha=0.5,
-                 savefilename=None,
+                 savefigpath=None,
                  gaussianwh=100,
                  gaussiansd=None,
                  title=''):
@@ -117,7 +115,7 @@ def draw_heatmap(gazepoints,
     alpha		-	float between 0 and 1, indicating the transparancy of
                     the heatmap, where 0 is completely transparant and 1
                     is completely untransparant (default = 0.5)
-    savefilename	-	full path to the file in which the heatmap should be
+    savefigpath	-	full path to the file in which the heatmap should be
                     saved, or None to not save the file (default = None)
     returns
     fig			-	a matplotlib.pyplot Figure instance, containing the
@@ -192,8 +190,8 @@ def draw_heatmap(gazepoints,
     # invert the y axis, as (0,0) is top left on a display
     ax.invert_yaxis()
     # save the figure if a file name was provided
-    if savefilename != None:
-        fig.savefig(savefilename)
+    if savefigpath != None:
+        fig.savefig(os.path.join(savefigpath, title.replace(' ','-') + '.png'), dpi=300)
     ax.set_axis_on()
     ax.set_title(title)
 
