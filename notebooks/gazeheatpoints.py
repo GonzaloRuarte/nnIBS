@@ -189,10 +189,15 @@ def draw_heatmap(gazepoints,
 
     # invert the y axis, as (0,0) is top left on a display
     ax.invert_yaxis()
-    # save the figure if a file name was provided
-    if savefigpath != None:
-        fig.savefig(os.path.join(savefigpath, title.replace(' ','-') + '.png'), dpi=300)
+    
+    # si no pongo esto a la hora de guardar el heatmap, no se guardan los axis (se puede sacar si se prefiere)
     ax.set_axis_on()
     ax.set_title(title)
+    
+    # save the figure if a file name was provided
+    if savefigpath != None:
+        #fig.tight_layout()
+        fig.savefig(os.path.join(savefigpath, title.replace(' ','-') + '.png'), bbox_inches='tight')
+    
 
     return fig, heatmap
