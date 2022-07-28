@@ -4,7 +4,7 @@ Todo el repo esta indexado en términos de imagenes.
 
 ## Notas
 
-- **25/7** - Las distancias no parecen muy cercanas a ser normales 
+- **25/7** - Las distancias al target no parecen muy cercanas a ser normales ni con logaritmo ni con boxcox. Las distancias a la última fijación
 - Parece que las fijaciones de respuesta estan en el tamaño de la pantalla y no de la imagen
 - Las notaciones que se usaron fueron las correspondientes a imagenes y no matrices **X:columna:ancho** e **Y:fila:alto**
 - Criterio para definir cuando la respuesta del sujeto efectivamente toca el target: círculo inscripto dentro del box del target, distancia de centros menor a la respuesta mas el radio del círculo inscripto (debería ser 72/2=36)
@@ -39,4 +39,9 @@ Todo el repo esta indexado en términos de imagenes.
 - Calcular área cubierta?
 - Agregar duración de la ultima fdjación o de la fijación en target
 - Agregar una función para plotear la distribución de los targets
-- d
+
+## Notas charla 26/7
+
+- Ver si podemos ajustar dos Gaussianas a distancia a ultima fijacion/ y distancia al target --> comp bimodal
+- Distancia a ultima fijaciones podemos probar boxcox
+- Mirar una distancia a la sacada promedio
