@@ -100,11 +100,10 @@ def add_responses(scanpaths_path, responses_path, calculate_features=True):
                 screen_height, screen_width = float(val['screen_height']), float(val['screen_width'])
                 image_height, image_width   = float(val['image_height']), float(val['image_width'])
                 offset_height, offset_width = (screen_height - image_height)/2, (screen_width-image_width)/2
-                assert responses.loc[subj_id, img]['response_x'] <= screen_height, f'Se fue del ancho en el dato {subj_id},{img}'
-                assert responses.loc[subj_id, img]['response_y'] <= screen_width, f'Se fue del ancho en el dato {subj_id},{img},'
-                # estan cambiados en matlab, los cruzo
-                val['response_y'] = float(responses.loc[subj_id, img]['response_x']) - offset_width
-                val['response_x'] = float(responses.loc[subj_id, img]['response_y']) - offset_height
+                assert responses.loc[subj_id, img]['response_x'] <= screen_width, f'Se fue del ancho en el dato {subj_id},{img}'
+                assert responses.loc[subj_id, img]['response_y'] <= screen_height, f'Se fue del ancho en el dato {subj_id},{img},'
+                val['response_x']      = float(responses.loc[subj_id, img]['response_x']) - offset_width
+                val['response_y']      = float(responses.loc[subj_id, img]['response_y']) - offset_height
                 val['response_size']   = responses.loc[subj_id, img]['response_size']
                 val['response_click']  = responses.loc[subj_id, img]['response_time_click']
                 val['response_circle'] = responses.loc[subj_id, img]['response_time_circle']

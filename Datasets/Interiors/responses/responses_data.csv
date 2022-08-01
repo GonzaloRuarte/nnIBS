@@ -1,4 +1,4 @@
-subj,subj_id,image,response_x,response_y,response_size,response_time_click,response_time_circle
+subj,subj_id,image,response_y,response_x,response_size,response_time_click,response_time_circle
 AFR,1,grayscale_11_opensource.jpg,591,354,17,9.40012257278431,18.2170030085836
 AFR,1,grayscale_18_housebeautiful.jpg,503,936,15,3.73357202764601,10.7335233504418
 AFR,1,grayscale_100_oliva.jpg,515,859,9,2.45023869420402,5.98370896885172
