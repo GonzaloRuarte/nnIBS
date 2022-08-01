@@ -105,24 +105,19 @@ def add_responses(scanpaths_path, responses_path, calculate_features=True):
                 # estan cambiados en matlab, los cruzo
                 val['response_y'] = float(responses.loc[subj_id, img]['response_x']) - offset_width
                 val['response_x'] = float(responses.loc[subj_id, img]['response_y']) - offset_height
-                #val['response_X'] = list(val['X']).append(val['response_x'])
-                #print('Tipo de dato de X: ', type(val['X']))
-                #break
-                #val['response_Y'] = list(val['Y']).append(val['response_y'])
-                # previo a la correccion por offset
-                #val['response_X']      = float(responses.loc[subj_id, img]['response_x'])
-                #val['response_Y']      = float(responses.loc[subj_id, img]['response_y'])
                 val['response_size']   = responses.loc[subj_id, img]['response_size']
                 val['response_click']  = responses.loc[subj_id, img]['response_time_click']
                 val['response_circle'] = responses.loc[subj_id, img]['response_time_circle']
+                # corrijo los que tenian 3 sacadas máximas y los ponemos dentro de los que tenian 4 (subs 37 y 29)
+                if val['max_fixations'] == 4: val['max_fixations'] = 5
                 if calculate_features:
-                    val['distance_to_target']  = distance_to_target(val)
-                    val['distance_to_last_fix'] = distance_to_last_fix(val)
-                    val['last_fix_dur'] = -1
+                    val['distance_to_target']    = distance_to_target(val)
+                    val['distance_to_last_fix']  = distance_to_last_fix(val)
+                    val['last_fix_dur']          = -1
                     val['target_found_response'] = target_found_response(val)
-                    #val['surface_covered']    = 0
-                    val['delta_time_response'] = val['response_circle'] - val['response_click']
-                
+                    val['delta_time_response']   = val['response_circle'] - val['response_click']
+                    #val['surface_covered']     = 0
+                    
                 subject_scanpaths[img].update(val)
                 #print(subject_scanpaths[img])
                 #break
