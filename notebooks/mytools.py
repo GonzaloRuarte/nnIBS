@@ -173,11 +173,12 @@ def plot_trial_subject_response(subj, image_name, data_path, resp_path, y_correc
     #subj = 41
     #image_name = 'grayscale_100_oliva.jpg' 
     subjs_response = load_human_scanpaths(os.path.join(resp_path, 'human_scanpaths'))
-    target_f = subjs_response[subj][image_name]['target_found']
-    max_fix  = subjs_response[subj][image_name]['max_fixations']-1
-    ty, tx = subjs_response[subj][image_name]['target_bbox'][:2]
-    rx, ry = subjs_response[subj][image_name]['response_x'], subjs_response[subj][image_name]['response_y']
-    r = subjs_response[subj][image_name]['response_size']
+    target_f   = subjs_response[subj][image_name]['target_found']
+    target_fr  = subjs_response[subj][image_name]['target_found_response']
+    max_fix    = subjs_response[subj][image_name]['max_fixations']-1
+    ty, tx     = subjs_response[subj][image_name]['target_bbox'][:2]
+    rx, ry     = subjs_response[subj][image_name]['response_x'], subjs_response[subj][image_name]['response_y']
+    r          = subjs_response[subj][image_name]['response_size']
     scanpath_x = np.array(subjs_response[subj][image_name]['X'])
     scanpath_y = np.array(subjs_response[subj][image_name]['Y'])
 
@@ -202,7 +203,7 @@ def plot_trial_subject_response(subj, image_name, data_path, resp_path, y_correc
         
         ax[0].text(835,745, f'Target found: {target_f}', style='normal', fontsize=10, 
                     bbox={'facecolor': 'red', 'alpha': 0.7, 'pad': 10})
-        ax[1].text(4, 8, f'Saccadic threshold: {max_fix}', style='italic',
+        ax[1].text(4, 8, f'Saccadic threshold: {max_fix}, \nResponse found:{target_fr}', style='italic',
                     bbox={'facecolor': 'red', 'alpha': 0.7, 'pad': 10})
         
     #ax[0].plot(x_init, y_init, 'g')
