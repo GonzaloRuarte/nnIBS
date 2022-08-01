@@ -88,7 +88,7 @@ class CumulativePerformance:
             scanpath_info   = scanpaths[image_name]
             scanpath_length = len(scanpath_info['X'])
             scanpath_max_fixations = scanpath_info['max_fixations']
-
+            
             if scanpath_max_fixations == 3:
                 number_of_scanpaths_with_three_fixations_max += 1
             elif scanpath_max_fixations == 5:
@@ -104,14 +104,18 @@ class CumulativePerformance:
         cumulative_performance_at_particular_fixations[3]  = cumulative_performance_at_particular_fixations[3] / number_of_scanpaths_with_three_fixations_max
         cumulative_performance_at_particular_fixations[5]  = cumulative_performance_at_particular_fixations[5] / number_of_scanpaths_with_five_fixations_max
         cumulative_performance_at_particular_fixations[9]  = cumulative_performance_at_particular_fixations[9] / number_of_scanpaths_with_nine_fixations_max
-        cumulative_performance_at_particular_fixations[13] = cumulative_performance_at_particular_fixations[13] / number_of_scanpaths_with_thirteen_fixations_max
-
+        if number_of_scanpaths_with_thirteen_fixations_max > 0:
+            cumulative_performance_at_particular_fixations[13] = cumulative_performance_at_particular_fixations[13] / number_of_scanpaths_with_thirteen_fixations_max
+        else:
+            # el problema esta en el caso de los sujetos que tiene no tiene trials de 12 sacadas sino que tiene el extra de 3 sacadas
+            # en este caso le asignamos un comportamiento igual al que tuvo en los trials de 8 sacadas
+            cumulative_performance_at_particular_fixations[13] = cumulative_performance_at_particular_fixations[9]
         return cumulative_performance_at_particular_fixations
 
-    def compute_human_cumulative_performance_gaston(self, dict_scanpaths,
-                                                    key_max_fix='max_fixations',
-                                                    use_response=False,
-                                                    use_target_found_response=False):
+    def compute_human_cumulative_performance_interiors_g(self, dict_scanpaths,
+                                                        key_max_fix='max_fixations',
+                                                        use_response=False,
+                                                        use_target_found_response=False):
         """
         Function to calculate both the cumulative performance and the response with and the mean response time for the GASTON dataset.
         Args:
@@ -124,9 +128,9 @@ class CumulativePerformance:
         
         cumulative_performance_dataset = dict()
         for subj_id, trials in dict_scanpaths.items():
-            number_of_trials_subj_fix_thr = dict(zip((3,5,6,13),[0,0,0,0]))
+            number_of_trials_subj_fix_thr = dict(zip((3,5,9,13),[0,0,0,0]))
             #cumulative_performance_at_particular_fixations = np.zeros((1,self.max_scanpath_length))
-            cumulative_performance_at_particular_fixations = dict(zip((3,5,6,13),[0,0,0,0]))
+            cumulative_performance_at_particular_fixations = dict(zip((3,5,9,13),[0,0,0,0]))
             for image_name, scanpath_info in trials.items():
                 scanpath_length = len(scanpath_info['X'])
                 scanpath_max_fixations = scanpath_info[key_max_fix]
