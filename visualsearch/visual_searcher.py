@@ -42,6 +42,7 @@ class VisualSearcher:
         self.target_similarity_method = config['target_similarity']
         self.output_path              = output_path
         self.human_scanpaths          = human_scanpaths
+        self.history_size             = config['history_size']
 
     def search(self, image_name, image, image_prior, target, target_bbox, initial_fixation):
         " Given an image, a target, and a prior of that image, it looks for the object in the image, generating a scanpath "
@@ -107,6 +108,9 @@ class VisualSearcher:
         print('Fixation:', end=' ')
         target_found = False
         start = time.time()
+        if self.history_size != None:
+            history_prior = np.zeros(shape=(self.history_size,grid_size[0],grid_size[1]))
+            history_likelihoods = np.zeros(shape=(self.history_size,grid_size[0],grid_size[1]))
         for fixation_number in range(self.max_saccades + 1):
             if self.human_scanpaths:
                 current_fixation = current_human_fixations[fixation_number]
@@ -123,9 +127,18 @@ class VisualSearcher:
             # If the limit has been reached, don't compute the next fixation
             if fixation_number == self.max_saccades:
                 break
+            if self.history_size != None:
+                history_likelihoods = history_likelihoods + target_similarity_map.at_fixation(current_fixation) * (np.square(self.visibility_map.at_fixation(current_fixation)))
+                history_likelihoods = np.append(history_likelihoods[1:],[target_similarity_map.at_fixation(current_fixation) * (np.square(self.visibility_map.at_fixation(current_fixation)))], axis=0)
+                likelihood = history_likelihoods[0]
+                history_prior = np.append(history_likelihoods[1:],[image_prior])
+                posterior = history_prior[0]
 
-            likelihood = likelihood + target_similarity_map.at_fixation(current_fixation) * (np.square(self.visibility_map.at_fixation(current_fixation)))
+            else:
+                likelihood = likelihood + target_similarity_map.at_fixation(current_fixation) * (np.square(self.visibility_map.at_fixation(current_fixation)))
+            
             likelihood_times_prior = posterior * np.exp(likelihood)
+            
             marginal  = np.sum(likelihood_times_prior)
             posterior = likelihood_times_prior / marginal
 
