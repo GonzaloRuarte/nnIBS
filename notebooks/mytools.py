@@ -124,12 +124,22 @@ def add_responses(scanpaths_path, responses_path, calculate_features=True):
                 json.dump(subject_scanpaths, outfile, cls=NpEncoder)
 
 def get_responses_features(subjs):
+    """
+    Function to load the scanpaths and calculate the features
+
+    Args:
+        subjs (dict): Subjects scanpaths data loaded from json file with load_dict_from_json()
+
+    Returns:
+        df (pd.DataFrame): Subjects features dataframe
+    """ 
     df = []
     for subj, imgs in subjs.items():
         for img, data in imgs.items():
             upd = {'subj': subj, 
                     'img': img,
                     'max_fixations': data['max_fixations'],
+                    'scanpath_length': len(data['X']),
                     'target_found': data['target_found'],
                     'target_found_response': data['target_found_response'],
                     'response_size': data['response_size'],
