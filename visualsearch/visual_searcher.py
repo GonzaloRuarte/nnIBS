@@ -109,7 +109,7 @@ class VisualSearcher:
         target_found = False
         start = time.time()
         if self.history_size != None:
-            history_prior = np.zeros(shape=(self.history_size,grid_size[0],grid_size[1]))
+            history_prior = np.repeat([image_prior],self.history_size,axis=0)
             history_likelihoods = np.zeros(shape=(self.history_size,grid_size[0],grid_size[1]))
         for fixation_number in range(self.max_saccades + 1):
             if self.human_scanpaths:
