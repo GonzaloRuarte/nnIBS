@@ -52,3 +52,4 @@ Todo el repo esta indexado en términos de imagenes.
 - Debería decidir que hacer con los sujetos que parecen tener un numero diferente de cantidad de fijaciones máximas pero el sujeto 29 (ISC) y el sujeto 37 (LM) tiene trials con 3 fijaciones máximas y por ende 4 fijaciones (por decisión se las pasamos a máximo 5 fijaciones ,4 *max_saccade*) **Decirle a Juan y Gonzalo**.
 - Esos mismos sujetos no tuvieron trials con 13 fijaciones (12 sacadas) por lo cual para usar la función de Fermin y Gonzalo, les asigne a esos sujetos el mismo rendimiento para esos trials que el que tuvieron con 9 fijaciones (8 sacadas)
 - No quedan igual los boxplots de performance, no importa lo que haga. **Mirar en detalle y discutir con los chicos** (deben usar otro criterio para decidir target found)
+- Arme dos notebooks, una exploratoria y otra de modelos
