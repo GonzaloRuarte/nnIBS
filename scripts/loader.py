@@ -2,6 +2,7 @@ import json
 import sys
 from os import makedirs, listdir, path, remove, cpu_count
 from . import constants
+from pathlib import Path
 
 def load_checkpoint(output_path):
     checkpoint = {}
@@ -78,32 +79,37 @@ def load_dataset_info(dataset_path):
 
     return dataset_info
 
-def load_human_scanpaths(human_scanpaths_dir, human_subject):
-    if human_subject is None:
-        return {}
-
-    human_scanpaths_files = listdir(human_scanpaths_dir)
-    human_subject_str     = str(human_subject)
-    if human_subject < 10: human_subject_str = '0' + human_subject_str
-    human_subject_file    = 'subj' + human_subject_str + '_scanpaths.json'
-    if not human_subject_file in human_scanpaths_files:
-        raise NameError('Scanpaths for human subject ' + human_subject_str + ' not found!')
+def load_human_scanpaths(human_scanpaths_dir, human_subject=None):
     
-    human_scanpaths = load_dict_from_json(path.join(human_scanpaths_dir, human_subject_file))
+    if human_subject is None:
+        # If not specified, load all subjects (json files) scanpaths into a list
+        path_files = Path(human_scanpaths_dir)
+        human_scanpaths_vals = [load_dict_from_json(path.join('', file)) for file in list(path_files.glob('*.json'))]
+        human_scanpaths_keys = [int(file.name.split('_')[-2][-2:]) for file in list(path_files.glob('*.json'))]
+        human_scanpaths = dict(zip(human_scanpaths_keys, human_scanpaths_vals))
+    else:
+        human_scanpaths_files = listdir(human_scanpaths_dir)
+        human_subject_str     = str(human_subject)
+        if human_subject < 10: human_subject_str = '0' + human_subject_str
+        human_subject_file    = 'subj' + human_subject_str + '_scanpaths.json'
+        if not human_subject_file in human_scanpaths_files:
+            raise NameError('Scanpaths for human subject ' + human_subject_str + ' not found!')
+
+        human_scanpaths = load_dict_from_json(path.join(human_scanpaths_dir, human_subject_file))
 
     return human_scanpaths
 
-def load_trials_properties(trials_properties_file, image_name, image_range, human_scanpaths, checkpoint):
+def load_trials_properties(trials_properties_file, image_name=None, image_range=None, human_scanpaths=None, checkpoint=None):
     trials_properties = load_dict_from_json(trials_properties_file)
     
-    if checkpoint:
+    if checkpoint is not None:
         trials_properties = checkpoint['trials_properties']
     elif image_name is not None:
         trials_properties = get_trial_properties_for_image(trials_properties, image_name)
     elif image_range is not None:
         trials_properties = get_trial_properties_in_range(trials_properties, image_range)
     
-    if human_scanpaths:
+    if human_scanpaths is not None:
         trials_properties = get_trial_properties_for_subject(trials_properties, human_scanpaths)
 
     return trials_properties
