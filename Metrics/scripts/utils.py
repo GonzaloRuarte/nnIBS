@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from os import listdir, path, scandir, makedirs
 from sklearn.neighbors import KernelDensity
 from sklearn.model_selection import GridSearchCV
-from .. import constants
+from . import constants
 
 def plot_table(df, title, save_path, filename):
     fig, ax = plt.subplots()

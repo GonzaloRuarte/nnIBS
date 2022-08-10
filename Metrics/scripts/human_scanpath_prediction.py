@@ -1,5 +1,5 @@
 from . import utils
-from .. import constants
+from . import constants
 from os import path, listdir, pardir
 import pandas as pd
 import numpy as np
@@ -13,13 +13,13 @@ import importlib
 """
 
 class HumanScanpathPrediction:
-    def __init__(self, dataset_name, human_scanpaths_dir, dataset_results_dir, models_dir, number_of_images, compute):
+    def __init__(self, dataset_name, human_scanpaths_dir, dataset_results_dir, number_of_images, compute):
         self.models_results      = {}
         self.dataset_name        = dataset_name
         self.number_of_images    = number_of_images
         self.human_scanpaths_dir = human_scanpaths_dir
         self.dataset_results_dir = dataset_results_dir
-        self.models_dir          = models_dir
+        self.model_dir          = "../Models/nnIBS"
 
         self.null_object = not compute
 
@@ -38,7 +38,7 @@ class HumanScanpathPrediction:
                 subject_number = subject[4:6]
 
                 if not self.subject_already_processed(subject, subject_number, model_output_path):
-                    model = importlib.import_module(self.models_dir + '.' + model_name + '.main')
+                    model = importlib.import_module(self.model_dir + '.main')
                     print('[Human Scanpath Prediction] Running ' + model_name + ' on ' + self.dataset_name + ' dataset using subject ' + subject_number + ' scanpaths')
                     model.main(self.dataset_name, int(subject_number))
             

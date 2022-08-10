@@ -1,13 +1,14 @@
-from . import constants
+from scripts import constants
 import argparse
-from .scripts.multimatch import Multimatch
-from .scripts.human_scanpath_prediction import HumanScanpathPrediction
-from .scripts.cumulative_performance import CumulativePerformance
-from .scripts import utils
+from scripts.multimatch import Multimatch
+from scripts.human_scanpath_prediction import HumanScanpathPrediction
+from scripts.cumulative_performance import CumulativePerformance
+from scripts import utils
 from os import path
 
-def main(datasets, models, compute_cumulative_performance, compute_multimatch, compute_human_scanpath_prediction):
+def main(datasets, compute_cumulative_performance, compute_multimatch, compute_human_scanpath_prediction):
     datasets_results = {}
+    model_name = "default"
     for dataset_name in datasets:
         dataset_path = path.join(constants.DATASETS_PATH, dataset_name)
         dataset_info = utils.load_dict_from_json(path.join(dataset_path, 'dataset_info.json'))
@@ -28,27 +29,25 @@ def main(datasets, models, compute_cumulative_performance, compute_multimatch, c
         subjects_cumulative_performance = CumulativePerformance(dataset_name, number_of_images, max_scanpath_length, compute_cumulative_performance)
         subjects_cumulative_performance.add_human_mean(human_scanpaths_dir, constants.HUMANS_COLOR)
 
-        human_scanpath_prediction = HumanScanpathPrediction(dataset_name, human_scanpaths_dir, dataset_results_dir, constants.MODELS_PATH, number_of_images, compute_human_scanpath_prediction)
+        human_scanpath_prediction = HumanScanpathPrediction(dataset_name, human_scanpaths_dir, dataset_results_dir,  number_of_images, compute_human_scanpath_prediction)
 
         # Compute models metrics and compare them with human subjects metrics
         color_index = 0
-        for model_name in models:
-            if not path.isdir(path.join(dataset_results_dir, model_name)):
-                print('No results found for ' + model_name + ' in ' + dataset_name + ' dataset')
-                continue
+        
+        if not path.isdir(dataset_results_dir):
+            print('No results found for ' + dataset_name + ' dataset')
+            continue
 
-            model_scanpaths_file = path.join(path.join(dataset_results_dir, model_name), 'Scanpaths.json')
-            model_scanpaths      = utils.load_dict_from_json(model_scanpaths_file)
+        model_scanpaths_file = path.join(path.join(dataset_results_dir, model_name), 'Scanpaths.json')
+        model_scanpaths      = utils.load_dict_from_json(model_scanpaths_file)
 
-            subjects_cumulative_performance.add_model(model_name, model_scanpaths, constants.MODELS_COLORS[color_index])
+        subjects_cumulative_performance.add_model(model_name, model_scanpaths, constants.MODELS_COLORS[color_index])
 
-            # Human multimatch scores are different for each model, since each model uses different image sizes
-            multimatch.load_human_mean_per_image(model_name, model_scanpaths)
-            multimatch.add_model_vs_humans_mean_per_image(model_name, model_scanpaths, constants.MODELS_COLORS[color_index])
+        # Human multimatch scores are different for each model, since each model uses different image sizes
+        multimatch.load_human_mean_per_image(model_name, model_scanpaths)
+        multimatch.add_model_vs_humans_mean_per_image(model_name, model_scanpaths, constants.MODELS_COLORS[color_index])
 
-            human_scanpath_prediction.compute_metrics_for_model(model_name)
-
-            color_index += 1
+        human_scanpath_prediction.compute_metrics_for_model(model_name)
 
         human_scanpath_prediction.add_baseline_models()
 
@@ -71,12 +70,11 @@ def main(datasets, models, compute_cumulative_performance, compute_multimatch, c
 
 if __name__ == "__main__":
     available_datasets = utils.get_dirs(constants.DATASETS_PATH)
-    available_models   = utils.get_dirs(constants.MODELS_PATH)
+    
     parser = argparse.ArgumentParser(description='Compute all metrics for each visual search model on each dataset. To only run a subset of them, specify by argument which ones.')
     parser.add_argument('--d', '--datasets', type=str, nargs='*', default=available_datasets, help='Names of the datasets on which to compute the metrics. \
         Values must be in list: ' + str(available_datasets))
-    parser.add_argument('--m', '--models', type=str, nargs='*', default=available_models, help='Names of the models on which to compute the metrics. \
-        Values must be in list: ' + str(available_models))
+
     parser.add_argument('--perf', '--performance', action='store_true', help='Compute cumulative performance')
     parser.add_argument('--mm', '--multimatch', action='store_true', help='Compute multimatch on the models')
     parser.add_argument('--hsp', '--human_scanpath_prediction', action='store_true', help='Compute human scanpath prediction on the models. \
@@ -84,10 +82,10 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    invalid_models   = not all(model in available_models for model in args.m)
+
     invalid_datasets = not all(dataset in available_datasets for dataset in args.d)
-    if (not args.m or invalid_models) or (not args.d or invalid_datasets):
-        raise ValueError('Invalid set of models or datasets')
+    if (not args.d or invalid_datasets):
+        raise ValueError('Invalid set or datasets')
 
     # If none were specified, default to True
     if not (args.perf or args.mm or args.hsp):
@@ -95,4 +93,4 @@ if __name__ == "__main__":
         args.mm   = True
         args.hsp  = True
 
-    main(args.d, args.m, args.perf, args.mm, args.hsp)
+    main(args.d, args.perf, args.mm, args.hsp)
