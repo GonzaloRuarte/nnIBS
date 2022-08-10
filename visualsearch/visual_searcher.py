@@ -127,16 +127,16 @@ class VisualSearcher:
             # If the limit has been reached, don't compute the next fixation
             if fixation_number == self.max_saccades:
                 break
-            if self.history_size != None:
-                likelihood = target_similarity_map.at_fixation(current_fixation) * (np.square(self.visibility_map.at_fixation(current_fixation)))
-                history_likelihoods = history_likelihoods + likelihood
-                history_likelihoods = np.append(history_likelihoods[1:],[likelihood], axis=0)
-                likelihood = history_likelihoods[0]
-                history_prior = np.append(history_prior[1:],[image_prior])
-                posterior = history_prior[0]
+           # if self.history_size != None:
+              #  likelihood = target_similarity_map.at_fixation(current_fixation) * (np.square(self.visibility_map.at_fixation(current_fixation)))
+              #  history_likelihoods = history_likelihoods + likelihood
+              #  history_likelihoods = np.append(history_likelihoods[1:],[likelihood], axis=0)
+               # likelihood = history_likelihoods[0]
+              #  history_prior = np.append(history_prior[1:],[image_prior])
+              #  posterior = history_prior[0]
 
-            else:
-                likelihood = likelihood + target_similarity_map.at_fixation(current_fixation) * (np.square(self.visibility_map.at_fixation(current_fixation)))
+            #else:
+            likelihood = likelihood + target_similarity_map.at_fixation(current_fixation) * (np.square(self.visibility_map.at_fixation(current_fixation)))
             
             likelihood_times_prior = posterior * np.exp(likelihood)
             
