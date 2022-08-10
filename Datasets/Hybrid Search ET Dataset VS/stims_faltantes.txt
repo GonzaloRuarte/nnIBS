@@ -1,0 +1,1 @@
+Los target_stims que figuran acá no aparecen en la columna st_5 del archivo stims_locations.csv para sus respectivos backgrounds, y sin embargo los csv de estos sujetos indican que vieron ese background y estaban buscando ese target_stim.

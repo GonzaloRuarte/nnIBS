@@ -1,0 +1,1458 @@
+{
+    "cmp_building_046_sheep_001.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "sheep1548.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": true,
+        "target_stim": "sheep1548.png",
+        "target_present": true,
+        "target_bbox": [
+            576.0,
+            305.0,
+            656.0,
+            356.0
+        ],
+        "X": [
+            664.7,
+            848.4000000000001,
+            755.0,
+            593.2
+        ],
+        "Y": [
+            534.6,
+            646.5,
+            809.1,
+            491.6
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_shelves_040_book_013.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "book879.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": false,
+        "target_stim": "book879.png",
+        "target_present": true,
+        "target_bbox": [
+            387.0,
+            157.0,
+            438.0,
+            238.0
+        ],
+        "X": [
+            688.9,
+            856.0999999999999,
+            780.3,
+            832.8,
+            232.89999999999998,
+            211.60000000000002
+        ],
+        "Y": [
+            518.8,
+            605.3,
+            420.8,
+            335.3,
+            457.5,
+            624.2
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_cakestand_003_food_002.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "sandwich701.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": true,
+        "target_stim": "sandwich701.png",
+        "target_present": true,
+        "target_bbox": [
+            768.0,
+            389.0,
+            839.0,
+            469.0
+        ],
+        "X": [
+            689.1,
+            545.4,
+            545.7
+        ],
+        "Y": [
+            573.1,
+            649.1,
+            380.8
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_africansavanna_003_wildanimals_003.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "bird246.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": false,
+        "target_stim": "bird246.png",
+        "target_present": true,
+        "target_bbox": [
+            493.0,
+            764.0,
+            573.0,
+            803.0
+        ],
+        "X": [
+            628.2,
+            395.4,
+            508.29999999999995,
+            387.9,
+            668.1,
+            880.0,
+            1067.8,
+            1160.6,
+            297.70000000000005,
+            176.3,
+            218.0,
+            489.29999999999995,
+            497.9,
+            537.6,
+            619.8
+        ],
+        "Y": [
+            538.8,
+            686.1,
+            846.6,
+            920.4,
+            876.9,
+            867.4,
+            908.8,
+            800.2,
+            879.9,
+            938.6,
+            176.0,
+            94.6,
+            713.7,
+            790.6,
+            910.9
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_office_001_pottedplant_001.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "potted plant870.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": true,
+        "target_stim": "potted plant870.png",
+        "target_present": true,
+        "target_bbox": [
+            868.0,
+            1195.0,
+            948.0,
+            1268.0
+        ],
+        "X": [
+            703.5,
+            627.0,
+            941.4000000000001,
+            415.70000000000005,
+            856.8
+        ],
+        "Y": [
+            492.29999999999995,
+            602.3,
+            673.4,
+            788.2,
+            920.5
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_shelves_016_cup_001.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "cup436.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": false,
+        "target_stim": "cup436.png",
+        "target_present": true,
+        "target_bbox": [
+            173.0,
+            911.0,
+            253.0,
+            953.0
+        ],
+        "X": [
+            647.0,
+            455.70000000000005,
+            509.4,
+            673.2,
+            938.0999999999999
+        ],
+        "Y": [
+            556.4,
+            521.5,
+            370.3,
+            181.1,
+            287.7
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_shelves_046_toys_005.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "motorcycle551.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": true,
+        "target_stim": "motorcycle551.png",
+        "target_present": true,
+        "target_bbox": [
+            158.0,
+            377.0,
+            204.0,
+            435.0
+        ],
+        "X": [
+            637.6,
+            504.0,
+            686.1,
+            414.79999999999995
+        ],
+        "Y": [
+            545.1,
+            555.7,
+            747.6,
+            296.9
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_shelves_054_toys_013.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "truck319.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": true,
+        "target_stim": "truck319.png",
+        "target_present": true,
+        "target_bbox": [
+            301.0,
+            1008.0,
+            381.0,
+            1074.0
+        ],
+        "X": [
+            659.7,
+            503.1,
+            391.20000000000005,
+            252.39999999999998
+        ],
+        "Y": [
+            580.7,
+            621.2,
+            369.3,
+            188.3
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_building_033_cat_012.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "cat1919.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": true,
+        "target_stim": "cat1919.png",
+        "target_present": true,
+        "target_bbox": [
+            666.0,
+            1028.0,
+            746.0,
+            1081.0
+        ],
+        "X": [
+            683.9,
+            546.1,
+            594.1,
+            820.9000000000001
+        ],
+        "Y": [
+            555.9,
+            498.6,
+            769.5,
+            627.5
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_shelves_096_teddybear_009.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "teddy bear34.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": true,
+        "target_stim": "teddy bear34.png",
+        "target_present": true,
+        "target_bbox": [
+            309.0,
+            228.0,
+            389.0,
+            295.0
+        ],
+        "X": [
+            630.1,
+            388.9,
+            269.1
+        ],
+        "Y": [
+            574.7,
+            678.5,
+            415.5
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_jungle_007_bird_007.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "bird332.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": true,
+        "target_stim": "bird332.png",
+        "target_present": true,
+        "target_bbox": [
+            230.0,
+            918.0,
+            310.0,
+            1000.0
+        ],
+        "X": [
+            599.4,
+            568.7,
+            470.29999999999995,
+            697.8
+        ],
+        "Y": [
+            453.8,
+            468.5,
+            130.1,
+            81.0
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_shelves_059_toys_018.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "truck196.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": true,
+        "target_stim": "truck196.png",
+        "target_present": true,
+        "target_bbox": [
+            84.0,
+            598.0,
+            133.0,
+            678.0
+        ],
+        "X": [
+            667.6,
+            540.1,
+            453.29999999999995,
+            337.0
+        ],
+        "Y": [
+            580.1,
+            521.6,
+            301.9,
+            69.9
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_shelves_103_teddybear_016.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "teddy bear1654.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": true,
+        "target_stim": "teddy bear1654.png",
+        "target_present": true,
+        "target_bbox": [
+            395.0,
+            437.0,
+            470.0,
+            517.0
+        ],
+        "X": [
+            644.8,
+            432.9,
+            265.1,
+            335.5
+        ],
+        "Y": [
+            547.3,
+            636.8,
+            666.5,
+            471.3
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_mountain_019_sheep_007.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "sheep119.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": true,
+        "target_stim": "sheep119.png",
+        "target_present": true,
+        "target_bbox": [
+            765.0,
+            167.0,
+            827.0,
+            247.0
+        ],
+        "X": [
+            717.5,
+            538.4,
+            594.0,
+            620.7,
+            619.5,
+            957.0,
+            855.4000000000001,
+            1050.9,
+            1163.4,
+            1103.3,
+            1131.7,
+            1181.0,
+            1158.1,
+            966.3,
+            755.0999999999999,
+            900.4000000000001,
+            974.4000000000001,
+            606.8,
+            586.9,
+            311.70000000000005
+        ],
+        "Y": [
+            565.6,
+            522.6,
+            639.7,
+            426.7,
+            630.0,
+            639.9,
+            836.6,
+            930.8,
+            851.8,
+            412.3,
+            285.3,
+            418.9,
+            282.3,
+            329.8,
+            295.1,
+            521.5,
+            619.3,
+            699.3,
+            640.6,
+            807.8
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_shelves_089_vase_008.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "vase1198.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": true,
+        "target_stim": "vase1198.png",
+        "target_present": true,
+        "target_bbox": [
+            912.0,
+            485.0,
+            992.0,
+            537.0
+        ],
+        "X": [
+            617.7,
+            806.0,
+            445.0,
+            449.1
+        ],
+        "Y": [
+            492.70000000000005,
+            587.6,
+            489.1,
+            830.8
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_shelves_111_pottedplant_002.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "potted plant455.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": true,
+        "target_stim": "potted plant455.png",
+        "target_present": true,
+        "target_bbox": [
+            844.0,
+            157.0,
+            924.0,
+            237.0
+        ],
+        "X": [
+            617.0,
+            583.9,
+            786.7,
+            1032.7,
+            523.6,
+            421.70000000000005,
+            378.6,
+            246.10000000000002
+        ],
+        "Y": [
+            521.1,
+            507.70000000000005,
+            659.1,
+            757.1,
+            439.8,
+            332.4,
+            212.3,
+            98.7
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_building_054_bird_010.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "bird1519.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": true,
+        "target_stim": "bird1519.png",
+        "target_present": true,
+        "target_bbox": [
+            963.0,
+            1019.0,
+            1010.0,
+            1099.0
+        ],
+        "X": [
+            609.6,
+            726.7,
+            285.20000000000005,
+            160.8,
+            311.1,
+            417.5,
+            807.3
+        ],
+        "Y": [
+            514.7,
+            492.0,
+            346.9,
+            336.2,
+            973.3,
+            982.0,
+            805.1
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_shelves_018_remote_002.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "remote24.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": false,
+        "target_stim": "remote24.png",
+        "target_present": true,
+        "target_bbox": [
+            310.0,
+            1096.0,
+            390.0,
+            1126.0
+        ],
+        "X": [
+            620.8,
+            663.1,
+            671.0,
+            663.9,
+            489.29999999999995,
+            759.4000000000001,
+            569.8,
+            422.9,
+            250.5,
+            211.5,
+            305.79999999999995,
+            514.6,
+            662.5,
+            725.7,
+            786.3,
+            1024.2,
+            1073.2
+        ],
+        "Y": [
+            506.1,
+            647.3,
+            577.3,
+            629.9,
+            704.3,
+            747.3,
+            849.9,
+            815.9,
+            680.0,
+            618.7,
+            580.6,
+            590.3,
+            592.9,
+            686.8,
+            730.4,
+            453.6,
+            350.9
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_building_022_cat_009.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "cat1633.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": true,
+        "target_stim": "cat1633.png",
+        "target_present": true,
+        "target_bbox": [
+            335.0,
+            930.0,
+            370.0,
+            1010.0
+        ],
+        "X": [
+            608.5,
+            471.29999999999995,
+            356.5,
+            585.0,
+            785.4000000000001,
+            753.5
+        ],
+        "Y": [
+            477.2,
+            601.9,
+            614.0,
+            599.6,
+            536.2,
+            497.6
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_shelves_035_book_008.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "book271.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": true,
+        "target_stim": "book271.png",
+        "target_present": true,
+        "target_bbox": [
+            737.0,
+            185.0,
+            761.0,
+            265.0
+        ],
+        "X": [
+            586.2,
+            411.4
+        ],
+        "Y": [
+            537.2,
+            784.8
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_mountain_004_sheep_001.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "sheep796.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": false,
+        "target_stim": "sheep796.png",
+        "target_present": true,
+        "target_bbox": [
+            326.0,
+            84.0,
+            389.0,
+            164.0
+        ],
+        "X": [
+            665.2,
+            634.9,
+            913.5,
+            550.1,
+            634.4,
+            661.9,
+            473.4,
+            771.7,
+            892.2,
+            1195.0,
+            1190.7,
+            1192.9,
+            1110.3,
+            1058.1,
+            1164.2,
+            333.79999999999995,
+            128.60000000000002,
+            108.19999999999999,
+            465.70000000000005,
+            157.60000000000002,
+            191.10000000000002
+        ],
+        "Y": [
+            576.5,
+            758.9,
+            844.3,
+            689.4,
+            568.5,
+            504.70000000000005,
+            289.6,
+            316.8,
+            513.4,
+            463.5,
+            176.8,
+            447.0,
+            769.7,
+            730.2,
+            930.3,
+            830.4,
+            682.0,
+            632.8,
+            971.1,
+            907.6,
+            463.0
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_shelves_109_teddybear_022.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "teddy bear838.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": true,
+        "target_stim": "teddy bear838.png",
+        "target_present": true,
+        "target_bbox": [
+            180.0,
+            994.0,
+            260.0,
+            1049.0
+        ],
+        "X": [
+            593.4,
+            455.20000000000005,
+            881.5,
+            895.3,
+            627.8
+        ],
+        "Y": [
+            471.1,
+            512.2,
+            501.4,
+            355.6,
+            234.8
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_snow_001_person_001.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "person10154.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": true,
+        "target_stim": "person10154.png",
+        "target_present": true,
+        "target_bbox": [
+            422.0,
+            109.0,
+            502.0,
+            173.0
+        ],
+        "X": [
+            632.9,
+            527.8,
+            756.9000000000001,
+            789.8,
+            1003.5,
+            1120.6,
+            753.0,
+            492.4,
+            182.10000000000002,
+            133.5,
+            184.8
+        ],
+        "Y": [
+            491.9,
+            605.1,
+            267.9,
+            194.1,
+            333.1,
+            192.2,
+            140.3,
+            130.6,
+            129.6,
+            56.2,
+            283.7
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_seabottom_001_bottle_001.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "bottle1337.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": true,
+        "target_stim": "bottle1337.png",
+        "target_present": true,
+        "target_bbox": [
+            402.0,
+            500.0,
+            482.0,
+            544.0
+        ],
+        "X": [
+            642.9,
+            497.4,
+            428.70000000000005
+        ],
+        "Y": [
+            504.29999999999995,
+            356.1,
+            441.1
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_shelves_081_knife_004.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "knife77.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": true,
+        "target_stim": "knife77.png",
+        "target_present": true,
+        "target_bbox": [
+            315.0,
+            896.0,
+            339.0,
+            976.0
+        ],
+        "X": [
+            636.4,
+            782.2,
+            918.5,
+            774.4000000000001
+        ],
+        "Y": [
+            533.8,
+            600.8,
+            670.4,
+            736.9
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_building_007_person_004.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "person18565.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": true,
+        "target_stim": "person18565.png",
+        "target_present": true,
+        "target_bbox": [
+            729.0,
+            253.0,
+            809.0,
+            298.0
+        ],
+        "X": [
+            644.0,
+            462.0
+        ],
+        "Y": [
+            524.9,
+            618.3
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_building_039_dog_007.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "dog519.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": false,
+        "target_stim": "dog519.png",
+        "target_present": true,
+        "target_bbox": [
+            20.0,
+            1074.0,
+            100.0,
+            1117.0
+        ],
+        "X": [
+            631.1,
+            559.7,
+            488.79999999999995,
+            761.9000000000001,
+            1110.7,
+            1003.5999999999999,
+            861.5,
+            1076.3,
+            1209.4,
+            648.0,
+            1095.7
+        ],
+        "Y": [
+            518.5,
+            706.8,
+            772.8,
+            839.6,
+            794.5,
+            464.1,
+            465.5,
+            457.9,
+            567.7,
+            265.4,
+            117.4
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_building_060_dog_017.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "dog1200.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": false,
+        "target_stim": "dog1200.png",
+        "target_present": true,
+        "target_bbox": [
+            786.0,
+            1056.0,
+            829.0,
+            1136.0
+        ],
+        "X": [
+            634.7,
+            388.79999999999995,
+            247.20000000000005,
+            603.9,
+            1088.0,
+            951.9000000000001,
+            1084.2
+        ],
+        "Y": [
+            533.1,
+            674.0,
+            837.8,
+            929.2,
+            917.4,
+            664.3,
+            735.9
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_yard_005_animal_003.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "cat1855.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": false,
+        "target_stim": "cat1855.png",
+        "target_present": true,
+        "target_bbox": [
+            54.0,
+            335.0,
+            134.0,
+            382.0
+        ],
+        "X": [
+            631.3,
+            604.2,
+            512.6,
+            353.0,
+            177.10000000000002,
+            222.60000000000002,
+            857.0999999999999,
+            737.5999999999999,
+            835.5999999999999,
+            509.9,
+            179.2,
+            205.89999999999998,
+            178.2,
+            674.2,
+            942.7,
+            1127.1,
+            1095.5
+        ],
+        "Y": [
+            639.8,
+            833.8,
+            625.5,
+            365.8,
+            246.2,
+            511.70000000000005,
+            409.0,
+            618.0,
+            667.8,
+            654.4,
+            897.7,
+            140.6,
+            0,
+            197.8,
+            221.8,
+            314.7,
+            596.5
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_building_015_person_008.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "person177.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": true,
+        "target_stim": "person177.png",
+        "target_present": true,
+        "target_bbox": [
+            492.0,
+            172.0,
+            572.0,
+            200.0
+        ],
+        "X": [
+            642.5,
+            582.4,
+            412.1
+        ],
+        "Y": [
+            491.1,
+            567.9,
+            536.6
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_shelves_075_toys_034.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "airplane1062.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": true,
+        "target_stim": "airplane1062.png",
+        "target_present": true,
+        "target_bbox": [
+            281.0,
+            765.0,
+            312.0,
+            845.0
+        ],
+        "X": [
+            618.2,
+            387.0,
+            791.9000000000001,
+            1076.7,
+            765.5999999999999,
+            671.9,
+            600.6,
+            392.0,
+            214.60000000000002,
+            145.7,
+            228.89999999999998
+        ],
+        "Y": [
+            498.4,
+            744.0,
+            845.5,
+            892.0,
+            735.5,
+            741.5,
+            939.9,
+            550.5,
+            254.10000000000002,
+            0,
+            150.5
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_shelves_030_book_003.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "book171.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": false,
+        "target_stim": "book171.png",
+        "target_present": true,
+        "target_bbox": [
+            9.0,
+            764.0,
+            24.0,
+            844.0
+        ],
+        "X": [
+            648.6,
+            473.70000000000005,
+            341.9,
+            315.5,
+            103.39999999999998,
+            393.70000000000005,
+            493.5,
+            683.3,
+            799.0999999999999
+        ],
+        "Y": [
+            521.4,
+            436.8,
+            516.7,
+            381.9,
+            129.2,
+            245.10000000000002,
+            344.9,
+            258.6,
+            40.2
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_shelves_108_teddybear_021.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "teddy bear1557.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": true,
+        "target_stim": "teddy bear1557.png",
+        "target_present": true,
+        "target_bbox": [
+            792.0,
+            402.0,
+            872.0,
+            447.0
+        ],
+        "X": [
+            616.2,
+            521.1
+        ],
+        "Y": [
+            559.4,
+            593.6
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    },
+    "cmp_sky_001_kite_001.jpg": {
+        "subject": "S111",
+        "dataset": "Hybrid Analysis ET",
+        "image_height": 1024,
+        "image_width": 1280,
+        "memory_set": [
+            "stm_sky_001_kite_001_016.png"
+        ],
+        "screen_height": 1080,
+        "screen_width": 1920,
+        "receptive_height": 32,
+        "receptive_width": 32,
+        "target_found": false,
+        "target_stim": "stm_sky_001_kite_001_016.png",
+        "target_present": true,
+        "target_bbox": [
+            59.0,
+            163.0,
+            106.0,
+            243.0
+        ],
+        "X": [
+            628.1,
+            627.0,
+            897.5999999999999,
+            528.6,
+            217.79999999999995,
+            355.0,
+            341.79999999999995,
+            279.1,
+            308.9,
+            616.9,
+            869.4000000000001,
+            971.7,
+            881.0,
+            755.4000000000001,
+            216.0,
+            268.29999999999995,
+            198.5
+        ],
+        "Y": [
+            496.29999999999995,
+            608.9,
+            691.5,
+            910.2,
+            890.3,
+            755.6,
+            538.1,
+            429.5,
+            255.2,
+            362.4,
+            296.4,
+            91.5,
+            280.9,
+            125.69999999999999,
+            0,
+            127.1,
+            0
+        ],
+        "target_object": "TBD",
+        "max_fixations": null
+    }
+}

@@ -1,0 +1,120 @@
+El sujeto S101 tiene la fijación 2 fuera de los límites de la imagen cmp_building_007_person_004.jpg
+El sujeto S101 tiene la fijación 3 fuera de los límites de la imagen cmp_africansavanna_003_wildanimals_003.jpg
+El sujeto S101 tiene la fijación 3 fuera de los límites de la imagen cmp_africansavanna_003_wildanimals_003.jpg
+El sujeto S101 tiene la fijación 16 fuera de los límites de la imagen cmp_africansavanna_003_wildanimals_003.jpg
+El sujeto S101 tiene la fijación 2 fuera de los límites de la imagen cmp_building_022_cat_009.jpg
+Trials con target present sin scanpaths en sujeto S101: 0
+Trials con target absent en sujeto S101: 34
+
+El sujeto S102 tiene la fijación 5 fuera de los límites de la imagen cmp_mountain_004_sheep_001.jpg
+Trials con target present sin scanpaths en sujeto S102: 0
+Trials con target absent en sujeto S102: 34
+
+El sujeto S103 tiene la fijación 8 fuera de los límites de la imagen cmp_shelves_075_toys_034.jpg
+Trials con target present sin scanpaths en sujeto S103: 0
+Trials con target absent en sujeto S103: 34
+
+El sujeto S105 tiene la fijación 11 fuera de los límites de la imagen cmp_africansavanna_003_wildanimals_003.jpg
+Trials con target present sin scanpaths en sujeto S105: 0
+Trials con target absent en sujeto S105: 34
+
+Trials con target present sin scanpaths en sujeto S106: 0
+Trials con target absent en sujeto S106: 34
+
+El sujeto S107 tiene la fijación 7 fuera de los límites de la imagen cmp_mountain_004_sheep_001.jpg
+Trials con target present sin scanpaths en sujeto S107: 0
+Trials con target absent en sujeto S107: 34
+
+El sujeto S108 tiene la fijación 9 fuera de los límites de la imagen cmp_building_007_person_004.jpg
+El sujeto S108 tiene la fijación 0 fuera de los límites de la imagen cmp_snow_001_person_001.jpg
+El sujeto S108 tiene la fijación 0 fuera de los límites de la imagen cmp_building_022_cat_009.jpg
+El sujeto S108 tiene la fijación 1 fuera de los límites de la imagen cmp_building_022_cat_009.jpg
+El sujeto S108 tiene la fijación 1 fuera de los límites de la imagen cmp_building_022_cat_009.jpg
+El sujeto S108 tiene la fijación 1 fuera de los límites de la imagen cmp_building_022_cat_009.jpg
+El sujeto S108 tiene la fijación 0 fuera de los límites de la imagen cmp_shelves_016_cup_001.jpg
+El sujeto S108 tiene la fijación 0 fuera de los límites de la imagen cmp_shelves_016_cup_001.jpg
+El sujeto S108 tiene la fijación 0 fuera de los límites de la imagen cmp_shelves_016_cup_001.jpg
+El sujeto S108 tiene la fijación 0 fuera de los límites de la imagen cmp_seabottom_001_bottle_001.jpg
+El sujeto S108 tiene la fijación 0 fuera de los límites de la imagen cmp_seabottom_001_bottle_001.jpg
+El sujeto S108 tiene la fijación 0 fuera de los límites de la imagen cmp_seabottom_001_bottle_001.jpg
+El sujeto S108 tiene la fijación 0 fuera de los límites de la imagen cmp_seabottom_001_bottle_001.jpg
+Trials con target present sin scanpaths en sujeto S108: 1
+Trials con target absent en sujeto S108: 34
+
+El sujeto S109 tiene la fijación 4 fuera de los límites de la imagen cmp_building_022_cat_009.jpg
+El sujeto S109 tiene la fijación 5 fuera de los límites de la imagen cmp_building_022_cat_009.jpg
+El sujeto S109 tiene la fijación 4 fuera de los límites de la imagen cmp_building_033_cat_012.jpg
+El sujeto S109 tiene la fijación 9 fuera de los límites de la imagen cmp_shelves_089_vase_008.jpg
+Trials con target present sin scanpaths en sujeto S109: 0
+Trials con target absent en sujeto S109: 34
+
+El sujeto S110 tiene la fijación 3 fuera de los límites de la imagen cmp_shelves_016_cup_001.jpg
+El sujeto S110 tiene la fijación 3 fuera de los límites de la imagen cmp_shelves_075_toys_034.jpg
+El sujeto S110 tiene la fijación 6 fuera de los límites de la imagen cmp_shelves_075_toys_034.jpg
+El sujeto S110 tiene la fijación 14 fuera de los límites de la imagen cmp_sky_001_kite_001.jpg
+El sujeto S110 tiene la fijación 5 fuera de los límites de la imagen cmp_shelves_089_vase_008.jpg
+El sujeto S110 tiene la fijación 2 fuera de los límites de la imagen cmp_building_054_bird_010.jpg
+El sujeto S110 tiene la fijación 3 fuera de los límites de la imagen cmp_building_054_bird_010.jpg
+El sujeto S110 tiene la fijación 4 fuera de los límites de la imagen cmp_building_039_dog_007.jpg
+El sujeto S110 tiene la fijación 4 fuera de los límites de la imagen cmp_building_039_dog_007.jpg
+Trials con target present sin scanpaths en sujeto S110: 0
+Trials con target absent en sujeto S110: 34
+
+El sujeto S111 tiene la fijación 4 fuera de los límites de la imagen cmp_shelves_016_cup_001.jpg
+Trials con target present sin scanpaths en sujeto S111: 1
+Trials con target absent en sujeto S111: 34
+
+El sujeto S112 tiene la fijación 17 fuera de los límites de la imagen cmp_shelves_075_toys_034.jpg
+El sujeto S112 tiene la fijación 9 fuera de los límites de la imagen cmp_jungle_007_bird_007.jpg
+El sujeto S112 tiene la fijación 9 fuera de los límites de la imagen cmp_jungle_007_bird_007.jpg
+El sujeto S112 tiene la fijación 9 fuera de los límites de la imagen cmp_jungle_007_bird_007.jpg
+El sujeto S112 tiene la fijación 12 fuera de los límites de la imagen cmp_sky_001_kite_001.jpg
+El sujeto S112 tiene la fijación 12 fuera de los límites de la imagen cmp_sky_001_kite_001.jpg
+El sujeto S112 tiene la fijación 9 fuera de los límites de la imagen cmp_yard_005_animal_003.jpg
+El sujeto S112 tiene la fijación 12 fuera de los límites de la imagen cmp_shelves_054_toys_013.jpg
+El sujeto S112 tiene la fijación 3 fuera de los límites de la imagen cmp_shelves_016_cup_001.jpg
+El sujeto S112 tiene la fijación 4 fuera de los límites de la imagen cmp_building_060_dog_017.jpg
+El sujeto S112 tiene la fijación 4 fuera de los límites de la imagen cmp_building_060_dog_017.jpg
+Trials con target present sin scanpaths en sujeto S112: 0
+Trials con target absent en sujeto S112: 34
+
+El sujeto S113 tiene la fijación 5 fuera de los límites de la imagen cmp_mountain_019_sheep_007.jpg
+Trials con target present sin scanpaths en sujeto S113: 1
+Trials con target absent en sujeto S113: 34
+
+Trials con target present sin scanpaths en sujeto S114: 0
+Trials con target absent en sujeto S114: 34
+
+El sujeto S115 tiene la fijación 2 fuera de los límites de la imagen cmp_seabottom_001_bottle_001.jpg
+Trials con target present sin scanpaths en sujeto S115: 0
+Trials con target absent en sujeto S115: 34
+
+Trials con target present sin scanpaths en sujeto S116: 0
+Trials con target absent en sujeto S116: 34
+
+El sujeto S117 tiene la fijación 6 fuera de los límites de la imagen cmp_shelves_030_book_003.jpg
+El sujeto S117 tiene la fijación 11 fuera de los límites de la imagen cmp_mountain_019_sheep_007.jpg
+Trials con target present sin scanpaths en sujeto S117: 0
+Trials con target absent en sujeto S117: 34
+
+El sujeto S118 tiene la fijación 3 fuera de los límites de la imagen cmp_shelves_016_cup_001.jpg
+El sujeto S118 tiene la fijación 5 fuera de los límites de la imagen cmp_shelves_075_toys_034.jpg
+El sujeto S118 tiene la fijación 5 fuera de los límites de la imagen cmp_shelves_075_toys_034.jpg
+El sujeto S118 tiene la fijación 13 fuera de los límites de la imagen cmp_shelves_111_pottedplant_002.jpg
+Trials con target present sin scanpaths en sujeto S118: 0
+Trials con target absent en sujeto S118: 34
+
+El sujeto S119 tiene la fijación 25 fuera de los límites de la imagen cmp_africansavanna_003_wildanimals_003.jpg
+El sujeto S119 tiene la fijación 8 fuera de los límites de la imagen cmp_shelves_030_book_003.jpg
+El sujeto S119 tiene la fijación 8 fuera de los límites de la imagen cmp_shelves_030_book_003.jpg
+El sujeto S119 tiene la fijación 2 fuera de los límites de la imagen cmp_building_022_cat_009.jpg
+El sujeto S119 tiene la fijación 19 fuera de los límites de la imagen cmp_building_054_bird_010.jpg
+El sujeto S119 tiene la fijación 9 fuera de los límites de la imagen cmp_sky_001_kite_001.jpg
+El sujeto S119 tiene la fijación 15 fuera de los límites de la imagen cmp_yard_005_animal_003.jpg
+El sujeto S119 tiene la fijación 16 fuera de los límites de la imagen cmp_yard_005_animal_003.jpg
+El sujeto S119 tiene la fijación 17 fuera de los límites de la imagen cmp_building_039_dog_007.jpg
+El sujeto S119 tiene la fijación 7 fuera de los límites de la imagen cmp_office_001_pottedplant_001.jpg
+El sujeto S119 tiene la fijación 8 fuera de los límites de la imagen cmp_office_001_pottedplant_001.jpg
+Trials con target present sin scanpaths en sujeto S119: 0
+Trials con target absent en sujeto S119: 34
+
