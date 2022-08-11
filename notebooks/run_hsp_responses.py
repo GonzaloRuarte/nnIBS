@@ -1,3 +1,4 @@
+from ..Metrics.scripts.human_scanpath_prediction import compute_trial_metrics
 import run_visualsearch
 from os import listdir, path
 from visualsearch.utils import utils
@@ -6,12 +7,13 @@ import pandas as pd
 import numpy as np
 from scipy.stats import multivariate_normal
 import numba
+
 human_scanpaths_path = 'data/human_scanpaths'
 
 def main():
     for subject in listdir(human_scanpaths_path):
         subject_number  = subject[4:6]
-        config_filename = 'ssim'
+        config_filename = 'gaston_ssim'
         run_visualsearch.main(config_filename, None, None, int(subject_number), 'all', True)
         output_path = path.join(path.join('output', + config_filename), 'human_subject_' + subject_number)
         human_scanpaths = utils.load_from_json(path.join(output_path, 'Subject_scanpaths.json'))
@@ -22,18 +24,20 @@ def main():
             probability_maps_folder = path.join(output_path, path.join('probability_maps', image_name[:-4]))
             for index in range(1, np.size(human_fixations_x)): #la fijacion inicial es compartida, por ende no hay que compararla                
                 probability_map = pd.read_csv(probability_maps_folder + 'fixation_' + str(index))                
-                compute_scanpath_prediction_metrics(probability_map, human_fixations_y[:index], human_fixations_x[:index])
-
-def center_gaussian(shape):
+                #compute_scanpath_prediction_metrics(probability_map, human_fixations_y[:index], human_fixations_x[:index])
+                compute_trial_metrics
+                
+def center_gaussian(img_shape):
     sigma  = [[1, 0], [0, 1]]
-    mean   = [shape[0] // 2, shape[1] // 2]
-    x_range = np.linspace(0, shape[0], shape[0])
-    y_range = np.linspace(0, shape[1], shape[1])
+    mean   = [img_shape[0] // 2, img_shape[1] // 2]
+    x_range = np.linspace(0, img_shape[0], img_shape[0])
+    y_range = np.linspace(0, img_shape[1], img_shape[1])
 
     x_matrix, y_matrix = np.meshgrid(y_range, x_range)
     quantiles = np.transpose([y_matrix.flatten(), x_matrix.flatten()])
     mvn = multivariate_normal.pdf(quantiles, mean=mean, cov=sigma)
-    mvn = np.reshape(mvn_at_fixation, shape)
+    mvn = np.reshape(mvn, img_shape)
+    #mvn = np.reshape(mvn_at_fixation, shape)
 
     return mvn
 
