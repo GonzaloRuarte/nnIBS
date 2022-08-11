@@ -4,6 +4,7 @@ import visualsearch
 import sys
 from os import path,environ
 
+
 " Runs visualsearch/main.py according to the supplied parameters "
 
 def setup_and_run(dataset_name, config_name, image_name, image_range, human_subject, number_of_processes, save_probability_maps):
@@ -23,7 +24,7 @@ def setup_and_run(dataset_name, config_name, image_name, image_range, human_subj
 
 """ Main method, added to be polymorphic with respect to the other models """
 def main(dataset_name, human_subject=None):
-    setup_and_run(dataset_name, config_name='default', image_name=None, image_range=None, human_subject=human_subject, number_of_processes='all', save_probability_maps=False)
+    setup_and_run(dataset_name, config_name='default', image_name=None, image_range=None, human_subject=human_subject, number_of_processes=int(environ['SLURM_CPUS_PER_TASK']), save_probability_maps=False)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run the nnIBS Visual Search model')
