@@ -80,7 +80,17 @@ def dimensions_check_response():
 def dimensions_check_target_bbox():
     pass
 
-def add_responses(scanpaths_path, responses_path, calculate_features=True):
+def add_responses(scanpaths_path, responses_path, save_path=None, change_scanpaths=False, calculate_features=True):
+    """Function to add the responses to the scanpaths, and calculate the features if needed (distance to target, target found, etc).
+    If change_scanpaths is True, the scanpaths will be changed by adding the response as last fixation.
+
+    Args:
+        scanpaths_path (_type_): _description_
+        responses_path (_type_): _description_
+        change_scanpaths (bool, optional): _description_. Defaults to False.
+        calculate_features (bool, optional): _description_. Defaults to True.
+    """
+    if save_path is None: save_path = responses_path
     responses = pd.read_csv(os.path.join(responses_path, 'responses_data.csv')).set_index(['subj_id','image'])
     trials_data = load_trials_properties(os.path.join(responses_path, '..', 'trials_properties.json'))
     trials_data = pd.DataFrame(trials_data).set_index('image')
@@ -109,6 +119,8 @@ def add_responses(scanpaths_path, responses_path, calculate_features=True):
                 val['response_circle'] = responses.loc[subj_id, img]['response_time_circle']
                 # corrijo los que tenian 3 sacadas máximas y los ponemos dentro de los que tenian 4 (subs 37 y 29)
                 if val['max_fixations'] == 4: val['max_fixations'] = 5
+                # agrego las respuestas como ultima fijacion
+                if change_scanpaths: val['X'].append(val['response_x']), val['Y'].append(val['response_y'])
                 if calculate_features:
                     val['distance_to_target']    = distance_to_target(val)
                     val['distance_to_last_fix']  = distance_to_last_fix(val)
@@ -119,8 +131,8 @@ def add_responses(scanpaths_path, responses_path, calculate_features=True):
                     
                 subject_scanpaths[img].update(val)
                 #print(subject_scanpaths[img])
-                #break
-            with open(os.path.join(responses_path, 'human_scanpaths', file), "w") as outfile:
+
+            with open(os.path.join(save_path, 'human_scanpaths', file), "w") as outfile:
                 json.dump(subject_scanpaths, outfile, cls=NpEncoder)
 
 def get_responses_features(subjs):
