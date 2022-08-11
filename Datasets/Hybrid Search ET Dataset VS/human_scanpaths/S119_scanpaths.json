@@ -359,36 +359,6 @@
         "target_object": "TBD",
         "max_fixations": null
     },
-    "cmp_seabottom_001_bottle_001.jpg": {
-        "subject": "S119",
-        "dataset": "Hybrid Analysis ET",
-        "image_height": 1024,
-        "image_width": 1280,
-        "memory_set": [
-            "bottle1337.png"
-        ],
-        "screen_height": 1080,
-        "screen_width": 1920,
-        "receptive_height": 32,
-        "receptive_width": 32,
-        "target_found": true,
-        "target_stim": "bottle1337.png",
-        "target_present": true,
-        "target_bbox": [
-            402.0,
-            500.0,
-            482.0,
-            544.0
-        ],
-        "X": [
-            739.5
-        ],
-        "Y": [
-            492.1
-        ],
-        "target_object": "TBD",
-        "max_fixations": null
-    },
     "cmp_mountain_004_sheep_001.jpg": {
         "subject": "S119",
         "dataset": "Hybrid Analysis ET",

@@ -1,64 +1,4 @@
 {
-    "cmp_jungle_007_bird_007.jpg": {
-        "subject": "S117",
-        "dataset": "Hybrid Analysis ET",
-        "image_height": 1024,
-        "image_width": 1280,
-        "memory_set": [
-            "bird332.png"
-        ],
-        "screen_height": 1080,
-        "screen_width": 1920,
-        "receptive_height": 32,
-        "receptive_width": 32,
-        "target_found": true,
-        "target_stim": "bird332.png",
-        "target_present": true,
-        "target_bbox": [
-            230.0,
-            918.0,
-            310.0,
-            1000.0
-        ],
-        "X": [
-            686.1
-        ],
-        "Y": [
-            343.2
-        ],
-        "target_object": "TBD",
-        "max_fixations": null
-    },
-    "cmp_shelves_103_teddybear_016.jpg": {
-        "subject": "S117",
-        "dataset": "Hybrid Analysis ET",
-        "image_height": 1024,
-        "image_width": 1280,
-        "memory_set": [
-            "teddy bear1654.png"
-        ],
-        "screen_height": 1080,
-        "screen_width": 1920,
-        "receptive_height": 32,
-        "receptive_width": 32,
-        "target_found": true,
-        "target_stim": "teddy bear1654.png",
-        "target_present": true,
-        "target_bbox": [
-            395.0,
-            437.0,
-            470.0,
-            517.0
-        ],
-        "X": [
-            619.3
-        ],
-        "Y": [
-            394.4
-        ],
-        "target_object": "TBD",
-        "max_fixations": null
-    },
     "cmp_shelves_046_toys_005.jpg": {
         "subject": "S117",
         "dataset": "Hybrid Analysis ET",
@@ -753,36 +693,6 @@
             754.1,
             604.1,
             714.8
-        ],
-        "target_object": "TBD",
-        "max_fixations": null
-    },
-    "cmp_shelves_054_toys_013.jpg": {
-        "subject": "S117",
-        "dataset": "Hybrid Analysis ET",
-        "image_height": 1024,
-        "image_width": 1280,
-        "memory_set": [
-            "truck319.png"
-        ],
-        "screen_height": 1080,
-        "screen_width": 1920,
-        "receptive_height": 32,
-        "receptive_width": 32,
-        "target_found": true,
-        "target_stim": "truck319.png",
-        "target_present": true,
-        "target_bbox": [
-            301.0,
-            1008.0,
-            381.0,
-            1074.0
-        ],
-        "X": [
-            637.2
-        ],
-        "Y": [
-            428.4
         ],
         "target_object": "TBD",
         "max_fixations": null

@@ -1513,36 +1513,6 @@
         "target_object": "TBD",
         "max_fixations": null
     },
-    "cmp_building_046_sheep_001.jpg": {
-        "subject": "S118",
-        "dataset": "Hybrid Analysis ET",
-        "image_height": 1024,
-        "image_width": 1280,
-        "memory_set": [
-            "sheep1548.png"
-        ],
-        "screen_height": 1080,
-        "screen_width": 1920,
-        "receptive_height": 32,
-        "receptive_width": 32,
-        "target_found": true,
-        "target_stim": "sheep1548.png",
-        "target_present": true,
-        "target_bbox": [
-            576.0,
-            305.0,
-            656.0,
-            356.0
-        ],
-        "X": [
-            516.6
-        ],
-        "Y": [
-            567.4
-        ],
-        "target_object": "TBD",
-        "max_fixations": null
-    },
     "cmp_building_060_dog_017.jpg": {
         "subject": "S118",
         "dataset": "Hybrid Analysis ET",

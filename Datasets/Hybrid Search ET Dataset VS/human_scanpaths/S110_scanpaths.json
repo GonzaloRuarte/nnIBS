@@ -1235,36 +1235,6 @@
         "target_object": "TBD",
         "max_fixations": null
     },
-    "cmp_building_015_person_008.jpg": {
-        "subject": "S110",
-        "dataset": "Hybrid Analysis ET",
-        "image_height": 1024,
-        "image_width": 1280,
-        "memory_set": [
-            "person177.png"
-        ],
-        "screen_height": 1080,
-        "screen_width": 1920,
-        "receptive_height": 32,
-        "receptive_width": 32,
-        "target_found": true,
-        "target_stim": "person177.png",
-        "target_present": true,
-        "target_bbox": [
-            492.0,
-            172.0,
-            572.0,
-            200.0
-        ],
-        "X": [
-            407.20000000000005
-        ],
-        "Y": [
-            420.5
-        ],
-        "target_object": "TBD",
-        "max_fixations": null
-    },
     "cmp_africansavanna_003_wildanimals_003.jpg": {
         "subject": "S110",
         "dataset": "Hybrid Analysis ET",

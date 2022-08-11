@@ -39,36 +39,6 @@
         "target_object": "TBD",
         "max_fixations": null
     },
-    "cmp_shelves_103_teddybear_016.jpg": {
-        "subject": "S102",
-        "dataset": "Hybrid Analysis ET",
-        "image_height": 1024,
-        "image_width": 1280,
-        "memory_set": [
-            "teddy bear1654.png"
-        ],
-        "screen_height": 1080,
-        "screen_width": 1920,
-        "receptive_height": 32,
-        "receptive_width": 32,
-        "target_found": true,
-        "target_stim": "teddy bear1654.png",
-        "target_present": true,
-        "target_bbox": [
-            395.0,
-            437.0,
-            470.0,
-            517.0
-        ],
-        "X": [
-            674.0
-        ],
-        "Y": [
-            450.0
-        ],
-        "target_object": "TBD",
-        "max_fixations": null
-    },
     "cmp_building_015_person_008.jpg": {
         "subject": "S102",
         "dataset": "Hybrid Analysis ET",

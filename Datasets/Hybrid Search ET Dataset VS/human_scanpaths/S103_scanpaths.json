@@ -983,36 +983,6 @@
         "target_object": "TBD",
         "max_fixations": null
     },
-    "cmp_shelves_054_toys_013.jpg": {
-        "subject": "S103",
-        "dataset": "Hybrid Analysis ET",
-        "image_height": 1024,
-        "image_width": 1280,
-        "memory_set": [
-            "truck319.png"
-        ],
-        "screen_height": 1080,
-        "screen_width": 1920,
-        "receptive_height": 32,
-        "receptive_width": 32,
-        "target_found": true,
-        "target_stim": "truck319.png",
-        "target_present": true,
-        "target_bbox": [
-            301.0,
-            1008.0,
-            381.0,
-            1074.0
-        ],
-        "X": [
-            827.7
-        ],
-        "Y": [
-            397.1
-        ],
-        "target_object": "TBD",
-        "max_fixations": null
-    },
     "cmp_shelves_030_book_003.jpg": {
         "subject": "S103",
         "dataset": "Hybrid Analysis ET",
