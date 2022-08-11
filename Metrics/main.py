@@ -8,7 +8,7 @@ from os import path
 
 def main(datasets, compute_cumulative_performance, compute_multimatch, compute_human_scanpath_prediction):
     datasets_results = {}
-    model_name = "default"
+    model_name = "nnIBS"
     for dataset_name in datasets:
         dataset_path = path.join(constants.DATASETS_PATH, dataset_name)
         dataset_info = utils.load_dict_from_json(path.join(dataset_path, 'dataset_info.json'))
@@ -38,7 +38,7 @@ def main(datasets, compute_cumulative_performance, compute_multimatch, compute_h
             print('No results found for ' + dataset_name + ' dataset')
             continue
 
-        model_scanpaths_file = path.join(path.join(dataset_results_dir, model_name), 'Scanpaths.json')
+        model_scanpaths_file = path.join(dataset_results_dir, 'Scanpaths.json')
         model_scanpaths      = utils.load_dict_from_json(model_scanpaths_file)
 
         subjects_cumulative_performance.add_model(model_name, model_scanpaths, constants.MODELS_COLORS[color_index])

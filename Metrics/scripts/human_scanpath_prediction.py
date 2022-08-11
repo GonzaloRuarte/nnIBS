@@ -26,7 +26,7 @@ class HumanScanpathPrediction:
     def compute_metrics_for_model(self, model_name):
         if self.null_object: return
 
-        model_output_path     = path.join(self.dataset_results_dir, model_name)    
+        model_output_path     = self.dataset_results_dir 
         human_scanpaths_files = utils.sorted_alphanumeric(listdir(self.human_scanpaths_dir))
         model_average_file    = path.join(model_output_path, 'human_scanpath_prediction_mean_per_image.json')
 
@@ -145,7 +145,6 @@ class HumanScanpathPrediction:
                             model_results[subject][image_name] = {'AUC': np.mean(trial_aucs), 'NSS': np.mean(trial_nss), 'IG': np.mean(trial_igs), 'LL': np.mean(trial_lls)}
                         else:
                             model_results[subject] = {image_name: {'AUC': np.mean(trial_aucs), 'NSS': np.mean(trial_nss), 'IG': np.mean(trial_igs), 'LL': np.mean(trial_lls)}}
-
         baseline_averages = {}
         for model in baseline_models:
             baseline_averages[model] = self.get_average_per_image(baseline_models[model]['results'])
