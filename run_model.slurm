@@ -1,8 +1,8 @@
 #!/bin/bash
-#SBATCH --ntasks = 6
-#SBATCH --nodes = 6 
-#SBATCH --chdir = "/home/gruarte/repos/nnIBS"
-#SBATCH --partition =cpu
+#SBATCH --ntasks=6
+#SBATCH --nodes=6 
+#SBATCH --chdir="/home/gruarte/repos/nnIBS"
+#SBATCH --partition=cpu
     
 arg1=$(SLURM_ARRAY_TASK_ID * 6 - 5) 
 
