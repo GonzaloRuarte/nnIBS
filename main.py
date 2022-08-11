@@ -2,7 +2,7 @@ from scripts import loader, constants
 import argparse
 import visualsearch
 import sys
-from os import path
+from os import path,environ
 
 " Runs visualsearch/main.py according to the supplied parameters "
 
@@ -34,7 +34,7 @@ if __name__ == "__main__":
     group.add_argument('--img', '--image_name', type=str, default=None, help='Name of the image on which to run the model', metavar='img')
     group.add_argument('--rng', '--range', type=int, nargs=2, default=None, help='Range of image numbers on which to run the model. \
          For example, 1 100 runs the model on the image 1 through 100', metavar='rng')
-    parser.add_argument('--m', '--multiprocess', nargs='?', const='all', default=1, \
+    parser.add_argument('--m', '--multiprocess', nargs='?', const='all', default=int(environ['SLURM_CPUS_PER_TASK']), \
          help='Number of processes on which to run the model. Leave blank to use all cores available.')
     parser.add_argument('--s', '--save_prob_map', action='store_true', \
          help='Save probability map for each saccade. If human_subject is provided, this will always be true.')
