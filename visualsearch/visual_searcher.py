@@ -139,9 +139,9 @@ class VisualSearcher:
               #  posterior = history_prior[0]
 
             #else:
-            likelihoods = np.array(list(map(lambda x: x.at_fixation(current_fixation),target_similarity_map)))
-            minimum_entropy_likelihood_index = np.argmin(list(map(lambda x : entropy(x.flatten()),likelihoods)))
-            likelihood = likelihood + likelihoods[minimum_entropy_likelihood_index] * (np.square(self.visibility_map.at_fixation(current_fixation)))
+            target_similarities = np.array(list(map(lambda x: x.at_fixation(current_fixation),target_similarity_map)))
+            minimum_entropy_likelihood_index = np.argmin(list(map(lambda x : entropy(x.flatten()),target_similarities)))
+            likelihood = likelihood + target_similarities[minimum_entropy_likelihood_index] * (np.square(self.visibility_map.at_fixation(current_fixation)))
             
             likelihood_times_prior = posterior * np.exp(likelihood)
             
