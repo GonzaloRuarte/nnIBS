@@ -1,4 +1,0 @@
-La imagen cmp_mountain_018_sheep_006.jpg tiene el siguiente estímulo repetido: sheep1827.png
-La imagen cmp_mountain_018_sheep_006.jpg tiene el siguiente estímulo repetido: sheep1827.png
-La imagen cmp_mountain_018_sheep_006.jpg tiene 14 estímulos sin repetir
-Esto es en base a las filas del csv global.

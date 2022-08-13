@@ -963,7 +963,7 @@
         "screen_width": 1920,
         "receptive_height": 32,
         "receptive_width": 32,
-        "target_found": false,
+        "target_found": true,
         "target_stim": "dog1200.png",
         "target_present": true,
         "target_bbox": [

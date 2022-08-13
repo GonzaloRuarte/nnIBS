@@ -1,0 +1,18 @@
+{
+    "dataset_name": "Hybrid Search ET Dataset",
+    "number_of_images": 204,
+    "image_height": 1024,
+    "image_width": 1280,
+    "max_scanpath_length": 40,
+    "receptive_size": [
+        32,
+        32
+    ],
+    "mean_target_size": [
+        68.07405462184875,
+        64.72242647058823
+    ],
+    "images_dir": "images/",
+    "targets_dir": "stimuli/",
+    "scanpaths_dir": "human_scanpaths/"
+}
