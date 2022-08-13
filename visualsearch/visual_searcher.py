@@ -6,6 +6,7 @@ from . import prior
 import numpy as np
 import time
 import importlib
+from scipy.stats import entropy
 
 class VisualSearcher: 
     def __init__(self, config, grid, visibility_map, target_similarity_dir, output_path, human_scanpaths):
@@ -44,14 +45,15 @@ class VisualSearcher:
         self.human_scanpaths          = human_scanpaths
         self.history_size             = config['history_size']
 
-    def search(self, image_name, image, image_prior, target, target_bbox, initial_fixation):
+    def search(self, image_name, image, image_prior, memory_set, memory_set_names,target_bbox, initial_fixation):
         " Given an image, a target, and a prior of that image, it looks for the object in the image, generating a scanpath "
         """ Input:
             Specifies the data of the image on which to run the visual search model. Fields:
                 image_name (string)         : name of the image
                 image (2D array)            : search image
                 image_prior (2D array)      : grayscale image with values between 0 and 1 that serves as prior
-                target (2D array)           : target image
+                memory_set (3D array)       : stimuli to search
+                memory_set_names (array)    : filenames of the stimuli
                 target_bbox (array)         : bounding box (upper left row, upper left column, lower right row, lower right column) of the target inside the search image
                 initial_fixation (int, int) : row and column of the first fixation on the search image
             Output:
@@ -98,7 +100,8 @@ class VisualSearcher:
             print(image_name + ': initial fixation falls off the grid')
             return {}
 
-        target_similarity_map = self.initialize_target_similarity_map(image, target, target_bbox, image_name)
+
+        target_similarity_map = np.array(list(map(lambda i: self.initialize_target_similarity_map(memory_set[i], image,target_bbox, image_name,memory_set_names[i]),range(0,len(memory_set)))))
 
         # Initialize variables for computing each fixation        
         likelihood = np.zeros(shape=grid_size)
@@ -136,7 +139,9 @@ class VisualSearcher:
               #  posterior = history_prior[0]
 
             #else:
-            likelihood = likelihood + target_similarity_map.at_fixation(current_fixation) * (np.square(self.visibility_map.at_fixation(current_fixation)))
+            likelihoods = np.array(list(map(lambda x: x.at_fixation(current_fixation),target_similarity_map)))
+            minimum_entropy_likelihood_index = np.argmin(list(map(lambda x : entropy(x.flatten()),likelihoods)))
+            likelihood = likelihood + likelihoods[minimum_entropy_likelihood_index] * (np.square(self.visibility_map.at_fixation(current_fixation)))
             
             likelihood_times_prior = posterior * np.exp(likelihood)
             
@@ -176,12 +181,12 @@ class VisualSearcher:
         else:
             return BayesianModel(self.grid.size(), self.visibility_map, norm_cdf_tolerance, self.number_of_processes, self.save_probability_maps)
 
-    def initialize_target_similarity_map(self, image, target, target_bbox, image_name):
+    def initialize_target_similarity_map(self,  target, image, target_bbox, image_name,stim_name):
         # Load corresponding module, which has the same name in lower case
         module = importlib.import_module('.target_similarity.' + self.target_similarity_method.lower(), 'visualsearch')
         # Get the class
         target_similarity_class = getattr(module, self.target_similarity_method.capitalize())
-        target_similarity_map   = target_similarity_class(image_name, image, target, target_bbox, self.visibility_map, self.scale_factor, self.additive_shift, self.grid, self.seed, \
+        target_similarity_map   = target_similarity_class(image_name, stim_name, image, target, target_bbox, self.visibility_map, self.scale_factor, self.additive_shift, self.grid, self.seed, \
             self.number_of_processes, self.save_similarity_maps, self.target_similarity_dir)
         return target_similarity_map
 

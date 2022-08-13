@@ -4,7 +4,7 @@ from skimage import io
 from ..utils import utils
 
 class TargetSimilarity():
-    def __init__(self, image_name, image, target, target_bbox, visibility_map, scale_factor, additive_shift, grid, seed, number_of_processes, save_similarity_maps, target_similarity_dir):
+    def __init__(self, image_name,stim_name, image, target, target_bbox, visibility_map, scale_factor, additive_shift, grid, seed, number_of_processes, save_similarity_maps, target_similarity_dir):
         # Set the seed for generating random noise
         np.random.seed(seed)
 
@@ -13,6 +13,7 @@ class TargetSimilarity():
         self.grid                  = grid
         self.image_name            = image_name
         self.target_similarity_dir = target_similarity_dir
+        self.stim_name             = stim_name    
 
         self.create_target_similarity_map(image, target, target_bbox, visibility_map, scale_factor, additive_shift)
 
@@ -46,7 +47,7 @@ class TargetSimilarity():
               
         # If precomputed, load target similarity map
         save_path = path.join(self.target_similarity_dir, self.__class__.__name__)
-        filename  = self.image_name[:-4] + '.png'
+        filename  = self.image_name[:-4] + '_' + self.stim_name[:-4] +'.png'
         file_path = path.join(save_path, filename)
         if path.exists(file_path):
             target_similarity_map = io.imread(file_path)

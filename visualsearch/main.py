@@ -81,10 +81,14 @@ def run(config, dataset_info, trials_properties, human_scanpaths, output_path, s
             trial_number += 1
             image_name  = trial['image']
             target_name = trial['target'] 
+            if not (trial['memory_set'] is None):
+                memory_set = list(map(lambda x: utils.load_image(targets_dir,x),trial['memory_set']))
+            else:
+                memory_set = [utils.load_image(targets_dir, target_name)]
             print('Searching in image ' + image_name + ' (' + str(trial_number) + '/' + str(total_trials) + ')...')
             
             image       = utils.load_image(images_dir, image_name, model_image_size)
-            target      = utils.load_image(targets_dir, target_name)
+
             image_prior = prior.load(image, image_name, model_image_size, prior_name, saliency_dir)
             
             initial_fixation = (trial['initial_fixation_row'], trial['initial_fixation_column'])
@@ -93,11 +97,11 @@ def run(config, dataset_info, trials_properties, human_scanpaths, output_path, s
                                     trial['target_height'] + trial['target_matched_row'], trial['target_width'] + trial['target_matched_column']]
             target_bbox      = [utils.rescale_coordinate(target_bbox[i], image_size[i % 2 == 1], model_image_size[i % 2 == 1]) for i in range(len(target_bbox))]
 
-            trial_scanpath = visual_searcher.search(image_name, image, image_prior, target, target_bbox, initial_fixation)
+            trial_scanpath = visual_searcher.search(image_name, image, image_prior, memory_set,trial['memory_set'], target_bbox, initial_fixation)
 
             if trial_scanpath:
                 # If there were no errors, save the scanpath
-                utils.add_scanpath_to_dict(image_name, trial_scanpath, target_bbox, trial['target_object'], grid, config, dataset_info['dataset_name'], scanpaths)
+                utils.add_scanpath_to_dict(image_name, trial_scanpath, target_bbox, trial['target_object'], grid, config, dataset_info['dataset_name'], scanpaths,memory_set)
                 targets_found += trial_scanpath['target_found']
     except KeyboardInterrupt:
         time_elapsed = time.time() - start + previous_time
