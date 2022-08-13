@@ -101,7 +101,7 @@ def run(config, dataset_info, trials_properties, human_scanpaths, output_path, s
 
             if trial_scanpath:
                 # If there were no errors, save the scanpath
-                utils.add_scanpath_to_dict(image_name, trial_scanpath, target_bbox, trial['target_object'], grid, config, dataset_info['dataset_name'], scanpaths,memory_set)
+                utils.add_scanpath_to_dict(image_name, trial_scanpath, target_bbox, trial['target_object'], grid, config, dataset_info['dataset_name'], scanpaths)
                 targets_found += trial_scanpath['target_found']
     except KeyboardInterrupt:
         time_elapsed = time.time() - start + previous_time
