@@ -28,8 +28,7 @@ def main(dataset_name, human_subject=None):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run the nnIBS Visual Search model')
     parser.add_argument('-dataset', type=str, help='Name of the dataset on which to run the model. Value must be one of cIBS, COCOSearch18, IVSN or MCS.')
-    parser.add_argument('--cfg', '--config', type=str, default='default', help='Name of configuration setup. Examples: greedy, ssim, ivsn. Default is bayesian, with correlation \
-        and deepgaze as prior.', metavar='cfg')
+    parser.add_argument('--cfg', '--config', type=str, default='default', help='Name of configuration setup. Examples: greedy, ssim, ivsn. Default is ivsn.', metavar='cfg')
     group = parser.add_mutually_exclusive_group()
     group.add_argument('--img', '--image_name', type=str, default=None, help='Name of the image on which to run the model', metavar='img')
     group.add_argument('--rng', '--range', type=int, nargs=2, default=None, help='Range of image numbers on which to run the model. \
