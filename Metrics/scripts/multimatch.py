@@ -20,7 +20,7 @@ class Multimatch:
             return
             
         number_of_models = len(self.multimatch_values)
-        fig, axs = plt.subplots(1, number_of_models, sharex=True, sharey=True, figsize=(10, 5))
+        fig, axs = plt.subplots(1, number_of_models, sharex=True, sharey=True, figsize=(6, 5))
 
         if number_of_models == 1: axs = [axs]
 
