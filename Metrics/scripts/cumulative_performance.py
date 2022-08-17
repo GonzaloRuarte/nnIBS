@@ -26,32 +26,39 @@ class CumulativePerformance:
         if self.null_object:
             return
 
-        humans_cumulative_performance = []
+        humans_cumulative_performance = {}
         humans_scanpaths_files = listdir(humans_scanpaths_dir)
         print('[Cumulative performance] Computing human mean for ' + self.dataset_name + ' dataset')
         for human_scanpaths_file in humans_scanpaths_files:
             human_scanpaths = utils.load_dict_from_json(path.join(humans_scanpaths_dir, human_scanpaths_file))
-            human_scanpaths = utils.get_random_subset(human_scanpaths, size=self.number_of_images)
+            human_scanpaths = utils.divide_by_memory_set_size(utils.get_random_subset(human_scanpaths, size=self.number_of_images))
+            for mss in human_scanpaths.keys():
+                if not mss in humans_cumulative_performance:
+                    humans_cumulative_performance[mss] = []
+                if self.dataset_name == 'Interiors':
+                    humans_cumulative_performance[mss].append(self.compute_human_cumulative_performance_interiors(human_scanpaths[mss]))
+                else:
+                    humans_cumulative_performance[mss].append(self.compute_cumulative_performance(human_scanpaths[mss]))
+        total_cumulative_performance = 0
+        amount_mss = 0
+        for mss in humans_cumulative_performance.keys():
             if self.dataset_name == 'Interiors':
-                humans_cumulative_performance.append(self.compute_human_cumulative_performance_interiors(human_scanpaths))
+                number_of_subjects = len(humans_scanpaths_files)
+                humans_cumulative_performance_mean = [np.empty(n) for n in np.repeat(number_of_subjects, 4)]
+                subject_index = 0
+                for subject_cumulative_performance in humans_cumulative_performance:
+                    humans_cumulative_performance_mean[0][subject_index] = subject_cumulative_performance[1][3]
+                    humans_cumulative_performance_mean[1][subject_index] = subject_cumulative_performance[1][5]
+                    humans_cumulative_performance_mean[2][subject_index] = subject_cumulative_performance[1][9]
+                    humans_cumulative_performance_mean[3][subject_index] = subject_cumulative_performance[1][13]
+                    subject_index += 1
             else:
-                humans_cumulative_performance.append(self.compute_cumulative_performance(human_scanpaths))
-        
-        # Interiors dataset caps the number of maximum saccades for humans at 2, 4, 8 and 12
-        # Therefore, cumulative performance is calculated at fixation number 3, 5, 9 and 13
-        if self.dataset_name == 'Interiors':
-            number_of_subjects = len(humans_scanpaths_files)
-            humans_cumulative_performance_mean = [np.empty(n) for n in np.repeat(number_of_subjects, 4)]
-            subject_index = 0
-            for subject_cumulative_performance in humans_cumulative_performance:
-                humans_cumulative_performance_mean[0][subject_index] = subject_cumulative_performance[3]
-                humans_cumulative_performance_mean[1][subject_index] = subject_cumulative_performance[5]
-                humans_cumulative_performance_mean[2][subject_index] = subject_cumulative_performance[9]
-                humans_cumulative_performance_mean[3][subject_index] = subject_cumulative_performance[13]
-                subject_index += 1
-        else:
-            humans_cumulative_performance_mean = np.mean(np.array(humans_cumulative_performance), axis=0)
-        self.subjects_cumulative_performance.append({'subject': 'Humans', 'cumulative_performance': humans_cumulative_performance_mean, 'color': humans_color})
+                humans_cumulative_performance_mean = np.mean(np.array(humans_cumulative_performance[mss]), axis=0)
+            self.subjects_cumulative_performance.append({'subject': 'Humans MSS '+str(mss), 'cumulative_performance': humans_cumulative_performance_mean, 'color': humans_color})
+            total_cumulative_performance += humans_cumulative_performance_mean
+            amount_mss += 1
+        total_cumulative_performance /= amount_mss
+        self.subjects_cumulative_performance.append({'subject': 'Humans', 'cumulative_performance': total_cumulative_performance, 'color': humans_color})
 
     def compute_cumulative_performance(self, scanpaths):
         """ At index i, this array holds the number of targets found in i or less fixations """
@@ -114,14 +121,17 @@ class CumulativePerformance:
             
         fig, ax = plt.subplots()
         for subject in self.subjects_cumulative_performance:
+            
             subject_name = subject['subject']
+            if subject_name == "Humans":
+                continue
             subject_cumulative_performance = subject['cumulative_performance'] 
 
-            if subject_name == 'Humans' and self.dataset_name == 'Interiors':
+            if subject_name == 'Humans MSS 1' and self.dataset_name == 'Interiors':
                 ax.boxplot(subject_cumulative_performance, notch=True, vert=True, whiskerprops={'linestyle': (0, (5, 10)), 'color': subject['color']}, capprops={'color': subject['color']}, \
                     boxprops={'color': subject['color']}, flierprops={'marker': '+', 'markeredgecolor': subject['color']}, medianprops={'color': subject['color']}, positions=[3, 5, 9, 13])
             else:
-                ax.plot(range(1, self.max_scanpath_length + 1), subject_cumulative_performance[1:], label=subject_name, color=subject['color'])
+                ax.plot(range(1, self.max_scanpath_length + 1), subject_cumulative_performance[1:], label=subject_name)
 
         ax.legend(loc='lower right')  
         dataset_name = self.dataset_name + ' dataset'
