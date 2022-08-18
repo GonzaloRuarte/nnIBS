@@ -128,6 +128,21 @@ def get_dirs(path_):
 
     return dirs
 
+def divide_by_memory_set_size(trials_dict):
+    scanpaths_per_mss = {}
+    for (key,val) in trials_dict.items():
+        if not "memory_set" in val:
+            mss = 1
+        else:
+            mss = len(val["memory_set"])
+        if not mss in scanpaths_per_mss:
+            scanpaths_per_mss[len(val["memory_set"])] = {key : val}
+        else:
+            scanpaths_per_mss[len(val["memory_set"])][key] = val
+    return scanpaths_per_mss
+
+
+
 def get_random_subset(trials_dict, size):
     if len(trials_dict) <= size:
         return trials_dict
