@@ -112,7 +112,6 @@ class VisualSearcher:
         target_found = False
         start = time.time()
         if self.history_size != None:
-            history_prior = np.repeat([image_prior],self.history_size,axis=0)
             history_likelihoods = np.zeros(shape=(self.history_size,grid_size[0],grid_size[1]))
         for fixation_number in range(self.max_saccades + 1):
             if self.human_scanpaths:
@@ -130,22 +129,23 @@ class VisualSearcher:
             # If the limit has been reached, don't compute the next fixation
             if fixation_number == self.max_saccades:
                 break
-           # if self.history_size != None:
-              #  likelihood = target_similarity_map.at_fixation(current_fixation) * (np.square(self.visibility_map.at_fixation(current_fixation)))
-              #  history_likelihoods = history_likelihoods + likelihood
-              #  history_likelihoods = np.append(history_likelihoods[1:],[likelihood], axis=0)
-               # likelihood = history_likelihoods[0]
-              #  history_prior = np.append(history_prior[1:],[image_prior])
-              #  posterior = history_prior[0]
-
-            #else:
             target_similarities = np.array(list(map(lambda x: x.at_fixation(current_fixation),target_similarity_map)))
             minimum_entropy_likelihood_index = np.argmin(list(map(lambda x : entropy(x.flatten()),target_similarities)))
-            likelihood = likelihood + target_similarities[minimum_entropy_likelihood_index] * (np.square(self.visibility_map.at_fixation(current_fixation)))
-            
+            if self.history_size != None:#esto hay que ver con gaston si está bien, porque el "prior" es siempre el mapa de saliencia e incorporo la información de las n fijaciones que recuerdo Y la actual
+                #si history_size = 0 esto se rompe, que funcionalidad debería tener si history_size = 0?
+                history_likelihoods = history_likelihoods + (target_similarities[minimum_entropy_likelihood_index] * (np.square(self.visibility_map.at_fixation(current_fixation))))
+                likelihood = history_likelihoods[0] #I remember the last n fixations and I also include the information gained in the current fixation
+                history_likelihoods = np.append(history_likelihoods[1:],[likelihood], axis=0)
+                posterior = image_prior
+
+            else:
+                likelihood = likelihood + (target_similarities[minimum_entropy_likelihood_index] * (np.square(self.visibility_map.at_fixation(current_fixation))))
+            #si solo me quedo con el else, en la variable "likelihood" estoy acumulando mediante una sumatoria todos los likelihoods con fui computando hasta ahora, pero la variable "posterior" también tiene la info acumulada hasta el momento, esto no está mal? 
+            #y si está mal por qué funciona bien? xd
             likelihood_times_prior = posterior * np.exp(likelihood)
             
             marginal  = np.sum(likelihood_times_prior)
+            
             posterior = likelihood_times_prior / marginal
 
             fixations[fixation_number + 1] = self.search_model.next_fixation(posterior, image_name, fixation_number, self.output_path)
