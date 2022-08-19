@@ -3,10 +3,10 @@
     "number_of_images": 204,
     "image_height": 1024,
     "image_width": 1280,
-    "max_scanpath_length": 44,
+    "max_scanpath_length": 40,
     "receptive_size": [
-        32,
-        32
+        78,
+        78
     ],
     "mean_target_size": [
         68.06880252100841,
