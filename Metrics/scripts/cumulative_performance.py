@@ -10,7 +10,6 @@ class CumulativePerformance:
         self.number_of_images = number_of_images
         self.max_scanpath_length = max_scanpath_length
         self.subjects_cumulative_performance = []
-
         self.null_object = not compute
 
     def add_model(self, model_name, model_scanpaths, model_color):
@@ -32,7 +31,9 @@ class CumulativePerformance:
         for human_scanpaths_file in humans_scanpaths_files:
             human_scanpaths = utils.load_dict_from_json(path.join(humans_scanpaths_dir, human_scanpaths_file))
             human_scanpaths = utils.divide_by_memory_set_size(utils.get_random_subset(human_scanpaths, size=self.number_of_images))
-            for mss in human_scanpaths.keys():
+            mss_sorted = list(human_scanpaths.keys())
+            mss_sorted.sort()
+            for mss in mss_sorted:
                 if not mss in humans_cumulative_performance:
                     humans_cumulative_performance[mss] = []
                 if self.dataset_name == 'Interiors':
@@ -141,7 +142,7 @@ class CumulativePerformance:
         plt.yticks(np.arange(0, 1, 0.1))
         plt.xlabel('Number of fixations')
         plt.ylabel('Cumulative performance')
-        plt.savefig(path.join(save_path, 'Cumulative performance.png'))
+        plt.savefig(save_path)
         plt.show()
     
     def save_results(self, save_path, filename):

@@ -41,7 +41,8 @@ def main(datasets, compute_cumulative_performance, compute_multimatch, compute_h
 
             model_scanpaths_file = path.join(config_folder, 'Scanpaths.json')
             model_scanpaths      = utils.load_dict_from_json(model_scanpaths_file)
-
+            # Plot just the subjects
+            subjects_cumulative_performance.plot(save_path=path.join(config_folder,"Cumulative Performance Humans.png"))
             subjects_cumulative_performance.add_model(model_name, model_scanpaths, constants.MODELS_COLORS[color_index])
             subjects_cumulative_performance.save_results(save_path=config_folder, filename=constants.FILENAME)
 
@@ -63,7 +64,7 @@ def main(datasets, compute_cumulative_performance, compute_multimatch, compute_h
             dataset_results = utils.load_dict_from_json(path.join(config_folder, constants.FILENAME))
             datasets_results[dataset_name] = dataset_results
 
-            subjects_cumulative_performance.plot(save_path=config_folder)
+            subjects_cumulative_performance.plot(save_path=path.join(config_folder,"Cumulative Performance.png"))
             multimatch.plot(save_path=config_folder)
 
             dataset_results_table = utils.create_table(dataset_results)
