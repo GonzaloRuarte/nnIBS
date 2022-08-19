@@ -50,7 +50,8 @@ def main(datasets, compute_cumulative_performance, compute_multimatch, compute_h
             multimatch.load_human_mean_per_image(model_name, model_scanpaths)
             multimatch.add_model_vs_humans_mean_per_image(model_name, model_scanpaths, constants.MODELS_COLORS[color_index])
             multimatch.save_results(save_path=config_folder, filename=constants.FILENAME)
-
+            subjects_cumulative_performance.plot(save_path=path.join(config_folder,"Cumulative Performance.png"))
+            multimatch.plot(save_path=config_folder)
 
 
             human_scanpath_prediction.compute_metrics_for_model(model_name)
@@ -64,8 +65,7 @@ def main(datasets, compute_cumulative_performance, compute_multimatch, compute_h
             dataset_results = utils.load_dict_from_json(path.join(config_folder, constants.FILENAME))
             datasets_results[dataset_name] = dataset_results
 
-            subjects_cumulative_performance.plot(save_path=path.join(config_folder,"Cumulative Performance.png"))
-            multimatch.plot(save_path=config_folder)
+
 
             dataset_results_table = utils.create_table(dataset_results)
             utils.plot_table(dataset_results_table, title=dataset_name + ' dataset', save_path=config_folder, filename='Table.png')

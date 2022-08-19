@@ -1,15 +1,15 @@
 {
     "Humans MSS 1": {
-        "AUCperf": 0.688
+        "AUCperf": 0.676
     },
     "Humans MSS 2": {
-        "AUCperf": 0.656
+        "AUCperf": 0.642
     },
     "Humans MSS 4": {
-        "AUCperf": 0.53
+        "AUCperf": 0.516
     },
     "Humans": {
-        "AUCperf": 0.625,
+        "AUCperf": 0.611,
         "AvgMM": 0.84,
         "MMvec": [
             0.925,
@@ -29,7 +29,7 @@
         ]
     },
     "nnIBS": {
-        "AUCperf": 0.779,
+        "AUCperf": 0.756,
         "Corr": 0.20954028646038064,
         "AvgMM": 0.817,
         "MMvec": [
