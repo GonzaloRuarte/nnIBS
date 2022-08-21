@@ -5,8 +5,8 @@
     "image_width": 1280,
     "max_scanpath_length": 40,
     "receptive_size": [
-        32,
-        32
+        68,
+        68
     ],
     "mean_target_size": [
         68.06880252100841,

@@ -1,15 +1,15 @@
 {
     "Humans MSS 1": {
-        "AUCperf": 0.676
+        "AUCperf": 0.661
     },
     "Humans MSS 2": {
-        "AUCperf": 0.642
+        "AUCperf": 0.629
     },
     "Humans MSS 4": {
-        "AUCperf": 0.516
+        "AUCperf": 0.504
     },
     "Humans": {
-        "AUCperf": 0.611,
+        "AUCperf": 0.598,
         "AvgMM": 0.84,
         "MMvec": [
             0.925,
@@ -29,23 +29,23 @@
         ]
     },
     "nnIBS": {
-        "AUCperf": 0.756,
-        "Corr": 0.20954028646038064,
+        "AUCperf": 0.762,
+        "Corr": 0.2093792842460725,
         "AvgMM": 0.817,
         "MMvec": [
             0.895,
             0.021
         ],
         "MMdir": [
-            0.693,
+            0.692,
             0.049
         ],
         "MMlen": [
-            0.881,
+            0.88,
             0.038
         ],
         "MMpos": [
-            0.8,
+            0.799,
             0.032
         ]
     }
