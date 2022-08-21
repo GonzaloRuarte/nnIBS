@@ -105,7 +105,6 @@ class VisualSearcher:
 
         # Initialize variables for computing each fixation        
         likelihood = np.zeros(shape=grid_size)
-        posterior  = image_prior
 
         # Search
         print('Fixation:', end=' ')
@@ -136,13 +135,11 @@ class VisualSearcher:
                 history_likelihoods = history_likelihoods + (target_similarities[minimum_entropy_likelihood_index] * (np.square(self.visibility_map.at_fixation(current_fixation))))
                 likelihood = history_likelihoods[0] #I remember the last n fixations and I also include the information gained in the current fixation
                 history_likelihoods = np.append(history_likelihoods[1:],[likelihood], axis=0)
-                posterior = image_prior
 
             else:
                 likelihood = likelihood + (target_similarities[minimum_entropy_likelihood_index] * (np.square(self.visibility_map.at_fixation(current_fixation))))
-            #si solo me quedo con el else, en la variable "likelihood" estoy acumulando mediante una sumatoria todos los likelihoods con fui computando hasta ahora, pero la variable "posterior" también tiene la info acumulada hasta el momento, esto no está mal? 
-            #y si está mal por qué funciona bien? xd
-            likelihood_times_prior = posterior * np.exp(likelihood)
+
+            likelihood_times_prior = image_prior * np.exp(likelihood)
             
             marginal  = np.sum(likelihood_times_prior)
             

@@ -8,5 +8,5 @@
     "seed"                  : 1234,
     "norm_cdf_tolerance"    : 0.001,
     "save_similarity_maps"  : true,
-    "history_size"        : 4
+    "history_size"        : null
 }
