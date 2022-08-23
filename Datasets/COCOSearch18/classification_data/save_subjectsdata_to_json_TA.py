@@ -9,9 +9,9 @@ import numpy as np
     Only 80% of the dataset is available, so there are some images that are never used in the human trials files.
 """
 
-human_scanpaths_test_file = 'fixations_TP_val.json'
+human_scanpaths_test_file = 'fixations_TA_trainval.json'
 
-images_dir      = '../images/'
+images_dir      = '../images_TA/'
 targets_dir     = '../targets/'
 scanpaths_dir   = '../human_scanpaths/'
 categories_path = 'categories/'
@@ -89,11 +89,7 @@ for scanpath in human_scanpaths:
     number_of_trials += 1
     scanpath_x  = scanpath['X']
     scanpath_y  = scanpath['Y']
-    target_bbox = scanpath['bbox']
-    # New target bounding box shape will be [first row, first column, last row, last column]
-    target_bbox = [target_bbox[1], target_bbox[0], target_bbox[1] + target_bbox[3], target_bbox[0] + target_bbox[2]]
 
-    marked_target_found = scanpath['correct']
 
     original_scanpath_length = len(scanpath_x)
     # Collapse consecutive fixations which are closer than receptive_size / 2
@@ -106,26 +102,9 @@ for scanpath in human_scanpaths:
     initial_fixations_y.append(scanpath_y[0])
 
     original_scanpath_len = len(scanpath_x)
-    # Crop scanpaths as soon as a fixation falls between the target's bounding box
-    target_found, scanpath_x, scanpath_y = utils.crop_scanpath(scanpath_x, scanpath_y, target_bbox, receptive_size, (image_height, image_width))
-    if len(scanpath_x) == 1:
-        trivial_scanpaths += 1
-        continue
-    if target_found: targets_found += 1
-    if len(scanpath_x) < original_scanpath_len: cropped_scanpaths += 1
     
-    scanpath_length = len(scanpath_x)
-    last_fixation_x = scanpath_x[scanpath_length - 1]
-    last_fixation_y = scanpath_y[scanpath_length - 1]
     # Sanity check
-    if target_found and not utils.between_bounds(target_bbox, last_fixation_y, last_fixation_x, receptive_size):
-        print('Subject: ' + str(current_subject) + '; trial: ' + image_name + '. Last fixation doesn\'t fall between target\'s bounds')
-        print('Target bbox: ' + str(target_bbox) + '. Last fixation: ' + str((last_fixation_y, last_fixation_x)) + '\n')
-        target_found = False
-        wrong_targets_found += 1
 
-    if target_found and scanpath_length > largest_scanpath: 
-        largest_scanpath = scanpath_length
 
     if current_subject < 10:
         current_subject_string = '0' + str(current_subject)
@@ -135,14 +114,10 @@ for scanpath in human_scanpaths:
     if not image_name in trials_processed:
         # Save trial info
         target_name = image_name[:-4] + '_target' + image_name[-4:]
-        target_matched_row    = target_bbox[0]
-        target_matched_column = target_bbox[1]
-        target_height         = target_bbox[2] - target_matched_row
-        target_width          = target_bbox[3] - target_matched_column
-        trials_properties.append({'image' : image_name, 'target' : target_name, 'dataset' : 'COCOSearch18 Dataset', \
-            'target_matched_row' : target_matched_row, 'target_matched_column' : target_matched_column, 'target_height' : target_height, 'target_width' : target_width, \
-                'image_height' : image_height, 'image_width' : image_width, 'initial_fixation_row' : initial_fixation[0], 'initial_fixation_column' : initial_fixation[1], \
-                    'target_object' : task})
+
+        trials_properties.append({'image' : image_name,  'dataset' : 'COCOSearch18 Dataset', \
+            'image_height' : image_height, 'image_width' : image_width, 'initial_fixation_row' : initial_fixation[0], 'initial_fixation_column' : initial_fixation[1], \
+                    'target_object' : task,'memory_set' : [target_name]})
 
         if not path.exists(targets_dir):
             mkdir(targets_dir)
@@ -152,12 +127,12 @@ for scanpath in human_scanpaths:
 
         trials_processed.append(image_name)
 
-    subject_scanpaths[image_name] = {'subject' : current_subject_string, 'dataset' : 'COCOSearch18 Dataset', 'image_height' : image_height, 'image_width' : image_width, \
-        'screen_height' : screen_height, 'screen_width' : screen_width, 'receptive_height' : receptive_size[0], 'receptive_width' : receptive_size[1], 'target_found' : target_found, \
-            'target_bbox' : target_bbox, 'X' : scanpath_x, 'Y' : scanpath_y, 'T' : scanpath['T'], 'target_object' : scanpath['task'], 'max_fixations' : max_fixations}
+    subject_scanpaths[image_name] = {'subject' : current_subject_string, 'dataset' : 'COCOSearch18 Dataset', 'image_height' : image_height, 'image_width' : image_width, 'memory_set': [target_name], \
+        'screen_height' : screen_height, 'screen_width' : screen_width, 'receptive_height' : receptive_size[0], 'receptive_width' : receptive_size[1],  \
+             'X' : scanpath_x, 'Y' : scanpath_y, 'T' : scanpath['T'], 'target_object' : scanpath['task'], 'max_fixations' : max_fixations}
 
 # Save trials properties
-utils.save_to_json('../trials_properties_val.json', trials_properties)
+utils.save_to_json('../trials_properties_TA_trainval.json', trials_properties)
 
 # Save a human_scanpaths file for each subject
 for subject in subjects:
@@ -183,5 +158,5 @@ print('Number of unused images: ' + str(unused_images))
 print('Largest target found scanpath: ' + str(largest_scanpath))
 print("Collapsed scanpaths (discretized in size " + str(receptive_size) + ") : " + str(collapsed_scanpaths))
 print("Number of fixations collapsed: " + str(collapsed_fixations))
-print('Cropped scanpaths (target found earlier): ' + str(cropped_scanpaths))
+
 print('Trivial scanpaths (length one): ' + str(trivial_scanpaths))
