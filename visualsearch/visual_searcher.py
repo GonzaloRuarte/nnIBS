@@ -100,7 +100,8 @@ class VisualSearcher:
         target_similarity_map = self.initialize_target_similarity_map(image, target, target_bbox, image_name)
 
         # Initialize variables for computing each fixation        
-        likelihood = np.zeros(shape=grid_size)
+        #likelihood = np.zeros(shape=grid_size)
+        weighted_template_response = np.zeros(shape=grid_size)
         posterior  = image_prior
 
         # Search
@@ -123,9 +124,16 @@ class VisualSearcher:
             # If the limit has been reached, don't compute the next fixation
             if fixation_number == self.max_saccades:
                 break
+            
+            # Version previa al bugfix
+            # likelihood = likelihood + target_similarity_map.at_fixation(current_fixation) * (np.square(self.visibility_map.at_fixation(current_fixation)))
+            # likelihood_times_prior = posterior * np.exp(likelihood)
+            # marginal  = np.sum(likelihood_times_prior)
+            # posterior = likelihood_times_prior / marginal
 
-            likelihood = likelihood + target_similarity_map.at_fixation(current_fixation) * (np.square(self.visibility_map.at_fixation(current_fixation)))
-            likelihood_times_prior = posterior * np.exp(likelihood)
+            # Bugfix
+            weighted_template_response = weighted_template_response + target_similarity_map.at_fixation(current_fixation) * (np.square(self.visibility_map.at_fixation(current_fixation)))
+            likelihood_times_prior = image_prior * np.exp(weighted_template_response)
             marginal  = np.sum(likelihood_times_prior)
             posterior = likelihood_times_prior / marginal
 
