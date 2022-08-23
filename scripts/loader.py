@@ -5,7 +5,7 @@ from . import constants
 from pathlib import Path
 
 def load_checkpoint(output_path):
-    checkpoint = {}
+    checkpoint = None
     checkpoint_file = path.join(output_path, 'checkpoint.json')
     if path.exists(checkpoint_file):
         answer = input('Checkpoint found! Resume execution? (Y/N): ').upper()
@@ -82,6 +82,8 @@ def load_dataset_info(dataset_path):
 def load_human_scanpaths(human_scanpaths_dir, human_subject=None):
     
     if human_subject is None:
+        return {}
+    elif human_subject=='all':
         # If not specified, load all subjects (json files) scanpaths into a list
         path_files = Path(human_scanpaths_dir)
         human_scanpaths_vals = [load_dict_from_json(path.join('', file)) for file in list(path_files.glob('*.json'))]
@@ -109,7 +111,7 @@ def load_trials_properties(trials_properties_file, image_name=None, image_range=
     elif image_range is not None:
         trials_properties = get_trial_properties_in_range(trials_properties, image_range)
     
-    if human_scanpaths is not None:
+    if human_scanpaths:
         trials_properties = get_trial_properties_for_subject(trials_properties, human_scanpaths)
 
     return trials_properties
