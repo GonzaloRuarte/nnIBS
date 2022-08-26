@@ -31,8 +31,7 @@ class Net(models.ResNet):
         self.avgpool = nn.AvgPool2d((7, 7))
         # Convert the original fc layer to a convolutional layer. 
         self.last_conv = torch.nn.Conv2d( in_channels = self.fc.in_features, out_channels = num_classes, kernel_size = 1)
-        self.last_conv.weight.data.copy_( self.fc.weight.data.view ( *self.fc.weight.data.shape, 1, 1))
-        self.last_conv.bias.data.copy_ (self.fc.bias.data)	 
+
 
     # Reimplementing forward pass.
 
