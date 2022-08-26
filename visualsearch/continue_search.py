@@ -53,14 +53,15 @@ class Net(nn.Module):
                 #calculate loss
                 loss = loss_fn(output,y_train.reshape(-1,1))
 
-                #accuracy
-                predicted = model(torch.tensor(x,dtype=torch.float32))
-                acc = (predicted.reshape(-1).detach().numpy().round() == y).mean()    
+   
                 #backprop
                 optimizer.zero_grad()
                 loss.backward()
                 optimizer.step()
             if i%50 == 0:
+                #accuracy
+                predicted = model(torch.tensor(x,dtype=torch.float32))
+                acc = (predicted.reshape(-1).detach().numpy().round() == y).mean() 
                 losses.append(loss)
                 accur.append(acc)
                 print("epoch {}\tloss : {}\t accuracy : {}".format(i,loss,acc))
