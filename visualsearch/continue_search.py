@@ -31,24 +31,33 @@ class Net(nn.Module):
         x = torch.sigmoid(self.fc3(x))
         return x
 
-    def fit(self,x,y,learning_rate=0.01,epochs = 700):    
+class ModelLoader():
+    def __init__(self,input_shape,learning_rate=0.01,epochs=700):
+        self.model = Net(input_shape=input_shape)
+        self.learning_rate = learning_rate
+        self.epochs = epochs
+
+    def load(self,model_dict_path):
+        self.model.load_state_dict(torch.load(model_dict_path))
+
+    def fit(self,x,y):    
         # Model , Optimizer, Loss
-        model = self.__init__(input_shape=x.shape[1])
-        optimizer = torch.optim.SGD(model.parameters(),lr=learning_rate)
+
+        optimizer = torch.optim.SGD(self.model.parameters(),lr=self.learning_rate)
         loss_fn = nn.BCELoss()
         trainset = dataset(x,y)
         #DataLoader
         trainloader = DataLoader(trainset,batch_size=64,shuffle=False)
-        model.train()
+        self.model.train()
 
         #forward loop
         losses = []
         accur = []
-        for i in range(epochs):
+        for i in range(self.epochs):
             for j,(x_train,y_train) in enumerate(trainloader):
 
                 #calculate output
-                output = model(x_train)
+                output = self.model(x_train)
 
                 #calculate loss
                 loss = loss_fn(output,y_train.reshape(-1,1))
@@ -60,7 +69,7 @@ class Net(nn.Module):
                 optimizer.step()
             if i%50 == 0:
                 #accuracy
-                predicted = model(torch.tensor(x,dtype=torch.float32))
+                predicted = self.model(torch.tensor(x,dtype=torch.float32))
                 acc = (predicted.reshape(-1).detach().numpy().round() == y).mean() 
                 losses.append(loss)
                 accur.append(acc)
@@ -73,16 +82,13 @@ class Net(nn.Module):
         plt.title('Accuracy vs Epochs')
         plt.xlabel('Epochs')
         plt.ylabel('accuracy')
-        torch.save(model.state_dict(), "binary_class_model.pkl")
+        torch.save(self.model.state_dict(), "GNG_model_dict.pkl")
 
-    def continue_search(self,posterior):
-
-        model = self.__init__(input_shape=posterior.shape[1])
-        model.load_state_dict(torch.load("binary_class_model.pkl"))
-        model.eval()
+    def continue_search(self,posterior):        
+        self.model.eval()
 
         with torch.no_grad():
-            prediction = model(posterior)
+            prediction = self.model(posterior)
             argmax_prediction = torch.argmax(prediction).item()
         return argmax_prediction
 
