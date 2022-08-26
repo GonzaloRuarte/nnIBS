@@ -36,7 +36,8 @@ class Net(nn.Module):
         model = self.__init__(input_shape=x.shape[1])
         optimizer = torch.optim.SGD(model.parameters(),lr=learning_rate)
         loss_fn = nn.BCELoss()
-        trainset = dataset(x,y)#DataLoader
+        trainset = dataset(x,y)
+        #DataLoader
         trainloader = DataLoader(trainset,batch_size=64,shuffle=False)
         model.train()
 
@@ -54,7 +55,8 @@ class Net(nn.Module):
 
                 #accuracy
                 predicted = model(torch.tensor(x,dtype=torch.float32))
-                acc = (predicted.reshape(-1).detach().numpy().round() == y).mean()    #backprop
+                acc = (predicted.reshape(-1).detach().numpy().round() == y).mean()    
+                #backprop
                 optimizer.zero_grad()
                 loss.backward()
                 optimizer.step()
