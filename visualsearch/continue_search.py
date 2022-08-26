@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 
 from torch import nn
 from torch.nn import functional as F
+from torchvision import models
 
 from torch.utils.data import Dataset, DataLoader
 class dataset(Dataset):
@@ -19,21 +20,48 @@ class dataset(Dataset):
         
 
 
-class Net(nn.Module):
-    def __init__(self,input_shape):
-        super(Net,self).__init__()
-        self.fc1 = nn.Linear(input_shape,32)
-        self.fc2 = nn.Linear(32,64)
-        self.fc3 = nn.Linear(64,1)  
-    def forward(self,x):
-        x = torch.relu(self.fc1(x))
-        x = torch.relu(self.fc2(x))
-        x = torch.sigmoid(self.fc3(x))
+class Net(models.ResNet):
+    def __init__(self, num_classes=1000, **kwargs):
+        # Start with standard resnet152 defined here
+
+        super().__init__(block = models.resnet.BasicBlock, layers = [3, 8, 36, 3], num_classes = num_classes, **kwargs)
+        #black and white images
+        self.conv1 = nn.Conv2d(1, self.inplanes, kernel_size=7, stride=2, padding=3, bias=False)
+        # Replace AdaptiveAvgPool2d with standard AvgPool2d        
+        self.avgpool = nn.AvgPool2d((7, 7))
+        # Convert the original fc layer to a convolutional layer. 
+        self.last_conv = torch.nn.Conv2d( in_channels = self.fc.in_features, out_channels = num_classes, kernel_size = 1)
+        self.last_conv.weight.data.copy_( self.fc.weight.data.view ( *self.fc.weight.data.shape, 1, 1))
+        self.last_conv.bias.data.copy_ (self.fc.bias.data)	 
+
+    # Reimplementing forward pass.
+
+    def _forward_impl(self, x):
+        # Standard forward for resnet18
+
+        x = self.conv1(x)
+        x = self.bn1(x)
+        x = self.relu(x)
+        x = self.maxpool(x)
+
+        x = self.layer1(x)
+        x = self.layer2(x)
+        x = self.layer3(x)
+        x = self.layer4(x)
+
+        x = self.avgpool(x)
+
+        # Notice, there is no forward pass
+        # through the original fully connected layer.
+        # Instead, we forward pass through the last conv layer
+
+        x = self.last_conv(x)
+
         return x
 
 class ModelLoader():
-    def __init__(self,input_shape,learning_rate=0.01,epochs=700):
-        self.model = Net(input_shape=input_shape)
+    def __init__(self,num_classes=1,learning_rate=0.01,epochs=700):
+        self.model = Net(num_classes=num_classes)
         self.learning_rate = learning_rate
         self.epochs = epochs
 
