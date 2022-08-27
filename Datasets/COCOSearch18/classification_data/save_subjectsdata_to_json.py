@@ -9,7 +9,7 @@ import numpy as np
     Only 80% of the dataset is available, so there are some images that are never used in the human trials files.
 """
 
-human_scanpaths_test_file = 'fixations_TP_val.json'
+human_scanpaths_test_file = 'fixations_TP_trainval.json'
 
 images_dir      = '../images/'
 targets_dir     = '../targets/'
@@ -67,7 +67,7 @@ for scanpath in human_scanpaths:
     # Check if the task of the trial is different this time for this image
     if not image_name in images_tasks:
         images_tasks[image_name] = {'task' : task, 'new_name' : None}
-        #shutil.move(images_dir + task + '/' + image_name, images_dir + image_name)
+        shutil.move(images_dir + task + '/' + image_name, images_dir + image_name)
     else:
         image_info = images_tasks[image_name]
         while task != image_info['task']:
@@ -81,7 +81,7 @@ for scanpath in human_scanpaths:
                 new_name = str(int(image_name[0]) + 1) + image_name[1:]
                 image_info['new_name'] = new_name
                 images_tasks[new_name] = {'task' : task, 'new_name' : None}
-                #shutil.copyfile(images_dir + image_name, images_dir + new_name)
+                shutil.copyfile(images_dir + image_name, images_dir + new_name)
 
             image_info = images_tasks[new_name]
             image_name = new_name
