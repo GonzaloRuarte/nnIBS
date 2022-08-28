@@ -88,7 +88,7 @@ class VisualSearcher:
             # Check if the probability maps have already been computed and stored
             if utils.exists_probability_maps_for_image(image_name, self.output_path):
                 print('Loaded previously computed probability maps for image ' + image_name)
-                #human_scanpath_prediction.save_scanpath_prediction_metrics(current_human_scanpath, image_name, self.output_path)
+                human_scanpath_prediction.save_scanpath_prediction_metrics(current_human_scanpath, image_name, self.output_path)
                 return {}
         
         # Initialize fixations matrix
@@ -162,8 +162,8 @@ class VisualSearcher:
         scanpath_x_coordinates = self.get_coordinates(fixations, axis=1)
         scanpath_y_coordinates = self.get_coordinates(fixations, axis=0)
 
-        #if self.human_scanpaths:
-            #human_scanpath_prediction.save_scanpath_prediction_metrics(current_human_scanpath, image_name, self.output_path)
+        if self.human_scanpaths:
+            human_scanpath_prediction.save_scanpath_prediction_metrics(current_human_scanpath, image_name, self.output_path)
 
         return { 'target_found' : target_found, 'scanpath_x' : scanpath_x_coordinates, 'scanpath_y' : scanpath_y_coordinates }
     
