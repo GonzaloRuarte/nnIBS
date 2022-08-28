@@ -130,7 +130,7 @@ class VisualSearcher:
                 break
             target_similarities = np.array(list(map(lambda x: x.at_fixation(current_fixation),target_similarity_map)))
             minimum_entropy_likelihood_index = np.argmin(list(map(lambda x : entropy(x.flatten()),target_similarities)))
-            if self.history_size != None:#esto hay que ver con gaston si está bien, porque el "prior" es siempre el mapa de saliencia e incorporo la información de las n fijaciones que recuerdo Y la actual
+            if self.history_size != None:
                 history_likelihoods = np.append(history_likelihoods,[np.zeros(shape=grid_size)], axis=0)
                 history_likelihoods = history_likelihoods + (target_similarities[minimum_entropy_likelihood_index] * (np.square(self.visibility_map.at_fixation(current_fixation))))
                 likelihood = history_likelihoods[0] #I remember the last n fixations and I also include the information gained in the current fixation

@@ -81,10 +81,11 @@ def run(config, dataset_info, trials_properties, human_scanpaths, output_path, s
             trial_number += 1
             image_name  = trial['image']
             target_name = trial['target'] 
-            if not (trial['memory_set'] is None):
-                memory_set = list(map(lambda x: utils.load_image(targets_dir,x),trial['memory_set']))
-            else:
-                memory_set = [utils.load_image(targets_dir, target_name)]
+            if not ('memory_set' in trial):
+                trial['memory_set'] = [target_name]
+                
+            memory_set = list(map(lambda x: utils.load_image(targets_dir,x),trial['memory_set']))
+                
             print('Searching in image ' + image_name + ' (' + str(trial_number) + '/' + str(total_trials) + ')...')
             
             image       = utils.load_image(images_dir, image_name, model_image_size)
