@@ -72,12 +72,13 @@ class VisualSearcher:
         image_prior = prior.sum(image_prior, self.max_saccades)
       
         # Convert target bounding box to grid cells
-        target_bbox_in_grid = np.empty(len(target_bbox), dtype=np.int)
-        target_bbox_in_grid[0], target_bbox_in_grid[1] = self.grid.map_to_cell((target_bbox[0], target_bbox[1]))
-        target_bbox_in_grid[2], target_bbox_in_grid[3] = self.grid.map_to_cell((target_bbox[2], target_bbox[3]))
-        if not(utils.are_within_boundaries((target_bbox_in_grid[0], target_bbox_in_grid[1]), (target_bbox_in_grid[2], target_bbox_in_grid[3]), np.zeros(2), grid_size)):
-            print(image_name + ': target bounding box is outside of the grid')
-            return {}
+        if target_bbox != None:
+            target_bbox_in_grid = np.empty(len(target_bbox), dtype=np.int)
+            target_bbox_in_grid[0], target_bbox_in_grid[1] = self.grid.map_to_cell((target_bbox[0], target_bbox[1]))
+            target_bbox_in_grid[2], target_bbox_in_grid[3] = self.grid.map_to_cell((target_bbox[2], target_bbox[3]))
+            if not(utils.are_within_boundaries((target_bbox_in_grid[0], target_bbox_in_grid[1]), (target_bbox_in_grid[2], target_bbox_in_grid[3]), np.zeros(2), grid_size)):
+                print(image_name + ': target bounding box is outside of the grid')
+                return {}
 
         if self.human_scanpaths: 
             # Get subject scanpath for this image
@@ -87,7 +88,7 @@ class VisualSearcher:
             # Check if the probability maps have already been computed and stored
             if utils.exists_probability_maps_for_image(image_name, self.output_path):
                 print('Loaded previously computed probability maps for image ' + image_name)
-                human_scanpath_prediction.save_scanpath_prediction_metrics(current_human_scanpath, image_name, self.output_path)
+                #human_scanpath_prediction.save_scanpath_prediction_metrics(current_human_scanpath, image_name, self.output_path)
                 return {}
         
         # Initialize fixations matrix
@@ -119,11 +120,11 @@ class VisualSearcher:
                 current_fixation = fixations[fixation_number]
 
             print(fixation_number + 1, end=' ')
-            
-            if utils.are_within_boundaries(current_fixation, current_fixation, (target_bbox_in_grid[0], target_bbox_in_grid[1]), (target_bbox_in_grid[2] + 1, target_bbox_in_grid[3] + 1)):
-                target_found = True
-                fixations = fixations[:fixation_number + 1]
-                break
+            if target_bbox != None:
+                if utils.are_within_boundaries(current_fixation, current_fixation, (target_bbox_in_grid[0], target_bbox_in_grid[1]), (target_bbox_in_grid[2] + 1, target_bbox_in_grid[3] + 1)):
+                    target_found = True
+                    fixations = fixations[:fixation_number + 1]
+                    break
 
             # If the limit has been reached, don't compute the next fixation
             if fixation_number == self.max_saccades:
@@ -161,8 +162,8 @@ class VisualSearcher:
         scanpath_x_coordinates = self.get_coordinates(fixations, axis=1)
         scanpath_y_coordinates = self.get_coordinates(fixations, axis=0)
 
-        if self.human_scanpaths:
-            human_scanpath_prediction.save_scanpath_prediction_metrics(current_human_scanpath, image_name, self.output_path)
+        #if self.human_scanpaths:
+            #human_scanpath_prediction.save_scanpath_prediction_metrics(current_human_scanpath, image_name, self.output_path)
 
         return { 'target_found' : target_found, 'scanpath_x' : scanpath_x_coordinates, 'scanpath_y' : scanpath_y_coordinates }
     

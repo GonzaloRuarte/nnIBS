@@ -109,12 +109,15 @@ def add_scanpath_to_dict(image_name, image_scanpath, target_bbox, target_object,
     target_found = image_scanpath['target_found']
     scanpath_x   = image_scanpath['scanpath_x']
     scanpath_y   = image_scanpath['scanpath_y']
-    target_bbox_in_grid = np.empty(len(target_bbox), dtype=np.int)
-    target_bbox_in_grid[0], target_bbox_in_grid[1] = grid.map_to_cell((target_bbox[0], target_bbox[1]))
-    target_bbox_in_grid[2], target_bbox_in_grid[3] = grid.map_to_cell((target_bbox[2], target_bbox[3]))
-
+    if target_bbox != None:
+        target_bbox_in_grid = np.empty(len(target_bbox), dtype=np.int)
+        target_bbox_in_grid[0], target_bbox_in_grid[1] = grid.map_to_cell((target_bbox[0], target_bbox[1]))
+        target_bbox_in_grid[2], target_bbox_in_grid[3] = grid.map_to_cell((target_bbox[2], target_bbox[3]))
+        target_bbox_in_grid = target_bbox_in_grid.tolist()
+    else:
+        target_bbox_in_grid = None
     dict_[image_name] = {'subject' : 'nnIBS Model', 'dataset' : dataset_name, 'image_height' : int(grid.size()[0]), 'image_width' : int(grid.size()[1]), \
-        'receptive_height' : 1, 'receptive_width' : 1, 'target_found' : target_found, 'target_bbox' : target_bbox_in_grid.tolist(), \
+        'receptive_height' : 1, 'receptive_width' : 1, 'target_found' : target_found, 'target_bbox' : target_bbox_in_grid, \
                  'X' : list(map(int, scanpath_x)), 'Y' : list(map(int, scanpath_y)), 'target_object' : target_object, 'max_fixations' : config['max_saccades'] + 1
         }
 
@@ -127,11 +130,13 @@ def rescale_and_crop(trial_info, new_size, receptive_size):
     trial_scanpath_Y = [rescale_coordinate(y, trial_info['image_height'], new_size[0]) for y in trial_info['Y']]
 
     image_size       = (trial_info['image_height'], trial_info['image_width'])
-    target_bbox      = trial_info['target_bbox']
-    target_bbox      = [rescale_coordinate(target_bbox[i], image_size[i % 2 == 1], new_size[i % 2 == 1]) for i in range(len(target_bbox))]
+    if "target_bbox" in trial_info:
+        target_bbox      = trial_info['target_bbox']
+        target_bbox      = [rescale_coordinate(target_bbox[i], image_size[i % 2 == 1], new_size[i % 2 == 1]) for i in range(len(target_bbox))]
 
     trial_scanpath_X, trial_scanpath_Y = collapse_fixations(trial_scanpath_X, trial_scanpath_Y, receptive_size)
-    trial_scanpath_X, trial_scanpath_Y = crop_scanpath(trial_scanpath_X, trial_scanpath_Y, target_bbox, receptive_size)
+    if "target_bbox" in trial_info:
+        trial_scanpath_X, trial_scanpath_Y = crop_scanpath(trial_scanpath_X, trial_scanpath_Y, target_bbox, receptive_size)
 
     return trial_scanpath_X, trial_scanpath_Y        
 

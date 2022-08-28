@@ -30,15 +30,17 @@ class TargetSimilarity():
                 sigma, mu (4D arrays) : values of the normal distribution for each possible fixation in the grid. It's based on target similarity and visibility
         """
         grid_size = self.grid.size()
-        target_bbox_in_grid = np.empty(len(target_bbox), dtype=np.int)
-        target_bbox_in_grid[0], target_bbox_in_grid[1] = self.grid.map_to_cell((target_bbox[0], target_bbox[1]))
-        target_bbox_in_grid[2], target_bbox_in_grid[3] = self.grid.map_to_cell((target_bbox[2], target_bbox[3]))
+        if target_bbox != None:
+            target_bbox_in_grid = np.empty(len(target_bbox), dtype=np.int)
+            target_bbox_in_grid[0], target_bbox_in_grid[1] = self.grid.map_to_cell((target_bbox[0], target_bbox[1]))
+            target_bbox_in_grid[2], target_bbox_in_grid[3] = self.grid.map_to_cell((target_bbox[2], target_bbox[3]))
 
         # Initialize mu, where each cell has a value of 0.5 if the target is present and -0.5 otherwise
         self.mu = np.zeros(shape=(grid_size[0], grid_size[1], grid_size[0], grid_size[1])) - 0.5
-        for row in range(target_bbox_in_grid[0], target_bbox_in_grid[2] + 1):
-            for column in range(target_bbox_in_grid[1], target_bbox_in_grid[3] + 1):
-                self.mu[row, column] = np.zeros(shape=grid_size) + 0.5
+        if target_bbox != None:
+            for row in range(target_bbox_in_grid[0], target_bbox_in_grid[2] + 1):
+                for column in range(target_bbox_in_grid[1], target_bbox_in_grid[3] + 1):
+                    self.mu[row, column] = np.zeros(shape=grid_size) + 0.5
         
         # Initialize sigma
         self.sigma = np.ones(shape=self.mu.shape)

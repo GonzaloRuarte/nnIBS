@@ -3,7 +3,6 @@
 from os import path, listdir
 import re
 
-import importlib
 import main as nnIBS
 
 
@@ -15,7 +14,7 @@ def sorted_alphanumeric(data):
 def get_subjects_posteriors_for_model(model_name,dataset_name):
 
     
-    model_output_path     = "COCOSearch18_dataset/greedy_hsp/" 
+
     human_scanpaths_files = sorted_alphanumeric(listdir(path.join(path.join("Datasets", dataset_name),"human_scanpaths")))
 
 
@@ -29,4 +28,4 @@ def get_subjects_posteriors_for_model(model_name,dataset_name):
 
 
 
-get_subjects_posteriors_for_model("nnIBS","COCOSearch18/tp_trainval")
+get_subjects_posteriors_for_model("nnIBS","COCOSearch18/ta_trainval")

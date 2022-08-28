@@ -80,8 +80,9 @@ def run(config, dataset_info, trials_properties, human_scanpaths, output_path, s
         for trial in trials_properties:
             trial_number += 1
             image_name  = trial['image']
-            target_name = trial['target'] 
+             
             if not ('memory_set' in trial):
+                target_name = trial['target']
                 trial['memory_set'] = [target_name]
                 
             memory_set = list(map(lambda x: utils.load_image(targets_dir,x),trial['memory_set']))
@@ -94,10 +95,12 @@ def run(config, dataset_info, trials_properties, human_scanpaths, output_path, s
             
             initial_fixation = (trial['initial_fixation_row'], trial['initial_fixation_column'])
             initial_fixation = [utils.rescale_coordinate(initial_fixation[i], image_size[i], model_image_size[i]) for i in range(len(initial_fixation))]
-            target_bbox      = [trial['target_matched_row'], trial['target_matched_column'], \
-                                    trial['target_height'] + trial['target_matched_row'], trial['target_width'] + trial['target_matched_column']]
-            target_bbox      = [utils.rescale_coordinate(target_bbox[i], image_size[i % 2 == 1], model_image_size[i % 2 == 1]) for i in range(len(target_bbox))]
-
+            if "target_matched_row" in trial:
+                target_bbox      = [trial['target_matched_row'], trial['target_matched_column'], \
+                                        trial['target_height'] + trial['target_matched_row'], trial['target_width'] + trial['target_matched_column']]
+                target_bbox      = [utils.rescale_coordinate(target_bbox[i], image_size[i % 2 == 1], model_image_size[i % 2 == 1]) for i in range(len(target_bbox))]
+            else:
+                target_bbox = None
             trial_scanpath = visual_searcher.search(image_name, image, image_prior, memory_set,trial['memory_set'], target_bbox, initial_fixation)
 
             if trial_scanpath:
