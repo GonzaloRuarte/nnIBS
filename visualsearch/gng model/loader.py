@@ -1,5 +1,5 @@
 import torch
-from torch.utils.data import Dataset, DataLoader, ConcatDataset, SubsetRandomSampler
+from torch.utils.data import Dataset, DataLoader, SubsetRandomSampler
 from torch import nn
 
 from sklearn.model_selection import KFold
@@ -88,7 +88,7 @@ class ModelLoader():
         # Set fixed random number seed
         torch.manual_seed(42)
 
-        dataset = ConcatDataset([x, y])
+        trainset = dataset(x,y)
         del x,y
         # Define the K-fold Cross Validator
         kfold = KFold(n_splits=k_folds, shuffle=True)
@@ -97,7 +97,7 @@ class ModelLoader():
         print('--------------------------------')
 
         # K-fold Cross Validation model evaluation
-        for fold, (train_ids, test_ids) in enumerate(kfold.split(dataset)):
+        for fold, (train_ids, test_ids) in enumerate(kfold.split(trainset)):
             
             # Print
             print(f'FOLD {fold}')
@@ -109,10 +109,10 @@ class ModelLoader():
             
             # Define data loaders for training and testing data in this fold
             trainloader = DataLoader(
-                            dataset, 
+                            trainset, 
                             self.batch_size, sampler=train_subsampler)
             testloader = DataLoader(
-                            dataset,
+                            trainset,
                             self.batch_size, sampler=test_subsampler)
             
             # Init the neural network
@@ -129,20 +129,16 @@ class ModelLoader():
                 current_loss = 0.0
 
                 # Iterate over the DataLoader for training data
-                for i, data in enumerate(trainloader, 0):
-                    
-                    # Get inputs
-                    inputs, targets = data
-                    inputs = torch.tensor(inputs,dtype=torch.float32,device="cuda")
-                    targets = torch.tensor(targets,dtype=torch.float32,device="cuda").reshape(-1,1)
+                for j,(x_train,y_train) in enumerate(trainloader):
+
                     # Zero the gradients
                     self.optim.zero_grad()
                     
                     # Perform forward pass
-                    outputs = self.model(inputs)
+                    outputs = self.model(x_train)
                     
                     # Compute loss
-                    loss = self.loss_fn(outputs, targets)
+                    loss = self.loss_fn(outputs, y_train.reshape(-1,1))
                     
                     # Perform backward pass
                     loss.backward()
@@ -152,11 +148,11 @@ class ModelLoader():
                     
                     # Print statistics
                     current_loss += loss.item()
-                    if i % 500 == 499:
+                    if j % 500 == 499:
                         print('Loss after mini-batch %5d: %.3f' %
-                            (i + 1, current_loss / 500))
+                            (j + 1, current_loss / 500))
                         current_loss = 0.0
-                    del loss, outputs, inputs, targets   
+                    del loss, outputs, x_train, y_train   
             # Process is complete.
             print('Training process has finished. Saving trained model.')
 

@@ -1,7 +1,7 @@
 import numpy as np
 from os import path
 
-import loader
+import loader,torch
 
 if __name__ == "__main__":
     tp_posteriors = np.load(path.abspath("tp_posteriors.npy"))
@@ -20,5 +20,5 @@ if __name__ == "__main__":
     del ta_posteriors,ta_labels,tp_posteriors,tp_labels
 
     model_loader = loader.ModelLoader()
-    model_loader.fit(posteriors,labels)
+    model_loader.cross_val(posteriors,labels)
 
