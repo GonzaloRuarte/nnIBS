@@ -160,7 +160,7 @@ class ModelLoader():
             print('Starting testing')
             
             # Saving the model
-            save_path = f'./model-fold-{fold}.pth'
+            save_path = f'./gng-fold-{fold}.pth'
             torch.save(self.model.state_dict(), save_path)
 
             # Evaluationfor this fold
