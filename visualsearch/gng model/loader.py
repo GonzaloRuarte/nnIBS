@@ -37,6 +37,7 @@ class ModelLoader():
 
 
         trainset = dataset(x,y)
+        del x,y
         #DataLoader
         trainloader = DataLoader(trainset,self.batch_size,shuffle=False)
         self.model.train()
@@ -88,7 +89,7 @@ class ModelLoader():
         torch.manual_seed(42)
 
         dataset = ConcatDataset([x, y])
-        
+        del x,y
         # Define the K-fold Cross Validator
         kfold = KFold(n_splits=k_folds, shuffle=True)
             
