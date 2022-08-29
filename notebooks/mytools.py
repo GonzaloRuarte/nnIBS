@@ -194,7 +194,7 @@ def plot_trial_subject_response(subj, image_name, data_path, resp_path, y_correc
 
     #subj = 41
     #image_name = 'grayscale_100_oliva.jpg' 
-    subjs_response = load_human_scanpaths(os.path.join(resp_path, 'human_scanpaths'))
+    subjs_response = load_human_scanpaths(os.path.join(resp_path, 'human_scanpaths'),'all')
     target_f   = subjs_response[subj][image_name]['target_found']
     target_fr  = subjs_response[subj][image_name]['target_found_response']
     max_fix    = subjs_response[subj][image_name]['max_fixations']-1
