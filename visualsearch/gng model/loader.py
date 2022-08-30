@@ -1,19 +1,21 @@
 import torch
 from torch.utils.data import Dataset, DataLoader, SubsetRandomSampler
 from torch import nn
-
+from torchvision._internally_replaced_utils import load_state_dict_from_url
+from torchvision.models.resnet import Bottleneck
 from sklearn.model_selection import KFold
-
+from os import path
 from go_no_go import Net
 
 class dataset(Dataset):
-    def __init__(self,x,y):
+    def __init__(self,x,y,fixation_nums):
         self.x = torch.tensor(x,dtype=torch.float32,device="cuda")
-        self.y = torch.tensor(y,dtype=torch.float32,device="cuda")
+        self.y = torch.tensor(y,dtype=torch.int32,device="cuda")
+        self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.int32,device="cuda")
         self.length = self.x.shape[0]
 
     def __getitem__(self,idx):
-        return self.x[idx],self.y[idx]  
+        return self.x[idx],self.y[idx],self.fixation_num[idx]
     def __len__(self):
         return self.length
         
@@ -22,12 +24,27 @@ class ModelLoader():
     def __init__(self,num_classes=1,learning_rate=0.01,epochs=700,batch_size=32,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.SGD):
 
         self.model = Net(num_classes=num_classes)
-        self.model.to("cuda")
+        
         self.learning_rate = learning_rate
         self.epochs = epochs
         self.batch_size = batch_size
         self.loss_fn = loss_fn
         self.optim = optim(self.model.parameters(),lr=self.learning_rate)
+        
+        if path.exists(path.join(".","GNG_model_dict.pth")):
+            self.load(path.join(".","GNG_model_dict.pth"))
+        else:
+            #pretrained resnet-152 by default
+            state_dict = load_state_dict_from_url("https://download.pytorch.org/models/resnet152-394f9c45.pth")
+            #to make it work in grayscale images
+            conv1_weight = state_dict['conv1.weight']
+            state_dict['conv1.weight'] = conv1_weight.sum(dim=1, keepdim=True)
+            self.model.load_state_dict(state_dict)
+        #Transfer Learning
+        for param in self.model.parameters():
+            param.requires_grad = False
+        self.model.to("cuda")
+        self.model.fc = nn.Linear(512 * Bottleneck.expansion, num_classes)
 
     def load(self,model_dict_path):
         self.model.load_state_dict(torch.load(model_dict_path))
@@ -57,9 +74,10 @@ class ModelLoader():
                 loss.backward()
                 self.optim.step()
                 del loss,output
-        torch.save(self.model.state_dict(), "GNG_model_dict.pkl")
+        torch.save(self.model.state_dict(), "GNG_model_dict.pth")
 
-    def continue_search(self,posterior):        
+    def continue_search(self,posterior):
+                
         self.model.eval()
 
         with torch.no_grad():
@@ -80,7 +98,7 @@ class ModelLoader():
 
     
     
-    def cross_val(self,x,y,k_folds=5):
+    def cross_val(self,posteriors,fixation_nums,labels,k_folds=5):
     
         # For fold results
         results = {}
@@ -88,8 +106,8 @@ class ModelLoader():
         # Set fixed random number seed
         torch.manual_seed(42)
 
-        trainset = dataset(x,y)
-        del x,y
+        trainset = dataset(posteriors,labels,fixation_nums)
+        del posteriors,labels,fixation_nums
         # Define the K-fold Cross Validator
         kfold = KFold(n_splits=k_folds, shuffle=True)
             
@@ -129,7 +147,7 @@ class ModelLoader():
                 current_loss = 0.0
 
                 # Iterate over the DataLoader for training data
-                for j,(x_train,y_train) in enumerate(trainloader):
+                for j,(x_train,y_train,fixation_num_train) in enumerate(trainloader):
 
                     # Zero the gradients
                     self.optim.zero_grad()

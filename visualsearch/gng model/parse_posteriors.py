@@ -20,17 +20,19 @@ def parse_fixations(results_dir,label):
                 else:
                     posteriors = np.concatenate((posteriors,np.array([np.genfromtxt(posterior_file, delimiter=",")[1:25,:]])),axis=0)
 
-    labels = np.full(posteriors.shape[0],label)
+    labels = np.full(posteriors.shape[0],label,dtype=np.int32)
 
     return posteriors,fixation_numbers,labels
 
 if __name__ == "__main__":
     #tp_posteriors,tp_fixations,tp_labels = parse_fixations(path.join("..","..","Results","COCOSearch18","tp_trainval_dataset","greedy_hsp","subjects_predictions"),1)
-    #np.save("ta_posteriors.npy",tp_posteriors)
-    #np.save("ta_labels.npy",tp_labels)
+    #np.save("tp_posteriors.npy",tp_posteriors)
+    #np.save("tp_fixations.npy",tp_fixations)
+    #np.save("tp_labels.npy",tp_labels)
 
 
     ta_posteriors,ta_fixations,ta_labels = parse_fixations(path.join("..","..","Results","COCOSearch18","ta_trainval_dataset","greedy_hsp","subjects_predictions"),0)
     np.save("ta_posteriors.npy",ta_posteriors)
+    np.save("ta_fixations.npy",ta_fixations)
     np.save("ta_labels.npy",ta_labels)
 
