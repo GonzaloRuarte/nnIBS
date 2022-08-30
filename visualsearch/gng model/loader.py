@@ -1,10 +1,10 @@
 import torch
 from torch.utils.data import Dataset, DataLoader, SubsetRandomSampler
 from torch import nn
-from torchvision._internally_replaced_utils import load_state_dict_from_url
+
 from torchvision.models.resnet import Bottleneck
 from sklearn.model_selection import KFold
-from os import path
+
 from go_no_go import Net
 
 class dataset(Dataset):
@@ -24,35 +24,28 @@ class ModelLoader():
     def __init__(self,num_classes=1,learning_rate=0.01,epochs=700,batch_size=32,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.SGD):
 
         self.model = Net(num_classes=num_classes)
-        
+        self.num_classes = num_classes
         self.learning_rate = learning_rate
         self.epochs = epochs
         self.batch_size = batch_size
         self.loss_fn = loss_fn
-        self.optim = optim(self.model.parameters(),lr=self.learning_rate)
+        self.optim_module = optim
+        self.optim_func= self.optim_module(self.model.parameters(),lr=self.learning_rate)
         
-        if path.exists(path.join(".","GNG_model_dict.pth")):
-            self.load(path.join(".","GNG_model_dict.pth"))
-        else:
-            #pretrained resnet-152 by default
-            state_dict = load_state_dict_from_url("https://download.pytorch.org/models/resnet152-394f9c45.pth")
-            #to make it work in grayscale images
-            conv1_weight = state_dict['conv1.weight']
-            state_dict['conv1.weight'] = conv1_weight.sum(dim=1, keepdim=True)
-            self.model.load_state_dict(state_dict)
+
+    def transfer_learning(self):
         #Transfer Learning
         for param in self.model.parameters():
             param.requires_grad = False
         self.model.to("cuda")
-        self.model.fc = nn.Linear(512 * Bottleneck.expansion, num_classes)
+        self.model.fc = nn.Linear(512 * Bottleneck.expansion, self.num_classes)
+        self.optim_func= self.optim_module(self.model.fc.parameters(),lr=self.learning_rate)
 
     def load(self,model_dict_path):
         self.model.load_state_dict(torch.load(model_dict_path))
 
     def fit(self,x,y):    
-        # Model , Optimizer, Loss
-
-
+        self.transfer_learning()
         trainset = dataset(x,y)
         del x,y
         #DataLoader
@@ -70,9 +63,9 @@ class ModelLoader():
 
    
                 #backprop
-                self.optim.zero_grad()
+                self.optim_func.zero_grad()
                 loss.backward()
-                self.optim.step()
+                self.optim_func.step()
                 del loss,output
         torch.save(self.model.state_dict(), "GNG_model_dict.pth")
 
@@ -87,10 +80,7 @@ class ModelLoader():
 
 
     def reset_weights(self):
-        '''
-            Try resetting model weights to avoid
-            weight leakage.
-        '''
+        
         for layer in self.model.children():
             if hasattr(layer, 'reset_parameters'):
                 print(f'Reset trainable parameters of layer = {layer}')
@@ -99,7 +89,7 @@ class ModelLoader():
     
     
     def cross_val(self,posteriors,fixation_nums,labels,k_folds=5):
-    
+        self.transfer_learning()
         # For fold results
         results = {}
         
@@ -133,9 +123,9 @@ class ModelLoader():
                             trainset,
                             self.batch_size, sampler=test_subsampler)
             
-            # Init the neural network
+            # Init the neural network, only the FC is trained
 
-            self.reset_weights()
+            self.model.fc.reset_parameters()
             
             # Run the training loop for defined number of epochs
             for epoch in range(self.epochs):
@@ -150,7 +140,7 @@ class ModelLoader():
                 for j,(x_train,y_train,fixation_num_train) in enumerate(trainloader):
 
                     # Zero the gradients
-                    self.optim.zero_grad()
+                    self.optim_func.zero_grad()
                     
                     # Perform forward pass
                     outputs = self.model(x_train,fixation_num_train)
@@ -162,7 +152,7 @@ class ModelLoader():
                     loss.backward()
                     
                     # Perform optimization
-                    self.optim.step()
+                    self.optim_func.step()
                     
                     # Print statistics
                     current_loss += loss.item()
