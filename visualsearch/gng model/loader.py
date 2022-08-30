@@ -31,33 +31,34 @@ class ModelLoader():
         self.loss_fn = loss_fn
         self.optim_module = optim
         self.optim_func= self.optim_module(self.model.parameters(),lr=self.learning_rate)
-        
+        self.model = self.model.to("cuda")
 
     def transfer_learning(self):
         #Transfer Learning
         for param in self.model.parameters():
             param.requires_grad = False
-        self.model.to("cuda")
-        self.model.fc = nn.Linear(512 * Bottleneck.expansion, self.num_classes)
+        
+        self.model.fc = nn.Linear(512 * Bottleneck.expansion, self.num_classes,device="cuda")
         self.optim_func= self.optim_module(self.model.fc.parameters(),lr=self.learning_rate)
+
 
     def load(self,model_dict_path):
         self.model.load_state_dict(torch.load(model_dict_path))
 
-    def fit(self,x,y):    
+    def fit(self,posteriors,labels,fixation_nums):    
         self.transfer_learning()
-        trainset = dataset(x,y)
-        del x,y
+        trainset = dataset(posteriors,labels,fixation_nums)
+        del posteriors,labels,fixation_nums
         #DataLoader
         trainloader = DataLoader(trainset,self.batch_size,shuffle=False)
         self.model.train()
         
         #forward loop
         for i in range(self.epochs):
-            for j,(x_train,y_train) in enumerate(trainloader):
+            for j,(x_train,y_train,fixation_num_train) in enumerate(trainloader):
 
                 #calculate output
-                output = self.model(x_train)
+                self.model(x_train,fixation_num_train)
                 #calculate loss
                 loss = self.loss_fn(output,y_train.reshape(-1,1))
 
@@ -88,7 +89,7 @@ class ModelLoader():
 
     
     
-    def cross_val(self,posteriors,fixation_nums,labels,k_folds=5):
+    def cross_val(self,posteriors,labels,fixation_nums,k_folds=5):
         self.transfer_learning()
         # For fold results
         results = {}
