@@ -6,7 +6,7 @@ from os import listdir, path
 
 def parse_fixations(results_dir,label):
     posteriors = None
-    fixation_numbers = np.array([])
+    fixation_numbers = np.array([],dtype=np.float32)
     
     for subject in listdir(results_dir):
         probability_maps_folder = path.join(results_dir,subject,'probability_maps')
@@ -14,7 +14,7 @@ def parse_fixations(results_dir,label):
             image_fixations_dir = path.join(probability_maps_folder,image_id)
             for posterior in listdir(image_fixations_dir):
                 posterior_file = path.join(image_fixations_dir,posterior)
-                fixation_numbers = np.append(fixation_numbers,int(posterior[:-4].split('_')[1]))
+                fixation_numbers = np.append(fixation_numbers,float(posterior[:-4].split('_')[1]))
                 if posteriors is None:
                     posteriors = np.array([np.genfromtxt(posterior_file, delimiter=",")[1:25,:]])
                 else:

@@ -153,7 +153,7 @@ class ModelLoader():
                     self.optim.zero_grad()
                     
                     # Perform forward pass
-                    outputs = self.model(x_train)
+                    outputs = self.model(x_train,fixation_num_train)
                     
                     # Compute loss
                     loss = self.loss_fn(outputs, y_train.reshape(-1,1))
