@@ -12,9 +12,9 @@ if __name__ == "__main__":
     tp_posteriors = np.expand_dims(tp_posteriors, axis=1) #para incorporar el canal (que es uno solo en este caso)
 
     ta_data = np.load(path.abspath("target_absent_data.npz"))
-    ta_posteriors = tp_data["posteriors"]
-    ta_fixation_nums = tp_data["fixations"]
-    ta_labels = tp_data["labels"]
+    ta_posteriors = ta_data["posteriors"]
+    ta_fixation_nums = ta_data["fixations"]
+    ta_labels = ta_data["labels"]
         
     ta_posteriors = np.expand_dims(ta_posteriors, axis=1) #para incorporar el canal (que es uno solo en este caso)
 

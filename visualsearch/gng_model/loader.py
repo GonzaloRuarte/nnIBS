@@ -10,18 +10,18 @@ from go_no_go import Net
 class dataset(Dataset):
     def __init__(self,x,y,fixation_nums):
         self.x = torch.tensor(x,dtype=torch.float32,device="cuda")
-        self.y = torch.tensor(y,dtype=torch.int32,device="cuda")
-        self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.int32,device="cuda")
+        self.y = torch.tensor(y,dtype=torch.float32,device="cuda")
+        self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.float32,device="cuda")
         self.length = self.x.shape[0]
 
     def __getitem__(self,idx):
-        return self.x[idx],self.y[idx],self.fixation_num[idx]
+        return self.x[idx],self.y[idx],self.fixation_nums[idx]
     def __len__(self):
         return self.length
         
 
 class ModelLoader():
-    def __init__(self,num_classes=1,learning_rate=0.01,epochs=700,batch_size=32,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.SGD):
+    def __init__(self,num_classes=1,learning_rate=0.01,epochs=10,batch_size=32,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.SGD):
 
         self.model = Net(num_classes=num_classes)
         self.num_classes = num_classes
@@ -58,7 +58,7 @@ class ModelLoader():
             for j,(x_train,y_train,fixation_num_train) in enumerate(trainloader):
 
                 #calculate output
-                self.model(x_train,fixation_num_train)
+                output = self.model(x_train,fixation_num_train)
                 #calculate loss
                 loss = self.loss_fn(output,y_train.reshape(-1,1))
 
@@ -70,14 +70,14 @@ class ModelLoader():
                 del loss,output
         torch.save(self.model.state_dict(), "GNG_model_dict.pth")
 
-    def continue_search(self,posterior):
+    def continue_search(self,posterior,num_fixation):
                 
         self.model.eval()
 
         with torch.no_grad():
-            prediction = self.model(torch.tensor(posterior,dtype=torch.float32))
-            argmax_prediction = torch.argmax(prediction).item()
-        return argmax_prediction
+            prediction = self.model(torch.tensor(posterior,dtype=torch.float32),torch.tensor(num_fixation,dtype=torch.float32))
+
+        return (torch.sigmoid(prediction) >= 0.5).item()
 
 
     def reset_weights(self):
@@ -104,7 +104,7 @@ class ModelLoader():
             
         # Start print
         print('--------------------------------')
-
+        
         # K-fold Cross Validation model evaluation
         for fold, (train_ids, test_ids) in enumerate(kfold.split(trainset)):
             
@@ -129,6 +129,7 @@ class ModelLoader():
             self.model.fc.reset_parameters()
             
             # Run the training loop for defined number of epochs
+            correct, total = 0, 0
             for epoch in range(self.epochs):
 
                 # Print epoch
@@ -136,7 +137,7 @@ class ModelLoader():
 
                 # Set current loss value
                 current_loss = 0.0
-
+                self.model.train()
                 # Iterate over the DataLoader for training data
                 for j,(x_train,y_train,fixation_num_train) in enumerate(trainloader):
 
@@ -145,7 +146,11 @@ class ModelLoader():
                     
                     # Perform forward pass
                     outputs = self.model(x_train,fixation_num_train)
-                    
+                    predictions = (torch.sigmoid(outputs) >= 0.5)
+
+                    total += y_train.size(0)
+
+                    correct += (predictions.flatten() == y_train).sum().item()
                     # Compute loss
                     loss = self.loss_fn(outputs, y_train.reshape(-1,1))
                     
@@ -154,44 +159,48 @@ class ModelLoader():
                     
                     # Perform optimization
                     self.optim_func.step()
-                    
+
                     # Print statistics
                     current_loss += loss.item()
                     if j % 500 == 499:
                         print('Loss after mini-batch %5d: %.3f' %
                             (j + 1, current_loss / 500))
+                        print('Accuracy after mini-batch %5d: %.3f %%' %
+                            (j + 1, 100.0 * correct / total))    
                         current_loss = 0.0
-                    del loss, outputs, x_train, y_train   
+                    del loss, outputs, x_train, y_train, fixation_num_train, predictions
             # Process is complete.
             print('Training process has finished. Saving trained model.')
-
+            print('Accuracy after epoch %d: %.3f %%' % (epoch+1,100.0 * correct / total))
             # Print about testing
             print('Starting testing')
-            
+            self.model.eval()
+
             # Saving the model
             save_path = f'./gng-fold-{fold}.pth'
             torch.save(self.model.state_dict(), save_path)
 
-            # Evaluationfor this fold
+            # Evaluation for this fold
             correct, total = 0, 0
             with torch.no_grad():
 
                 # Iterate over the test data and generate predictions
-                for i, data in enumerate(testloader, 0):
-
-                    # Get inputs
-                    inputs, targets = data
+                for j,(x_test,y_test,fixation_num_test) in enumerate(testloader):
 
                     # Generate outputs
-                    outputs = self.model(inputs)
+                    outputs = self.model(x_test,fixation_num_test)
 
                     # Set total and correct
-                    _, predicted = torch.max(outputs.data, 1)
-                    total += targets.size(0)
-                    correct += (predicted == targets).sum().item()
+                    predictions = (torch.sigmoid(outputs) >= 0.5)
+
+                    total += y_test.size(0)
+
+                    correct += (predictions.flatten() == y_test).sum().item()
+                    
+                    del predictions, x_test, y_test, fixation_num_test
 
             # Print accuracy
-            print('Accuracy for fold %d: %d %%' % (fold, 100.0 * correct / total))
+            print('Accuracy for fold %d: %.3f %%' % (fold, 100.0 * correct / total))
             print('--------------------------------')
             results[fold] = 100.0 * (correct / total)
             

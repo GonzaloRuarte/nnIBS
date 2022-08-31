@@ -7,7 +7,7 @@ class Net(models.ResNet):
     def __init__(self, num_classes=1000, **kwargs):
         # Start with standard resnet152 defined here
 
-        super().__init__(block = models.resnet.Bottleneck, layers = [3, 8, 36, 3], num_classes = num_classes, **kwargs)
+        super().__init__(block = models.resnet.Bottleneck, layers = [3, 8, 36, 3], num_classes = 1000, **kwargs)
         #black and white images
 
         self.inplanes = 64
