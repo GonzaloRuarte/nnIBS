@@ -1,7 +1,7 @@
 import numpy as np
 from os import path
 
-import loader,torch
+import loader
 
 if __name__ == "__main__":
     tp_data = np.load(path.abspath("target_present_data.npz"))
