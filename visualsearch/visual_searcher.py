@@ -7,8 +7,8 @@ import numpy as np
 import time
 import importlib
 from scipy.stats import entropy
-from gng_model import loader
-
+from .gng_model import loader
+from os import path
 class VisualSearcher: 
     def __init__(self, config, grid, visibility_map, target_similarity_dir, output_path, human_scanpaths):
         " Creates a new instance of the visual search model "
@@ -73,7 +73,8 @@ class VisualSearcher:
         image_prior = prior.sum(image_prior, self.max_saccades)
       
         gng_model = loader.ModelLoader()
-        gng_model.load("gng_model/gng_fold-4.pth")
+        gng_model.transfer_learning()
+        gng_model.load(path.abspath("visualsearch/gng_model/gng-fold-4.pth"))
         # Convert target bounding box to grid cells
         if target_bbox != None:
             target_bbox_in_grid = np.empty(len(target_bbox), dtype=np.int)
@@ -146,7 +147,7 @@ class VisualSearcher:
             
             marginal  = np.sum(likelihood_times_prior)
             
-            posterior = likelihood_times_prior / marginal
+            posterior = likelihood_times_prior / marginal            
             if not gng_model.continue_search(posterior,fixation_number):
                 break
             fixations[fixation_number + 1] = self.search_model.next_fixation(posterior, image_name, fixation_number, self.output_path)
