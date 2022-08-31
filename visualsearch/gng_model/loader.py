@@ -38,7 +38,7 @@ class ModelLoader():
         for param in self.model.parameters():
             param.requires_grad = False
         
-        self.model.fc = nn.Linear(512 * Bottleneck.expansion, self.num_classes,device="cuda")
+        self.model.fc = nn.Linear(1+(512 * Bottleneck.expansion), self.num_classes,device="cuda")
         self.optim_func= self.optim_module(self.model.fc.parameters(),lr=self.learning_rate)
 
 
@@ -130,9 +130,9 @@ class ModelLoader():
             self.model.fc.reset_parameters()
             
             # Run the training loop for defined number of epochs
-            correct, total, true_positives, true_negatives, positives, negatives = 0, 0, 0, 0, 0, 0
+            
             for epoch in range(self.epochs):
-
+                correct, total, true_positives, true_negatives, positives, negatives = 0, 0, 0, 0, 0, 0
                 # Print epoch
                 print(f'Starting epoch {epoch+1}')
 
@@ -175,11 +175,12 @@ class ModelLoader():
 
                         current_loss = 0.0
                     del loss, outputs, x_train, y_train, fixation_num_train, predictions
+                print('TPR after epoch %d: %.3f %%' % (epoch+1,100.0 * true_positives / positives))
+                print('TNR after epoch %d: %.3f %%' % (epoch+1,100.0 * true_negatives / negatives))
+                print('Accuracy after epoch %d: %.3f %%' % (epoch+1,100.0 * correct / total))
             # Process is complete.
             print('Training process has finished. Saving trained model.')
-            print('TPR after epoch %d: %.3f %%' % (epoch+1,100.0 * true_positives / positives))
-            print('TNR after epoch %d: %.3f %%' % (epoch+1,100.0 * true_negatives / negatives))
-            print('Accuracy after epoch %d: %.3f %%' % (epoch+1,100.0 * correct / total))
+            
 
             # Print about testing
             print('Starting testing')
@@ -214,9 +215,9 @@ class ModelLoader():
                     del predictions, x_test, y_test, fixation_num_test, outputs
 
             # Print accuracy
-            print('Accuracy for fold %d: %.3f %%' % (fold, 100.0 * correct / total))
-            print('TPR for fold %d: %.3f %%' % (fold, 100.0 * true_positives / positives))
-            print('TNR for fold %d: %.3f %%' % (fold, 100.0 * true_negatives / negatives))
+            print('Accuracy in testing set for fold %d: %.3f %%' % (fold, 100.0 * correct / total))
+            print('TPR in testing set for fold %d: %.3f %%' % (fold, 100.0 * true_positives / positives))
+            print('TNR in testing set for fold %d: %.3f %%' % (fold, 100.0 * true_negatives / negatives))
 
 
 

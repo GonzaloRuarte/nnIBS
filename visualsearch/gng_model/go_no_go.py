@@ -33,8 +33,8 @@ class Net(models.ResNet):
         x = self.layer4(x)
 
         x = self.avgpool(x)
-        #x = torch.cat([torch.flatten(x, 1),torch.tensor([fixation_num])])
-        x = torch.flatten(x, 1)
+        x = torch.cat((torch.flatten(x, 1),fixation_num[:,None]),1)
+
         x = self.fc(x)
 
         return x

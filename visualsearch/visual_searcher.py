@@ -74,7 +74,7 @@ class VisualSearcher:
       
         gng_model = loader.ModelLoader()
         gng_model.transfer_learning()
-        gng_model.load(path.abspath("visualsearch/gng_model/gng-fold-4.pth"))
+        gng_model.load(path.abspath("visualsearch/gng_model/gng-fold-0.pth"))
         # Convert target bounding box to grid cells
         if target_bbox != None:
             target_bbox_in_grid = np.empty(len(target_bbox), dtype=np.int)
@@ -148,7 +148,7 @@ class VisualSearcher:
             marginal  = np.sum(likelihood_times_prior)
             
             posterior = likelihood_times_prior / marginal            
-            if not gng_model.continue_search(posterior,fixation_number):
+            if not gng_model.continue_search(posterior,[fixation_number]):
                 break
             fixations[fixation_number + 1] = self.search_model.next_fixation(posterior, image_name, fixation_number, self.output_path)
             
