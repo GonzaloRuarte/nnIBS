@@ -129,7 +129,7 @@ class ModelLoader():
             self.model.fc.reset_parameters()
             
             # Run the training loop for defined number of epochs
-            correct, total = 0, 0
+            correct, total, true_positives, true_negatives, positives, negatives = 0, 0, 0, 0, 0, 0
             for epoch in range(self.epochs):
 
                 # Print epoch
@@ -149,11 +149,17 @@ class ModelLoader():
                     predictions = (torch.sigmoid(outputs) >= 0.5)
 
                     total += y_train.size(0)
+                    positives += (y_train ==1).sum().item()
+                    negatives += (y_train ==0).sum().item()
 
                     correct += (predictions.flatten() == y_train).sum().item()
+                    true_positives += torch.logical_and(predictions.flatten(),y_train).sum().item()
+                    true_negatives += torch.logical_and(torch.logical_not(predictions.flatten()),torch.logical_not(y_train)).sum().item()
                     # Compute loss
                     loss = self.loss_fn(outputs, y_train.reshape(-1,1))
                     
+
+
                     # Perform backward pass
                     loss.backward()
                     
@@ -165,13 +171,20 @@ class ModelLoader():
                     if j % 500 == 499:
                         print('Loss after mini-batch %5d: %.3f' %
                             (j + 1, current_loss / 500))
+                        print('TPR after mini-batch %5d: %.3f %%' %
+                            (j + 1, 100.0 * true_positives / positives))    
+                        print('TNR after mini-batch %5d: %.3f %%' %
+                            (j + 1, 100.0 * true_negatives / negatives))      
                         print('Accuracy after mini-batch %5d: %.3f %%' %
                             (j + 1, 100.0 * correct / total))    
                         current_loss = 0.0
                     del loss, outputs, x_train, y_train, fixation_num_train, predictions
             # Process is complete.
             print('Training process has finished. Saving trained model.')
+            print('TPR after epoch %d: %.3f %%' % (epoch+1,100.0 * true_positives / positives))
+            print('TNR after epoch %d: %.3f %%' % (epoch+1,100.0 * true_negatives / negatives))
             print('Accuracy after epoch %d: %.3f %%' % (epoch+1,100.0 * correct / total))
+
             # Print about testing
             print('Starting testing')
             self.model.eval()
@@ -181,7 +194,7 @@ class ModelLoader():
             torch.save(self.model.state_dict(), save_path)
 
             # Evaluation for this fold
-            correct, total = 0, 0
+            correct, total, true_positives, true_negatives, positives, negatives = 0, 0, 0, 0, 0, 0
             with torch.no_grad():
 
                 # Iterate over the test data and generate predictions
@@ -195,12 +208,22 @@ class ModelLoader():
 
                     total += y_test.size(0)
 
+                    positives += (y_test ==1).sum().item()
+                    negatives += (y_test ==0).sum().item()
+
                     correct += (predictions.flatten() == y_test).sum().item()
+                    true_positives += torch.logical_and(predictions.flatten(),y_test).sum().item()
+                    true_negatives += torch.logical_and(torch.logical_not(predictions.flatten()),torch.logical_not(y_test)).sum().item()
                     
-                    del predictions, x_test, y_test, fixation_num_test
+                    del predictions, x_test, y_test, fixation_num_test, outputs
 
             # Print accuracy
             print('Accuracy for fold %d: %.3f %%' % (fold, 100.0 * correct / total))
+            print('TPR for fold %d: %.3f %%' % (fold, 100.0 * true_positives / positives))
+            print('TNR for fold %d: %.3f %%' % (fold, 100.0 * true_negatives / negatives))
+
+
+
             print('--------------------------------')
             results[fold] = 100.0 * (correct / total)
             
