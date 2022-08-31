@@ -5,7 +5,7 @@ from torch import nn
 from torchvision.models.resnet import Bottleneck
 from sklearn.model_selection import KFold
 from numpy import expand_dims
-from go_no_go import Net
+from .go_no_go import Net
 
 class dataset(Dataset):
     def __init__(self,x,y,fixation_nums):
@@ -75,7 +75,7 @@ class ModelLoader():
         self.model.eval()
 
         with torch.no_grad():
-            prediction = self.model(torch.tensor(expand_dims(posterior, axis=(0, 1)),dtype=torch.float32),torch.tensor(num_fixation,dtype=torch.float32))
+            prediction = self.model(torch.tensor(expand_dims(posterior, axis=(0, 1)),dtype=torch.float32,device="cuda"),torch.tensor(num_fixation,dtype=torch.float32,device="cuda"))
 
         return (torch.sigmoid(prediction) >= 0.5).item()
 
