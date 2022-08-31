@@ -25,14 +25,11 @@ def parse_fixations(results_dir,label):
     return posteriors,fixation_numbers,labels
 
 if __name__ == "__main__":
-    #tp_posteriors,tp_fixations,tp_labels = parse_fixations(path.join("..","..","Results","COCOSearch18","tp_trainval_dataset","greedy_hsp","subjects_predictions"),1)
-    #np.save("tp_posteriors.npy",tp_posteriors)
-    #np.save("tp_fixations.npy",tp_fixations)
-    #np.save("tp_labels.npy",tp_labels)
+    tp_posteriors,tp_fixations,tp_labels = parse_fixations(path.join("..","..","Results","COCOSearch18","tp_trainval_dataset","greedy_hsp","subjects_predictions"),1)
+    np.savez_compressed("target_present_data.npz",posteriors=tp_posteriors,fixations=tp_fixations,labels=tp_labels)
+
 
 
     ta_posteriors,ta_fixations,ta_labels = parse_fixations(path.join("..","..","Results","COCOSearch18","ta_trainval_dataset","greedy_hsp","subjects_predictions"),0)
-    np.save("ta_posteriors.npy",ta_posteriors)
-    np.save("ta_fixations.npy",ta_fixations)
-    np.save("ta_labels.npy",ta_labels)
+    np.savez_compressed("target_absent_data.npz",posteriors=ta_posteriors,fixations=ta_fixations,labels=ta_labels)
 
