@@ -4,7 +4,7 @@ from torch import nn
 
 from torchvision.models.resnet import Bottleneck
 from sklearn.model_selection import KFold
-
+from numpy import expand_dims
 from go_no_go import Net
 
 class dataset(Dataset):
@@ -75,7 +75,7 @@ class ModelLoader():
         self.model.eval()
 
         with torch.no_grad():
-            prediction = self.model(torch.tensor(posterior,dtype=torch.float32),torch.tensor(num_fixation,dtype=torch.float32))
+            prediction = self.model(torch.tensor(expand_dims(posterior, axis=(0, 1)),dtype=torch.float32),torch.tensor(num_fixation,dtype=torch.float32))
 
         return (torch.sigmoid(prediction) >= 0.5).item()
 
@@ -93,7 +93,8 @@ class ModelLoader():
         self.transfer_learning()
         # For fold results
         results = {}
-        
+        tprs = {}
+        tnrs = {}
         # Set fixed random number seed
         torch.manual_seed(42)
 
@@ -171,12 +172,7 @@ class ModelLoader():
                     if j % 500 == 499:
                         print('Loss after mini-batch %5d: %.3f' %
                             (j + 1, current_loss / 500))
-                        print('TPR after mini-batch %5d: %.3f %%' %
-                            (j + 1, 100.0 * true_positives / positives))    
-                        print('TNR after mini-batch %5d: %.3f %%' %
-                            (j + 1, 100.0 * true_negatives / negatives))      
-                        print('Accuracy after mini-batch %5d: %.3f %%' %
-                            (j + 1, 100.0 * correct / total))    
+
                         current_loss = 0.0
                     del loss, outputs, x_train, y_train, fixation_num_train, predictions
             # Process is complete.
@@ -226,12 +222,17 @@ class ModelLoader():
 
             print('--------------------------------')
             results[fold] = 100.0 * (correct / total)
+            tprs[fold] = 100.0 * true_positives / positives
+            tnrs[fold] = 100.0 * true_negatives / negatives
             
         # Print fold results
         print(f'K-FOLD CROSS VALIDATION RESULTS FOR {k_folds} FOLDS')
         print('--------------------------------')
-        sum = 0.0
+
         for key, value in results.items():
-            print(f'Fold {key}: {value} %')
-            sum += value
-        print(f'Average: {sum/len(results.items())} %')
+            print(f'Fold {key} accuracy: {value} %')
+
+
+        print(f'Average Accuracy: {results.values().sum()/len(results.items())} %')
+        print(f'Average TPR: {tprs.values().sum()/len(tprs.items())} %')
+        print(f'Average TNR: {tnrs.values().sum()/len(tnrs.items())} %')

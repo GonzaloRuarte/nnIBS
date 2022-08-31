@@ -7,6 +7,7 @@ import numpy as np
 import time
 import importlib
 from scipy.stats import entropy
+from gng_model import loader
 
 class VisualSearcher: 
     def __init__(self, config, grid, visibility_map, target_similarity_dir, output_path, human_scanpaths):
@@ -71,6 +72,8 @@ class VisualSearcher:
         # Sum probabilities
         image_prior = prior.sum(image_prior, self.max_saccades)
       
+        gng_model = loader.ModelLoader()
+        gng_model.load("gng_model/gng_fold-4.pth")
         # Convert target bounding box to grid cells
         if target_bbox != None:
             target_bbox_in_grid = np.empty(len(target_bbox), dtype=np.int)
@@ -127,8 +130,8 @@ class VisualSearcher:
                     break
 
             # If the limit has been reached, don't compute the next fixation
-            if fixation_number == self.max_saccades:
-                break
+
+            
             target_similarities = np.array(list(map(lambda x: x.at_fixation(current_fixation),target_similarity_map)))
             minimum_entropy_likelihood_index = np.argmin(list(map(lambda x : entropy(x.flatten()),target_similarities)))
             if self.history_size != None:
@@ -144,7 +147,8 @@ class VisualSearcher:
             marginal  = np.sum(likelihood_times_prior)
             
             posterior = likelihood_times_prior / marginal
-
+            if not gng_model.continue_search(posterior,fixation_number):
+                break
             fixations[fixation_number + 1] = self.search_model.next_fixation(posterior, image_name, fixation_number, self.output_path)
             
         end = time.time()
