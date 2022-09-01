@@ -5,7 +5,7 @@ from torch import nn
 from torchvision.models.resnet import Bottleneck
 from sklearn.model_selection import KFold
 from numpy import expand_dims
-from .go_no_go import Net
+from go_no_go import Net
 
 class dataset(Dataset):
     def __init__(self,x,y,fixation_nums):
@@ -21,7 +21,7 @@ class dataset(Dataset):
         
 
 class ModelLoader():
-    def __init__(self,num_classes=1,learning_rate=0.01,epochs=10,batch_size=32,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.SGD):
+    def __init__(self,num_classes=1,learning_rate=0.005,epochs=100,batch_size=32,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.SGD):
 
         self.model = Net(num_classes=num_classes)
         self.num_classes = num_classes
@@ -32,6 +32,11 @@ class ModelLoader():
         self.optim_module = optim
         self.optim_func= self.optim_module(self.model.parameters(),lr=self.learning_rate)
         self.model = self.model.to("cuda")
+
+    def balanced_weights(self,y_data):
+        y_data = torch.tensor(y_data,dtype=torch.float32,device="cuda")
+        self.loss_fn = nn.BCEWithLogitsLoss(pos_weight=(y_data==0.).sum()/y_data.sum())
+        del y_data
 
     def transfer_learning(self):
         #Transfer Learning
@@ -52,7 +57,7 @@ class ModelLoader():
         #DataLoader
         trainloader = DataLoader(trainset,self.batch_size,shuffle=False)
         self.model.train()
-        
+        self.balanced_weights(labels)
         #forward loop
         for i in range(self.epochs):
             for j,(x_train,y_train,fixation_num_train) in enumerate(trainloader):
@@ -97,7 +102,7 @@ class ModelLoader():
         tnrs = {}
         # Set fixed random number seed
         torch.manual_seed(42)
-
+        self.balanced_weights(labels)
         trainset = dataset(posteriors,labels,fixation_nums)
         del posteriors,labels,fixation_nums
         # Define the K-fold Cross Validator

@@ -19,9 +19,9 @@ if __name__ == "__main__":
     ta_posteriors = np.expand_dims(ta_posteriors, axis=1) #para incorporar el canal (que es uno solo en este caso)
 
     
-    posteriors = np.concatenate((tp_posteriors,tp_posteriors,tp_posteriors,ta_posteriors),axis=0)
-    labels = np.concatenate((tp_labels,tp_labels,tp_labels,ta_labels),axis=0)
-    fixation_nums = np.concatenate((tp_fixation_nums,tp_fixation_nums,tp_fixation_nums,ta_fixation_nums),axis=0)
+    posteriors = np.concatenate((tp_posteriors,ta_posteriors),axis=0)
+    labels = np.concatenate((tp_labels,ta_labels),axis=0)
+    fixation_nums = np.concatenate((tp_fixation_nums,ta_fixation_nums),axis=0)
     del ta_posteriors,ta_labels,tp_posteriors,tp_labels,tp_fixation_nums,ta_fixation_nums
 
     model_loader = loader.ModelLoader()
