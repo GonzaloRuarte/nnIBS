@@ -1,17 +1,32 @@
 import numpy as np
 from os import path
+import argparse
 
 import loader
 
 if __name__ == "__main__":
-    tp_data = np.load(path.abspath("target_present_data.npz"))
+    parser = argparse.ArgumentParser(description='Run the model go-no-go')
+    parser.add_argument('-datapath', help="Path to the dataset", default='./../../Datasets/GNGposteriors/')
+    args = parser.parse_args()
+    
+    # load data target present trials
+    try:
+        tp_data = np.load(path.join(args.datapath, 'target_present_data.npz'))
+    except Exception as ex:
+        print(ex)
+        tp_data = np.load(path.abspath("target_present_data.npz"))
     tp_posteriors = tp_data["posteriors"]
     tp_fixation_nums = tp_data["fixations"]
     tp_labels = tp_data["labels"]
         
     tp_posteriors = np.expand_dims(tp_posteriors, axis=1) #para incorporar el canal (que es uno solo en este caso)
 
-    ta_data = np.load(path.abspath("target_absent_data.npz"))
+    # load data target absent trials
+    try:
+        ta_data = np.load(path.join(args.datapath, 'target_absent_data.npz'))
+    except Exception as ex:
+        print(ex)
+        ta_data = np.load(path.abspath('target_absent_data.npz'))
     ta_posteriors = ta_data["posteriors"]
     ta_fixation_nums = ta_data["fixations"]
     ta_labels = ta_data["labels"]
