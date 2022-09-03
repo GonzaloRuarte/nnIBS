@@ -1,17 +1,18 @@
 import numpy as np
 from os import path
 import argparse
+import os
 
 import loader
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run the model go-no-go')
-    parser.add_argument('-datapath', help="Path to the dataset", default='./../../Datasets/GNGposteriors/')
+    parser.add_argument('-datapath', help="Path to the dataset, is a symlink", default='./../../Datasets/GNGposteriors/')
     args = parser.parse_args()
     
     # load data target present trials
     try:
-        tp_data = np.load(path.join(args.datapath, 'target_present_data.npz'))
+        tp_data = np.load(path.join(os.path.abspath(os.readlink(args.datapath)), 'target_present_data.npz'))
     except Exception as ex:
         print(ex)
         tp_data = np.load(path.abspath("target_present_data.npz"))
@@ -23,7 +24,7 @@ if __name__ == "__main__":
 
     # load data target absent trials
     try:
-        ta_data = np.load(path.join(args.datapath, 'target_absent_data.npz'))
+        ta_data = np.load(path.join(os.path.abspath(os.readlink(args.datapath)), 'target_absent_data.npz'))
     except Exception as ex:
         print(ex)
         ta_data = np.load(path.abspath('target_absent_data.npz'))
