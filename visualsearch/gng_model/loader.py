@@ -233,6 +233,6 @@ class ModelLoader():
             print(f'Fold {key} accuracy: {value} %')
 
 
-        print(f'Average Accuracy: {results.values().sum()/len(results.items())} %')
-        print(f'Average TPR: {tprs.values().sum()/len(tprs.items())} %')
-        print(f'Average TNR: {tnrs.values().sum()/len(tnrs.items())} %')
+        print(f'Average Accuracy: {sum(results.values())/len(results.items())} %')
+        print(f'Average TPR: {sum(tprs.values())/len(tprs.items())} %')
+        print(f'Average TNR: {sum(tnrs.values())/len(tnrs.items())} %')
