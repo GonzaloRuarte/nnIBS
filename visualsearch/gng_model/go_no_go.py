@@ -22,7 +22,7 @@ class Net(models.ResNet):
         for param in self.parameters():
             param.requires_grad = False
         self.reduction = nn.Linear(512 * models.resnet.Bottleneck.expansion,64)
-        self.avgpool2 = nn.AdaptiveAvgPool1d(1)
+        self.avgpool2 = nn.AvgPool1d(1)
         self.fc = nn.Linear(65, num_classes,device="cuda")
         
     def forward(self, x, fixation_num):
