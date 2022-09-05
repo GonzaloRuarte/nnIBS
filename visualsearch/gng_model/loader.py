@@ -3,7 +3,7 @@ from torch.utils.data import Dataset, DataLoader, SubsetRandomSampler
 from torch import nn
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 from torchvision.models.resnet import Bottleneck
-from sklearn.model_selection import KFold
+from sklearn.model_selection import StratifiedKFold
 from numpy import expand_dims
 from go_no_go import Net
 
@@ -108,7 +108,7 @@ class ModelLoader():
         trainset = dataset(posteriors,labels,fixation_nums)
         del posteriors,labels,fixation_nums
         # Define the K-fold Cross Validator
-        kfold = KFold(n_splits=k_folds, shuffle=True)
+        kfold = StratifiedKFold(n_splits=k_folds, shuffle=True,random_state=42)
             
         # Start print
         print('--------------------------------')
