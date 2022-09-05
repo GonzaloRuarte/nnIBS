@@ -97,7 +97,7 @@ class ModelLoader():
         torch.manual_seed(42)
         self.balanced_weights(labels)
         trainset = dataset(posteriors,labels,fixation_nums)
-        del posteriors,labels,fixation_nums
+        # del posteriors,labels,fixation_nums
         # Define the K-fold Cross Validator
         kfold = StratifiedKFold(n_splits=k_folds, shuffle=True,random_state=42)
             
@@ -105,7 +105,7 @@ class ModelLoader():
         print('--------------------------------')
         
         # K-fold Cross Validation model evaluation
-        for fold, (train_ids, test_ids) in enumerate(kfold.split(trainset)):
+        for fold, (train_ids, test_ids) in enumerate(kfold.split(posteriors,labels)):
             
             # Print
             print(f'FOLD {fold}')
