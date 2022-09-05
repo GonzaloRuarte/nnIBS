@@ -2,7 +2,7 @@ import torch
 from torch.utils.data import Dataset, DataLoader, SubsetRandomSampler
 from torch import nn
 from torch.optim.lr_scheduler import ReduceLROnPlateau
-from torchvision.models.resnet import Bottleneck
+
 from sklearn.model_selection import StratifiedKFold
 from numpy import expand_dims
 from go_no_go import Net
@@ -29,30 +29,21 @@ class ModelLoader():
         self.epochs = epochs
         self.batch_size = batch_size
         self.loss_fn = loss_fn
-        self.optim_module = optim
-        self.optim_func= self.optim_module(self.model.parameters(),lr=self.learning_rate)
+        self.optim_module = optim        
         self.model = self.model.to("cuda")
         self.scheduler=scheduler
-        self.scheduler_func=scheduler(self.optim_func, 'min')
+        self.optim_func= self.optim_module(filter(lambda p: p.requires_grad, self.model.parameters()),lr=self.learning_rate, momentum=0.1)
+        self.scheduler_func=self.scheduler(self.optim_func, 'min')
     def balanced_weights(self,y_data):
         y_data = torch.tensor(y_data,dtype=torch.float32,device="cuda")
         self.loss_fn = nn.BCEWithLogitsLoss(pos_weight=(y_data==0.).sum()/y_data.sum())
-        del y_data
-
-    def transfer_learning(self):
-        #Transfer Learning
-        for param in self.model.parameters():
-            param.requires_grad = False
-        
-        self.model.fc = nn.Linear(1+(512 * Bottleneck.expansion), self.num_classes,device="cuda")
-        self.optim_func= self.optim_module(self.model.fc.parameters(),lr=self.learning_rate, momentum=0.1)
-        self.scheduler_func=self.scheduler(self.optim_func, 'min')
-
+        del y_data 
+    
     def load(self,model_dict_path):
         self.model.load_state_dict(torch.load(model_dict_path))
 
     def fit(self,posteriors,labels,fixation_nums):    
-        self.transfer_learning()
+        
         trainset = dataset(posteriors,labels,fixation_nums)
         del posteriors,labels,fixation_nums
         #DataLoader
@@ -97,7 +88,7 @@ class ModelLoader():
     
     
     def cross_val(self,posteriors,labels,fixation_nums,k_folds=5):
-        self.transfer_learning()
+        
         # For fold results
         results = {}
         tprs = {}
@@ -108,7 +99,7 @@ class ModelLoader():
         trainset = dataset(posteriors,labels,fixation_nums)
         del posteriors,labels,fixation_nums
         # Define the K-fold Cross Validator
-        kfold = StratifiedKFold(n_splits=k_folds, shuffle=True)
+        kfold = StratifiedKFold(n_splits=k_folds, shuffle=True,random_state=42)
             
         # Start print
         print('--------------------------------')

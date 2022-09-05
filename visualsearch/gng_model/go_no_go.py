@@ -12,15 +12,18 @@ class Net(models.ResNet):
 
         self.inplanes = 64
         self.conv1 = nn.Conv2d(1, self.inplanes, kernel_size=7, stride=2, padding=3, bias=False)
-        if path.exists(path.join(".","GNG_model_dict.pth")):
-            self.load_state_dict(torch.load(path.join(".","GNG_model_dict.pth")))
-        else:
-            #pretrained resnet-152 by default
-            state_dict = load_state_dict_from_url("https://download.pytorch.org/models/resnet152-394f9c45.pth")
-            #to make it work in grayscale images
-            conv1_weight = state_dict['conv1.weight']
-            state_dict['conv1.weight'] = conv1_weight.sum(dim=1, keepdim=True)
-            self.load_state_dict(state_dict)
+        #pretrained resnet-152 by default
+        state_dict = load_state_dict_from_url("https://download.pytorch.org/models/resnet152-394f9c45.pth")
+        #to make it work in grayscale images
+        conv1_weight = state_dict['conv1.weight']
+        state_dict['conv1.weight'] = conv1_weight.sum(dim=1, keepdim=True)
+        self.load_state_dict(state_dict) 
+        #Transfer Learning                   
+        for param in self.parameters():
+            param.requires_grad = False
+        self.linear = nn.Linear(512 * models.resnet.Bottleneck.expansion,64)
+        self.fc = nn.Linear(65, num_classes,device="cuda")
+        
     def forward(self, x, fixation_num):
         x = self.conv1(x)
         x = self.bn1(x)
@@ -33,7 +36,9 @@ class Net(models.ResNet):
         x = self.layer4(x)
 
         x = self.avgpool(x)
-        x = torch.cat((torch.flatten(x, 1),fixation_num[:,None]),1)
+        x = torch.flatten(x,1)
+        x = self.linear(x)
+        x = torch.cat((x,fixation_num[:,None]),1)
 
         x = self.fc(x)
 
