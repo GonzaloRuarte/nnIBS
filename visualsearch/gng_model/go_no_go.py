@@ -39,8 +39,9 @@ class Net(models.ResNet):
         x = self.avgpool(x)
         x = torch.flatten(x,1)
         x = self.reduction(x)
-        x = torch.cat((x,fixation_num[:,None]),1)
         x = self.avgpool2(x)
+        x = torch.cat((x,fixation_num[:,None]),1)
+        
         x = self.fc(x)
 
         return x
