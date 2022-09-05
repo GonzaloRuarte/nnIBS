@@ -108,7 +108,7 @@ class ModelLoader():
         trainset = dataset(posteriors,labels,fixation_nums)
         del posteriors,labels,fixation_nums
         # Define the K-fold Cross Validator
-        kfold = KFold(n_splits=k_folds, shuffle=True)
+        kfold = StratifiedKFold(n_splits=k_folds, shuffle=True)
             
         # Start print
         print('--------------------------------')
