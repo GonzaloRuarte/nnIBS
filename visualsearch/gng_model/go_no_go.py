@@ -21,7 +21,8 @@ class Net(models.ResNet):
         #Transfer Learning                   
         for param in self.parameters():
             param.requires_grad = False
-        self.linear = nn.Linear(512 * models.resnet.Bottleneck.expansion,64)
+        self.reduction = nn.Linear(512 * models.resnet.Bottleneck.expansion,64)
+        self.avgpool2 = nn.AdaptiveAvgPool1d(1)
         self.fc = nn.Linear(65, num_classes,device="cuda")
         
     def forward(self, x, fixation_num):
@@ -37,9 +38,9 @@ class Net(models.ResNet):
 
         x = self.avgpool(x)
         x = torch.flatten(x,1)
-        x = self.linear(x)
+        x = self.reduction(x)
         x = torch.cat((x,fixation_num[:,None]),1)
-
+        x = self.avgpool2(x)
         x = self.fc(x)
 
         return x
