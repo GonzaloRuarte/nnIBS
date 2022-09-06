@@ -1,0 +1,3 @@
+- output: resultados primera versión sin stratified k fold, posterior mas fijación
+- output2: resultados segunda version, le agregamos una reducción lineal más a 64 en vez de 2048 y ahi concatenamos la fijacion, con stratified k fold
+-
