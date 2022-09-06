@@ -125,7 +125,7 @@ class ModelLoader():
             
             # Init the neural network, only the FC is trained
 
-            self.model.fc.reset_parameters()
+            self.model.reset_tl_params()
             
             # Run the training loop for defined number of epochs
             
