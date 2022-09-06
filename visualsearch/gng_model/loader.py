@@ -21,7 +21,7 @@ class dataset(Dataset):
         
 
 class ModelLoader():
-    def __init__(self,num_classes=1,learning_rate=0.001,epochs=100,batch_size=32,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.SGD,scheduler= ReduceLROnPlateau):
+    def __init__(self,num_classes=1,learning_rate=0.001,epochs=50,batch_size=128,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.SGD,scheduler= ReduceLROnPlateau):
 
         self.model = Net(num_classes=num_classes)
         self.num_classes = num_classes
@@ -105,15 +105,19 @@ class ModelLoader():
         print('--------------------------------')
         
         # K-fold Cross Validation model evaluation
-        for fold, (train_ids, test_ids) in enumerate(kfold.split(posteriors,labels)):
+        kfold.get_n_splits(posteriors, labels) # arma los folds a partir de los datos
+        fold = 0
+        for train_index, test_index in kfold.split(posteriors, labels):
             
             # Print
             print(f'FOLD {fold}')
+
+            fold+=1
             print('--------------------------------')
             
             # Sample elements randomly from a given list of ids, no replacement.
-            train_subsampler = SubsetRandomSampler(train_ids)
-            test_subsampler = SubsetRandomSampler(test_ids)
+            train_subsampler = SubsetRandomSampler(train_index)
+            test_subsampler = SubsetRandomSampler(test_index)
             
             # Define data loaders for training and testing data in this fold
             trainloader = DataLoader(
