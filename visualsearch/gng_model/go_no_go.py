@@ -45,3 +45,8 @@ class Net(models.ResNet):
         x = self.fc(x)
 
         return x
+
+    def reset_tl_params(self):
+        self.reduction.reset_parameters()
+        self.avgpool2.reset_parameters()
+        self.fc.reset_parameters()
