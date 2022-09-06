@@ -21,8 +21,11 @@ class Net(models.ResNet):
         #Transfer Learning                   
         for param in self.parameters():
             param.requires_grad = False
-        self.reduction = nn.Linear(512 * models.resnet.Bottleneck.expansion,64)
-        self.avgpool2 = nn.AvgPool1d(1)
+        self.conv2 = nn.Conv2d(2048, 512, kernel_size=1, stride=1, padding=0, bias=False)
+        self.avgpool2 = nn.AvgPool2d((1,1))
+        self.conv3 = nn.Conv2d(512, 64, kernel_size=1, stride=1, padding=0, bias=False)
+        self.avgpool3 = nn.AvgPool2d((1,1))
+        #self.reduction = nn.Linear(512 * models.resnet.Bottleneck.expansion,64)
         self.fc = nn.Linear(65, num_classes,device="cuda")
         
     def forward(self, x, fixation_num):
@@ -37,16 +40,17 @@ class Net(models.ResNet):
         x = self.layer4(x)
 
         x = self.avgpool(x)
-        x = torch.flatten(x,1)
-        x = self.reduction(x)
+        x = self.conv2(x)
         x = self.avgpool2(x)
-        x = torch.cat((x,fixation_num[:,None]),1)
+        x = self.conv3(x)
+        x = self.avgpool3(x)         
         
+        x = torch.flatten(x,1)
+        x = torch.cat((x,fixation_num[:,None]),1)
         x = self.fc(x)
 
         return x
-
     def reset_tl_params(self):
-        self.reduction.reset_parameters()
-        self.avgpool2.reset_parameters()
+        self.conv2.reset_parameters()
+        self.conv3.reset_parameters()
         self.fc.reset_parameters()
