@@ -128,7 +128,7 @@ class ModelLoader():
                             self.batch_size, sampler=test_subsampler)
             
             # Init the neural network, only the FC is trained
-
+            self.model.train()
             self.model.reset_tl_params()
             
             # Run the training loop for defined number of epochs
@@ -140,7 +140,7 @@ class ModelLoader():
 
                 # Set current loss value
                 current_loss = 0.0
-                self.model.train()
+                
                 # Iterate over the DataLoader for training data
                 for j,(x_train,y_train,fixation_num_train) in enumerate(trainloader):
 
