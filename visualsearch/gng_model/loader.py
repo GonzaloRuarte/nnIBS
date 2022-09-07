@@ -6,6 +6,7 @@ from torch.optim.lr_scheduler import ReduceLROnPlateau
 from sklearn.model_selection import StratifiedKFold
 from numpy import expand_dims
 from go_no_go import Net
+import random
 
 class dataset(Dataset):
     def __init__(self,x,y,fixation_nums):
@@ -88,18 +89,20 @@ class ModelLoader():
     
     
     def cross_val(self,posteriors,labels,fixation_nums,k_folds=5):
-        
+        seed = 42
+
+        random.seed(seed)
         # For fold results
         results = {}
         tprs = {}
         tnrs = {}
         # Set fixed random number seed
-        torch.manual_seed(42)
-        self.balanced_weights(labels)
+        torch.manual_seed(seed)
+        
         trainset = dataset(posteriors,labels,fixation_nums)
         # del posteriors,labels,fixation_nums
         # Define the K-fold Cross Validator
-        kfold = StratifiedKFold(n_splits=k_folds, shuffle=True,random_state=42)
+        kfold = StratifiedKFold(n_splits=k_folds, shuffle=True,random_state=seed)
             
         # Start print
         print('--------------------------------')
@@ -127,9 +130,14 @@ class ModelLoader():
                             trainset,
                             self.batch_size, sampler=test_subsampler)
             
-            # Init the neural network, only the FC is trained
+            # Init the neural network, only the last layers are trained
+            self.model = Net(num_classes=self.num_classes)   
+            self.model = self.model.to("cuda")
             self.model.train()
             self.model.reset_tl_params()
+            self.balanced_weights(labels)
+            self.optim_func= self.optim_module(filter(lambda p: p.requires_grad, self.model.parameters()),lr=0.001, momentum=0.1)
+            self.scheduler_func=self.scheduler(self.optim_func, 'min')
             
             # Run the training loop for defined number of epochs
             
