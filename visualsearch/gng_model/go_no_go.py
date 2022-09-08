@@ -24,9 +24,11 @@ class Net(models.ResNet):
         self.conv2 = nn.Conv2d(2048, 512, kernel_size=1, stride=1, padding=0, bias=False)
         self.avgpool2 = nn.AvgPool2d((1,1))
         self.conv3 = nn.Conv2d(512, 64, kernel_size=1, stride=1, padding=0, bias=False)
-        self.avgpool3 = nn.AvgPool2d((1,1))
+        
         #self.reduction = nn.Linear(512 * models.resnet.Bottleneck.expansion,64)
         self.fc = nn.Linear(65, num_classes,device="cuda")
+        self.bn2 = nn.BatchNorm2d(512)
+        self.bn3 = nn.BatchNorm2d(64)
         
     def forward(self, x, fixation_num):
         x = self.conv1(x)
@@ -39,12 +41,13 @@ class Net(models.ResNet):
         x = self.layer3(x)
         x = self.layer4(x)
 
-        x = self.avgpool(x)
+
         x = self.conv2(x)
-        x = self.avgpool2(x)
-        x = self.conv3(x)
-        x = self.avgpool3(x)         
-        
+        x = self.bn2(x)
+        x = self.conv3(x)                
+        x = self.bn3(x)
+        x = self.relu(x)
+        x = self.avgpool2(x) 
         x = torch.flatten(x,1)
         x = torch.cat((x,fixation_num[:,None]),1)
         x = self.fc(x)
