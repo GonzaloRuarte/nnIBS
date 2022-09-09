@@ -42,8 +42,8 @@ class Net(models.ResNet):
         x = self.layer4(x)
 
 
-        x = self.conv2(x)
-        x = self.bn2(x)
+        #x = self.conv2(x)
+        #x = self.bn2(x)
         x = self.conv3(x)                
         x = self.bn3(x)
         x = self.relu(x)
