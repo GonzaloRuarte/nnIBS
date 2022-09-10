@@ -89,7 +89,7 @@ class ModelLoader():
     
     
     def cross_val(self,posteriors,labels,fixation_nums,k_folds=5):
-        seed = 42
+        seed = 321
 
         random.seed(seed)
         # For fold results

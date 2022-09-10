@@ -25,8 +25,7 @@ class Net(models.ResNet):
         self.avgpool2 = nn.AvgPool2d((1,1))
         self.conv3 = nn.Conv2d(64, 32, kernel_size=7, stride=2, padding=3, bias=False)
         
-        #self.reduction = nn.Linear(512 * models.resnet.Bottleneck.expansion,64)
-        self.fc = nn.Linear(129, num_classes,device="cuda")
+        self.fc = nn.Linear(128, num_classes,device="cuda")
         self.bn2 = nn.BatchNorm2d(64)
         self.bn3 = nn.BatchNorm2d(32)
         
@@ -54,7 +53,7 @@ class Net(models.ResNet):
         x = self.avgpool2(x) 
         x = torch.flatten(x,1)
 
-        x = torch.cat((x,fixation_num[:,None]),1)
+        #x = torch.cat((x,fixation_num[:,None]),1)
         x = self.fc(x)
 
         return x
