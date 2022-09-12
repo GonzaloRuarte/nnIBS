@@ -37,7 +37,7 @@ class ModelLoader():
         self.scheduler_func=self.scheduler(self.optim_func, 'min')
     def balanced_weights(self,y_data):
         y_data = torch.tensor(y_data,dtype=torch.float32,device="cuda")
-        self.loss_fn = nn.BCEWithLogitsLoss(pos_weight=(y_data==0.).sum()/y_data.sum())
+        self.loss_fn = nn.BCEWithLogitsLoss(pos_weight=2*(y_data==0.).sum()/(y_data.sum()))
         del y_data 
     
     def load(self,model_dict_path):
