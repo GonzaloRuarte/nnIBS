@@ -201,7 +201,7 @@ class ModelLoader():
             # Saving the model
             save_path = f'./gng-fold-{fold}.pth'
             torch.save(self.model.state_dict(), save_path)
-            np.savez_compressed(f"./gng-outputs-{fold}.npz",outputs=test_index)
+            
             # Evaluation for this fold
             correct, total, true_positives, true_negatives, positives, negatives = 0, 0, 0, 0, 0, 0
             with torch.no_grad():
@@ -230,7 +230,7 @@ class ModelLoader():
             print('Accuracy in testing set for fold %d: %.3f %%' % (fold, 100.0 * correct / total))
             print('TPR in testing set for fold %d: %.3f %%' % (fold, 100.0 * true_positives / positives))
             print('TNR in testing set for fold %d: %.3f %%' % (fold, 100.0 * true_negatives / negatives))
-
+            np.savez_compressed(f"./gng-outputs-{fold}.npz",outputs=test_index)
 
 
             print('--------------------------------')
