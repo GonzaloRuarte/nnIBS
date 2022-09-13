@@ -159,7 +159,7 @@ class ModelLoader():
                     # Perform forward pass
                     outputs = self.model(x_train,fixation_num_train)
                     predictions = (torch.sigmoid(outputs) >= 0.5)
-                    total_outputs = np.append(total_outputs,outputs.cpu().detach().numpy())
+                    
                     total += y_train.size(0)
                     positives += (y_train ==1).sum().item()
                     negatives += (y_train ==0).sum().item()
@@ -211,10 +211,10 @@ class ModelLoader():
 
                     # Generate outputs
                     outputs = self.model(x_test,fixation_num_test)
-
+                    
                     # Set total and correct
                     predictions = (torch.sigmoid(outputs) >= 0.5)
-
+                    total_outputs = np.append(total_outputs,torch.sigmoid(outputs).cpu().detach().numpy())
                     total += y_test.size(0)
 
                     positives += (y_test ==1).sum().item()
