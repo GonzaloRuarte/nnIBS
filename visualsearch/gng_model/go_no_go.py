@@ -24,11 +24,11 @@ class Net(models.ResNet):
         self.conv2 = nn.Conv2d(512, 64, kernel_size=7, stride=2, padding=3, bias=False)
         self.avgpool2 = nn.AvgPool2d((1,1))
         self.conv3 = nn.Conv2d(64, 32, kernel_size=7, stride=2, padding=3, bias=False)
-        
-        self.fc = nn.Linear(129, num_classes,device="cuda")
+        self.fc2 = nn.Linear(33,num_classes,device="cuda")
+        self.fc = nn.Linear(128, 32,device="cuda")
         self.bn2 = nn.BatchNorm2d(64)
         self.bn3 = nn.BatchNorm2d(32)
-        
+
     def forward(self, x, fixation_num):
 
         x = nn.functional.interpolate(x,size=(224,224))
@@ -47,17 +47,19 @@ class Net(models.ResNet):
         x = self.conv2(x)
         x = self.bn2(x)
 
-        x = self.conv3(x)                
+        x = self.conv3(x)
         x = self.bn3(x)
         x = self.relu(x)
-        x = self.avgpool2(x) 
+        x = self.avgpool2(x)
         x = torch.flatten(x,1)
+        x = self.fc(x)
 
         x = torch.cat((x,fixation_num[:,None]),1)
-        x = self.fc(x)
+        x = self.fc2(x)
 
         return x
     def reset_tl_params(self):
         self.conv2.reset_parameters()
         self.conv3.reset_parameters()
         self.fc.reset_parameters()
+        self.fc2.reset_parameters()
