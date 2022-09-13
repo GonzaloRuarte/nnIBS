@@ -7,6 +7,7 @@ from sklearn.model_selection import StratifiedKFold
 from numpy import expand_dims
 from go_no_go import Net
 import random
+import numpy as np
 
 class dataset(Dataset):
     def __init__(self,x,y,fixation_nums):
@@ -140,7 +141,7 @@ class ModelLoader():
             self.scheduler_func=self.scheduler(self.optim_func, 'min')
             
             # Run the training loop for defined number of epochs
-            
+            total_outputs= np.empty(shape=test_index.size)
             for epoch in range(self.epochs):
                 correct, total, true_positives, true_negatives, positives, negatives = 0, 0, 0, 0, 0, 0
                 # Print epoch
@@ -158,7 +159,7 @@ class ModelLoader():
                     # Perform forward pass
                     outputs = self.model(x_train,fixation_num_train)
                     predictions = (torch.sigmoid(outputs) >= 0.5)
-
+                    total_outputs[test_index] = outputs.cpu().detach().numpy()
                     total += y_train.size(0)
                     positives += (y_train ==1).sum().item()
                     negatives += (y_train ==0).sum().item()
@@ -200,7 +201,7 @@ class ModelLoader():
             # Saving the model
             save_path = f'./gng-fold-{fold}.pth'
             torch.save(self.model.state_dict(), save_path)
-
+            np.savez_compressed(f"./gng-outputs-{fold}.npz",outputs=test_index)
             # Evaluation for this fold
             correct, total, true_positives, true_negatives, positives, negatives = 0, 0, 0, 0, 0, 0
             with torch.no_grad():
