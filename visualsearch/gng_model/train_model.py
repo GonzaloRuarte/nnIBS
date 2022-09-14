@@ -20,7 +20,7 @@ if __name__ == "__main__":
     tp_fixation_nums = tp_data["fixations"]
     tp_labels = tp_data["labels"]
         
-    tp_posteriors = np.expand_dims(tp_posteriors, axis=1) #para incorporar el canal (que es uno solo en este caso)
+    
 
     # load data target absent trials
 #    try:
@@ -32,7 +32,7 @@ if __name__ == "__main__":
     ta_fixation_nums = ta_data["fixations"]
     ta_labels = ta_data["labels"]
         
-    ta_posteriors = np.expand_dims(ta_posteriors, axis=1) #para incorporar el canal (que es uno solo en este caso)
+    
 
     
     posteriors = np.concatenate((tp_posteriors,ta_posteriors),axis=0)
