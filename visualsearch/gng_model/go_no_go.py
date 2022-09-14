@@ -5,7 +5,7 @@ from os import path
 from torchvision._internally_replaced_utils import load_state_dict_from_url
 
 class RNNModel(nn.Module):
-    def __init__(self, input_dim, hidden_dim, layer_dim, output_dim, dropout_prob):
+    def __init__(self, hidden_dim, layer_dim, dropout_prob, input_dim=768, num_classes = 1):
         super(RNNModel, self).__init__()
 
         # Defining the number of layers and the nodes in each layer
@@ -17,9 +17,11 @@ class RNNModel(nn.Module):
             input_dim, hidden_dim, layer_dim, batch_first=True, dropout=dropout_prob
         )
         # Fully connected layer
-        self.fc = nn.Linear(hidden_dim, output_dim)
+        self.fc = nn.Linear(hidden_dim, num_classes)
 
     def forward(self, x):
+        
+        x = torch.flatten(x,1)
         # Initializing hidden state for first input with zeros
         h0 = torch.zeros(self.layer_dim, x.size(0), self.hidden_dim).requires_grad_()
 
@@ -55,12 +57,13 @@ class Net(models.ResNet):
         for param in self.parameters():
             param.requires_grad = False
         self.conv2 = nn.Conv2d(512, 64, kernel_size=7, stride=2, padding=3, bias=False)
-        self.avgpool2 = nn.AvgPool2d((1,1))
-        self.conv3 = nn.Conv2d(64, 32, kernel_size=7, stride=2, padding=3, bias=False)
-        self.fc2 = nn.Linear(33,num_classes,device="cuda")
-        self.fc = nn.Linear(128, 32,device="cuda")
         self.bn2 = nn.BatchNorm2d(64)
+        self.conv3 = nn.Conv2d(64, 32, kernel_size=7, stride=2, padding=3, bias=False)
         self.bn3 = nn.BatchNorm2d(32)
+        self.avgpool2 = nn.AvgPool2d((1,1))        
+        self.fc = nn.Linear(128, 32,device="cuda")
+        self.fc2 = nn.Linear(33,num_classes,device="cuda")
+        
 
     def forward(self, x, fixation_num):
         x = torch.unsqueeze(x, axis=1) #para incorporar el canal (que es uno solo en este caso)
