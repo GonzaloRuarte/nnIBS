@@ -149,7 +149,7 @@ class ModelLoader():
         
         fold = 0
 
-        for train_index, test_index in kfold.split(np.zeros(trainset.length), trainset.get_labels().cpu()):
+        for train_index, test_index in kfold.split(np.zeros(trainset.length), trainset.get_labels().cpu().detach().numpy()):
 
             # Print
             print(f'FOLD {fold}')
