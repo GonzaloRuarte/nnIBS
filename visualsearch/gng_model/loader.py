@@ -55,7 +55,7 @@ class SeqDataset(Dataset):
         return self.length
 
     def get_labels(self):
-        return self.y[self.intervals_indexes.T[0]].cpu()
+        return self.y[self.intervals_indexes.T[0]]
 
 
 class ModelLoader():
@@ -74,10 +74,9 @@ class ModelLoader():
         self.optim_func= self.optim_module(filter(lambda p: p.requires_grad, self.model.parameters()),lr=self.learning_rate, momentum=0.1)
         self.scheduler_func=self.scheduler(self.optim_func, 'min')
         self.dataset = dataset
-    def balanced_weights(self,y_data):
-        y_data = torch.tensor(y_data,dtype=torch.float32,device="cuda")
+    def balanced_weights(self,y_data):        
         self.loss_fn = nn.BCEWithLogitsLoss(pos_weight=(y_data==0.).sum()/(y_data.sum()))
-        del y_data 
+
     
     def load(self,model_dict_path):
         self.model.load_state_dict(torch.load(model_dict_path))
@@ -150,7 +149,7 @@ class ModelLoader():
         
         fold = 0
 
-        for train_index, test_index in kfold.split(np.zeros(trainset.length), trainset.get_labels()):
+        for train_index, test_index in kfold.split(np.zeros(trainset.length), trainset.get_labels().cpu()):
 
             # Print
             print(f'FOLD {fold}')
