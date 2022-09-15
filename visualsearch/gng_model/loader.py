@@ -180,6 +180,8 @@ class ModelLoader():
             
             # Run the training loop for defined number of epochs
             total_outputs= np.empty(shape=test_index.size)
+            fixation_num_updated= np.empty(shape=test_index.size)
+            labels_updated= np.empty(shape=test_index.size)
             for epoch in range(self.epochs):
                 correct, total, true_positives, true_negatives, positives, negatives = 0, 0, 0, 0, 0, 0
                 # Print epoch
@@ -247,6 +249,8 @@ class ModelLoader():
                 # Iterate over the test data and generate predictions
                 for j,(x_test,y_test,fixation_num_test) in enumerate(testloader):
 
+                    fixation_num_updated = np.append(fixation_num_updated,fixation_num_test.cpu())
+                    labels_updated = np.append(labels_updated,y_test.cpu())
                     # Generate outputs
                     outputs = self.model(x_test,fixation_num_test)
                     
@@ -268,7 +272,8 @@ class ModelLoader():
             print('Accuracy in testing set for fold %d: %.3f %%' % (fold, 100.0 * correct / total))
             print('TPR in testing set for fold %d: %.3f %%' % (fold, 100.0 * true_positives / positives))
             print('TNR in testing set for fold %d: %.3f %%' % (fold, 100.0 * true_negatives / negatives))
-            np.savez_compressed(f"./gng-outputs-{fold}.npz",outputs=total_outputs)
+            np.savez_compressed(f"./gng-outputs-{fold}.npz",outputs=total_outputs,labels=labels_updated,fixations=fixation_num_updated)
+
 
 
             print('--------------------------------')
