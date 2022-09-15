@@ -20,12 +20,49 @@ class dataset(Dataset):
         return self.x[idx],self.y[idx],self.fixation_nums[idx]
     def __len__(self):
         return self.length
+    def get_labels(self):
+        return self.y
+   
+class SeqDataset(Dataset):
+    def __init__(self,x,y,fixation_nums):
+        #obtengo los índices de comienzo y fin de scanpath
+        sequence_start = np.where(fixation_nums == 1)[0]
+        sequence_end = np.append(sequence_start[1:]-1,[fixation_nums.shape[0]-1])
+        sequence_intervals = np.array([sequence_start,sequence_end])
+        #filtro los de tamaño 1
+        non_size_1_intervals = np.where(sequence_intervals[0,:] != sequence_intervals[1,:])[0]
+        sequence_intervals = np.array([sequence_intervals[0,:][non_size_1_intervals],sequence_intervals[1,:][non_size_1_intervals]]).T #agrupo de a pares (principio, fin)
+
+        #obtengo los intervalos completos y después tomo de a pares consecutivos
+        #por ej si tengo un scanpath de 4 fijaciones que arranca en el índice i obtengo los pares (i,i+1), (i+1,i+2), (i+2,i+3)  
+        consecutive_elements = lambda x: [[x[i], x[i + 1]] for i in range(len(x) - 1)]
+        get_paired_sequences = lambda x: np.array(consecutive_elements(np.linspace(x[0],x[-1],1+x[-1]-x[0],dtype=np.int32)))
         
+        full_intervals = np.concatenate(list(map(get_paired_sequences,sequence_intervals)))
+
+        self.x = torch.tensor(x,dtype=torch.float32,device="cuda")
+        self.y = torch.tensor(y,dtype=torch.float32,device="cuda")
+        self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.float32,device="cuda")
+        self.intervals_indexes = full_intervals
+        self.length = self.intervals_indexes.shape[0]
+        print(self.length)
+    def __getitem__(self,idx):
+        interval = self.intervals_indexes[idx]
+        #la etiqueta es la misma para todo el intervalo
+        return self.x[interval[0]:interval[1]+1],self.y[interval[0]],self.fixation_nums[interval[0]:interval[1]+1]
+
+    def __len__(self):
+        return self.length
+
+    def get_labels(self):
+        return self.y[self.intervals_indexes.T[0]].cpu()
+
 
 class ModelLoader():
-    def __init__(self,num_classes=1,learning_rate=0.001,epochs=50,batch_size=128,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.SGD,scheduler= ReduceLROnPlateau):
+    def __init__(self,num_classes=1,learning_rate=0.001,epochs=50,batch_size=128,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.SGD,scheduler= ReduceLROnPlateau,model=Net,dataset=dataset):
 
-        self.model = Net(num_classes=num_classes)
+        self.model_class = model
+        self.model = model(num_classes=num_classes)
         self.num_classes = num_classes
         self.learning_rate = learning_rate
         self.epochs = epochs
@@ -36,6 +73,7 @@ class ModelLoader():
         self.scheduler=scheduler
         self.optim_func= self.optim_module(filter(lambda p: p.requires_grad, self.model.parameters()),lr=self.learning_rate, momentum=0.1)
         self.scheduler_func=self.scheduler(self.optim_func, 'min')
+        self.dataset = dataset
     def balanced_weights(self,y_data):
         y_data = torch.tensor(y_data,dtype=torch.float32,device="cuda")
         self.loss_fn = nn.BCEWithLogitsLoss(pos_weight=(y_data==0.).sum()/(y_data.sum()))
@@ -100,7 +138,7 @@ class ModelLoader():
         # Set fixed random number seed
         torch.manual_seed(seed)
         
-        trainset = dataset(posteriors,labels,fixation_nums)
+        trainset = self.dataset(posteriors,labels,fixation_nums)
         # del posteriors,labels,fixation_nums
         # Define the K-fold Cross Validator
         kfold = StratifiedKFold(n_splits=k_folds, shuffle=True,random_state=seed)
@@ -109,10 +147,11 @@ class ModelLoader():
         print('--------------------------------')
         
         # K-fold Cross Validation model evaluation
-        kfold.get_n_splits(posteriors, labels) # arma los folds a partir de los datos
+        
         fold = 0
-        for train_index, test_index in kfold.split(posteriors, labels):
-            
+
+        for train_index, test_index in kfold.split(np.zeros(trainset.length), trainset.get_labels()):
+
             # Print
             print(f'FOLD {fold}')
 
@@ -132,11 +171,11 @@ class ModelLoader():
                             self.batch_size, sampler=test_subsampler)
             
             # Init the neural network, only the last layers are trained
-            self.model = Net(num_classes=self.num_classes)   
+            self.model = self.model_class(num_classes=self.num_classes)   
             self.model = self.model.to("cuda")
             self.model.train()
             self.model.reset_tl_params()
-            self.balanced_weights(labels)
+            self.balanced_weights(trainset.get_labels())
             self.optim_func= self.optim_module(filter(lambda p: p.requires_grad, self.model.parameters()),lr=0.001, momentum=0.1)
             self.scheduler_func=self.scheduler(self.optim_func, 'min')
             

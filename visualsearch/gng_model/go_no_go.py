@@ -5,7 +5,7 @@ from os import path
 from torchvision._internally_replaced_utils import load_state_dict_from_url
 
 class RNNModel(nn.Module):
-    def __init__(self, hidden_dim, layer_dim, dropout_prob, input_dim=768, num_classes = 1):
+    def __init__(self, hidden_dim= 64, layer_dim = 3, dropout_prob= 0.2, input_dim=768, num_classes = 1):
         super(RNNModel, self).__init__()
 
         # Defining the number of layers and the nodes in each layer
@@ -17,13 +17,13 @@ class RNNModel(nn.Module):
             input_dim, hidden_dim, layer_dim, batch_first=True, dropout=dropout_prob
         )
         # Fully connected layer
-        self.fc = nn.Linear(hidden_dim, num_classes)
+        self.fc = nn.Linear(hidden_dim, num_classes,device="cuda")
 
-    def forward(self, x):
+    def forward(self, x, fixation_num):
         
-        x = torch.flatten(x,1)
+        x = torch.flatten(x,2)
         # Initializing hidden state for first input with zeros
-        h0 = torch.zeros(self.layer_dim, x.size(0), self.hidden_dim).requires_grad_()
+        h0 = torch.zeros(self.layer_dim, x.size(0), self.hidden_dim,device="cuda").requires_grad_()
 
         # Forward propagation by passing in the input and hidden state into the model
         out, h0 = self.rnn(x, h0.detach())
@@ -35,6 +35,9 @@ class RNNModel(nn.Module):
         # Convert the final state to our desired output shape (batch_size, output_dim)
         out = self.fc(out)
         return out
+    def reset_tl_params(self):
+        self.rnn.reset_parameters()
+        self.fc.reset_parameters()
 
 
 
@@ -61,8 +64,8 @@ class Net(models.ResNet):
         self.conv3 = nn.Conv2d(64, 32, kernel_size=7, stride=2, padding=3, bias=False)
         self.bn3 = nn.BatchNorm2d(32)
         self.avgpool2 = nn.AvgPool2d((1,1))        
-        self.fc = nn.Linear(128, 32,device="cuda")
-        self.fc2 = nn.Linear(33,num_classes,device="cuda")
+        self.fc = nn.Linear(128, 32)
+        self.fc2 = nn.Linear(33,num_classes)
         
 
     def forward(self, x, fixation_num):
