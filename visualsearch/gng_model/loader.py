@@ -149,7 +149,7 @@ class ModelLoader():
         
         fold = 0
 
-        for train_index, test_index in kfold.split(np.zeros(trainset.length), trainset.get_labels().cpu()):
+        for train_index, test_index in kfold.split(np.zeros(trainset.length), trainset.get_labels().cpu().detach().numpy()):
 
             # Print
             print(f'FOLD {fold}')
@@ -249,8 +249,8 @@ class ModelLoader():
                 # Iterate over the test data and generate predictions
                 for j,(x_test,y_test,fixation_num_test) in enumerate(testloader):
 
-                    fixation_num_updated = np.append(fixation_num_updated,fixation_num_test.cpu())
-                    labels_updated = np.append(labels_updated,y_test.cpu())
+                    fixation_num_updated = np.append(fixation_num_updated,fixation_num_test.cpu().detach().numpy())
+                    labels_updated = np.append(labels_updated,y_test.cpu().detach().numpy())
                     # Generate outputs
                     outputs = self.model(x_test,fixation_num_test)
                     
