@@ -44,8 +44,7 @@ class SeqDataset(Dataset):
         self.y = torch.tensor(y,dtype=torch.float32,device="cuda")
         self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.float32,device="cuda")
         self.intervals_indexes = full_intervals
-        self.length = self.intervals_indexes.shape[0]
-        print(self.length)
+        self.length = self.intervals_indexes.shape[0]  
     def __getitem__(self,idx):
         interval = self.intervals_indexes[idx]
         #la etiqueta es la misma para todo el intervalo
