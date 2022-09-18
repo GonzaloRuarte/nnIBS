@@ -126,7 +126,7 @@ class ModelLoader():
     def predict(self,posteriors,labels,fixation_nums):
         testset = dataset(posteriors,labels,fixation_nums)
         del posteriors,labels,fixation_nums
-        self.load(self,"gng-fold-1.pth")
+        self.load("gng-fold-1.pth")
 
 
         #DataLoader
