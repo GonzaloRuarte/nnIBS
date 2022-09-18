@@ -31,6 +31,7 @@ class VisualSearcher:
                 Output path     (string)        : folder path where scanpaths and probability maps will be stored
         """
         self.max_saccades             = config['max_saccades']
+        self.init_max_saccades        = config['max_saccades']
         self.grid                     = grid
         self.scale_factor             = config['scale_factor']
         self.additive_shift           = config['additive_shift']
@@ -70,8 +71,8 @@ class VisualSearcher:
             print(image_name + ': prior image\'s dimensions don\'t match dataset\'s dimensions')
             return {}
         # Sum probabilities
-        image_prior = prior.sum(image_prior, self.max_saccades)
-      
+        image_prior = prior.sum(image_prior, self.init_max_saccades)
+
         gng_model = loader.ModelLoader()
         gng_model.transfer_learning()
         gng_model.load(path.abspath("visualsearch/gng_model/gng-fold-0.pth"))
@@ -131,8 +132,8 @@ class VisualSearcher:
                     break
 
             # If the limit has been reached, don't compute the next fixation
-
-            
+          
+                        
             target_similarities = np.array(list(map(lambda x: x.at_fixation(current_fixation),target_similarity_map)))
             minimum_entropy_likelihood_index = np.argmin(list(map(lambda x : entropy(x.flatten()),target_similarities)))
             if self.history_size != None:
@@ -151,7 +152,7 @@ class VisualSearcher:
             if not gng_model.continue_search(posterior,[fixation_number+1]):
                 break
             fixations[fixation_number + 1] = self.search_model.next_fixation(posterior, image_name, fixation_number, self.output_path)
-            
+
         end = time.time()
 
         if target_found:
