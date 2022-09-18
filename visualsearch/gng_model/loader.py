@@ -178,9 +178,9 @@ class ModelLoader():
             self.scheduler_func=self.scheduler(self.optim_func, 'min')
             
             # Run the training loop for defined number of epochs
-            total_outputs= np.empty()
-            fixation_num_updated= np.empty()
-            labels_updated= np.empty()
+            total_outputs= np.empty([])
+            fixation_num_updated= np.empty([])
+            labels_updated= np.empty([])
             for epoch in range(self.epochs):
                 correct, total, true_positives, true_negatives, positives, negatives = 0, 0, 0, 0, 0, 0
                 # Print epoch
