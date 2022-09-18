@@ -123,7 +123,52 @@ class ModelLoader():
                 print(f'Reset trainable parameters of layer = {layer}')
                 layer.reset_parameters()
 
-    
+    def predict(self,posteriors,labels,fixation_nums):
+        testset = dataset(posteriors,labels,fixation_nums)
+        del posteriors,labels,fixation_nums
+        self.load(self,"gng-fold-1.pth")
+
+
+        #DataLoader
+        testloader = DataLoader(testset,self.batch_size,shuffle=False)
+        self.model.eval()
+
+        correct, total, true_positives, true_negatives, positives, negatives = 0, 0, 0, 0, 0, 0
+        with torch.no_grad():
+
+            # Iterate over the test data and generate predictions
+            for j,(x_test,y_test,fixation_num_test) in enumerate(testloader):
+
+                fixation_num_updated = np.append(fixation_num_updated,fixation_num_test.cpu().detach().numpy())
+                labels_updated = np.append(labels_updated,y_test.cpu().detach().numpy())
+                # Generate outputs
+                outputs = self.model(x_test,fixation_num_test)
+                
+                # Set total and correct
+                predictions = (torch.sigmoid(outputs) >= 0.5)
+                total_outputs = np.append(total_outputs,torch.sigmoid(outputs).cpu().detach().numpy())
+                total += y_test.size(0)
+
+                positives += (y_test ==1).sum().item()
+                negatives += (y_test ==0).sum().item()
+
+                correct += (predictions.flatten() == y_test).sum().item()
+                true_positives += torch.logical_and(predictions.flatten(),y_test).sum().item()
+                true_negatives += torch.logical_and(torch.logical_not(predictions.flatten()),torch.logical_not(y_test)).sum().item()
+                
+                del predictions, x_test, y_test, fixation_num_test, outputs
+
+            # Print accuracy
+            print('Accuracy in testing set: %.3f %%' % (100.0 * correct / total))
+            print('TPR in testing set: %.3f %%' % (100.0 * true_positives / positives))
+            if negatives > 0:
+                print('TNR in testing set: %.3f %%' % (100.0 * true_negatives / negatives))
+
+
+
+
+
+
     
     def cross_val(self,posteriors,labels,fixation_nums,k_folds=5):
         seed = 321
