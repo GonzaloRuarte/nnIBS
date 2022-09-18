@@ -139,14 +139,11 @@ class ModelLoader():
             # Iterate over the test data and generate predictions
             for j,(x_test,y_test,fixation_num_test) in enumerate(testloader):
 
-                fixation_num_updated = np.append(fixation_num_updated,fixation_num_test.cpu().detach().numpy())
-                labels_updated = np.append(labels_updated,y_test.cpu().detach().numpy())
                 # Generate outputs
                 outputs = self.model(x_test,fixation_num_test)
                 
                 # Set total and correct
                 predictions = (torch.sigmoid(outputs) >= 0.5)
-                total_outputs = np.append(total_outputs,torch.sigmoid(outputs).cpu().detach().numpy())
                 total += y_test.size(0)
 
                 positives += (y_test ==1).sum().item()
