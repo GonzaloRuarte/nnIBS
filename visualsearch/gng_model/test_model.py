@@ -18,7 +18,7 @@ if __name__ == "__main__":
     posteriors = np.concatenate((tp_posteriors,tp_posteriors),axis=0)
     labels = np.concatenate((tp_labels,tp_labels),axis=0)
     fixation_nums = np.concatenate((tp_fixation_nums,tp_fixation_nums),axis=0)
-    del tp_posteriors,tp_labels,tp_posteriors,tp_labels,tp_fixation_nums,tp_fixation_nums
+    del tp_posteriors,tp_labels,tp_fixation_nums
 
     model_loader = loader.ModelLoader()
     model_loader.predict(posteriors,labels,fixation_nums)
