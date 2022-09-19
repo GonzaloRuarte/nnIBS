@@ -74,8 +74,8 @@ class VisualSearcher:
         image_prior = prior.sum(image_prior, self.init_max_saccades)
 
         gng_model = loader.ModelLoader()
-        gng_model.transfer_learning()
-        gng_model.load(path.abspath("visualsearch/gng_model/gng-fold-0.pth"))
+
+        gng_model.load(path.abspath("visualsearch/gng_model/gng-fold-1.pth"))
         # Convert target bounding box to grid cells
         if target_bbox != None:
             target_bbox_in_grid = np.empty(len(target_bbox), dtype=np.int)
