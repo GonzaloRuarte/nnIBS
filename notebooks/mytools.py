@@ -237,7 +237,7 @@ def plot_image_responses(image_name, data_path, resp_path, y_correction = False,
     
     # plot image and overlay target box
     img = cv2.imread(os.path.join(data_path, 'images',image_name))
-    subjs_response = load_human_scanpaths(os.path.join(resp_path, 'human_scanpaths'))
+    subjs_response = load_human_scanpaths(os.path.join(resp_path, 'human_scanpaths'), human_subject='all')
     ty, tx = subjs_response[list(subjs_response.keys())[0]][image_name]['target_bbox'][:2]
     
     if ax is None:
