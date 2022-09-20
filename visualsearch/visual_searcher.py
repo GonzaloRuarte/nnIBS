@@ -149,7 +149,7 @@ class VisualSearcher:
             marginal  = np.sum(likelihood_times_prior)
             
             posterior = likelihood_times_prior / marginal            
-            if not gng_model.continue_search(posterior,[fixation_number+1]):
+            if not gng_model.continue_search(posterior,fixation_number+1):
                 break
             fixations[fixation_number + 1] = self.search_model.next_fixation(posterior, image_name, fixation_number, self.output_path)
 
