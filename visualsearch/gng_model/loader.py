@@ -290,8 +290,7 @@ class ModelLoader():
                     
                     positives += (y_train ==1).sum().item()
                     negatives += (y_train ==0).sum().item()
-                    total += positives + negatives
-                    correct += (predictions.flatten() == y_train).sum().item()
+                    
                     true_positives += torch.logical_and(predictions.flatten(),y_train).sum().item()
                     true_negatives += torch.logical_and(torch.logical_not(predictions.flatten()),torch.logical_not(y_train)).sum().item()
                     # Compute loss
@@ -313,6 +312,8 @@ class ModelLoader():
 
                         current_loss = 0.0
                     del  outputs, x_train, y_train, fixation_num_train, predictions
+                total = positives + negatives
+                correct = true_positives + true_negatives
                 print('TPR after epoch %d: %.3f %%' % (epoch+1,100.0 * true_positives / positives))
                 print('TNR after epoch %d: %.3f %%' % (epoch+1,100.0 * true_negatives / negatives))
                 print('Accuracy after epoch %d: %.3f %%' % (epoch+1,100.0 * correct / total))
@@ -344,18 +345,18 @@ class ModelLoader():
                     # Set total and correct
                     predictions = (torch.sigmoid(outputs) >= 0.5)
                     total_outputs = np.append(total_outputs,torch.sigmoid(outputs).cpu().detach().numpy())
-                    total += y_test.size(0)
 
                     positives += (y_test ==1).sum().item()
                     negatives += (y_test ==0).sum().item()
 
-                    correct += (predictions.flatten() == y_test).sum().item()
                     true_positives += torch.logical_and(predictions.flatten(),y_test).sum().item()
                     true_negatives += torch.logical_and(torch.logical_not(predictions.flatten()),torch.logical_not(y_test)).sum().item()
                     
                     del predictions, x_test, y_test, fixation_num_test, outputs
 
             # Print accuracy
+            total = positives + negatives
+            correct = true_positives + true_negatives
             print('Accuracy in testing set for fold %d: %.3f %%' % (fold, 100.0 * correct / total))
             print('TPR in testing set for fold %d: %.3f %%' % (fold, 100.0 * true_positives / positives))
             print('TNR in testing set for fold %d: %.3f %%' % (fold, 100.0 * true_negatives / negatives))
