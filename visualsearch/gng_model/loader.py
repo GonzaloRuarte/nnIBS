@@ -4,12 +4,12 @@ from torch import nn
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 
 from sklearn.model_selection import StratifiedKFold
-from .go_no_go import Net
+from go_no_go import Net
 import random
 import numpy as np
 
 class dataset(Dataset):
-    def __init__(self,x,y,fixation_nums):
+    def __init__(self,x,y,fixation_nums,image_ids):
         self.x = torch.tensor(x,dtype=torch.float32,device="cuda")
         self.y = torch.tensor(y,dtype=torch.float32,device="cuda")
         self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.float32,device="cuda")
@@ -21,9 +21,56 @@ class dataset(Dataset):
         return self.length
     def get_labels(self):
         return self.y
-   
+
+
+class ImageDividedDataset(Dataset):
+    def __init__(self,x,y,fixation_nums,image_ids):
+        indexes_sorted = image_ids.argsort()
+        self.image_ids = image_ids[indexes_sorted]
+        x = x[indexes_sorted]
+        y = y[indexes_sorted]
+        fixation_nums= fixation_nums[indexes_sorted]
+        sequence_end = np.append(np.where(self.image_ids[:-1] != self.image_ids[1:])[0],[self.image_ids.shape[0]-1]) #valores en los que el siguiente valor es distinto al actual
+        
+        sequence_start = np.append([0],sequence_end[:-1]+1)
+        
+        sequence_intervals = np.array([sequence_start,sequence_end])       
+
+
+        self.x = torch.tensor(x,dtype=torch.float32,device="cuda")
+        self.y = torch.tensor(y,dtype=torch.float32,device="cuda")
+        self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.float32,device="cuda")
+        self.images_indexes = sequence_intervals.T
+        self.length = self.images_indexes.shape[0] 
+    def __getitem__(self,idx):
+        #me aseguro que al iterar sobre el dataset, meta los posteriors de una misma imagen en un solo fold.
+        interval = self.images_indexes[idx]
+        #la etiqueta es la misma para una misma imagen
+        return self.x[interval[0]:interval[1]+1],self.y[interval[0]:interval[1]+1],self.fixation_nums[interval[0]:interval[1]+1]
+
+    def __len__(self):
+        return self.length
+
+    def get_labels(self):
+        return self.y[self.images_indexes.T[0]]
+
+    def verify_same_label(self):
+        true_values = np.array([],dtype=np.float32)
+        interval = self.y[self.images_indexes[0][0]:self.images_indexes[0][1]+1]
+        for i in range(0,self.length):
+            interval = self.y[self.images_indexes[i][0]:self.images_indexes[i][1]+1]
+            if np.where(interval.cpu().detach().numpy() == interval.cpu().detach().numpy()[0])[0].shape[0] == interval.shape[0]:
+                true_values = np.append(true_values,[1])
+            else:
+
+                true_values = np.append(true_values,[0])
+        if np.sum(true_values) == self.length:
+            print("True")
+        else:
+            print(self.length - np.sum(true_values))
+            print("False")
 class SeqDataset(Dataset):
-    def __init__(self,x,y,fixation_nums):
+    def __init__(self,x,y,fixation_nums,image_ids):
         #obtengo los índices de comienzo y fin de scanpath
         sequence_start = np.where(fixation_nums == 1)[0]
         sequence_end = np.append(sequence_start[1:]-1,[fixation_nums.shape[0]-1])
@@ -57,7 +104,7 @@ class SeqDataset(Dataset):
 
 
 class ModelLoader():
-    def __init__(self,num_classes=1,learning_rate=0.001,epochs=50,batch_size=128,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.SGD,scheduler= ReduceLROnPlateau,model=Net,dataset=dataset):
+    def __init__(self,num_classes=1,learning_rate=0.001,epochs=50,batch_size=1,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.SGD,scheduler= ReduceLROnPlateau,model=Net,dataset=dataset):
 
         self.model_class = model
         self.model = model(num_classes=num_classes)
@@ -79,9 +126,9 @@ class ModelLoader():
     def load(self,model_dict_path):
         self.model.load_state_dict(torch.load(model_dict_path))
 
-    def fit(self,posteriors,labels,fixation_nums):    
+    def fit(self,posteriors,labels,fixation_nums,images_ids):    
         
-        trainset = dataset(posteriors,labels,fixation_nums)
+        trainset = self.dataset(posteriors,labels,fixation_nums,images_ids)
         del posteriors,labels,fixation_nums
         #DataLoader
         trainloader = DataLoader(trainset,self.batch_size,shuffle=False)
@@ -122,8 +169,8 @@ class ModelLoader():
                 print(f'Reset trainable parameters of layer = {layer}')
                 layer.reset_parameters()
 
-    def predict(self,posteriors,labels,fixation_nums):
-        testset = dataset(posteriors,labels,fixation_nums)
+    def predict(self,posteriors,labels,fixation_nums,images_ids):
+        testset = self.dataset(posteriors,labels,fixation_nums,images_ids)
         del posteriors,labels,fixation_nums
         self.load("gng-fold-1.pth")
 
@@ -166,7 +213,7 @@ class ModelLoader():
 
 
     
-    def cross_val(self,posteriors,labels,fixation_nums,k_folds=5):
+    def cross_val(self,posteriors,labels,fixation_nums,images_ids,k_folds=5):
         seed = 321
 
         random.seed(seed)
@@ -177,7 +224,7 @@ class ModelLoader():
         # Set fixed random number seed
         torch.manual_seed(seed)
         
-        trainset = self.dataset(posteriors,labels,fixation_nums)
+        trainset = self.dataset(posteriors,labels,fixation_nums,images_ids)
         # del posteriors,labels,fixation_nums
         # Define the K-fold Cross Validator
         kfold = StratifiedKFold(n_splits=k_folds, shuffle=True,random_state=seed)
@@ -239,7 +286,7 @@ class ModelLoader():
                     # Perform forward pass
                     outputs = self.model(x_train,fixation_num_train)
                     predictions = (torch.sigmoid(outputs) >= 0.5)
-                    
+                    y_train = y_train.reshape(-1,1)
                     total += y_train.size(0)
                     positives += (y_train ==1).sum().item()
                     negatives += (y_train ==0).sum().item()
@@ -248,7 +295,7 @@ class ModelLoader():
                     true_positives += torch.logical_and(predictions.flatten(),y_train).sum().item()
                     true_negatives += torch.logical_and(torch.logical_not(predictions.flatten()),torch.logical_not(y_train)).sum().item()
                     # Compute loss
-                    loss = self.loss_fn(outputs, y_train.reshape(-1,1))
+                    loss = self.loss_fn(outputs, y_train)
                     
 
 

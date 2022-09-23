@@ -1,7 +1,6 @@
 import numpy as np
 from os import path
 import argparse
-import os
 
 import loader
 
@@ -19,7 +18,7 @@ if __name__ == "__main__":
     tp_posteriors = tp_data["posteriors"]
     tp_fixation_nums = tp_data["fixations"]
     tp_labels = tp_data["labels"]
-        
+    tp_image_ids = tp_data["image_ids"]    
     
 
     # load data target absent trials
@@ -31,15 +30,15 @@ if __name__ == "__main__":
     ta_posteriors = ta_data["posteriors"]
     ta_fixation_nums = ta_data["fixations"]
     ta_labels = ta_data["labels"]
-        
+    ta_image_ids = ta_data["image_ids"]   
     
 
     
     posteriors = np.concatenate((tp_posteriors,ta_posteriors),axis=0)
     labels = np.concatenate((tp_labels,ta_labels),axis=0)
     fixation_nums = np.concatenate((tp_fixation_nums,ta_fixation_nums),axis=0)
-    del ta_posteriors,ta_labels,tp_posteriors,tp_labels,tp_fixation_nums,ta_fixation_nums
-
-    model_loader = loader.ModelLoader()
-    model_loader.cross_val(posteriors,labels,fixation_nums)
+    image_ids = np.concatenate((tp_image_ids,ta_image_ids),axis=0)
+    del ta_posteriors,ta_labels,tp_posteriors,tp_labels,tp_fixation_nums,ta_fixation_nums,ta_image_ids,tp_image_ids
+    model_loader = loader.ModelLoader(dataset = loader.ImageDividedDataset)
+    model_loader.cross_val(posteriors,labels,fixation_nums,image_ids)
 
