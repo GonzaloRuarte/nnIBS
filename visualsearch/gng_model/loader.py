@@ -286,16 +286,16 @@ class ModelLoader():
                     # Perform forward pass
                     outputs = self.model(x_train,fixation_num_train)
                     predictions = (torch.sigmoid(outputs) >= 0.5)
-                    y_train = y_train.reshape(-1,1)
-                    total += y_train.size(0)
+                    
+                    
                     positives += (y_train ==1).sum().item()
                     negatives += (y_train ==0).sum().item()
-
+                    total += positives + negatives
                     correct += (predictions.flatten() == y_train).sum().item()
                     true_positives += torch.logical_and(predictions.flatten(),y_train).sum().item()
                     true_negatives += torch.logical_and(torch.logical_not(predictions.flatten()),torch.logical_not(y_train)).sum().item()
                     # Compute loss
-                    loss = self.loss_fn(outputs, y_train)
+                    loss = self.loss_fn(outputs, y_train.reshape(-1,1))
                     
 
 
