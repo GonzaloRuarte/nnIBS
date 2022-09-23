@@ -3,7 +3,7 @@ from torch.utils.data import Dataset, DataLoader, SubsetRandomSampler
 from torch import nn
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 
-from sklearn.model_selection import StratifiedKFold
+from sklearn.model_selection import StratifiedGroupKFold
 from go_no_go import Net
 import random
 import numpy as np
@@ -14,61 +14,16 @@ class dataset(Dataset):
         self.y = torch.tensor(y,dtype=torch.float32,device="cuda")
         self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.float32,device="cuda")
         self.length = self.x.shape[0]
-
+        self.image_ids = torch.tensor(image_ids,dtype=torch.float32,device="cuda")
     def __getitem__(self,idx):
         return self.x[idx],self.y[idx],self.fixation_nums[idx]
     def __len__(self):
         return self.length
     def get_labels(self):
         return self.y
+    def get_groups(self):
+        return self.image_ids
 
-
-class ImageDividedDataset(Dataset):
-    def __init__(self,x,y,fixation_nums,image_ids):
-        indexes_sorted = image_ids.argsort()
-        self.image_ids = image_ids[indexes_sorted]
-        x = x[indexes_sorted]
-        y = y[indexes_sorted]
-        fixation_nums= fixation_nums[indexes_sorted]
-        sequence_end = np.append(np.where(self.image_ids[:-1] != self.image_ids[1:])[0],[self.image_ids.shape[0]-1]) #valores en los que el siguiente valor es distinto al actual
-        
-        sequence_start = np.append([0],sequence_end[:-1]+1)
-        
-        sequence_intervals = np.array([sequence_start,sequence_end])       
-
-
-        self.x = torch.tensor(x,dtype=torch.float32,device="cuda")
-        self.y = torch.tensor(y,dtype=torch.float32,device="cuda")
-        self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.float32,device="cuda")
-        self.images_indexes = sequence_intervals.T
-        self.length = self.images_indexes.shape[0] 
-    def __getitem__(self,idx):
-        #me aseguro que al iterar sobre el dataset, meta los posteriors de una misma imagen en un solo fold.
-        interval = self.images_indexes[idx]
-        #la etiqueta es la misma para una misma imagen
-        return self.x[interval[0]:interval[1]+1],self.y[interval[0]:interval[1]+1],self.fixation_nums[interval[0]:interval[1]+1]
-
-    def __len__(self):
-        return self.length
-
-    def get_labels(self):
-        return self.y[self.images_indexes.T[0]]
-
-    def verify_same_label(self):
-        true_values = np.array([],dtype=np.float32)
-        interval = self.y[self.images_indexes[0][0]:self.images_indexes[0][1]+1]
-        for i in range(0,self.length):
-            interval = self.y[self.images_indexes[i][0]:self.images_indexes[i][1]+1]
-            if np.where(interval.cpu().detach().numpy() == interval.cpu().detach().numpy()[0])[0].shape[0] == interval.shape[0]:
-                true_values = np.append(true_values,[1])
-            else:
-
-                true_values = np.append(true_values,[0])
-        if np.sum(true_values) == self.length:
-            print("True")
-        else:
-            print(self.length - np.sum(true_values))
-            print("False")
 class SeqDataset(Dataset):
     def __init__(self,x,y,fixation_nums,image_ids):
         #obtengo los índices de comienzo y fin de scanpath
@@ -104,7 +59,7 @@ class SeqDataset(Dataset):
 
 
 class ModelLoader():
-    def __init__(self,num_classes=1,learning_rate=0.001,epochs=50,batch_size=1,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.SGD,scheduler= ReduceLROnPlateau,model=Net,dataset=dataset):
+    def __init__(self,num_classes=1,learning_rate=0.001,epochs=50,batch_size=128,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.SGD,scheduler= ReduceLROnPlateau,model=Net,dataset=dataset):
 
         self.model_class = model
         self.model = model(num_classes=num_classes)
@@ -227,7 +182,7 @@ class ModelLoader():
         trainset = self.dataset(posteriors,labels,fixation_nums,images_ids)
         # del posteriors,labels,fixation_nums
         # Define the K-fold Cross Validator
-        kfold = StratifiedKFold(n_splits=k_folds, shuffle=True,random_state=seed)
+        kfold = StratifiedGroupKFold(n_splits=k_folds, shuffle=True,random_state=seed)
             
         # Start print
         print('--------------------------------')
@@ -236,7 +191,7 @@ class ModelLoader():
         
         fold = 0
 
-        for train_index, test_index in kfold.split(np.zeros(trainset.length), trainset.get_labels().cpu().detach().numpy()):
+        for train_index, test_index in kfold.split(np.zeros(trainset.length), trainset.get_labels().cpu().detach().numpy(),groups=trainset.get_groups().cpu().detach().numpy()):
 
             # Print
             print(f'FOLD {fold}')
@@ -259,7 +214,7 @@ class ModelLoader():
             # Init the neural network, only the last layers are trained
             self.model = self.model_class(num_classes=self.num_classes)   
             self.model = self.model.to("cuda")
-            self.model.train()
+            
             self.model.reset_tl_params()
             self.balanced_weights(trainset.get_labels())
             self.optim_func= self.optim_module(filter(lambda p: p.requires_grad, self.model.parameters()),lr=0.001, momentum=0.1)
@@ -276,7 +231,7 @@ class ModelLoader():
 
                 # Set current loss value
                 current_loss = 0.0
-                
+                self.model.train()
                 # Iterate over the DataLoader for training data
                 for j,(x_train,y_train,fixation_num_train) in enumerate(trainloader):
 
@@ -318,50 +273,45 @@ class ModelLoader():
                 print('TNR after epoch %d: %.3f %%' % (epoch+1,100.0 * true_negatives / negatives))
                 print('Accuracy after epoch %d: %.3f %%' % (epoch+1,100.0 * correct / total))
                 self.scheduler_func.step(loss.item())
+                self.model.eval()
+                correct, total, true_positives, true_negatives, positives, negatives = 0, 0, 0, 0, 0, 0
+                with torch.no_grad():
+
+                    # Iterate over the test data and generate predictions
+                    for j,(x_test,y_test,fixation_num_test) in enumerate(testloader):
+
+
+                        # Generate outputs
+                        outputs = self.model(x_test,fixation_num_test)
+                        
+                        # Set total and correct
+                        predictions = (torch.sigmoid(outputs) >= 0.5)
+                        if epoch +1 == self.epochs:
+                            fixation_num_updated = np.append(fixation_num_updated,fixation_num_test.cpu().detach().numpy())
+                            labels_updated = np.append(labels_updated,y_test.cpu().detach().numpy())
+                            total_outputs = np.append(total_outputs,torch.sigmoid(outputs).cpu().detach().numpy())
+
+                        positives += (y_test ==1).sum().item()
+                        negatives += (y_test ==0).sum().item()
+
+                        true_positives += torch.logical_and(predictions.flatten(),y_test).sum().item()
+                        true_negatives += torch.logical_and(torch.logical_not(predictions.flatten()),torch.logical_not(y_test)).sum().item()
+                        
+                        del predictions, x_test, y_test, fixation_num_test, outputs
+
+                # Print accuracy
+                total = positives + negatives
+                correct = true_positives + true_negatives
+                print('TPR in testing set after epoch %d: %.3f %%' % (epoch+1, 100.0 * true_positives / positives))
+                print('TNR in testing set after epoch %d: %.3f %%' % (epoch+1, 100.0 * true_negatives / negatives))
+                print('Accuracy in testing set after epoch %d: %.3f %%' % (epoch+1, 100.0 * correct / total))
             # Process is complete.
             print('Training process has finished. Saving trained model.')
             
-
-            # Print about testing
-            print('Starting testing')
-            self.model.eval()
-
             # Saving the model
             save_path = f'./gng-fold-{fold}.pth'
             torch.save(self.model.state_dict(), save_path)
-            
-            # Evaluation for this fold
-            correct, total, true_positives, true_negatives, positives, negatives = 0, 0, 0, 0, 0, 0
-            with torch.no_grad():
-
-                # Iterate over the test data and generate predictions
-                for j,(x_test,y_test,fixation_num_test) in enumerate(testloader):
-
-                    fixation_num_updated = np.append(fixation_num_updated,fixation_num_test.cpu().detach().numpy())
-                    labels_updated = np.append(labels_updated,y_test.cpu().detach().numpy())
-                    # Generate outputs
-                    outputs = self.model(x_test,fixation_num_test)
-                    
-                    # Set total and correct
-                    predictions = (torch.sigmoid(outputs) >= 0.5)
-                    total_outputs = np.append(total_outputs,torch.sigmoid(outputs).cpu().detach().numpy())
-
-                    positives += (y_test ==1).sum().item()
-                    negatives += (y_test ==0).sum().item()
-
-                    true_positives += torch.logical_and(predictions.flatten(),y_test).sum().item()
-                    true_negatives += torch.logical_and(torch.logical_not(predictions.flatten()),torch.logical_not(y_test)).sum().item()
-                    
-                    del predictions, x_test, y_test, fixation_num_test, outputs
-
-            # Print accuracy
-            total = positives + negatives
-            correct = true_positives + true_negatives
-            print('Accuracy in testing set for fold %d: %.3f %%' % (fold, 100.0 * correct / total))
-            print('TPR in testing set for fold %d: %.3f %%' % (fold, 100.0 * true_positives / positives))
-            print('TNR in testing set for fold %d: %.3f %%' % (fold, 100.0 * true_negatives / negatives))
             np.savez_compressed(f"./gng-outputs-{fold}.npz",outputs=total_outputs,labels=labels_updated,fixations=fixation_num_updated)
-
 
 
             print('--------------------------------')
