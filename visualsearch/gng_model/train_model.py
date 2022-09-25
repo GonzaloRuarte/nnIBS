@@ -39,6 +39,6 @@ if __name__ == "__main__":
     fixation_nums = np.concatenate((tp_fixation_nums,ta_fixation_nums),axis=0)
     image_ids = np.concatenate((tp_image_ids,ta_image_ids),axis=0)
     del ta_posteriors,ta_labels,tp_posteriors,tp_labels,tp_fixation_nums,ta_fixation_nums,ta_image_ids,tp_image_ids
-    model_loader = loader.ModelLoader(dataset = loader.ImageDividedDataset)
+    model_loader = loader.ModelLoader()
     model_loader.cross_val(posteriors,labels,fixation_nums,image_ids)
 
