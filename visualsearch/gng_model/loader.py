@@ -7,6 +7,7 @@ from sklearn.model_selection import StratifiedGroupKFold
 from go_no_go import Net
 import random
 import numpy as np
+import pandas as pd
 
 class dataset(Dataset):
     def __init__(self,x,y,fixation_nums,image_ids):
@@ -74,7 +75,8 @@ class ModelLoader():
         self.optim_func= self.optim_module(filter(lambda p: p.requires_grad, self.model.parameters()),lr=self.learning_rate, momentum=0.1)
         self.scheduler_func=self.scheduler(self.optim_func, 'min')
         self.dataset = dataset
-    def balanced_weights(self,y_data):        
+    def balanced_weights(self,y_data):
+        print(f"Data imbalance ratio: {(y_data==0.).sum()/(y_data.sum())}")   
         self.loss_fn = nn.BCEWithLogitsLoss(pos_weight=(y_data==0.).sum()/(y_data.sum()))
 
     
@@ -170,7 +172,7 @@ class ModelLoader():
     
     def cross_val(self,posteriors,labels,fixation_nums,images_ids,k_folds=5):
         seed = 321
-
+        training_info = pd.DataFrame(columns=["n_fold,n_epoch,acc,tpr,tnr,loss,train,valid"])
         random.seed(seed)
         # For fold results
         results = {}
@@ -269,6 +271,7 @@ class ModelLoader():
                     del  outputs, x_train, y_train, fixation_num_train, predictions
                 total = positives + negatives
                 correct = true_positives + true_negatives
+                training_info = pd.concat([training_info, pd.DataFrame({"n_fold": fold,"n_epoch": epoch+1,"acc": 100.0 * correct / total,"tpr": 100.0 * true_positives / positives,"tnr": 100.0 * true_negatives / negatives,"loss": loss.item(),"train": 1,"valid": 0},index=[0])],ignore_index=True)
                 print('TPR after epoch %d: %.3f %%' % (epoch+1,100.0 * true_positives / positives))
                 print('TNR after epoch %d: %.3f %%' % (epoch+1,100.0 * true_negatives / negatives))
                 print('Accuracy after epoch %d: %.3f %%' % (epoch+1,100.0 * correct / total))
@@ -302,6 +305,7 @@ class ModelLoader():
                 # Print accuracy
                 total = positives + negatives
                 correct = true_positives + true_negatives
+                training_info = pd.concat([training_info, pd.DataFrame({"n_fold": fold,"n_epoch": epoch+1,"acc": 100.0 * correct / total,"tpr": 100.0 * true_positives / positives,"tnr": 100.0 * true_negatives / negatives,"loss": -1,"train": 0,"valid": 1},index=[0])],ignore_index=True)
                 print('TPR in testing set after epoch %d: %.3f %%' % (epoch+1, 100.0 * true_positives / positives))
                 print('TNR in testing set after epoch %d: %.3f %%' % (epoch+1, 100.0 * true_negatives / negatives))
                 print('Accuracy in testing set after epoch %d: %.3f %%' % (epoch+1, 100.0 * correct / total))
@@ -325,7 +329,7 @@ class ModelLoader():
 
         for key, value in results.items():
             print(f'Fold {key} accuracy: {value} %')
-
+        training_info.to_csv('training_info_nuevo_enfoque_con_fixation_rank.csv')
 
         print(f'Average Accuracy: {sum(results.values())/len(results.items())} %')
         print(f'Average TPR: {sum(tprs.values())/len(tprs.items())} %')
