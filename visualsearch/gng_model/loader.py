@@ -172,7 +172,7 @@ class ModelLoader():
     
     def cross_val(self,posteriors,labels,fixation_nums,images_ids,k_folds=5):
         seed = 321
-        training_info = pd.DataFrame(columns=["n_fold,n_epoch,acc,tpr,tnr,loss,train,valid"])
+        training_info = pd.DataFrame(columns=["n_fold","n_epoch","acc","tpr","tnr","loss","train","valid"])
         random.seed(seed)
         # For fold results
         results = {}
