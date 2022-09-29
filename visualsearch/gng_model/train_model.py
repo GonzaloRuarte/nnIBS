@@ -8,17 +8,19 @@ def remove_short_scanpaths(posteriors,labels,fixation_nums,image_ids):
     #obtengo los índices de comienzo y fin de scanpath
     sequence_start = np.where(fixation_nums == 1)[0]
     sequence_end = np.append(sequence_start[1:]-1,[fixation_nums.shape[0]-1])
-    print(sequence_start.shape)
-    print(sequence_end.shape)
+
     #filtro los de tamaño <= 4
     long_intervals = np.where(sequence_end -sequence_start >2)[0]
-    print(long_intervals.shape)
+
     sequence_start = sequence_start[long_intervals]
     sequence_end = sequence_end[long_intervals]
-    sequence_intervals = np.array([sequence_start,sequence_end])
+    sequence_intervals = np.array([sequence_start,sequence_end]).T
 
-    print(sequence_intervals)
-    print(sequence_intervals.shape)
+    useful_indexes = [list(range(x[0],x[1]+1)) for x in sequence_intervals] 
+    useful_indexes = sum(useful_indexes, [])
+
+    return posteriors[useful_indexes],labels[useful_indexes],fixation_nums[useful_indexes],image_ids[useful_indexes]
+    
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run the model go-no-go')
     parser.add_argument('-datapath', help="Path to the dataset, is a symlink", default='./../../Datasets/GNGposteriors/')
@@ -54,7 +56,7 @@ if __name__ == "__main__":
     fixation_nums = np.concatenate((tp_fixation_nums,ta_fixation_nums),axis=0)
     image_ids = np.concatenate((tp_image_ids,ta_image_ids),axis=0)
     del ta_posteriors,ta_labels,tp_posteriors,tp_labels,tp_fixation_nums,ta_fixation_nums,ta_image_ids,tp_image_ids
-    remove_short_scanpaths(posteriors,labels,fixation_nums,image_ids)
-    #model_loader = loader.ModelLoader()
-    #model_loader.cross_val(posteriors,labels,fixation_nums,image_ids)
+    posteriors,labels,fixation_nums,image_ids = remove_short_scanpaths(posteriors,labels,fixation_nums,image_ids)
+    model_loader = loader.ModelLoader()
+    model_loader.cross_val(posteriors,labels,fixation_nums,image_ids)
 
