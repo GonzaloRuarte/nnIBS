@@ -29,7 +29,7 @@ if __name__ == "__main__":
 #        tp_data = np.load(path.join(os.path.abspath(os.readlink(args.datapath)), 'target_present_data.npz'))
 #    except Exception as ex:
 #    print(ex)
-    tp_data = np.load(path.abspath("target_present_data.npz"))
+    tp_data = np.load(path.abspath("/home/liaa-user/repos/posteriors-cocosearch18-subjects/target_present_data.npz"))
     tp_posteriors = tp_data["posteriors"]
     tp_fixation_nums = tp_data["fixations"]
     tp_labels = tp_data["labels"]
@@ -41,7 +41,7 @@ if __name__ == "__main__":
 #        ta_data = np.load(path.join(os.path.abspath(os.readlink(args.datapath)), 'target_absent_data.npz'))
 #    except Exception as ex:
 #        print(ex)
-    ta_data = np.load(path.abspath("target_absent_data.npz"))
+    ta_data = np.load(path.abspath("/home/liaa-user/repos/posteriors-cocosearch18-subjects/target_absent_data.npz"))
     ta_posteriors = ta_data["posteriors"]
     ta_fixation_nums = ta_data["fixations"]
     ta_labels = ta_data["labels"]
