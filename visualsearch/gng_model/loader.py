@@ -218,7 +218,7 @@ class ModelLoader():
             self.model = self.model.to("cuda")
             
             self.model.reset_tl_params()
-            self.balanced_weights(trainset.get_labels())
+            #self.balanced_weights(trainset.get_labels())
             self.optim_func= self.optim_module(filter(lambda p: p.requires_grad, self.model.parameters()),lr=0.001, momentum=0.1)
             self.scheduler_func=self.scheduler(self.optim_func, 'min')
             
