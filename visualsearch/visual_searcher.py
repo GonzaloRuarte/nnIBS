@@ -7,46 +7,152 @@ import numpy as np
 import time
 import importlib
 from scipy.stats import entropy
-from .gng_model import loader
-from os import path
+#from .gng_model import loader
+#from os import path
+from .visibility_map import VisibilityMap
+from .grid import Grid
+import sys
+
+
 class VisualSearcher: 
-    def __init__(self, config, grid, visibility_map, target_similarity_dir, output_path, human_scanpaths):
+    def __init__(self, config, dataset_info, trials_properties, output_path, human_scanpaths,sigma):
         " Creates a new instance of the visual search model "
         """ Input:
                 Config (dict). One entry. Fields:
-                    search_model          (string) : bayesian, greedy
-                    target_similarity     (string) : correlation, geisler, ssim, ivsn
-                    prior                 (string) : deepgaze, mlnet, flat, center
-                    max_saccades          (int)    : maximum number of saccades allowed
-                    cell_size             (int)    : size (in pixels) of the cells in the grid
-                    scale_factor          (int)    : modulates the variance of target similarity and prevents 1 / d' from diverging in bayesian search
-                    additive_shift        (int)    : modulates the variance of target similarity and prevents 1 / d' from diverging in bayesian search
-                    save_probability_maps (bool)   : indicates whether to save the probability map to a file after each saccade or not
-                    proc_number           (int)    : number of processes on which to execute bayesian search
-                    save_similarity_maps  (bool)   : indicates whether to save the target similarity map for each image in bayesian search
-                target_similarity_dir (string)  : folder path where the target similarity maps are stored
-                human_scanpaths (dict)          : if not empty, it contains the human scanpaths which the model will use as fixations
-                grid            (Grid)          : representation of an image with cells instead of pixels
-                visibility_map  (VisibilityMap) : visibility map with the size of the grid
+                    search_model      (string)   : bayesian, greedy
+                    target_similarity (string)   : correlation, geisler, ssim, ivsn
+                    prior             (string)   : deepgaze, mlnet, flat, center
+                    max_saccades      (int)      : maximum number of saccades allowed
+                    cell_size         (int)      : size (in pixels) of the cells in the grid
+                    scale_factor      (int)      : modulates the variance of target similarity and prevents 1 / d' from diverging in bayesian search
+                    additive_shift    (int)      : modulates the variance of target similarity and prevents 1 / d' from diverging in bayesian search
+                    save_probability_maps (bool) : indicates whether to save the probability map to a file after each saccade or not
+                    proc_number       (int)      : number of processes on which to execute bayesian search
+                    image_size        (int, int) : image size on which the model will operate
+                    save_similarity_maps (bool)  : indicates whether to save the target similarity map for each image in bayesian search
+                Dataset info (dict). One entry. Fields:
+                    name          (string)         : name of the dataset
+                    images_dir    (string)         : folder path where search images are stored
+                    targets_dir   (string)         : folder path where the targets are stored
+                    saliency_dir  (string)         : folder path where the saliency maps are stored
+                    target_similarity_dir (string) : folder path where the target similarity maps are stored
+                    image_height  (int)            : default image height (in pixels)
+                    image_width   (int)            : default image width (in pixels)
+                Trials properties (dict):
+                    Each entry specifies the data of the image on which to run the visual search model. Fields:
+                    image  (string)               : image name (where to look)
+                    target (string)               : name of the target image (what to look for)
+                    target_matched_row (int)      : starting Y coordinate, in pixels, of the target in the image
+                    target_matched_column (int)   : starting X coordinate, in pixels, of the target in the image
+                    target_height (int)           : height of the target in pixels
+                    target_width (int)            : width of the target in pixels
+                    initial_fixation_row (int)    : row of the first fixation on the image
+                    initial_fixation_column (int) : column of the first fixation on the image
                 Output path     (string)        : folder path where scanpaths and probability maps will be stored
+                human_scanpaths (dict) : if not empty, it contains the human scanpaths which the model will use as fixations
         """
+        
+
+        self.cell_size  = config['cell_size']
+        self.config = config
+        self.dataset_name = dataset_info['dataset_name']
+        self.model_image_size = config['image_size']
         self.max_saccades             = config['max_saccades']
         self.init_max_saccades        = config['max_saccades']
-        self.grid                     = grid
+        self.grid                     = Grid(np.array(self.model_image_size), self.cell_size)
         self.scale_factor             = config['scale_factor']
         self.additive_shift           = config['additive_shift']
         self.seed                     = config['seed']
         self.save_probability_maps    = config['save_probability_maps']
         self.save_similarity_maps     = config['save_similarity_maps']
         self.number_of_processes      = config['proc_number']
-        self.visibility_map           = visibility_map
+        self.visibility_map           = VisibilityMap(self.model_image_size, self.grid, sigma)
         self.search_model             = self.initialize_model(config['search_model'], config['norm_cdf_tolerance'])
-        self.target_similarity_dir    = target_similarity_dir
+        self.target_similarity_dir    = dataset_info['target_similarity_dir']
         self.target_similarity_method = config['target_similarity']
         self.output_path              = output_path
         self.human_scanpaths          = human_scanpaths
         self.history_size             = config['history_size']
+        self.trials_properties        = trials_properties
+        self.images_dir            = dataset_info['images_dir']
+        self.targets_dir           = dataset_info['targets_dir']
+        self.saliency_dir          = dataset_info['saliency_dir']
+        self.target_similarity_dir = dataset_info['target_similarity_dir']
+        self.prior_name    = config['prior']
+        self.image_size = (dataset_info['image_height'], dataset_info['image_width'])
 
+        self.cell_size  = config['cell_size']
+        print(self.human_scanpaths)
+        # Rescale human scanpaths' coordinates (if any) to those of the grid
+        utils.rescale_scanpaths(self.grid, self.human_scanpaths)
+        print(self.human_scanpaths)
+
+
+
+    def run(self):
+        """
+            Output:
+                Output_path/scanpaths/Scanpaths.json: Dictionary indexed by image name where each entry contains the scanpath for that given image, alongside the configuration used.
+                Output_path/probability_maps/: In this folder, the probability map computed for each saccade is stored. This is done for every image in trials_properties. (Only if save_probability_maps is true.)
+                Output_path/similarity_maps/: In this folder, the target similarity map computed for each image is stored. This is done for every image in trials_properties. (Only if save_similarity_maps is true.)
+        """
+        
+        print('Press Ctrl + C to interrupt execution and save a checkpoint \n')
+
+        # If resuming execution, load previously generated data
+        scanpaths, targets_found, previous_time = utils.load_data_from_checkpoint(self.output_path)
+
+        trial_number = len(scanpaths)
+        total_trials = len(self.trials_properties) + trial_number
+        start = time.time()
+        try:
+            for trial in self.trials_properties:
+                trial_number += 1
+                image_name  = trial['image']
+                    
+                if not ('memory_set' in trial):
+                    target_name = trial['target']
+                    trial['memory_set'] = [target_name]
+                    
+                memory_set = list(map(lambda x: utils.load_image(self.targets_dir,x),trial['memory_set']))
+                    
+                print('Searching in image ' + image_name + ' (' + str(trial_number) + '/' + str(total_trials) + ')...')
+                
+                image       = utils.load_image(self.images_dir, image_name, self.model_image_size)
+
+                image_prior = prior.load(image, image_name, self.model_image_size, self.prior_name, self.saliency_dir)
+                
+                initial_fixation = (trial['initial_fixation_row'], trial['initial_fixation_column'])
+                initial_fixation = [utils.rescale_coordinate(initial_fixation[i], self.image_size[i], self.model_image_size[i]) for i in range(len(initial_fixation))]
+                if "target_matched_row" in trial:
+                    target_bbox      = [trial['target_matched_row'], trial['target_matched_column'], \
+                                            trial['target_height'] + trial['target_matched_row'], trial['target_width'] + trial['target_matched_column']]
+                    target_bbox      = [utils.rescale_coordinate(target_bbox[i], self.image_size[i % 2 == 1], self.model_image_size[i % 2 == 1]) for i in range(len(target_bbox))]
+                else:
+                    target_bbox = None
+                trial_scanpath = self.search(image_name, image, image_prior, memory_set,trial['memory_set'], target_bbox, initial_fixation)
+
+                if trial_scanpath:
+                    # If there were no errors, save the scanpath
+                    utils.add_scanpath_to_dict(image_name, trial_scanpath, target_bbox, trial['target_object'], self.grid, self.config, self.dataset_name, scanpaths)
+                    targets_found += trial_scanpath['target_found']
+        except KeyboardInterrupt:
+            time_elapsed = time.time() - start + previous_time
+            utils.save_checkpoint(self.config, scanpaths, targets_found, self.trials_properties, time_elapsed, self.output_path)        
+            sys.exit(0)
+
+        time_elapsed = time.time() - start + previous_time
+        if self.human_scanpaths:
+            utils.save_scanpaths(self.output_path, self.human_scanpaths, filename='Subject_scanpaths.json')
+        else:
+            utils.save_scanpaths(self.output_path, scanpaths)
+        utils.erase_checkpoint(self.output_path)
+
+        print('Total targets found: ' + str(targets_found) + '/' + str(len(scanpaths)))
+        print('Total time elapsed:  ' + str(round(time_elapsed, 4))   + ' seconds')
+
+    
+    
     def search(self, image_name, image, image_prior, memory_set, memory_set_names,target_bbox, initial_fixation):
         " Given an image, a target, and a prior of that image, it looks for the object in the image, generating a scanpath "
         """ Input:
@@ -73,9 +179,9 @@ class VisualSearcher:
         # Sum probabilities
         image_prior = prior.sum(image_prior, self.init_max_saccades)
 
-        gng_model = loader.ModelLoader()
+        #gng_model = loader.ModelLoader()
 
-        gng_model.load(path.abspath("visualsearch/gng_model/gng-fold-1.pth"))
+        #gng_model.load(path.abspath("visualsearch/gng_model/gng-fold-1.pth"))
         # Convert target bounding box to grid cells
         if target_bbox != None:
             target_bbox_in_grid = np.empty(len(target_bbox), dtype=np.int)
@@ -132,8 +238,8 @@ class VisualSearcher:
                     break
 
             # If the limit has been reached, don't compute the next fixation
-          
-                        
+            if fixation_number == self.max_saccades:
+                break
             target_similarities = np.array(list(map(lambda x: x.at_fixation(current_fixation),target_similarity_map)))
             minimum_entropy_likelihood_index = np.argmin(list(map(lambda x : entropy(x.flatten()),target_similarities)))
             if self.history_size != None:
@@ -149,8 +255,8 @@ class VisualSearcher:
             marginal  = np.sum(likelihood_times_prior)
             
             posterior = likelihood_times_prior / marginal            
-            if not gng_model.continue_search(posterior,fixation_number+1):
-                break
+            #if not gng_model.continue_search(posterior,fixation_number+1):
+                #break
             fixations[fixation_number + 1] = self.search_model.next_fixation(posterior, image_name, fixation_number, self.output_path)
 
         end = time.time()
