@@ -202,8 +202,8 @@ class ModelLoader():
             print('--------------------------------')
             
             # Sample elements randomly from a given list of ids, no replacement.
-            train_subsampler = ImbalancedDatasetSampler(train_index)
-            test_subsampler = ImbalancedDatasetSampler(test_index)
+            train_subsampler = ImbalancedDatasetSampler(trainset,indices=train_index,labels=trainset.get_labels().cpu().detach().numpy()[train_index])
+            test_subsampler = ImbalancedDatasetSampler(trainset,indices=test_index,labels=trainset.get_labels().cpu().detach().numpy()[test_index])
             
             # Define data loaders for training and testing data in this fold
             trainloader = DataLoader(
