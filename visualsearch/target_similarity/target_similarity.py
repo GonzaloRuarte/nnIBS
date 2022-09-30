@@ -38,9 +38,8 @@ class TargetSimilarity():
         # Initialize mu, where each cell has a value of 0.5 if the target is present and -0.5 otherwise
         self.mu = np.zeros(shape=(grid_size[0], grid_size[1], grid_size[0], grid_size[1])) - 0.5
         if target_bbox != None:
-            for row in range(target_bbox_in_grid[0], target_bbox_in_grid[2] + 1):
-                for column in range(target_bbox_in_grid[1], target_bbox_in_grid[3] + 1):
-                    self.mu[row, column] = np.zeros(shape=grid_size) + 0.5
+            self.mu[target_bbox_in_grid[0]: target_bbox_in_grid[2]+ 1, target_bbox_in_grid[1]: target_bbox_in_grid[3]+ 1] = np.zeros(shape=grid_size) + 0.5
+
         
         # Initialize sigma
         self.sigma = np.ones(shape=self.mu.shape)
