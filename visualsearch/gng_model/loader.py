@@ -329,7 +329,7 @@ class ModelLoader():
 
         for key, value in results.items():
             print(f'Fold {key} accuracy: {value} %')
-        training_info.to_csv('training_info_scanpaths_largos.csv')
+        training_info.to_csv('training_info_sampler.csv')
 
         print(f'Average Accuracy: {sum(results.values())/len(results.items())} %')
         print(f'Average TPR: {sum(tprs.values())/len(tprs.items())} %')
