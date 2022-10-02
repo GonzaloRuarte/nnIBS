@@ -8,7 +8,7 @@ from go_no_go import Net
 import random
 import numpy as np
 import pandas as pd
-from torchsampler import ImbalancedDatasetSampler
+
 class dataset(Dataset):
     def __init__(self,x,y,fixation_nums,image_ids):
         self.x = torch.tensor(x,dtype=torch.float32,device="cuda")
@@ -202,8 +202,8 @@ class ModelLoader():
             print('--------------------------------')
             
             # Sample elements randomly from a given list of ids, no replacement.
-            train_subsampler = ImbalancedDatasetSampler(trainset,indices=train_index,labels=trainset.get_labels().cpu().detach().numpy()[train_index])
-            test_subsampler = ImbalancedDatasetSampler(trainset,indices=test_index,labels=trainset.get_labels().cpu().detach().numpy()[test_index])
+            train_subsampler = SubsetRandomSampler(train_index)
+            test_subsampler = SubsetRandomSampler(test_index)
             
             # Define data loaders for training and testing data in this fold
             trainloader = DataLoader(
