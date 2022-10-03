@@ -45,13 +45,13 @@ class Net(models.ResNet):
     def __init__(self, num_classes=1000, **kwargs):
         # Start with standard resnet152 defined here
 
-        super().__init__(block = models.resnet.BasicBlock, layers=[2, 2, 2, 2], num_classes = 1000, **kwargs)
+        super().__init__(block = models.resnet.Bottleneck, layers=[3, 8, 36, 3], num_classes = 1000, **kwargs)
         #black and white images
 
         self.inplanes = 64
         self.conv1 = nn.Conv2d(1, self.inplanes, kernel_size=7, stride=2, padding=3, bias=False)
         #pretrained resnet-152 by default
-        state_dict = load_state_dict_from_url("https://download.pytorch.org/models/resnet18-f37072fd.pth")
+        state_dict = load_state_dict_from_url("https://download.pytorch.org/models/resnet152-f82ba261.pth")
         #to make it work in grayscale images
         conv1_weight = state_dict['conv1.weight']
         state_dict['conv1.weight'] = conv1_weight.sum(dim=1, keepdim=True)
@@ -59,9 +59,9 @@ class Net(models.ResNet):
         #Transfer Learning                   
         for param in self.parameters():
             param.requires_grad = False
-        self.conv2 = nn.Conv2d(512, 64, kernel_size=7, stride=2, padding=3, bias=False)
-        self.bn2 = nn.BatchNorm2d(64)
-        self.conv3 = nn.Conv2d(64, 32, kernel_size=7, stride=2, padding=3, bias=False)
+        self.conv2 = nn.Conv2d(2048, 128, kernel_size=7, stride=2, padding=3, bias=False)
+        self.bn2 = nn.BatchNorm2d(128)
+        self.conv3 = nn.Conv2d(128, 32, kernel_size=7, stride=2, padding=3, bias=False)
         self.bn3 = nn.BatchNorm2d(32)
         self.avgpool2 = nn.AvgPool2d((1,1))        
         #self.fc = nn.Linear(128, 32)
