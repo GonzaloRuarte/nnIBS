@@ -105,7 +105,7 @@ class VisualSearcher:
         posterior  = image_prior
 
         # Search
-        print('Fixation:', end=' ')
+        print('Fixation:', end=' ', flush=True)
         target_found = False
         start = time.time()
         for fixation_number in range(self.max_saccades + 1):
@@ -114,7 +114,7 @@ class VisualSearcher:
             else:
                 current_fixation = fixations[fixation_number]
 
-            print(fixation_number + 1, end=' ')
+            print(fixation_number + 1, end=' ', flush=True)
             
             if utils.are_within_boundaries(current_fixation, current_fixation, (target_bbox_in_grid[0], target_bbox_in_grid[1]), (target_bbox_in_grid[2] + 1, target_bbox_in_grid[3] + 1)):
                 target_found = True

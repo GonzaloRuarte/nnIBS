@@ -1,6 +1,6 @@
 {
     "search_model"          : "bayesian",
-    "target_similarity"     : "ivsn",
+    "target_similarity"     : "ivsn_resnext",
     "prior"                 : "deepgaze",
     "cell_size"             : 32,
     "scale_factor"          : 3,

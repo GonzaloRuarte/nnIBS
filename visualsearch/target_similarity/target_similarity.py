@@ -81,7 +81,7 @@ class TargetSimilarity():
         target_similarity_map = np.tile(target_similarity_map[:, :, np.newaxis, np.newaxis], (1, 1, grid_size[0], grid_size[1]))
 
         # Modify mu in order to incorporate target similarity and visibility
-        self.mu = self.mu * (visibility_map.normalized_at_every_fixation() + 0.5) + target_similarity_map * (1 - visibility_map.normalized_at_every_fixation() + 0.5)
+        self.mu = np.where(target_similarity_map > 0, 0.5, -0.5) * (visibility_map.normalized_at_every_fixation() + 0.5) + target_similarity_map * (1 - visibility_map.normalized_at_every_fixation() + 0.5)
         # Convert values to the interval [-1, 1]
         self.mu = self.mu / 2
 
