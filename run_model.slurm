@@ -3,7 +3,9 @@
 #SBATCH --nodes=6 
 #SBATCH --chdir="/home/gruarte/repos/nnIBS"
 #SBATCH --partition=cpu
-    
+#SBATCH --time=72:00:00
+#SBATCH --mem=40000
+
 arg1=$(SLURM_ARRAY_TASK_ID * 6 - 5) 
 
 arg2=$(SLURM_ARRAY_TASK_ID * 6)    
