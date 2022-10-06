@@ -1,7 +1,6 @@
 import os
 import json
 import glob
-from turtle import screensize
 import numpy as np
 import pandas as pd
 import cv2
@@ -409,3 +408,67 @@ def plot_fixposmap(data, image_file=None, image_path = None, plot_save_path=None
         if plot_save_path is not None:
             cv2.imwrite(os.path.join(plot_save_path, image_file), heatmap)
     return heatmap
+
+##################################
+### funciones sacadas/adaptadas de los utils de visual search para reducir los scanpaths
+
+def rescale_coordinate(value, old_size, new_size):
+    return int((value / old_size) * new_size)
+
+def between_bounds(target_bbox, fix_y, fix_x, receptive_size):
+    return target_bbox[0] <= fix_y + receptive_size[0] // 2 and target_bbox[2] >= fix_y - receptive_size[0] // 2 and \
+        target_bbox[1] <= fix_x + receptive_size[1] // 2 and target_bbox[3] >= fix_x - receptive_size[1] // 2
+
+# cropea en el caso de haber llegado al target - para responses no la usamos
+def crop_scanpath(scanpath_x, scanpath_y, target_bbox, receptive_size):
+    index = 0
+    for fixation in zip(scanpath_y, scanpath_x):
+        if between_bounds(target_bbox, fixation[0], fixation[1], receptive_size):
+            break
+        index += 1
+    
+    cropped_scanpath_x = list(scanpath_x[:index + 1])
+    cropped_scanpath_y = list(scanpath_y[:index + 1])
+    return cropped_scanpath_x, cropped_scanpath_y
+
+def collapse_fixations(scanpath_x, scanpath_y, receptive_size):
+    collapsed_scanpath_x = list(scanpath_x)
+    collapsed_scanpath_y = list(scanpath_y)
+    index = 0
+    while index < len(collapsed_scanpath_x) - 1:
+        abs_difference_x = [abs(fix_1 - fix_2) for fix_1, fix_2 in zip(collapsed_scanpath_x, collapsed_scanpath_x[1:])]
+        abs_difference_y = [abs(fix_1 - fix_2) for fix_1, fix_2 in zip(collapsed_scanpath_y, collapsed_scanpath_y[1:])]
+
+        if abs_difference_x[index] < receptive_size[1] / 2 and abs_difference_y[index] < receptive_size[0] / 2:
+            new_fix_x = (collapsed_scanpath_x[index] + collapsed_scanpath_x[index + 1]) / 2
+            new_fix_y = (collapsed_scanpath_y[index] + collapsed_scanpath_y[index + 1]) / 2
+            collapsed_scanpath_x[index] = new_fix_x
+            collapsed_scanpath_y[index] = new_fix_y
+            del collapsed_scanpath_x[index + 1]
+            del collapsed_scanpath_y[index + 1]
+        else:
+            index += 1
+
+    return collapsed_scanpath_x, collapsed_scanpath_y
+
+# rescala y cropea en el caso de haber llegado al target - para responses no lo usamos
+def rescale_and_crop(trial_info, new_size, receptive_size):
+    trial_scanpath_X = [rescale_coordinate(x, trial_info['image_width'], new_size[1]) for x in trial_info['X']]
+    trial_scanpath_Y = [rescale_coordinate(y, trial_info['image_height'], new_size[0]) for y in trial_info['Y']]
+
+    image_size       = (trial_info['image_height'], trial_info['image_width'])
+    target_bbox      = trial_info['target_bbox']
+    target_bbox      = [rescale_coordinate(target_bbox[i], image_size[i % 2 == 1], new_size[i % 2 == 1]) for i in range(len(target_bbox))]
+
+    #trial_scanpath_X, trial_scanpath_Y = collapse_fixations(trial_scanpath_X, trial_scanpath_Y, receptive_size)
+    #trial_scanpath_X, trial_scanpath_Y = crop_scanpath(trial_scanpath_X, trial_scanpath_Y, target_bbox, receptive_size)
+
+    return trial_scanpath_X, trial_scanpath_Y        
+
+def rescale_scanpaths(grid, human_scanpaths):
+    for trial in human_scanpaths:        
+        scanpath = human_scanpaths[trial]
+        scanpath['X'], scanpath['Y'] = rescale_and_crop(scanpath, grid.size(), [1, 1])
+        # Convert to int so it can be saved in JSON format
+        scanpath['X'] = [int(x_coord) for x_coord in scanpath['X']]
+        scanpath['Y'] = [int(y_coord) for y_coord in scanpath['Y']]
