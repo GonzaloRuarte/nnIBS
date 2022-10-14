@@ -2,6 +2,8 @@ import numpy as np
 from os import path
 from skimage import io
 from ..utils import utils
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 class TargetSimilarity():
     def __init__(self, image_name, image, target, target_bbox, visibility_map, scale_factor, additive_shift, grid, seed, number_of_processes, save_similarity_maps, target_similarity_dir):
@@ -81,10 +83,11 @@ class TargetSimilarity():
         target_similarity_map = np.tile(target_similarity_map[:, :, np.newaxis, np.newaxis], (1, 1, grid_size[0], grid_size[1]))
 
         # Modify mu in order to incorporate target similarity and visibility
+        self.mu_oracle = self.mu * (visibility_map.normalized_at_every_fixation() + 0.5) + target_similarity_map * (1 - visibility_map.normalized_at_every_fixation() + 0.5)
         self.mu = np.where(target_similarity_map > np.percentile(target_similarity_map, 75), 0.5, -0.5) * (visibility_map.normalized_at_every_fixation() + 0.5) + target_similarity_map * (1 - visibility_map.normalized_at_every_fixation() + 0.5)
         # Convert values to the interval [-1, 1]
         self.mu = self.mu / 2
-
+        self.mu_oracle = self.mu_oracle / 2
         return
     
     def at_fixation(self, fixation):
@@ -97,5 +100,13 @@ class TargetSimilarity():
         grid_size = self.grid.size()
         # For backwards compatibility with MATLAB, it's necessary to transpose the matrix
         random_noise = np.transpose(np.random.standard_normal((grid_size[1], grid_size[0])))
+        save_path = path.join(self.target_similarity_dir, self.__class__.__name__)
+        filename  = self.image_name[:-4]+'_'+str(fixation[0])+'_'+str(fixation[1]) + '.png'
+        target_similarity_map = self.mu[:, :, fixation[0], fixation[1]]
+        target_similarity_map_oracle = self.mu_oracle[:, :, fixation[0], fixation[1]]
+        fig, ax =plt.subplots(1,2,figsize=(18,6))
 
-        return self.sigma[:, :, fixation[0], fixation[1]] * random_noise + self.mu[:, :, fixation[0], fixation[1]]
+        sns.heatmap(target_similarity_map, ax=ax[0])
+        sns.heatmap(target_similarity_map_oracle, ax=ax[1])
+        plt.savefig(path.join(save_path,filename))
+        return self.sigma[:, :, fixation[0], fixation[1]] * random_noise + target_similarity_map
