@@ -109,4 +109,4 @@ class TargetSimilarity():
         sns.heatmap(target_similarity_map, ax=ax[0])
         sns.heatmap(target_similarity_map_oracle, ax=ax[1])
         plt.savefig(path.join(save_path,filename))
-        return self.sigma[:, :, fixation[0], fixation[1]] * random_noise + target_similarity_map
+        return self.sigma[:, :, fixation[0], fixation[1]] * random_noise + target_similarity_map_oracle
