@@ -42,22 +42,23 @@ class DoublePosteriorDataset(Dataset):
 
         full_intervals = np.concatenate(list(map(get_paired_sequences,sequence_intervals)))
         self.intervals_indexes = full_intervals
-        self.x = torch.tensor(np.stack((x[self.intervals_indexes.T[0]],x[self.intervals_indexes.T[1]])),dtype=torch.float32,device="cuda")
-        self.y = torch.tensor(y,dtype=torch.float32,device="cuda")[self.intervals_indexes.T[1]]
-        self.fixation_nums = torch.tensor(np.stack((fixation_nums[self.intervals_indexes.T[0]],fixation_nums[self.intervals_indexes.T[1]])),dtype=torch.float32,device="cuda")
+        self.x = torch.tensor(x,dtype=torch.float32,device="cuda")
+        self.y = torch.tensor(y,dtype=torch.float32,device="cuda")
+        self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.float32,device="cuda")
         
         self.length = self.intervals_indexes.shape[0]  
         self.image_ids = torch.tensor(image_ids[self.intervals_indexes.T[0]],dtype=torch.float32,device="cuda")
 
     def __getitem__(self,idx):
-        return self.x[:,idx],self.y[idx],self.fixation_nums[:,idx]
+        interval = self.intervals_indexes[idx]
+        return self.x[interval[0]:interval[1]+1],self.y[interval[1]],self.fixation_nums[interval[0]:interval[1]+1]
 
     def __len__(self):
         return self.length
 
     def get_labels(self):
 
-        return self.y
+        return self.y[self.intervals_indexes.T[1]]
 
     def get_groups(self):
         return self.image_ids
