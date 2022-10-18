@@ -332,7 +332,7 @@ class ModelLoader():
                         if epoch +1 == self.epochs:
                             fixation_num_updated = np.append(fixation_num_updated,fixation_num_test.cpu().detach().numpy())
                             labels_updated = np.append(labels_updated,y_test.cpu().detach().numpy())
-                            total_outputs = np.append(total_outputs,torch.sigmoid(outputs).cpu().detach().numpy())
+                            total_outputs = np.append(total_outputs,outputs.cpu().detach().numpy())
 
                         positives += (y_test ==1).sum().item()
                         negatives += (y_test ==0).sum().item()
