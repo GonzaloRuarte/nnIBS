@@ -51,7 +51,7 @@ class DoublePosteriorDataset(Dataset):
 
     def __getitem__(self,idx):
         interval = self.intervals_indexes[idx]
-        return self.x[interval[0]:interval[1]+1],self.y[interval[1]],self.fixation_nums[interval[0]:interval[1]+1]
+        return self.x[interval[0]:interval[1]+1],self.y[interval[1]],self.fixation_nums[interval[1]]
 
     def __len__(self):
         return self.length
