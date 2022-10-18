@@ -25,6 +25,43 @@ class dataset(Dataset):
     def get_groups(self):
         return self.image_ids
 
+class DoublePosteriorDataset(Dataset):
+    def __init__(self,x,y,fixation_nums,image_ids):
+        #obtengo los índices de comienzo y fin de scanpath
+        sequence_start = np.where(fixation_nums == 1)[0]
+        sequence_end = np.append(sequence_start[1:]-1,[fixation_nums.shape[0]-1])
+        sequence_intervals = np.array([sequence_start,sequence_end])
+        #filtro los de tamaño 1
+        non_size_1_intervals = np.where(sequence_intervals[0,:] != sequence_intervals[1,:])[0]
+        sequence_intervals = np.array([sequence_intervals[0,:][non_size_1_intervals],sequence_intervals[1,:][non_size_1_intervals]]).T #agrupo de a pares (principio, fin)
+
+        #obtengo los intervalos completos y después tomo de a pares consecutivos
+        #por ej si tengo un scanpath de 4 fijaciones que arranca en el índice i obtengo los pares (i,i+1), (i+1,i+2), (i+2,i+3)  
+        consecutive_elements = lambda x: [[x[i], x[i + 1]] for i in range(len(x) - 1)]
+        get_paired_sequences = lambda x: np.array(consecutive_elements(np.linspace(x[0],x[-1],1+x[-1]-x[0],dtype=np.int32)))
+
+        full_intervals = np.concatenate(list(map(get_paired_sequences,sequence_intervals)))
+        self.intervals_indexes = full_intervals
+        self.x = torch.tensor(np.stack((x[self.intervals_indexes.T[0]],x[self.intervals_indexes.T[1]])),dtype=torch.float32,device="cuda")
+        self.y = torch.tensor(y,dtype=torch.float32,device="cuda")[self.intervals_indexes.T[1]]
+        self.fixation_nums = torch.tensor(np.stack((fixation_nums[self.intervals_indexes.T[0]],fixation_nums[self.intervals_indexes.T[1]])),dtype=torch.float32,device="cuda")
+        
+        self.length = self.intervals_indexes.shape[0]  
+        self.image_ids = torch.tensor(image_ids[self.intervals_indexes.T[0]],dtype=torch.float32,device="cuda")
+
+    def __getitem__(self,idx):
+        return self.x[:,idx],self.y[idx],self.fixation_nums[:,idx]
+
+    def __len__(self):
+        return self.length
+
+    def get_labels(self):
+
+        return self.y
+
+    def get_groups(self):
+        return self.image_ids
+
 class SeqDataset(Dataset):
     def __init__(self,x,y,fixation_nums,image_ids):
         #obtengo los índices de comienzo y fin de scanpath
@@ -47,20 +84,24 @@ class SeqDataset(Dataset):
         self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.float32,device="cuda")
         self.intervals_indexes = full_intervals
         self.length = self.intervals_indexes.shape[0]  
+        self.image_ids = torch.tensor(image_ids,dtype=torch.float32,device="cuda")
     def __getitem__(self,idx):
         interval = self.intervals_indexes[idx]
-        #la etiqueta es la misma para todo el intervalo
-        return self.x[interval[0]:interval[1]+1],self.y[interval[0]],self.fixation_nums[interval[0]:interval[1]+1]
+
+        return self.x[interval[0]:interval[1]+1],self.y[interval[0]:interval[1]+1],self.fixation_nums[interval[0]:interval[1]+1]
 
     def __len__(self):
         return self.length
 
     def get_labels(self):
-        return self.y[self.intervals_indexes.T[0]]
 
+        return self.y[self.intervals_indexes.T[1]]
+
+    def get_groups(self):
+        return self.image_ids[self.intervals_indexes.T[0]]
 
 class ModelLoader():
-    def __init__(self,num_classes=1,learning_rate=0.001,epochs=50,batch_size=128,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.SGD,scheduler= ReduceLROnPlateau,model=Net,dataset=dataset):
+    def __init__(self,num_classes=1,learning_rate=0.001,epochs=50,batch_size=128,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.SGD,scheduler= ReduceLROnPlateau,model=Net,dataset=DoublePosteriorDataset):
 
         self.model_class = model
         self.model = model(num_classes=num_classes)
@@ -76,7 +117,6 @@ class ModelLoader():
         self.scheduler_func=self.scheduler(self.optim_func, 'min')
         self.dataset = dataset
     def balanced_weights(self,y_data):
-        print(f"Data imbalance ratio: {(y_data==0.).sum()/(y_data.sum())}")   
         self.loss_fn = nn.BCEWithLogitsLoss(pos_weight=(y_data==0.).sum()/(y_data.sum()))
 
     

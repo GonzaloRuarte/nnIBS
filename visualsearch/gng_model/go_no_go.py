@@ -1,7 +1,7 @@
 import torch
 from torch import nn
 from torchvision import models
-from os import path
+import numpy as np
 from torchvision._internally_replaced_utils import load_state_dict_from_url
 
 class RNNModel(nn.Module):
@@ -49,12 +49,12 @@ class Net(models.ResNet):
         #black and white images
 
         self.inplanes = 64
-        self.conv1 = nn.Conv2d(1, self.inplanes, kernel_size=7, stride=2, padding=3, bias=False)
+        self.conv1 = nn.Conv2d(2, self.inplanes, kernel_size=7, stride=2, padding=3, bias=False)
         #pretrained resnet-152 by default
         state_dict = load_state_dict_from_url("https://download.pytorch.org/models/resnet152-f82ba261.pth")
         #to make it work in grayscale images
-        conv1_weight = state_dict['conv1.weight']
-        state_dict['conv1.weight'] = conv1_weight.sum(dim=1, keepdim=True)
+        conv1_weight = state_dict['conv1.weight']        
+        state_dict['conv1.weight'] = conv1_weight.sum(dim=1, keepdim=True).repeat(1,2,1,1)
         self.load_state_dict(state_dict) 
         #Transfer Learning                   
         for param in self.parameters():
@@ -69,9 +69,9 @@ class Net(models.ResNet):
         
 
     def forward(self, x, fixation_num):
-        x = torch.squeeze(x)
-        fixation_num = torch.squeeze(fixation_num)
-        x = torch.unsqueeze(x, axis=1) #para incorporar el canal (que es uno solo en este caso)
+        #x = torch.squeeze(x)
+        #fixation_num = torch.squeeze(fixation_num)
+        #x = torch.unsqueeze(x, axis=1) #para incorporar el canal (que es uno solo en este caso)
 
         x = nn.functional.interpolate(x,size=(224,224))
 
