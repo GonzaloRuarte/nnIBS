@@ -18,8 +18,6 @@ class dataset(Dataset):
         for index in range(0,sequence_intervals.shape[0]):
             scanpath_size = sequence_intervals[index][1] - sequence_intervals[index][0] + 1
             scanpath_ids = np.append(scanpath_ids,np.full(scanpath_size,index))
-        print(scanpath_ids.shape)
-        print(fixation_nums.shape)
         self.x = torch.tensor(x,dtype=torch.float32,device="cuda")
         self.y = torch.tensor(y,dtype=torch.float32,device="cuda")
         self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.float32,device="cuda")
@@ -45,8 +43,6 @@ class DoublePosteriorDataset(Dataset):
         for index in range(0,sequence_intervals.shape[1]):
             scanpath_size = sequence_intervals[1][index] - sequence_intervals[0][index] + 1
             scanpath_ids = np.append(scanpath_ids,np.full(scanpath_size,index))
-        print(scanpath_ids.shape)
-        print(fixation_nums.shape)
         #filtro los de tamaño 1
         non_size_1_intervals = np.where(sequence_intervals[0,:] != sequence_intervals[1,:])[0]
         sequence_intervals = np.stack((sequence_intervals[0,:][non_size_1_intervals],sequence_intervals[1,:][non_size_1_intervals]),axis=1) #agrupo de a pares (principio, fin)
