@@ -17,14 +17,14 @@ class dataset(Dataset):
         scanpath_ids = np.empty(shape=0)
         for index in range(0,len(sequence_intervals)):
             scanpath_size = sequence_intervals[index][1] - sequence_intervals[index][0] + 1
-            scanpaths_ids = np.append(scanpaths_ids,np.fill(shape=len(scanpath_size)))
+            scanpath_ids = np.append(scanpath_ids,np.fill(shape=len(scanpath_size)))
 
         self.x = torch.tensor(x,dtype=torch.float32,device="cuda")
         self.y = torch.tensor(y,dtype=torch.float32,device="cuda")
         self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.float32,device="cuda")
         self.length = self.x.shape[0]
         self.image_ids = torch.tensor(image_ids,dtype=torch.float32,device="cuda")
-        self.scanpath_ids = torch.tensor(scanpaths_ids,dtype=torch.float32,device="cuda")
+        self.scanpath_ids = torch.tensor(scanpath_ids,dtype=torch.float32,device="cuda")
     def __getitem__(self,idx):
         return self.x[idx],self.y[idx],self.fixation_nums[idx],self.scanpath_ids[idx]
     def __len__(self):
@@ -53,8 +53,8 @@ class DoublePosteriorDataset(Dataset):
         scanpath_ids = np.empty(shape=0)
         for index in range(0,len(sequence_intervals)):
             scanpath_size = sequence_intervals[index][1] - sequence_intervals[index][0] + 1
-            scanpaths_ids = np.append(scanpaths_ids,np.fill(shape=len(scanpath_size)))
-        print(scanpaths_ids)
+            scanpath_ids = np.append(scanpath_ids,np.fill(shape=len(scanpath_size)))
+        print(scanpath_ids)
         self.intervals_indexes = full_intervals
         self.x = torch.tensor(x,dtype=torch.float32,device="cuda")
         self.y = torch.tensor(y,dtype=torch.float32,device="cuda")
@@ -62,7 +62,7 @@ class DoublePosteriorDataset(Dataset):
         
         self.length = self.intervals_indexes.shape[0]  
         self.image_ids = torch.tensor(image_ids[self.intervals_indexes.T[0]],dtype=torch.float32,device="cuda")
-        self.scanpath_ids = torch.tensor(scanpaths_ids,dtype=torch.float32,device="cuda")
+        self.scanpath_ids = torch.tensor(scanpath_ids,dtype=torch.float32,device="cuda")
     def __getitem__(self,idx):
         interval = self.intervals_indexes[idx]
         return self.x[interval[0]:interval[1]+1],self.y[interval[1]],self.fixation_nums[interval[1]],self.scanpath_ids[interval[1]]
