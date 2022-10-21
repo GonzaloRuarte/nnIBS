@@ -11,13 +11,15 @@ import pandas as pd
 
 class dataset(Dataset):
     def __init__(self,x,y,fixation_nums,image_ids):
+        sequence_start = np.where(fixation_nums == 1)[0]
         self.x = torch.tensor(x,dtype=torch.float32,device="cuda")
         self.y = torch.tensor(y,dtype=torch.float32,device="cuda")
         self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.float32,device="cuda")
         self.length = self.x.shape[0]
         self.image_ids = torch.tensor(image_ids,dtype=torch.float32,device="cuda")
+        self.scanpath_ids = torch.tensor(np.arange(len(sequence_start)),dtype=torch.float32,device="cuda")
     def __getitem__(self,idx):
-        return self.x[idx],self.y[idx],self.fixation_nums[idx]
+        return self.x[idx],self.y[idx],self.fixation_nums[idx],self.scanpath_ids[idx]
     def __len__(self):
         return self.length
     def get_labels(self):
@@ -30,10 +32,10 @@ class DoublePosteriorDataset(Dataset):
         #obtengo los índices de comienzo y fin de scanpath
         sequence_start = np.where(fixation_nums == 1)[0]
         sequence_end = np.append(sequence_start[1:]-1,[fixation_nums.shape[0]-1])
-        sequence_intervals = np.array([sequence_start,sequence_end])
+        sequence_intervals = np.stack((sequence_start,sequence_end))
         #filtro los de tamaño 1
         non_size_1_intervals = np.where(sequence_intervals[0,:] != sequence_intervals[1,:])[0]
-        sequence_intervals = np.array([sequence_intervals[0,:][non_size_1_intervals],sequence_intervals[1,:][non_size_1_intervals]]).T #agrupo de a pares (principio, fin)
+        sequence_intervals = np.stack((sequence_intervals[0,:][non_size_1_intervals],sequence_intervals[1,:][non_size_1_intervals]),axis=1) #agrupo de a pares (principio, fin)
 
         #obtengo los intervalos completos y después tomo de a pares consecutivos
         #por ej si tengo un scanpath de 4 fijaciones que arranca en el índice i obtengo los pares (i,i+1), (i+1,i+2), (i+2,i+3)  
@@ -48,10 +50,10 @@ class DoublePosteriorDataset(Dataset):
         
         self.length = self.intervals_indexes.shape[0]  
         self.image_ids = torch.tensor(image_ids[self.intervals_indexes.T[0]],dtype=torch.float32,device="cuda")
-
+        self.scanpath_ids = torch.tensor(np.arange(len(sequence_start)),dtype=torch.float32,device="cuda")
     def __getitem__(self,idx):
         interval = self.intervals_indexes[idx]
-        return self.x[interval[0]:interval[1]+1],self.y[interval[1]],self.fixation_nums[interval[1]]
+        return self.x[interval[0]:interval[1]+1],self.y[interval[1]],self.fixation_nums[interval[1]],self.scanpath_ids[interval[1]]
 
     def __len__(self):
         return self.length
@@ -68,10 +70,10 @@ class SeqDataset(Dataset):
         #obtengo los índices de comienzo y fin de scanpath
         sequence_start = np.where(fixation_nums == 1)[0]
         sequence_end = np.append(sequence_start[1:]-1,[fixation_nums.shape[0]-1])
-        sequence_intervals = np.array([sequence_start,sequence_end])
+        sequence_intervals = np.stack((sequence_start,sequence_end))
         #filtro los de tamaño 1
         non_size_1_intervals = np.where(sequence_intervals[0,:] != sequence_intervals[1,:])[0]
-        sequence_intervals = np.array([sequence_intervals[0,:][non_size_1_intervals],sequence_intervals[1,:][non_size_1_intervals]]).T #agrupo de a pares (principio, fin)
+        sequence_intervals = np.stack((sequence_intervals[0,:][non_size_1_intervals],sequence_intervals[1,:][non_size_1_intervals]),axis=1) #agrupo de a pares (principio, fin)
 
         #obtengo los intervalos completos y después tomo de a pares consecutivos
         #por ej si tengo un scanpath de 4 fijaciones que arranca en el índice i obtengo los pares (i,i+1), (i+1,i+2), (i+2,i+3)  
@@ -86,6 +88,7 @@ class SeqDataset(Dataset):
         self.intervals_indexes = full_intervals
         self.length = self.intervals_indexes.shape[0]  
         self.image_ids = torch.tensor(image_ids,dtype=torch.float32,device="cuda")
+        self.scanpath_ids = torch.tensor(np.arange(len(sequence_start)),dtype=torch.float32,device="cuda")
     def __getitem__(self,idx):
         interval = self.intervals_indexes[idx]
 
@@ -181,7 +184,7 @@ class ModelLoader():
         with torch.no_grad():
 
             # Iterate over the test data and generate predictions
-            for j,(x_test,y_test,fixation_num_test) in enumerate(testloader):
+            for j,(x_test,y_test,fixation_num_test,scanpath_id_test) in enumerate(testloader):
 
                 # Generate outputs
                 outputs = self.model(x_test,fixation_num_test)
@@ -197,7 +200,7 @@ class ModelLoader():
                 true_positives += torch.logical_and(predictions.flatten(),y_test).sum().item()
                 true_negatives += torch.logical_and(torch.logical_not(predictions.flatten()),torch.logical_not(y_test)).sum().item()
                 
-                del predictions, x_test, y_test, fixation_num_test, outputs
+                del predictions, x_test, y_test, fixation_num_test, outputs,scanpath_id_test
 
             # Print accuracy
             print('Accuracy in testing set: %.3f %%' % (100.0 * correct / total))
@@ -267,6 +270,7 @@ class ModelLoader():
             total_outputs= np.empty(shape=0)
             fixation_num_updated= np.empty(shape=0)
             labels_updated= np.empty(shape=0)
+            scanpath_ids= np.empty(shape=0)
             for epoch in range(self.epochs):
                 correct, total, true_positives, true_negatives, positives, negatives = 0, 0, 0, 0, 0, 0
                 # Print epoch
@@ -276,7 +280,7 @@ class ModelLoader():
                 current_loss = 0.0
                 self.model.train()
                 # Iterate over the DataLoader for training data
-                for j,(x_train,y_train,fixation_num_train) in enumerate(trainloader):
+                for j,(x_train,y_train,fixation_num_train,scanpath_id_test) in enumerate(trainloader):
 
                     # Zero the gradients
                     self.optim_func.zero_grad()
@@ -322,7 +326,7 @@ class ModelLoader():
                 with torch.no_grad():
 
                     # Iterate over the test data and generate predictions
-                    for j,(x_test,y_test,fixation_num_test) in enumerate(testloader):
+                    for j,(x_test,y_test,fixation_num_test,scanpath_id_test) in enumerate(testloader):
 
 
                         # Generate outputs
@@ -334,7 +338,7 @@ class ModelLoader():
                             fixation_num_updated = np.append(fixation_num_updated,fixation_num_test.cpu().detach().numpy())
                             labels_updated = np.append(labels_updated,y_test.cpu().detach().numpy())
                             total_outputs = np.append(total_outputs,outputs.cpu().detach().numpy())
-
+                            scanpath_ids = np.append(scanpath_ids,scanpath_id_test.cpu().detach().numpy())
                         positives += (y_test ==1).sum().item()
                         negatives += (y_test ==0).sum().item()
 
@@ -356,7 +360,7 @@ class ModelLoader():
             # Saving the model
             save_path = f'./gng-fold-{fold}.pth'
             torch.save(self.model.state_dict(), save_path)
-            np.savez_compressed(f"./gng-outputs-{fold}.npz",outputs=total_outputs,labels=labels_updated,fixations=fixation_num_updated)
+            np.savez_compressed(f"./gng-outputs-{fold}.npz",outputs=total_outputs,labels=labels_updated,fixations=fixation_num_updated,scanpath_ids=scanpath_ids)
 
 
             print('--------------------------------')
