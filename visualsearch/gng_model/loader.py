@@ -17,7 +17,7 @@ class dataset(Dataset):
         scanpath_ids = np.empty(shape=0)
         for index in range(0,len(sequence_intervals)):
             scanpath_size = sequence_intervals[index][1] - sequence_intervals[index][0] + 1
-            scanpath_ids = np.append(scanpath_ids,np.fill(shape=len(scanpath_size)))
+            scanpath_ids = np.append(scanpath_ids,np.full(shape=len(scanpath_size)))
 
         self.x = torch.tensor(x,dtype=torch.float32,device="cuda")
         self.y = torch.tensor(y,dtype=torch.float32,device="cuda")
@@ -53,8 +53,9 @@ class DoublePosteriorDataset(Dataset):
         scanpath_ids = np.empty(shape=0)
         for index in range(0,len(sequence_intervals)):
             scanpath_size = sequence_intervals[index][1] - sequence_intervals[index][0] + 1
-            scanpath_ids = np.append(scanpath_ids,np.fill(shape=len(scanpath_size)))
-        print(scanpath_ids)
+            scanpath_ids = np.append(scanpath_ids,np.full(shape=len(scanpath_size)))
+        print(scanpath_ids.shape)
+        print(fixation_nums.shape)
         self.intervals_indexes = full_intervals
         self.x = torch.tensor(x,dtype=torch.float32,device="cuda")
         self.y = torch.tensor(y,dtype=torch.float32,device="cuda")
