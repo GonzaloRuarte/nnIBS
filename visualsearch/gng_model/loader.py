@@ -15,10 +15,9 @@ class dataset(Dataset):
         sequence_end = np.append(sequence_start[1:]-1,[fixation_nums.shape[0]-1])
         sequence_intervals = np.stack((sequence_start,sequence_end),axis=1)
         scanpath_ids = np.empty(shape=0)
-        print(sequence_intervals.shape)
         for index in range(0,sequence_intervals.shape[0]):
             scanpath_size = sequence_intervals[index][1] - sequence_intervals[index][0] + 1
-            scanpath_ids = np.append(scanpath_ids,np.full(index,shape=scanpath_size))
+            scanpath_ids = np.append(scanpath_ids,np.full(scanpath_size,index))
         print(scanpath_ids.shape)
         print(fixation_nums.shape)
         self.x = torch.tensor(x,dtype=torch.float32,device="cuda")
@@ -49,9 +48,7 @@ class DoublePosteriorDataset(Dataset):
 
         for index in range(0,sequence_intervals.shape[0]):
             scanpath_size = sequence_intervals[index][1] - sequence_intervals[index][0] + 1
-            print(scanpath_size)
-            print(sequence_intervals.shape)
-            scanpath_ids = np.append(scanpath_ids,np.full(index,shape=scanpath_size))
+            scanpath_ids = np.append(scanpath_ids,np.full(scanpath_size,index))
         print(scanpath_ids.shape)
         print(fixation_nums.shape)
         #obtengo los intervalos completos y después tomo de a pares consecutivos
