@@ -15,7 +15,7 @@ class dataset(Dataset):
         sequence_end = np.append(sequence_start[1:]-1,[fixation_nums.shape[0]-1])
         sequence_intervals = np.stack((sequence_start,sequence_end),axis=1)
         get_full_intervals = lambda x: np.arange(x[0],x[1]+1)
-        full_range_ids = np.squeeze(list(map(get_full_intervals,sequence_intervals)))
+        full_range_ids = np.concatenate(np.array(list(map(get_full_intervals,sequence_intervals))))
         self.x = torch.tensor(x,dtype=torch.float32,device="cuda")
         self.y = torch.tensor(y,dtype=torch.float32,device="cuda")
         self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.float32,device="cuda")
@@ -46,8 +46,9 @@ class DoublePosteriorDataset(Dataset):
         consecutive_elements = lambda x: [[x[i], x[i + 1]] for i in range(len(x) - 1)]
         get_paired_sequences = lambda x: np.array(consecutive_elements(np.linspace(x[0],x[-1],1+x[-1]-x[0],dtype=np.int32)))
         get_full_intervals = lambda x: np.arange(x[0],x[1]+1)
-        full_range_ids = np.squeeze(list(map(get_full_intervals,sequence_intervals)))
+        full_range_ids = np.concatenate(list(map(get_full_intervals,sequence_intervals)))
         full_intervals = np.concatenate(list(map(get_paired_sequences,sequence_intervals)))
+        print(full_range_ids)
         self.intervals_indexes = full_intervals
         self.x = torch.tensor(x,dtype=torch.float32,device="cuda")
         self.y = torch.tensor(y,dtype=torch.float32,device="cuda")
