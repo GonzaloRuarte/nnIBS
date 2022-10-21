@@ -49,6 +49,8 @@ class DoublePosteriorDataset(Dataset):
 
         for index in range(0,sequence_intervals.shape[0]):
             scanpath_size = sequence_intervals[index][1] - sequence_intervals[index][0] + 1
+            print(scanpath_size)
+            print(sequence_intervals.shape)
             scanpath_ids = np.append(scanpath_ids,np.full(index,shape=scanpath_size))
         print(scanpath_ids.shape)
         print(fixation_nums.shape)
