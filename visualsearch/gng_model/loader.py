@@ -14,14 +14,17 @@ class dataset(Dataset):
         sequence_start = np.where(fixation_nums == 1)[0]
         sequence_end = np.append(sequence_start[1:]-1,[fixation_nums.shape[0]-1])
         sequence_intervals = np.stack((sequence_start,sequence_end),axis=1)
-        get_full_intervals = lambda x: np.arange(x[0],x[1]+1)
-        full_range_ids = np.concatenate(np.array(list(map(get_full_intervals,sequence_intervals))))
+        scanpath_ids = np.empty(shape=0)
+        for index in range(0,len(sequence_intervals)):
+            scanpath_size = sequence_intervals[index][1] - sequence_intervals[index][0] + 1
+            scanpaths_ids = np.append(scanpaths_ids,np.fill(shape=len(scanpath_size)))
+
         self.x = torch.tensor(x,dtype=torch.float32,device="cuda")
         self.y = torch.tensor(y,dtype=torch.float32,device="cuda")
         self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.float32,device="cuda")
         self.length = self.x.shape[0]
         self.image_ids = torch.tensor(image_ids,dtype=torch.float32,device="cuda")
-        self.scanpath_ids = torch.tensor(full_range_ids,dtype=torch.float32,device="cuda")
+        self.scanpath_ids = torch.tensor(scanpaths_ids,dtype=torch.float32,device="cuda")
     def __getitem__(self,idx):
         return self.x[idx],self.y[idx],self.fixation_nums[idx],self.scanpath_ids[idx]
     def __len__(self):
@@ -45,10 +48,13 @@ class DoublePosteriorDataset(Dataset):
         #por ej si tengo un scanpath de 4 fijaciones que arranca en el índice i obtengo los pares (i,i+1), (i+1,i+2), (i+2,i+3)  
         consecutive_elements = lambda x: [[x[i], x[i + 1]] for i in range(len(x) - 1)]
         get_paired_sequences = lambda x: np.array(consecutive_elements(np.linspace(x[0],x[-1],1+x[-1]-x[0],dtype=np.int32)))
-        get_full_intervals = lambda x: np.arange(x[0],x[1]+1)
-        full_range_ids = np.concatenate(list(map(get_full_intervals,sequence_intervals)))
+        
         full_intervals = np.concatenate(list(map(get_paired_sequences,sequence_intervals)))
-        print(full_range_ids)
+        scanpath_ids = np.empty(shape=0)
+        for index in range(0,len(sequence_intervals)):
+            scanpath_size = sequence_intervals[index][1] - sequence_intervals[index][0] + 1
+            scanpaths_ids = np.append(scanpaths_ids,np.fill(shape=len(scanpath_size)))
+        print(scanpaths_ids)
         self.intervals_indexes = full_intervals
         self.x = torch.tensor(x,dtype=torch.float32,device="cuda")
         self.y = torch.tensor(y,dtype=torch.float32,device="cuda")
@@ -56,7 +62,7 @@ class DoublePosteriorDataset(Dataset):
         
         self.length = self.intervals_indexes.shape[0]  
         self.image_ids = torch.tensor(image_ids[self.intervals_indexes.T[0]],dtype=torch.float32,device="cuda")
-        self.scanpath_ids = torch.tensor(full_range_ids,dtype=torch.float32,device="cuda")
+        self.scanpath_ids = torch.tensor(scanpaths_ids,dtype=torch.float32,device="cuda")
     def __getitem__(self,idx):
         interval = self.intervals_indexes[idx]
         return self.x[interval[0]:interval[1]+1],self.y[interval[1]],self.fixation_nums[interval[1]],self.scanpath_ids[interval[1]]
