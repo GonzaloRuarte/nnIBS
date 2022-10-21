@@ -51,7 +51,7 @@ class DoublePosteriorDataset(Dataset):
         
         full_intervals = np.concatenate(list(map(get_paired_sequences,sequence_intervals)))
         scanpath_ids = np.empty(shape=0)
-        for index in range(0,len(sequence_intervals)):
+        for index in range(0,sequence_intervals.shape[0]):
             scanpath_size = sequence_intervals[index][1] - sequence_intervals[index][0] + 1
             scanpath_ids = np.append(scanpath_ids,np.full(shape=len(scanpath_size)))
         print(scanpath_ids.shape)
