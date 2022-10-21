@@ -41,16 +41,16 @@ class DoublePosteriorDataset(Dataset):
         sequence_start = np.where(fixation_nums == 1)[0]
         sequence_end = np.append(sequence_start[1:]-1,[fixation_nums.shape[0]-1])
         sequence_intervals = np.stack((sequence_start,sequence_end))
-        #filtro los de tamaño 1
-        non_size_1_intervals = np.where(sequence_intervals[0,:] != sequence_intervals[1,:])[0]
-        sequence_intervals = np.stack((sequence_intervals[0,:][non_size_1_intervals],sequence_intervals[1,:][non_size_1_intervals]),axis=1) #agrupo de a pares (principio, fin)
         scanpath_ids = np.empty(shape=0)
-
         for index in range(0,sequence_intervals.shape[0]):
             scanpath_size = sequence_intervals[index][1] - sequence_intervals[index][0] + 1
             scanpath_ids = np.append(scanpath_ids,np.full(scanpath_size,index))
         print(scanpath_ids.shape)
         print(fixation_nums.shape)
+        #filtro los de tamaño 1
+        non_size_1_intervals = np.where(sequence_intervals[0,:] != sequence_intervals[1,:])[0]
+        sequence_intervals = np.stack((sequence_intervals[0,:][non_size_1_intervals],sequence_intervals[1,:][non_size_1_intervals]),axis=1) #agrupo de a pares (principio, fin)
+
         #obtengo los intervalos completos y después tomo de a pares consecutivos
         #por ej si tengo un scanpath de 4 fijaciones que arranca en el índice i obtengo los pares (i,i+1), (i+1,i+2), (i+2,i+3)  
         consecutive_elements = lambda x: [[x[i], x[i + 1]] for i in range(len(x) - 1)]
