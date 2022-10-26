@@ -277,10 +277,14 @@ class ModelLoader():
             self.scheduler_func=self.scheduler(self.optim_func, 'min')
             
             # Run the training loop for defined number of epochs
-            total_outputs= np.empty(shape=0)
-            fixation_num_updated= np.empty(shape=0)
-            labels_updated= np.empty(shape=0)
-            scanpath_ids= np.empty(shape=0)
+            training_outputs= np.empty(shape=0)
+            validation_outputs= np.empty(shape=0)
+            fixation_num_training= np.empty(shape=0)
+            labels_training= np.empty(shape=0)
+            scanpath_ids_training= np.empty(shape=0)
+            fixation_num_validation= np.empty(shape=0)
+            labels_validation= np.empty(shape=0)
+            scanpath_ids_validation= np.empty(shape=0)
             for epoch in range(self.epochs):
                 correct, total, true_positives, true_negatives, positives, negatives = 0, 0, 0, 0, 0, 0
                 # Print epoch
@@ -298,7 +302,11 @@ class ModelLoader():
                     # Perform forward pass
                     outputs = self.model(x_train,fixation_num_train)
                     predictions = (torch.sigmoid(outputs) >= 0.5)
-                    
+                    if epoch +1 == self.epochs:
+                            fixation_num_training = np.append(fixation_num_training,fixation_num_test.cpu().detach().numpy())
+                            labels_training = np.append(labels_training,y_test.cpu().detach().numpy())
+                            training_outputs = np.append(training_outputs,outputs.cpu().detach().numpy())
+                            scanpath_ids_training = np.append(scanpath_ids_training,scanpath_id_test.cpu().detach().numpy())
                     
                     positives += (y_train ==1).sum().item()
                     negatives += (y_train ==0).sum().item()
@@ -345,10 +353,10 @@ class ModelLoader():
                         # Set total and correct
                         predictions = (torch.sigmoid(outputs) >= 0.5)
                         if epoch +1 == self.epochs:
-                            fixation_num_updated = np.append(fixation_num_updated,fixation_num_test.cpu().detach().numpy())
-                            labels_updated = np.append(labels_updated,y_test.cpu().detach().numpy())
-                            total_outputs = np.append(total_outputs,outputs.cpu().detach().numpy())
-                            scanpath_ids = np.append(scanpath_ids,scanpath_id_test.cpu().detach().numpy())
+                            fixation_num_validation = np.append(fixation_num_validation,fixation_num_test.cpu().detach().numpy())
+                            labels_validation = np.append(labels_validation,y_test.cpu().detach().numpy())
+                            validation_outputs = np.append(validation_outputs,outputs.cpu().detach().numpy())
+                            scanpath_ids_validation = np.append(scanpath_ids_validation,scanpath_id_test.cpu().detach().numpy())
                         positives += (y_test ==1).sum().item()
                         negatives += (y_test ==0).sum().item()
 
@@ -370,7 +378,8 @@ class ModelLoader():
             # Saving the model
             save_path = f'./gng-fold-{fold}.pth'
             torch.save(self.model.state_dict(), save_path)
-            np.savez_compressed(f"./gng-outputs-{fold}.npz",outputs=total_outputs,labels=labels_updated,fixations=fixation_num_updated,scanpath_ids=scanpath_ids)
+            np.savez_compressed(f"./gng-outputs-{fold}.npz",outputs_training=training_outputs,labels_training=labels_training,fixations_training=fixation_num_training,scanpath_ids_training=scanpath_ids_training,
+            outputs_validation=validation_outputs,labels_validation=labels_validation,fixations_validation=fixation_num_validation,scanpath_ids_validation=scanpath_ids_validation)
 
 
             print('--------------------------------')
