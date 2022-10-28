@@ -322,8 +322,6 @@ class ModelLoader():
             fixation_num_validation= np.empty(shape=0)
             labels_validation= np.empty(shape=0)
             scanpath_ids_validation= np.empty(shape=0)
-            loss_training= np.empty(shape=0)
-            loss_validation= np.empty(shape=0)
             max_tpr = 0.0
             for epoch in range(self.epochs):
                 correct, total, true_positives, true_negatives, positives, negatives = 0, 0, 0, 0, 0, 0
@@ -332,6 +330,8 @@ class ModelLoader():
 
                 # Set current loss value
                 current_loss = 0.0
+                current_loss_val = 0.0
+                amount_minibatches = 0
                 self.model.train()
                 # Iterate over the DataLoader for training data
                 for j,(x_train,y_train,fixation_num_train,scanpath_id_train) in enumerate(trainloader):
@@ -356,40 +356,35 @@ class ModelLoader():
                         labels_training = np.append(labels_training,y_train.cpu().detach().numpy())
                         training_outputs = np.append(training_outputs,outputs.cpu().detach().numpy())
                         scanpath_ids_training = np.append(scanpath_ids_training,scanpath_id_train.cpu().detach().numpy())
-                        loss_training = np.append(loss_training,loss.item().cpu().detach().numpy())
 
                     # Perform backward pass
                     loss.backward()
-                    
+                    amount_minibatches +=1
                     # Perform optimization
                     self.optim_func.step()
-
-                    # Print statistics
                     current_loss += loss.item()
-                    if j % 500 == 499:
-                        print('Loss after mini-batch %5d: %.3f' %
-                            (j + 1, current_loss / 500))
-
-                        current_loss = 0.0
                     del  outputs, x_train, y_train, fixation_num_train, predictions
+                    
                 total = positives + negatives
+                current_loss /= amount_minibatches
                 correct = true_positives + true_negatives
                 training_info = pd.concat([training_info, pd.DataFrame({"n_fold": fold,"n_epoch": epoch+1,"acc": 100.0 * correct / total,"tpr": 100.0 * true_positives / positives,"tnr": 100.0 * true_negatives / negatives,"loss": loss.item(),"train": 1,"valid": 0},index=[0])],ignore_index=True)
                 print('TPR after epoch %d: %.3f %%' % (epoch+1,100.0 * true_positives / positives))
                 print('TNR after epoch %d: %.3f %%' % (epoch+1,100.0 * true_negatives / negatives))
                 print('Accuracy after epoch %d: %.3f %%' % (epoch+1,100.0 * correct / total))
+                print('Average loss for minibatches after epoch %d: %.3f' %(epoch+1, current_loss))
                 self.scheduler_func.step(loss.item())
                 self.model.eval()
                 correct, total, true_positives, true_negatives, positives, negatives = 0, 0, 0, 0, 0, 0
+                amount_minibatches = 0
                 with torch.no_grad():
-
                     # Iterate over the test data and generate predictions
                     for j,(x_test,y_test,fixation_num_test,scanpath_id_test) in enumerate(testloader):
-
-
                         # Generate outputs
                         outputs = self.model(x_test,fixation_num_test)
                         loss = self.loss_fn(outputs, y_test.reshape(-1,1))
+                        current_loss_val += loss.item()
+                        amount_minibatches +=1
                         # Set total and correct
                         predictions = (torch.sigmoid(outputs) >= 0.5)
                         if epoch +1 == self.epochs:
@@ -397,22 +392,22 @@ class ModelLoader():
                             labels_validation = np.append(labels_validation,y_test.cpu().detach().numpy())
                             validation_outputs = np.append(validation_outputs,outputs.cpu().detach().numpy())
                             scanpath_ids_validation = np.append(scanpath_ids_validation,scanpath_id_test.cpu().detach().numpy())
-                            loss_validation = np.append(loss_validation,loss.item().cpu().detach().numpy())
                         positives += (y_test ==1).sum().item()
                         negatives += (y_test ==0).sum().item()
 
                         true_positives += torch.logical_and(predictions.flatten(),y_test).sum().item()
                         true_negatives += torch.logical_and(torch.logical_not(predictions.flatten()),torch.logical_not(y_test)).sum().item()
                         
-                        del predictions, x_test, y_test, fixation_num_test, outputs
-
+                        del predictions, x_test,y_test, fixation_num_test,outputs
                 # Print accuracy
+                current_loss_val /= amount_minibatches
                 total = positives + negatives
                 correct = true_positives + true_negatives
-                training_info = pd.concat([training_info, pd.DataFrame({"n_fold": fold,"n_epoch": epoch+1,"acc": 100.0 * correct / total,"tpr": 100.0 * true_positives / positives,"tnr": 100.0 * true_negatives / negatives,"loss": -1,"train": 0,"valid": 1},index=[0])],ignore_index=True)
-                print('TPR in testing set after epoch %d: %.3f %%' % (epoch+1, 100.0 * true_positives / positives))
-                print('TNR in testing set after epoch %d: %.3f %%' % (epoch+1, 100.0 * true_negatives / negatives))
-                print('Accuracy in testing set after epoch %d: %.3f %%' % (epoch+1, 100.0 * correct / total))
+                training_info = pd.concat([training_info, pd.DataFrame({"n_fold": fold,"n_epoch": epoch+1,"training_loss": current_loss,"validation_loss": current_loss_val,"acc": 100.0 * correct / total,"tpr": 100.0 * true_positives / positives,"tnr": 100.0 * true_negatives / negatives,"loss": -1,"train": 0,"valid": 1},index=[0])],ignore_index=True)
+                print('TPR in validation set after epoch %d: %.3f %%' % (epoch+1, 100.0 * true_positives / positives))
+                print('TNR in validation set after epoch %d: %.3f %%' % (epoch+1, 100.0 * true_negatives / negatives))
+                print('Accuracy in validation set after epoch %d: %.3f %%' % (epoch+1, 100.0 * correct / total))
+                print('Average loss for minibatches in validation after epoch after epoch %d: %.3f' %(epoch+1, current_loss_val))
                 if true_positives/positives > max_tpr:
                     max_tpr = true_positives/positives
                     early_stopping = copy.deepcopy(self.model.state_dict())
@@ -424,7 +419,7 @@ class ModelLoader():
             torch.save(self.model.state_dict(), save_path)
             torch.save(early_stopping,'./early_stopping.pth')
             np.savez_compressed(f"./gng-outputs-{fold}.npz",outputs_training=training_outputs,labels_training=labels_training,fixations_training=fixation_num_training,scanpath_ids_training=scanpath_ids_training,
-            outputs_validation=validation_outputs,labels_validation=labels_validation,fixations_validation=fixation_num_validation,scanpath_ids_validation=scanpath_ids_validation,loss_training=loss_training,loss_validation=loss_validation)
+            outputs_validation=validation_outputs,labels_validation=labels_validation,fixations_validation=fixation_num_validation,scanpath_ids_validation=scanpath_ids_validation)
 
 
             print('--------------------------------')
