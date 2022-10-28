@@ -116,7 +116,7 @@ class SeqDataset(Dataset):
         return self.image_ids[self.intervals_indexes.T[0]]
 
 class ModelLoader():
-    def __init__(self,num_classes=1,learning_rate=0.001,epochs=50,batch_size=128,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.SGD,scheduler= ReduceLROnPlateau,model=Net,dataset=DoublePosteriorDataset):
+    def __init__(self,num_classes=1,learning_rate=0.001,epochs=100,batch_size=128,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.SGD,scheduler= ReduceLROnPlateau,model=Net,dataset=DoublePosteriorDataset):
 
         self.model_class = model
         self.model = model(num_classes=num_classes)
@@ -307,7 +307,7 @@ class ModelLoader():
             # Init the neural network, only the last layers are trained
             self.model = self.model_class(num_classes=self.num_classes)   
             self.model = self.model.to("cuda")
-            
+
             self.model.reset_tl_params()
             self.balanced_weights(trainset.get_labels())
             self.optim_func= self.optim_module(filter(lambda p: p.requires_grad, self.model.parameters()),lr=0.001, momentum=0.1)
