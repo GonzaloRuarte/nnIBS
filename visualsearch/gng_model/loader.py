@@ -127,7 +127,7 @@ class ModelLoader():
         self.optim_module = optim        
         self.model = self.model.to("cuda")
         self.scheduler=scheduler
-        self.optim_func= self.optim_module(filter(lambda p: p.requires_grad, self.model.parameters()),lr=self.learning_rate, momentum=0.1)
+        self.optim_func= self.optim_module(filter(lambda p: p.requires_grad, self.model.parameters()),lr=self.learning_rate, momentum=0.9)
         self.scheduler_func=self.scheduler(self.optim_func, 'min')
         self.dataset = dataset
     def balanced_weights(self,y_data):
@@ -138,29 +138,65 @@ class ModelLoader():
         self.model.load_state_dict(torch.load(model_dict_path))
 
     def fit(self,posteriors,labels,fixation_nums,images_ids):    
+        seed = 321
+        random.seed(seed)
+        # Set fixed random number seed
+        torch.manual_seed(seed)
         
         trainset = self.dataset(posteriors,labels,fixation_nums,images_ids)
         del posteriors,labels,fixation_nums
         #DataLoader
-        trainloader = DataLoader(trainset,self.batch_size,shuffle=False)
+        trainloader = DataLoader(trainset,self.batch_size,shuffle=False)                        
         self.model.train()
         self.balanced_weights(labels)
         #forward loop
-        for i in range(self.epochs):
-            for j,(x_train,y_train,fixation_num_train) in enumerate(trainloader):
+        for epoch in range(self.epochs):
+                correct, total, true_positives, true_negatives, positives, negatives = 0, 0, 0, 0, 0, 0
+                # Print epoch
+                print(f'Starting epoch {epoch+1}')
 
-                #calculate output
-                output = self.model(x_train,fixation_num_train)
-                #calculate loss
-                loss = self.loss_fn(output,y_train.reshape(-1,1))
+                # Set current loss value
+                current_loss = 0.0
+                self.model.train()
+                # Iterate over the DataLoader for training data
+                for j,(x_train,y_train,fixation_num_train,scanpath_id_train) in enumerate(trainloader):
 
-   
-                #backprop
-                self.optim_func.zero_grad()
-                loss.backward()
-                self.optim_func.step()
-                del output
-            self.scheduler_func.step(loss.item())
+                    # Zero the gradients
+                    self.optim_func.zero_grad()
+                    
+                    # Perform forward pass
+                    outputs = self.model(x_train,fixation_num_train)
+                    predictions = (torch.sigmoid(outputs) >= 0.5)                    
+                    positives += (y_train ==1).sum().item()
+                    negatives += (y_train ==0).sum().item()
+                    
+                    true_positives += torch.logical_and(predictions.flatten(),y_train).sum().item()
+                    true_negatives += torch.logical_and(torch.logical_not(predictions.flatten()),torch.logical_not(y_train)).sum().item()
+                    # Compute loss
+                    loss = self.loss_fn(outputs, y_train.reshape(-1,1))
+                    
+
+
+                    # Perform backward pass
+                    loss.backward()
+                    
+                    # Perform optimization
+                    self.optim_func.step()
+
+                    # Print statistics
+                    current_loss += loss.item()
+                    if j % 500 == 499:
+                        print('Loss after mini-batch %5d: %.3f' %
+                            (j + 1, current_loss / 500))
+
+                        current_loss = 0.0
+                    del  outputs, x_train, y_train, fixation_num_train, predictions
+                total = positives + negatives
+                correct = true_positives + true_negatives
+                print('TPR after epoch %d: %.3f %%' % (epoch+1,100.0 * true_positives / positives))
+                print('TNR after epoch %d: %.3f %%' % (epoch+1,100.0 * true_negatives / negatives))
+                print('Accuracy after epoch %d: %.3f %%' % (epoch+1,100.0 * correct / total))
+                self.scheduler_func.step(loss.item())
         torch.save(self.model.state_dict(), "GNG_model_dict.pth")
 
     def continue_search(self,posterior,num_fixation):
@@ -294,7 +330,7 @@ class ModelLoader():
                 current_loss = 0.0
                 self.model.train()
                 # Iterate over the DataLoader for training data
-                for j,(x_train,y_train,fixation_num_train,scanpath_id_test) in enumerate(trainloader):
+                for j,(x_train,y_train,fixation_num_train,scanpath_id_train) in enumerate(trainloader):
 
                     # Zero the gradients
                     self.optim_func.zero_grad()
@@ -303,10 +339,10 @@ class ModelLoader():
                     outputs = self.model(x_train,fixation_num_train)
                     predictions = (torch.sigmoid(outputs) >= 0.5)
                     if epoch +1 == self.epochs:
-                            fixation_num_training = np.append(fixation_num_training,fixation_num_test.cpu().detach().numpy())
-                            labels_training = np.append(labels_training,y_test.cpu().detach().numpy())
+                            fixation_num_training = np.append(fixation_num_training,fixation_num_train.cpu().detach().numpy())
+                            labels_training = np.append(labels_training,y_train.cpu().detach().numpy())
                             training_outputs = np.append(training_outputs,outputs.cpu().detach().numpy())
-                            scanpath_ids_training = np.append(scanpath_ids_training,scanpath_id_test.cpu().detach().numpy())
+                            scanpath_ids_training = np.append(scanpath_ids_training,scanpath_id_train.cpu().detach().numpy())
                     
                     positives += (y_train ==1).sum().item()
                     negatives += (y_train ==0).sum().item()
