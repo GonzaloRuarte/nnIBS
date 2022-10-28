@@ -8,6 +8,7 @@ from go_no_go import Net
 import random
 import numpy as np
 import pandas as pd
+import copy
 
 class dataset(Dataset):
     def __init__(self,x,y,fixation_nums,image_ids):
@@ -321,6 +322,9 @@ class ModelLoader():
             fixation_num_validation= np.empty(shape=0)
             labels_validation= np.empty(shape=0)
             scanpath_ids_validation= np.empty(shape=0)
+            loss_training= np.empty(shape=0)
+            loss_validation= np.empty(shape=0)
+            max_tpr = 0.0
             for epoch in range(self.epochs):
                 correct, total, true_positives, true_negatives, positives, negatives = 0, 0, 0, 0, 0, 0
                 # Print epoch
@@ -338,11 +342,7 @@ class ModelLoader():
                     # Perform forward pass
                     outputs = self.model(x_train,fixation_num_train)
                     predictions = (torch.sigmoid(outputs) >= 0.5)
-                    if epoch +1 == self.epochs:
-                            fixation_num_training = np.append(fixation_num_training,fixation_num_train.cpu().detach().numpy())
-                            labels_training = np.append(labels_training,y_train.cpu().detach().numpy())
-                            training_outputs = np.append(training_outputs,outputs.cpu().detach().numpy())
-                            scanpath_ids_training = np.append(scanpath_ids_training,scanpath_id_train.cpu().detach().numpy())
+                    
                     
                     positives += (y_train ==1).sum().item()
                     negatives += (y_train ==0).sum().item()
@@ -351,8 +351,12 @@ class ModelLoader():
                     true_negatives += torch.logical_and(torch.logical_not(predictions.flatten()),torch.logical_not(y_train)).sum().item()
                     # Compute loss
                     loss = self.loss_fn(outputs, y_train.reshape(-1,1))
-                    
-
+                    if epoch +1 == self.epochs:
+                        fixation_num_training = np.append(fixation_num_training,fixation_num_train.cpu().detach().numpy())
+                        labels_training = np.append(labels_training,y_train.cpu().detach().numpy())
+                        training_outputs = np.append(training_outputs,outputs.cpu().detach().numpy())
+                        scanpath_ids_training = np.append(scanpath_ids_training,scanpath_id_train.cpu().detach().numpy())
+                        loss_training = np.append(loss_training,loss.item().cpu().detach().numpy())
 
                     # Perform backward pass
                     loss.backward()
@@ -385,7 +389,7 @@ class ModelLoader():
 
                         # Generate outputs
                         outputs = self.model(x_test,fixation_num_test)
-                        
+                        loss = self.loss_fn(outputs, y_test.reshape(-1,1))
                         # Set total and correct
                         predictions = (torch.sigmoid(outputs) >= 0.5)
                         if epoch +1 == self.epochs:
@@ -393,6 +397,7 @@ class ModelLoader():
                             labels_validation = np.append(labels_validation,y_test.cpu().detach().numpy())
                             validation_outputs = np.append(validation_outputs,outputs.cpu().detach().numpy())
                             scanpath_ids_validation = np.append(scanpath_ids_validation,scanpath_id_test.cpu().detach().numpy())
+                            loss_validation = np.append(loss_validation,loss.item().cpu().detach().numpy())
                         positives += (y_test ==1).sum().item()
                         negatives += (y_test ==0).sum().item()
 
@@ -408,14 +413,18 @@ class ModelLoader():
                 print('TPR in testing set after epoch %d: %.3f %%' % (epoch+1, 100.0 * true_positives / positives))
                 print('TNR in testing set after epoch %d: %.3f %%' % (epoch+1, 100.0 * true_negatives / negatives))
                 print('Accuracy in testing set after epoch %d: %.3f %%' % (epoch+1, 100.0 * correct / total))
+                if true_positives/positives > max_tpr:
+                    max_tpr = true_positives/positives
+                    early_stopping = copy.deepcopy(self.model.state_dict())
             # Process is complete.
             print('Training process has finished. Saving trained model.')
             
             # Saving the model
             save_path = f'./gng-fold-{fold}.pth'
             torch.save(self.model.state_dict(), save_path)
+            torch.save(early_stopping,'./early_stopping.pth')
             np.savez_compressed(f"./gng-outputs-{fold}.npz",outputs_training=training_outputs,labels_training=labels_training,fixations_training=fixation_num_training,scanpath_ids_training=scanpath_ids_training,
-            outputs_validation=validation_outputs,labels_validation=labels_validation,fixations_validation=fixation_num_validation,scanpath_ids_validation=scanpath_ids_validation)
+            outputs_validation=validation_outputs,labels_validation=labels_validation,fixations_validation=fixation_num_validation,scanpath_ids_validation=scanpath_ids_validation,loss_training=loss_training,loss_validation=loss_validation)
 
 
             print('--------------------------------')

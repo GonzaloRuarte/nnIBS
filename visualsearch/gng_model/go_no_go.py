@@ -1,7 +1,6 @@
 import torch
 from torch import nn
 from torchvision import models
-import numpy as np
 from torchvision._internally_replaced_utils import load_state_dict_from_url
 
 class RNNModel(nn.Module):
@@ -59,13 +58,13 @@ class Net(models.ResNet):
         #Transfer Learning                   
         for param in self.parameters():
             param.requires_grad = False
-        self.conv2 = nn.Conv2d(512, 128, kernel_size=7, stride=2, padding=3, bias=False)
-        self.bn2 = nn.BatchNorm2d(128)
-        self.conv3 = nn.Conv2d(128, 32, kernel_size=7, stride=2, padding=3, bias=False)
-        self.bn3 = nn.BatchNorm2d(32)
+        self.conv2 = nn.Conv2d(512, 32, kernel_size=7, stride=2, padding=3, bias=False)
+        self.bn2 = nn.BatchNorm2d(32)
+        #self.conv3 = nn.Conv2d(128, 32, kernel_size=7, stride=2, padding=3, bias=False)
+        #self.bn3 = nn.BatchNorm2d(32)
         self.avgpool2 = nn.AvgPool2d((1,1))        
         #self.fc = nn.Linear(128, 32)
-        self.fc2 = nn.Linear(128,num_classes)
+        self.fc2 = nn.Linear(512,num_classes)
         
 
     def forward(self, x, fixation_num):
@@ -89,8 +88,8 @@ class Net(models.ResNet):
         x = self.conv2(x)
         x = self.bn2(x)
 
-        x = self.conv3(x)
-        x = self.bn3(x)
+        #x = self.conv3(x)
+        #x = self.bn3(x)
         x = self.relu(x)
         x = self.avgpool2(x)
         x = torch.flatten(x,1)
@@ -102,6 +101,6 @@ class Net(models.ResNet):
         return x
     def reset_tl_params(self):
         self.conv2.reset_parameters()
-        self.conv3.reset_parameters()
+        #self.conv3.reset_parameters()
         #self.fc.reset_parameters()
         self.fc2.reset_parameters()
