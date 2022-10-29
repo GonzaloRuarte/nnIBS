@@ -10,7 +10,7 @@ import numpy as np
 import pandas as pd
 import copy
 
-class dataset(Dataset):
+class PosteriorDataset(Dataset):
     def __init__(self,x,y,fixation_nums,image_ids):
         sequence_start = np.where(fixation_nums == 1)[0]
         sequence_end = np.append(sequence_start[1:]-1,[fixation_nums.shape[0]-1])
@@ -417,8 +417,8 @@ class ModelLoader():
             # Saving the model
             save_path = f'./gng-fold-{fold}.pth'
             torch.save(self.model.state_dict(), save_path)
-            torch.save(early_stopping,'./early_stopping.pth')
-            np.savez_compressed(f"./gng-outputs-{fold}.npz",outputs_training=training_outputs,labels_training=labels_training,fixations_training=fixation_num_training,scanpath_ids_training=scanpath_ids_training,
+            torch.save(early_stopping,f'./early_stopping-fold-{fold}.pth')
+            np.savez_compressed(f"./{self.model.__class__}-outputs-{fold}.npz",outputs_training=training_outputs,labels_training=labels_training,fixations_training=fixation_num_training,scanpath_ids_training=scanpath_ids_training,
             outputs_validation=validation_outputs,labels_validation=labels_validation,fixations_validation=fixation_num_validation,scanpath_ids_validation=scanpath_ids_validation)
 
 

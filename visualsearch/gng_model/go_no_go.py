@@ -40,13 +40,12 @@ class RNNModel(nn.Module):
 
 
 
-class Net(models.ResNet):
+class TransferNet(models.ResNet):
     def __init__(self, num_classes=1000, **kwargs):
         # Start with standard resnet152 defined here
 
         super().__init__(block = models.resnet.BasicBlock, layers=[2, 2, 2, 2], num_classes = 1000, **kwargs)
         #black and white images
-
         self.inplanes = 64
         self.conv1 = nn.Conv2d(2, self.inplanes, kernel_size=7, stride=2, padding=3, bias=False)
         #pretrained resnet-152 by default
@@ -60,16 +59,12 @@ class Net(models.ResNet):
             param.requires_grad = False
         self.conv2 = nn.Conv2d(512, 32, kernel_size=7, stride=2, padding=3, bias=False)
         self.bn2 = nn.BatchNorm2d(32)
-        #self.conv3 = nn.Conv2d(128, 32, kernel_size=7, stride=2, padding=3, bias=False)
-        #self.bn3 = nn.BatchNorm2d(32)
-        self.avgpool2 = nn.AvgPool2d((1,1))        
-        #self.fc = nn.Linear(128, 32)
+        self.avgpool2 = nn.AvgPool2d((1,1))
         self.fc2 = nn.Linear(512,num_classes)
         
 
     def forward(self, x, fixation_num):
         #x = torch.squeeze(x)
-        #fixation_num = torch.squeeze(fixation_num)
         #x = torch.unsqueeze(x, axis=1) #para incorporar el canal (que es uno solo en este caso)
 
         x = nn.functional.interpolate(x,size=(224,224))
@@ -87,20 +82,62 @@ class Net(models.ResNet):
 
         x = self.conv2(x)
         x = self.bn2(x)
-
-        #x = self.conv3(x)
-        #x = self.bn3(x)
         x = self.relu(x)
         x = self.avgpool2(x)
         x = torch.flatten(x,1)
-        #x = self.fc(x)
-
-        #x = torch.cat((x,fixation_num[:,None]),1)
         x = self.fc2(x)
 
         return x
     def reset_tl_params(self):
         self.conv2.reset_parameters()
-        #self.conv3.reset_parameters()
-        #self.fc.reset_parameters()
         self.fc2.reset_parameters()
+
+class Net(nn.Module):
+    def __init__(self, num_classes=1000, **kwargs):
+        super().__init__()
+
+        self.relu = nn.ReLU(inplace=True)
+        self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
+        self.inplanes = 64
+        self.conv1 = nn.Conv2d(2, 64, kernel_size=7, stride=2, padding=3, bias=False)
+        self.bn1 = nn.BatchNorm2d(64)
+        self.conv2 = nn.Conv2d(64, 64, kernel_size=7, stride=2, padding=3, bias=False)
+        
+        self.conv3 = nn.Conv2d(64, 64, kernel_size=7, stride=2, padding=3, bias=False)
+        self.conv4 = nn.Conv2d(64, 128, kernel_size=7, stride=2, padding=3, bias=False)
+
+        self.bn2 = nn.BatchNorm2d(128)
+        self.avgpool2 = nn.AvgPool2d((1,1))        
+        self.fc2 = nn.Linear(512,num_classes)
+        
+
+    def forward(self, x, fixation_num):
+        #x = torch.squeeze(x)
+        #x = torch.unsqueeze(x, axis=1) #para incorporar el canal (que es uno solo en este caso)
+        x = nn.functional.interpolate(x,size=(224,224))
+
+        x = self.conv1(x)
+        x = self.bn1(x)
+        x = self.relu(x)
+        x = self.maxpool(x)
+
+        x = self.conv2(x)
+        x = self.bn1(x)
+        x = self.relu(x)
+        x = self.maxpool(x)
+        x = self.conv3(x)
+        x = self.bn1(x)
+        x = self.relu(x)
+        x = self.maxpool(x)
+        x = self.conv4(x)
+        x = self.bn2(x)
+        x = self.relu(x)        
+
+        x = self.avgpool2(x)
+        x = torch.flatten(x,1)
+
+        x = self.fc2(x)
+
+        return x
+    def reset_tl_params(self):
+        pass
