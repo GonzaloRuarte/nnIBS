@@ -368,7 +368,7 @@ class ModelLoader():
                 total = positives + negatives
                 current_loss /= amount_minibatches
                 correct = true_positives + true_negatives
-                training_info = pd.concat([training_info, pd.DataFrame({"n_fold": fold,"n_epoch": epoch+1,"acc": 100.0 * correct / total,"tpr": 100.0 * true_positives / positives,"tnr": 100.0 * true_negatives / negatives,"loss": loss.item(),"train": 1,"valid": 0},index=[0])],ignore_index=True)
+                training_info = pd.concat([training_info, pd.DataFrame({"n_fold": fold,"n_epoch": epoch+1,"acc": 100.0 * correct / total,"tpr": 100.0 * true_positives / positives,"tnr": 100.0 * true_negatives / negatives,"loss": current_loss,"train": 1,"valid": 0},index=[0])],ignore_index=True)
                 print('TPR after epoch %d: %.3f %%' % (epoch+1,100.0 * true_positives / positives))
                 print('TNR after epoch %d: %.3f %%' % (epoch+1,100.0 * true_negatives / negatives))
                 print('Accuracy after epoch %d: %.3f %%' % (epoch+1,100.0 * correct / total))
@@ -403,7 +403,7 @@ class ModelLoader():
                 current_loss_val /= amount_minibatches
                 total = positives + negatives
                 correct = true_positives + true_negatives
-                training_info = pd.concat([training_info, pd.DataFrame({"n_fold": fold,"n_epoch": epoch+1,"training_loss": current_loss,"validation_loss": current_loss_val,"acc": 100.0 * correct / total,"tpr": 100.0 * true_positives / positives,"tnr": 100.0 * true_negatives / negatives,"loss": -1,"train": 0,"valid": 1},index=[0])],ignore_index=True)
+                training_info = pd.concat([training_info, pd.DataFrame({"n_fold": fold,"n_epoch": epoch+1,"acc": 100.0 * correct / total,"tpr": 100.0 * true_positives / positives,"tnr": 100.0 * true_negatives / negatives,"loss": current_loss_val,"train": 0,"valid": 1},index=[0])],ignore_index=True)
                 print('TPR in validation set after epoch %d: %.3f %%' % (epoch+1, 100.0 * true_positives / positives))
                 print('TNR in validation set after epoch %d: %.3f %%' % (epoch+1, 100.0 * true_negatives / negatives))
                 print('Accuracy in validation set after epoch %d: %.3f %%' % (epoch+1, 100.0 * correct / total))
