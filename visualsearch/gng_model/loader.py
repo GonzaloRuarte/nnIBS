@@ -4,7 +4,7 @@ from torch import nn
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 
 from sklearn.model_selection import StratifiedGroupKFold
-from go_no_go import Net
+import go_no_go
 import random
 import numpy as np
 import pandas as pd
@@ -116,7 +116,7 @@ class SeqDataset(Dataset):
         return self.image_ids[self.intervals_indexes.T[0]]
 
 class ModelLoader():
-    def __init__(self,num_classes=1,learning_rate=0.001,epochs=100,batch_size=128,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.SGD,scheduler= ReduceLROnPlateau,model=Net,dataset=DoublePosteriorDataset):
+    def __init__(self,num_classes=1,learning_rate=0.001,epochs=1,batch_size=128,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.SGD,scheduler= ReduceLROnPlateau,model=go_no_go.Net,dataset=DoublePosteriorDataset):
 
         self.model_class = model
         self.model = model(num_classes=num_classes)
@@ -418,7 +418,7 @@ class ModelLoader():
             save_path = f'./gng-fold-{fold}.pth'
             torch.save(self.model.state_dict(), save_path)
             torch.save(early_stopping,f'./early_stopping-fold-{fold}.pth')
-            np.savez_compressed(f"./{self.model.__class__}-outputs-{fold}.npz",outputs_training=training_outputs,labels_training=labels_training,fixations_training=fixation_num_training,scanpath_ids_training=scanpath_ids_training,
+            np.savez_compressed(f"./{self.model.__class__.__name__}-outputs-{fold}.npz",outputs_training=training_outputs,labels_training=labels_training,fixations_training=fixation_num_training,scanpath_ids_training=scanpath_ids_training,
             outputs_validation=validation_outputs,labels_validation=labels_validation,fixations_validation=fixation_num_validation,scanpath_ids_validation=scanpath_ids_validation)
 
 
