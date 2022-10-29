@@ -116,7 +116,7 @@ class SeqDataset(Dataset):
         return self.image_ids[self.intervals_indexes.T[0]]
 
 class ModelLoader():
-    def __init__(self,num_classes=1,learning_rate=0.001,epochs=1,batch_size=128,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.SGD,scheduler= ReduceLROnPlateau,model=go_no_go.Net,dataset=DoublePosteriorDataset):
+    def __init__(self,num_classes=1,learning_rate=0.001,epochs=100,batch_size=128,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.SGD,scheduler= ReduceLROnPlateau,model=go_no_go.Net,dataset=DoublePosteriorDataset):
 
         self.model_class = model
         self.model = model(num_classes=num_classes)
