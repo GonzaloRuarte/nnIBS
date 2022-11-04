@@ -2,13 +2,55 @@ import torch
 from torch.utils.data import Dataset, DataLoader, SubsetRandomSampler
 from torch import nn
 from torch.optim.lr_scheduler import ReduceLROnPlateau
-
+from os import path
 from sklearn.model_selection import StratifiedGroupKFold
 import go_no_go
 import random
 import numpy as np
 import pandas as pd
 import copy
+from PIL import Image
+import torchvision.transforms as transforms
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+transform = transforms.ToTensor()
+class PosteriorDatasetWithImage(Dataset):
+    def __init__(self,x,y,fixation_nums,image_ids):
+        sequence_start = np.where(fixation_nums == 1)[0]
+        sequence_end = np.append(sequence_start[1:]-1,[fixation_nums.shape[0]-1])
+        sequence_intervals = np.stack((sequence_start,sequence_end),axis=1)
+        scanpath_ids = np.empty(shape=0)
+        for index in range(0,sequence_intervals.shape[0]):
+            scanpath_size = sequence_intervals[index][1] - sequence_intervals[index][0] + 1
+            scanpath_ids = np.append(scanpath_ids,np.full(scanpath_size,index))
+        self.x = torch.tensor(x,dtype=torch.float32,device=device)
+        self.y = torch.tensor(y,dtype=torch.float32,device=device)
+        self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.float32,device=device)
+        self.length = self.x.shape[0]
+        self.image_ids = torch.tensor(image_ids,dtype=torch.float32,device=device)
+        self.scanpath_ids = torch.tensor(scanpath_ids,dtype=torch.float32,device=device)
+    def __getitem__(self,idx):
+        image_id_string = str(int(self.scanpath_ids[idx].item()))
+        image_id_string_length = len(image_id_string)
+        image_default_string_length = 12
+        image_file_name = (image_default_string_length - image_id_string_length)*'0' + image_id_string_length + ".jpg"
+        if path.exists("../../Datasets/COCOSearch18/ta_trainval/"+image_file_name):
+            fullpath = "../../Datasets/COCOSearch18/ta_trainval/"+image_file_name            
+        else:
+            fullpath = "../../Datasets/COCOSearch18/tp_trainval/"+image_file_name
+        
+        with Image.open(fullpath) as im:
+            image = transform(im).to(device)   
+        return self.x[idx],self.y[idx],self.fixation_nums[idx],self.scanpath_ids[idx],image
+    def __len__(self):
+        return self.length
+    def get_labels(self):
+        return self.y
+    def get_groups(self):
+        return self.image_ids
+
+
+
 
 class PosteriorDataset(Dataset):
     def __init__(self,x,y,fixation_nums,image_ids):
@@ -19,14 +61,14 @@ class PosteriorDataset(Dataset):
         for index in range(0,sequence_intervals.shape[0]):
             scanpath_size = sequence_intervals[index][1] - sequence_intervals[index][0] + 1
             scanpath_ids = np.append(scanpath_ids,np.full(scanpath_size,index))
-        self.x = torch.tensor(x,dtype=torch.float32,device="cuda")
-        self.y = torch.tensor(y,dtype=torch.float32,device="cuda")
-        self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.float32,device="cuda")
+        self.x = torch.tensor(x,dtype=torch.float32,device=device)
+        self.y = torch.tensor(y,dtype=torch.float32,device=device)
+        self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.float32,device=device)
         self.length = self.x.shape[0]
-        self.image_ids = torch.tensor(image_ids,dtype=torch.float32,device="cuda")
-        self.scanpath_ids = torch.tensor(scanpath_ids,dtype=torch.float32,device="cuda")
+        self.image_ids = torch.tensor(image_ids,dtype=torch.float32,device=device)
+        self.scanpath_ids = torch.tensor(scanpath_ids,dtype=torch.float32,device=device)
     def __getitem__(self,idx):
-        return self.x[idx],self.y[idx],self.fixation_nums[idx],self.scanpath_ids[idx]
+        return self.x[idx],self.y[idx],self.fixation_nums[idx],self.scanpath_ids[idx],None
     def __len__(self):
         return self.length
     def get_labels(self):
@@ -55,16 +97,16 @@ class DoublePosteriorDataset(Dataset):
         
         full_intervals = np.concatenate(list(map(get_paired_sequences,sequence_intervals)))        
         self.intervals_indexes = full_intervals
-        self.x = torch.tensor(x,dtype=torch.float32,device="cuda")
-        self.y = torch.tensor(y,dtype=torch.float32,device="cuda")
-        self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.float32,device="cuda")
+        self.x = torch.tensor(x,dtype=torch.float32,device=device)
+        self.y = torch.tensor(y,dtype=torch.float32,device=device)
+        self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.float32,device=device)
         
         self.length = self.intervals_indexes.shape[0]  
-        self.image_ids = torch.tensor(image_ids[self.intervals_indexes.T[0]],dtype=torch.float32,device="cuda")
-        self.scanpath_ids = torch.tensor(scanpath_ids,dtype=torch.float32,device="cuda")
+        self.image_ids = torch.tensor(image_ids[self.intervals_indexes.T[0]],dtype=torch.float32,device=device)
+        self.scanpath_ids = torch.tensor(scanpath_ids,dtype=torch.float32,device=device)
     def __getitem__(self,idx):
         interval = self.intervals_indexes[idx]
-        return self.x[interval[0]:interval[1]+1],self.y[interval[1]],self.fixation_nums[interval[1]],self.scanpath_ids[interval[1]]
+        return self.x[interval[0]:interval[1]+1],self.y[interval[1]],self.fixation_nums[interval[1]],self.scanpath_ids[interval[1]],None
 
     def __len__(self):
         return self.length
@@ -93,17 +135,17 @@ class SeqDataset(Dataset):
         
         full_intervals = np.concatenate(list(map(get_paired_sequences,sequence_intervals)))
 
-        self.x = torch.tensor(x,dtype=torch.float32,device="cuda")
-        self.y = torch.tensor(y,dtype=torch.float32,device="cuda")
-        self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.float32,device="cuda")
+        self.x = torch.tensor(x,dtype=torch.float32,device=device)
+        self.y = torch.tensor(y,dtype=torch.float32,device=device)
+        self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.float32,device=device)
         self.intervals_indexes = full_intervals
         self.length = self.intervals_indexes.shape[0]  
-        self.image_ids = torch.tensor(image_ids,dtype=torch.float32,device="cuda")
-        self.scanpath_ids = torch.tensor(np.arange(len(sequence_start)),dtype=torch.float32,device="cuda")
+        self.image_ids = torch.tensor(image_ids,dtype=torch.float32,device=device)
+        self.scanpath_ids = torch.tensor(np.arange(len(sequence_start)),dtype=torch.float32,device=device)
     def __getitem__(self,idx):
         interval = self.intervals_indexes[idx]
 
-        return self.x[interval[0]:interval[1]+1],self.y[interval[0]:interval[1]+1],self.fixation_nums[interval[0]:interval[1]+1]
+        return self.x[interval[0]:interval[1]+1],self.y[interval[0]:interval[1]+1],self.fixation_nums[interval[0]:interval[1]+1],None
 
     def __len__(self):
         return self.length
@@ -126,7 +168,7 @@ class ModelLoader():
         self.batch_size = batch_size
         self.loss_fn = loss_fn
         self.optim_module = optim        
-        self.model = self.model.to("cuda")
+        self.model = self.model.to(device)
         self.scheduler=scheduler
         self.optim_func= self.optim_module(filter(lambda p: p.requires_grad, self.model.parameters()),lr=self.learning_rate, momentum=0.9)
         self.scheduler_func=self.scheduler(self.optim_func, 'min')
@@ -205,7 +247,7 @@ class ModelLoader():
         self.model.eval()
         
         with torch.no_grad():
-            prediction = self.model(torch.tensor(np.array([posterior]),dtype=torch.float32,device="cuda"),torch.tensor(np.array([num_fixation]),dtype=torch.float32,device="cuda"))
+            prediction = self.model(torch.tensor(np.array([posterior]),dtype=torch.float32,device=device),torch.tensor(np.array([num_fixation]),dtype=torch.float32,device=device))
         print(torch.sigmoid(prediction).item())
         return (torch.sigmoid(prediction) >= 0.5).item()
 
@@ -306,7 +348,7 @@ class ModelLoader():
             
             # Init the neural network, only the last layers are trained
             self.model = self.model_class(num_classes=self.num_classes)   
-            self.model = self.model.to("cuda")
+            self.model = self.model.to(device)
 
             self.model.reset_tl_params()
             self.balanced_weights(trainset.get_labels())
@@ -334,13 +376,13 @@ class ModelLoader():
                 amount_minibatches = 0
                 self.model.train()
                 # Iterate over the DataLoader for training data
-                for j,(x_train,y_train,fixation_num_train,scanpath_id_train) in enumerate(trainloader):
+                for j,(x_train,y_train,fixation_num_train,scanpath_id_train,image_train) in enumerate(trainloader):
 
                     # Zero the gradients
                     self.optim_func.zero_grad()
                     
                     # Perform forward pass
-                    outputs = self.model(x_train,fixation_num_train)
+                    outputs = self.model(x_train,fixation_num_train,image_train)
                     predictions = (torch.sigmoid(outputs) >= 0.5)
                     
                     
@@ -379,9 +421,9 @@ class ModelLoader():
                 amount_minibatches = 0
                 with torch.no_grad():
                     # Iterate over the test data and generate predictions
-                    for j,(x_test,y_test,fixation_num_test,scanpath_id_test) in enumerate(testloader):
+                    for j,(x_test,y_test,fixation_num_test,scanpath_id_test,image_test) in enumerate(testloader):
                         # Generate outputs
-                        outputs = self.model(x_test,fixation_num_test)
+                        outputs = self.model(x_test,fixation_num_test,image_test)
                         loss = self.loss_fn(outputs, y_test.reshape(-1,1))
                         current_loss_val += loss.item()
                         amount_minibatches +=1
