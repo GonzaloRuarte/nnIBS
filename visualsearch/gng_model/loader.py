@@ -24,16 +24,16 @@ class PosteriorDatasetWithImage(Dataset):
             scanpath_size = sequence_intervals[index][1] - sequence_intervals[index][0] + 1
             scanpath_ids = np.append(scanpath_ids,np.full(scanpath_size,index))
         self.x = torch.tensor(x,dtype=torch.float32,device=device)
-        self.y = torch.tensor(y,dtype=torch.float32,device=device)
-        self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.float32,device=device)
+        self.y = torch.tensor(y,dtype=torch.int32,device=device)
+        self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.int32,device=device)
         self.length = self.x.shape[0]
-        self.image_ids = torch.tensor(image_ids,dtype=torch.float32,device=device)
-        self.scanpath_ids = torch.tensor(scanpath_ids,dtype=torch.float32,device=device)
+        self.image_ids = torch.tensor(image_ids,dtype=torch.int32,device=device)
+        self.scanpath_ids = torch.tensor(scanpath_ids,dtype=torch.int32,device=device)
     def __getitem__(self,idx):
-        image_id_string = str(int(self.scanpath_ids[idx].item()))
+        image_id_string = str(self.scanpath_ids[idx].item())
         image_id_string_length = len(image_id_string)
         image_default_string_length = 12
-        image_file_name = (image_default_string_length - image_id_string_length)*'0' + image_id_string_length + ".jpg"
+        image_file_name = (image_default_string_length - image_id_string_length)*'0' + image_id_string + ".jpg"
         if path.exists("../../Datasets/COCOSearch18/ta_trainval/"+image_file_name):
             fullpath = "../../Datasets/COCOSearch18/ta_trainval/"+image_file_name            
         else:
@@ -62,11 +62,11 @@ class PosteriorDataset(Dataset):
             scanpath_size = sequence_intervals[index][1] - sequence_intervals[index][0] + 1
             scanpath_ids = np.append(scanpath_ids,np.full(scanpath_size,index))
         self.x = torch.tensor(x,dtype=torch.float32,device=device)
-        self.y = torch.tensor(y,dtype=torch.float32,device=device)
-        self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.float32,device=device)
+        self.y = torch.tensor(y,dtype=torch.int32,device=device)
+        self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.int32,device=device)
         self.length = self.x.shape[0]
-        self.image_ids = torch.tensor(image_ids,dtype=torch.float32,device=device)
-        self.scanpath_ids = torch.tensor(scanpath_ids,dtype=torch.float32,device=device)
+        self.image_ids = torch.tensor(image_ids,dtype=torch.int32,device=device)
+        self.scanpath_ids = torch.tensor(scanpath_ids,dtype=torch.int32,device=device)
     def __getitem__(self,idx):
         return self.x[idx],self.y[idx],self.fixation_nums[idx],self.scanpath_ids[idx],None
     def __len__(self):
@@ -98,12 +98,12 @@ class DoublePosteriorDataset(Dataset):
         full_intervals = np.concatenate(list(map(get_paired_sequences,sequence_intervals)))        
         self.intervals_indexes = full_intervals
         self.x = torch.tensor(x,dtype=torch.float32,device=device)
-        self.y = torch.tensor(y,dtype=torch.float32,device=device)
-        self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.float32,device=device)
+        self.y = torch.tensor(y,dtype=torch.int32,device=device)
+        self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.int32,device=device)
         
         self.length = self.intervals_indexes.shape[0]  
-        self.image_ids = torch.tensor(image_ids[self.intervals_indexes.T[0]],dtype=torch.float32,device=device)
-        self.scanpath_ids = torch.tensor(scanpath_ids,dtype=torch.float32,device=device)
+        self.image_ids = torch.tensor(image_ids[self.intervals_indexes.T[0]],dtype=torch.int32,device=device)
+        self.scanpath_ids = torch.tensor(scanpath_ids,dtype=torch.int32,device=device)
     def __getitem__(self,idx):
         interval = self.intervals_indexes[idx]
         return self.x[interval[0]:interval[1]+1],self.y[interval[1]],self.fixation_nums[interval[1]],self.scanpath_ids[interval[1]],None
@@ -136,12 +136,12 @@ class SeqDataset(Dataset):
         full_intervals = np.concatenate(list(map(get_paired_sequences,sequence_intervals)))
 
         self.x = torch.tensor(x,dtype=torch.float32,device=device)
-        self.y = torch.tensor(y,dtype=torch.float32,device=device)
-        self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.float32,device=device)
+        self.y = torch.tensor(y,dtype=torch.int32,device=device)
+        self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.int32,device=device)
         self.intervals_indexes = full_intervals
         self.length = self.intervals_indexes.shape[0]  
-        self.image_ids = torch.tensor(image_ids,dtype=torch.float32,device=device)
-        self.scanpath_ids = torch.tensor(np.arange(len(sequence_start)),dtype=torch.float32,device=device)
+        self.image_ids = torch.tensor(image_ids,dtype=torch.int32,device=device)
+        self.scanpath_ids = torch.tensor(np.arange(len(sequence_start)),dtype=torch.int32,device=device)
     def __getitem__(self,idx):
         interval = self.intervals_indexes[idx]
 
@@ -158,7 +158,7 @@ class SeqDataset(Dataset):
         return self.image_ids[self.intervals_indexes.T[0]]
 
 class ModelLoader():
-    def __init__(self,num_classes=1,learning_rate=0.001,epochs=100,batch_size=128,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.Adam,scheduler= ReduceLROnPlateau,model=go_no_go.TransferNet,dataset=DoublePosteriorDataset):
+    def __init__(self,num_classes=1,learning_rate=0.001,epochs=100,batch_size=128,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.Adam,scheduler= ReduceLROnPlateau,model=go_no_go.TransferNetWithImage,dataset=PosteriorDatasetWithImage):
 
         self.model_class = model
         self.model = model(num_classes=num_classes)

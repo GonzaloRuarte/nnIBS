@@ -15,13 +15,13 @@ def natural_keys(text):
 
 def parse_fixations(results_dir,target_present):
     posteriors = None
-    fixation_numbers = np.array([],dtype=np.float32)
-    labels = np.array([],dtype=np.float32)
+    fixation_numbers = np.array([],dtype=np.int32)
+    labels = np.array([],dtype=np.int32)
     if target_present == 1:
         dataset = "tp_trainval"
     else:
         dataset = "ta_trainval"
-    image_ids = np.array([],dtype=np.float32)
+    image_ids = np.array([],dtype=np.int32)
     trials_discarded = 0
     total_trials = 0
     for subject in listdir(results_dir):
@@ -49,9 +49,9 @@ def parse_fixations(results_dir,target_present):
                         label = 1
                 else:
                     label = 0
-                fixation_numbers = np.append(fixation_numbers,float(posterior[:-4].split('_')[1]))
-                labels = np.append(labels,float(label))
-                image_ids = np.append(image_ids,float(image_id))
+                fixation_numbers = np.append(fixation_numbers,int(posterior[:-4].split('_')[1]))
+                labels = np.append(labels,int(label))
+                image_ids = np.append(image_ids,int(image_id))
                 if posteriors is None:
                     posteriors = np.array([np.genfromtxt(posterior_file, delimiter=",")[1:25,:]])
                 else:
