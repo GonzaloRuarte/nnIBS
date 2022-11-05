@@ -158,7 +158,7 @@ class SeqDataset(Dataset):
         return self.image_ids[self.intervals_indexes.T[0]]
 
 class ModelLoader():
-    def __init__(self,num_classes=1,learning_rate=0.001,epochs=100,batch_size=128,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.SGD,scheduler= ReduceLROnPlateau,model=go_no_go.Net,dataset=DoublePosteriorDataset):
+    def __init__(self,num_classes=1,learning_rate=0.001,epochs=100,batch_size=128,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.Adam,scheduler= ReduceLROnPlateau,model=go_no_go.TransferNet,dataset=DoublePosteriorDataset):
 
         self.model_class = model
         self.model = model(num_classes=num_classes)
@@ -170,7 +170,7 @@ class ModelLoader():
         self.optim_module = optim        
         self.model = self.model.to(device)
         self.scheduler=scheduler
-        self.optim_func= self.optim_module(filter(lambda p: p.requires_grad, self.model.parameters()),lr=self.learning_rate, momentum=0.9)
+        self.optim_func= self.optim_module(filter(lambda p: p.requires_grad, self.model.parameters()),lr=self.learning_rate)
         self.scheduler_func=self.scheduler(self.optim_func, 'min')
         self.dataset = dataset
     def balanced_weights(self,y_data):
@@ -352,7 +352,7 @@ class ModelLoader():
 
             self.model.reset_tl_params()
             self.balanced_weights(trainset.get_labels())
-            self.optim_func= self.optim_module(filter(lambda p: p.requires_grad, self.model.parameters()),lr=0.001, momentum=0.1)
+            self.optim_func= self.optim_module(filter(lambda p: p.requires_grad, self.model.parameters()),lr=self.learning_rate)
             self.scheduler_func=self.scheduler(self.optim_func, 'min')
             
             # Run the training loop for defined number of epochs
