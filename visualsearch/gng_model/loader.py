@@ -23,25 +23,30 @@ class PosteriorDatasetWithImage(Dataset):
         for index in range(0,sequence_intervals.shape[0]):
             scanpath_size = sequence_intervals[index][1] - sequence_intervals[index][0] + 1
             scanpath_ids = np.append(scanpath_ids,np.full(scanpath_size,index))
+
+        self.images = {}
+        for image_id in np.unique(image_ids):
+            image_id_string = str(image_id)
+            image_id_string_length = len(image_id_string)
+            image_default_string_length = 12
+            image_file_name = (image_default_string_length - image_id_string_length)*'0' + image_id_string + ".jpg"
+            if image_file_name[0] != '0':
+                image_file_name = '0' + image_file_name[1:]
+            if path.exists(path.abspath("../../Datasets/COCOSearch18/ta_trainval/images/"+image_file_name)):
+                fullpath = path.abspath("../../Datasets/COCOSearch18/ta_trainval/images/"+image_file_name)            
+            else:
+                fullpath = path.abspath("../../Datasets/COCOSearch18/tp_trainval/images/"+image_file_name)
+            with Image.open(fullpath) as im:                
+                self.images[image_id] = transform(im.resize((224,224))).to(device)
+                
         self.x = torch.tensor(x,dtype=torch.float32,device=device)
-        self.y = torch.tensor(y,dtype=torch.int32,device=device)
+        self.y = torch.tensor(y,dtype=torch.float32,device=device)
         self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.int32,device=device)
         self.length = self.x.shape[0]
-        self.image_ids = torch.tensor(image_ids,dtype=torch.int32,device=device)
+        self.image_ids = image_ids
         self.scanpath_ids = torch.tensor(scanpath_ids,dtype=torch.int32,device=device)
-    def __getitem__(self,idx):
-        image_id_string = str(self.scanpath_ids[idx].item())
-        image_id_string_length = len(image_id_string)
-        image_default_string_length = 12
-        image_file_name = (image_default_string_length - image_id_string_length)*'0' + image_id_string + ".jpg"
-        if path.exists("../../Datasets/COCOSearch18/ta_trainval/"+image_file_name):
-            fullpath = "../../Datasets/COCOSearch18/ta_trainval/"+image_file_name            
-        else:
-            fullpath = "../../Datasets/COCOSearch18/tp_trainval/"+image_file_name
-        
-        with Image.open(fullpath) as im:
-            image = transform(im).to(device)   
-        return self.x[idx],self.y[idx],self.fixation_nums[idx],self.scanpath_ids[idx],image
+    def __getitem__(self,idx):        
+        return self.x[idx],self.y[idx],self.fixation_nums[idx],self.scanpath_ids[idx],self.images[self.image_ids[idx]]
     def __len__(self):
         return self.length
     def get_labels(self):
@@ -65,7 +70,7 @@ class PosteriorDataset(Dataset):
         self.y = torch.tensor(y,dtype=torch.int32,device=device)
         self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.int32,device=device)
         self.length = self.x.shape[0]
-        self.image_ids = torch.tensor(image_ids,dtype=torch.int32,device=device)
+        self.image_ids = image_ids
         self.scanpath_ids = torch.tensor(scanpath_ids,dtype=torch.int32,device=device)
     def __getitem__(self,idx):
         return self.x[idx],self.y[idx],self.fixation_nums[idx],self.scanpath_ids[idx],None
@@ -102,7 +107,7 @@ class DoublePosteriorDataset(Dataset):
         self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.int32,device=device)
         
         self.length = self.intervals_indexes.shape[0]  
-        self.image_ids = torch.tensor(image_ids[self.intervals_indexes.T[0]],dtype=torch.int32,device=device)
+        self.image_ids = image_ids
         self.scanpath_ids = torch.tensor(scanpath_ids,dtype=torch.int32,device=device)
     def __getitem__(self,idx):
         interval = self.intervals_indexes[idx]
@@ -140,7 +145,7 @@ class SeqDataset(Dataset):
         self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.int32,device=device)
         self.intervals_indexes = full_intervals
         self.length = self.intervals_indexes.shape[0]  
-        self.image_ids = torch.tensor(image_ids,dtype=torch.int32,device=device)
+        self.image_ids = image_ids
         self.scanpath_ids = torch.tensor(np.arange(len(sequence_start)),dtype=torch.int32,device=device)
     def __getitem__(self,idx):
         interval = self.intervals_indexes[idx]
@@ -326,7 +331,7 @@ class ModelLoader():
         
         fold = 0
 
-        for train_index, test_index in kfold.split(np.zeros(trainset.length), trainset.get_labels().cpu().detach().numpy(),groups=trainset.get_groups().cpu().detach().numpy()):
+        for train_index, test_index in kfold.split(np.zeros(trainset.length), trainset.get_labels().cpu().detach().numpy(),groups=trainset.get_groups()):
 
             # Print
             print(f'FOLD {fold}')

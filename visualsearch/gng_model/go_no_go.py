@@ -101,12 +101,14 @@ class TransferNetWithImage(models.ResNet):
         super().__init__(block = models.resnet.BasicBlock, layers=[2, 2, 2, 2], num_classes = 1000, **kwargs)
         #black and white images
         self.inplanes = 64
-        self.conv1 = nn.Conv2d(2, self.inplanes, kernel_size=7, stride=2, padding=3, bias=False)
+        self.conv1 = nn.Conv2d(1, self.inplanes, kernel_size=7, stride=2, padding=3, bias=False)
+        self.conv1_img = nn.Conv2d(3, self.inplanes, kernel_size=7, stride=2, padding=3, bias=False)
         #pretrained resnet-152 by default
         state_dict = load_state_dict_from_url("https://download.pytorch.org/models/resnet18-f37072fd.pth")
         #to make it work in grayscale images
-        conv1_weight = state_dict['conv1.weight']        
-        state_dict['conv1.weight'] = conv1_weight.sum(dim=1, keepdim=True).repeat(1,2,1,1)
+        conv1_weight = state_dict['conv1.weight']
+        state_dict['conv1_img.weight'] = conv1_weight
+        state_dict['conv1.weight'] = conv1_weight.sum(dim=1, keepdim=True)        
         self.load_state_dict(state_dict) 
         #Transfer Learning                   
         for param in self.parameters():
@@ -139,8 +141,8 @@ class TransferNetWithImage(models.ResNet):
         x = self.relu(x)
         x = self.avgpool2(x)
         x = torch.flatten(x,1)
-
-        image = self.conv1(image)
+        
+        image = self.conv1_img(image)
         image = self.bn1(image)
         image = self.relu(image)
         image = self.maxpool(image)
@@ -151,8 +153,7 @@ class TransferNetWithImage(models.ResNet):
         image = self.layer4(image)
         image = self.avgpool(image)
         image = torch.flatten(image,1)
-
-        x = self.fc2(torch.stack((x,image)))
+        x = self.fc2(torch.hstack((x,image)))
 
         return x
     def reset_tl_params(self):
