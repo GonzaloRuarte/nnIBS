@@ -15,7 +15,7 @@ import torchvision.transforms as transforms
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 transform = transforms.ToTensor()
 class PosteriorDatasetWithImage(Dataset):
-    def __init__(self,x,y,fixation_nums,image_ids):
+    def __init__(self,x,y,fixation_nums,image_ids,fix_X,fix_Y):
         sequence_start = np.where(fixation_nums == 1)[0]
         sequence_end = np.append(sequence_start[1:]-1,[fixation_nums.shape[0]-1])
         sequence_intervals = np.stack((sequence_start,sequence_end),axis=1)
@@ -44,9 +44,11 @@ class PosteriorDatasetWithImage(Dataset):
         self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.int32,device=device)
         self.length = self.x.shape[0]
         self.image_ids = image_ids
-        self.scanpath_ids = torch.tensor(scanpath_ids,dtype=torch.int32,device=device)
+        self.fix_X = fix_X
+        self.fix_Y = fix_Y
+        self.scanpath_ids = scanpath_ids
     def __getitem__(self,idx):        
-        return self.x[idx],self.y[idx],self.fixation_nums[idx],self.scanpath_ids[idx],self.images[self.image_ids[idx]]
+        return self.x[idx],self.y[idx],self.fixation_nums[idx],self.scanpath_ids[idx],self.images[self.image_ids[idx]],self.fix_X[idx],self.fix_Y[idx]
     def __len__(self):
         return self.length
     def get_labels(self):
@@ -58,7 +60,7 @@ class PosteriorDatasetWithImage(Dataset):
 
 
 class PosteriorDataset(Dataset):
-    def __init__(self,x,y,fixation_nums,image_ids):
+    def __init__(self,x,y,fixation_nums,image_ids,fix_X,fix_Y):
         sequence_start = np.where(fixation_nums == 1)[0]
         sequence_end = np.append(sequence_start[1:]-1,[fixation_nums.shape[0]-1])
         sequence_intervals = np.stack((sequence_start,sequence_end),axis=1)
@@ -67,13 +69,15 @@ class PosteriorDataset(Dataset):
             scanpath_size = sequence_intervals[index][1] - sequence_intervals[index][0] + 1
             scanpath_ids = np.append(scanpath_ids,np.full(scanpath_size,index))
         self.x = torch.tensor(x,dtype=torch.float32,device=device)
-        self.y = torch.tensor(y,dtype=torch.int32,device=device)
+        self.y = torch.tensor(y,dtype=torch.float32,device=device)
         self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.int32,device=device)
         self.length = self.x.shape[0]
         self.image_ids = image_ids
-        self.scanpath_ids = torch.tensor(scanpath_ids,dtype=torch.int32,device=device)
+        self.fix_X = torch.tensor(fix_X,dtype=torch.float32,device=device)
+        self.fix_Y = torch.tensor(fix_Y,dtype=torch.float32,device=device)
+        self.scanpath_ids = scanpath_ids
     def __getitem__(self,idx):
-        return self.x[idx],self.y[idx],self.fixation_nums[idx],self.scanpath_ids[idx],None
+        return self.x[idx],self.y[idx],self.fixation_nums[idx],self.scanpath_ids[idx],np.empty(0),self.fix_X[idx],self.fix_Y[idx]
     def __len__(self):
         return self.length
     def get_labels(self):
@@ -82,7 +86,7 @@ class PosteriorDataset(Dataset):
         return self.image_ids
 
 class DoublePosteriorDataset(Dataset):
-    def __init__(self,x,y,fixation_nums,image_ids):
+    def __init__(self,x,y,fixation_nums,image_ids,fix_X,fix_Y):
         #obtengo los índices de comienzo y fin de scanpath
         sequence_start = np.where(fixation_nums == 1)[0]
         sequence_end = np.append(sequence_start[1:]-1,[fixation_nums.shape[0]-1])
@@ -103,15 +107,16 @@ class DoublePosteriorDataset(Dataset):
         full_intervals = np.concatenate(list(map(get_paired_sequences,sequence_intervals)))        
         self.intervals_indexes = full_intervals
         self.x = torch.tensor(x,dtype=torch.float32,device=device)
-        self.y = torch.tensor(y,dtype=torch.int32,device=device)
+        self.y = torch.tensor(y,dtype=torch.float32,device=device)
         self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.int32,device=device)
-        
+        self.fix_X = fix_X
+        self.fix_Y = fix_Y
         self.length = self.intervals_indexes.shape[0]  
         self.image_ids = image_ids
-        self.scanpath_ids = torch.tensor(scanpath_ids,dtype=torch.int32,device=device)
+        self.scanpath_ids = scanpath_ids
     def __getitem__(self,idx):
         interval = self.intervals_indexes[idx]
-        return self.x[interval[0]:interval[1]+1],self.y[interval[1]],self.fixation_nums[interval[1]],self.scanpath_ids[interval[1]],None
+        return self.x[interval[0]:interval[1]+1],self.y[interval[1]],self.fixation_nums[interval[1]],self.scanpath_ids[interval[1]],np.empty(0),self.fix_X[interval[1]],self.fix_Y[interval[1]]
 
     def __len__(self):
         return self.length
@@ -124,7 +129,7 @@ class DoublePosteriorDataset(Dataset):
         return self.image_ids
 
 class SeqDataset(Dataset):
-    def __init__(self,x,y,fixation_nums,image_ids):
+    def __init__(self,x,y,fixation_nums,image_ids,fix_X,fix_Y):
         #obtengo los índices de comienzo y fin de scanpath
         sequence_start = np.where(fixation_nums == 1)[0]
         sequence_end = np.append(sequence_start[1:]-1,[fixation_nums.shape[0]-1])
@@ -146,11 +151,13 @@ class SeqDataset(Dataset):
         self.intervals_indexes = full_intervals
         self.length = self.intervals_indexes.shape[0]  
         self.image_ids = image_ids
-        self.scanpath_ids = torch.tensor(np.arange(len(sequence_start)),dtype=torch.int32,device=device)
+        self.fix_X = fix_X
+        self.fix_Y = fix_Y
+        self.scanpath_ids = np.arange(len(sequence_start))
     def __getitem__(self,idx):
         interval = self.intervals_indexes[idx]
 
-        return self.x[interval[0]:interval[1]+1],self.y[interval[0]:interval[1]+1],self.fixation_nums[interval[0]:interval[1]+1],None
+        return self.x[interval[0]:interval[1]+1],self.y[interval[0]:interval[1]+1],self.fixation_nums[interval[0]:interval[1]+1],np.empty(0),self.fix_X[interval[0]:interval[1]+1],self.fix_Y[interval[0]:interval[1]+1]
 
     def __len__(self):
         return self.length
@@ -163,7 +170,7 @@ class SeqDataset(Dataset):
         return self.image_ids[self.intervals_indexes.T[0]]
 
 class ModelLoader():
-    def __init__(self,num_classes=1,learning_rate=0.001,epochs=100,batch_size=128,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.Adam,scheduler= ReduceLROnPlateau,model=go_no_go.TransferNetWithImage,dataset=PosteriorDatasetWithImage):
+    def __init__(self,dataset=None,num_classes=1,learning_rate=0.001,epochs=100,batch_size=128,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.Adam,scheduler= ReduceLROnPlateau,model=go_no_go.TransferNetWithImage):
 
         self.model_class = model
         self.model = model(num_classes=num_classes)
@@ -185,18 +192,18 @@ class ModelLoader():
     def load(self,model_dict_path):
         self.model.load_state_dict(torch.load(model_dict_path))
 
-    def fit(self,posteriors,labels,fixation_nums,images_ids):    
+    def fit(self):    
         seed = 321
         random.seed(seed)
         # Set fixed random number seed
         torch.manual_seed(seed)
         
-        trainset = self.dataset(posteriors,labels,fixation_nums,images_ids)
-        del posteriors,labels,fixation_nums
+        trainset = self.dataset
+
         #DataLoader
         trainloader = DataLoader(trainset,self.batch_size,shuffle=False)                        
         self.model.train()
-        self.balanced_weights(labels)
+        self.balanced_weights(trainset.get_labels())
         #forward loop
         for epoch in range(self.epochs):
                 correct, total, true_positives, true_negatives, positives, negatives = 0, 0, 0, 0, 0, 0
@@ -207,13 +214,13 @@ class ModelLoader():
                 current_loss = 0.0
                 self.model.train()
                 # Iterate over the DataLoader for training data
-                for j,(x_train,y_train,fixation_num_train,scanpath_id_train) in enumerate(trainloader):
+                for j,(x_train,y_train,fixation_num_train,scanpath_id_train,image_train,fix_X,fix_Y) in enumerate(trainloader):
 
                     # Zero the gradients
                     self.optim_func.zero_grad()
                     
                     # Perform forward pass
-                    outputs = self.model(x_train,fixation_num_train)
+                    outputs = self.model(x_train,fixation_num_train,image_train,fix_X,fix_Y)
                     predictions = (torch.sigmoid(outputs) >= 0.5)                    
                     positives += (y_train ==1).sum().item()
                     negatives += (y_train ==0).sum().item()
@@ -264,9 +271,9 @@ class ModelLoader():
                 print(f'Reset trainable parameters of layer = {layer}')
                 layer.reset_parameters()
 
-    def predict(self,posteriors,labels,fixation_nums,images_ids):
-        testset = self.dataset(posteriors,labels,fixation_nums,images_ids)
-        del posteriors,labels,fixation_nums
+    def predict(self):
+        testset = self.dataset
+
         self.load("gng-fold-1.pth")
 
 
@@ -278,10 +285,10 @@ class ModelLoader():
         with torch.no_grad():
 
             # Iterate over the test data and generate predictions
-            for j,(x_test,y_test,fixation_num_test,scanpath_id_test) in enumerate(testloader):
+            for j,(x_test,y_test,fixation_num_test,scanpath_id_test,image_test,fix_X,fix_Y) in enumerate(testloader):
 
                 # Generate outputs
-                outputs = self.model(x_test,fixation_num_test)
+                outputs = self.model(x_test,fixation_num_test,image_test,fix_X,fix_Y)
                 
                 # Set total and correct
                 predictions = (torch.sigmoid(outputs) >= 0.5)
@@ -308,7 +315,7 @@ class ModelLoader():
 
 
     
-    def cross_val(self,posteriors,labels,fixation_nums,images_ids,k_folds=5):
+    def cross_val(self,k_folds=5):
         seed = 321
         training_info = pd.DataFrame(columns=["n_fold","n_epoch","acc","tpr","tnr","loss","train","valid"])
         random.seed(seed)
@@ -319,7 +326,7 @@ class ModelLoader():
         # Set fixed random number seed
         torch.manual_seed(seed)
         
-        trainset = self.dataset(posteriors,labels,fixation_nums,images_ids)
+        trainset = self.dataset
         # del posteriors,labels,fixation_nums
         # Define the K-fold Cross Validator
         kfold = StratifiedGroupKFold(n_splits=k_folds, shuffle=True,random_state=seed)
@@ -381,13 +388,13 @@ class ModelLoader():
                 amount_minibatches = 0
                 self.model.train()
                 # Iterate over the DataLoader for training data
-                for j,(x_train,y_train,fixation_num_train,scanpath_id_train,image_train) in enumerate(trainloader):
+                for j,(x_train,y_train,fixation_num_train,scanpath_id_train,image_train,fix_X,fix_Y) in enumerate(trainloader):
 
                     # Zero the gradients
                     self.optim_func.zero_grad()
                     
                     # Perform forward pass
-                    outputs = self.model(x_train,fixation_num_train,image_train)
+                    outputs = self.model(x_train,fixation_num_train,image_train,fix_X,fix_Y)
                     predictions = (torch.sigmoid(outputs) >= 0.5)
                     
                     
@@ -426,9 +433,9 @@ class ModelLoader():
                 amount_minibatches = 0
                 with torch.no_grad():
                     # Iterate over the test data and generate predictions
-                    for j,(x_test,y_test,fixation_num_test,scanpath_id_test,image_test) in enumerate(testloader):
+                    for j,(x_test,y_test,fixation_num_test,scanpath_id_test,image_test,fix_X,fix_Y) in enumerate(testloader):
                         # Generate outputs
-                        outputs = self.model(x_test,fixation_num_test,image_test)
+                        outputs = self.model(x_test,fixation_num_test,image_test,fix_X,fix_Y)
                         loss = self.loss_fn(outputs, y_test.reshape(-1,1))
                         current_loss_val += loss.item()
                         amount_minibatches +=1

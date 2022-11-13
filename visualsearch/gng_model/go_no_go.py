@@ -18,7 +18,7 @@ class RNNModel(nn.Module):
         # Fully connected layer
         self.fc = nn.Linear(hidden_dim, num_classes)
 
-    def forward(self, x, fixation_num,image):
+    def forward(self, x, fixation_num,image,fix_X,fix_Y):
         
         x = torch.flatten(x,2)
         # Initializing hidden state for first input with zeros
@@ -47,12 +47,12 @@ class TransferNet(models.ResNet):
         super().__init__(block = models.resnet.BasicBlock, layers=[2, 2, 2, 2], num_classes = 1000, **kwargs)
         #black and white images
         self.inplanes = 64
-        self.conv1 = nn.Conv2d(2, self.inplanes, kernel_size=7, stride=2, padding=3, bias=False)
+        self.conv1 = nn.Conv2d(1, self.inplanes, kernel_size=7, stride=2, padding=3, bias=False)
         #pretrained resnet-152 by default
         state_dict = load_state_dict_from_url("https://download.pytorch.org/models/resnet18-f37072fd.pth")
         #to make it work in grayscale images
         conv1_weight = state_dict['conv1.weight']        
-        state_dict['conv1.weight'] = conv1_weight.sum(dim=1, keepdim=True).repeat(1,2,1,1)
+        state_dict['conv1.weight'] = conv1_weight.sum(dim=1, keepdim=True)
         self.load_state_dict(state_dict) 
         #Transfer Learning                   
         for param in self.parameters():
@@ -64,9 +64,9 @@ class TransferNet(models.ResNet):
         self.fc2 = nn.Linear(512,num_classes)
         
 
-    def forward(self, x, fixation_num,image):
-        #x = torch.squeeze(x)
-        #x = torch.unsqueeze(x, axis=1) #para incorporar el canal (que es uno solo en este caso)
+    def forward(self, x, fixation_num,image,fix_X,fix_Y):
+        x = torch.squeeze(x)
+        x = torch.unsqueeze(x, axis=1) #para incorporar el canal (que es uno solo en este caso)
 
         x = nn.functional.interpolate(x,size=(224,224))
 
@@ -86,13 +86,71 @@ class TransferNet(models.ResNet):
         x = self.relu(x)
         x = self.avgpool2(x)
         x = torch.flatten(x,1)
-        x = self.dropout(x)
+        
         x = self.fc2(x)
 
         return x
     def reset_tl_params(self):
         self.conv2.reset_parameters()
         self.fc2.reset_parameters()
+
+
+class TransferNetWithFix(models.ResNet):
+    def __init__(self, num_classes=1000, **kwargs):
+        # Start with standard resnet152 defined here
+
+        super().__init__(block = models.resnet.BasicBlock, layers=[2, 2, 2, 2], num_classes = 1000, **kwargs)
+        #black and white images
+        self.inplanes = 64
+        self.conv1 = nn.Conv2d(1, self.inplanes, kernel_size=7, stride=2, padding=3, bias=False)
+        #pretrained resnet-152 by default
+        state_dict = load_state_dict_from_url("https://download.pytorch.org/models/resnet18-f37072fd.pth")
+        #to make it work in grayscale images
+        conv1_weight = state_dict['conv1.weight']        
+        state_dict['conv1.weight'] = conv1_weight.sum(dim=1, keepdim=True)
+        self.load_state_dict(state_dict) 
+        #Transfer Learning                   
+        for param in self.parameters():
+            param.requires_grad = False
+        self.conv2 = nn.Conv2d(512, 32, kernel_size=7, stride=2, padding=3, bias=False)
+        self.bn2 = nn.BatchNorm2d(32)
+        self.avgpool2 = nn.AvgPool2d((1,1))
+        self.dropout = nn.Dropout(0.5)
+        self.fc2 = nn.Linear(514,num_classes)
+        
+
+    def forward(self, x, fixation_num,image,fix_X,fix_Y):
+        x = torch.squeeze(x)
+        x = torch.unsqueeze(x, axis=1) #para incorporar el canal (que es uno solo en este caso)
+
+        x = nn.functional.interpolate(x,size=(224,224))
+
+        x = self.conv1(x)
+        x = self.bn1(x)
+        x = self.relu(x)
+        x = self.maxpool(x)
+
+        x = self.layer1(x)
+        x = self.layer2(x)
+        x = self.layer3(x)
+        x = self.layer4(x)
+
+
+        x = self.conv2(x)
+        x = self.bn2(x)
+        x = self.relu(x)
+        x = self.avgpool2(x)
+        x = torch.flatten(x,1)
+        x = torch.cat((x,fix_X[:,None]),1)
+        x = torch.cat((x,fix_Y[:,None]),1)
+        x = self.fc2(x)
+
+        return x
+    def reset_tl_params(self):
+        self.conv2.reset_parameters()
+        self.fc2.reset_parameters()
+
+
 
 class TransferNetWithImage(models.ResNet):
     def __init__(self, num_classes=1000, **kwargs):
@@ -119,7 +177,7 @@ class TransferNetWithImage(models.ResNet):
         self.fc2 = nn.Linear(1024,num_classes)
         
 
-    def forward(self, x, fixation_num,image):
+    def forward(self, x, fixation_num,image,fix_X,fix_Y):
         x = torch.squeeze(x)
         x = torch.unsqueeze(x, axis=1) #para incorporar el canal (que es uno solo en este caso)
 
@@ -181,7 +239,7 @@ class Net(nn.Module):
         self.fc2 = nn.Linear(512,num_classes)
         
 
-    def forward(self, x, fixation_num,image):
+    def forward(self, x, fixation_num,image,fix_X,fix_Y):
         #x = torch.squeeze(x)
         #x = torch.unsqueeze(x, axis=1) #para incorporar el canal (que es uno solo en este caso)
         x = nn.functional.interpolate(x,size=(224,224))
