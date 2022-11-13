@@ -14,59 +14,16 @@ import torchvision.transforms as transforms
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 transform = transforms.ToTensor()
-class PosteriorDatasetWithImage(Dataset):
-    def __init__(self,x,y,fixation_nums,image_ids,fix_X,fix_Y):
-        sequence_start = np.where(fixation_nums == 1)[0]
-        sequence_end = np.append(sequence_start[1:]-1,[fixation_nums.shape[0]-1])
-        sequence_intervals = np.stack((sequence_start,sequence_end),axis=1)
-        scanpath_ids = np.empty(shape=0)
-        for index in range(0,sequence_intervals.shape[0]):
-            scanpath_size = sequence_intervals[index][1] - sequence_intervals[index][0] + 1
-            scanpath_ids = np.append(scanpath_ids,np.full(scanpath_size,index))
-
-        self.images = {}
-        for image_id in np.unique(image_ids):
-            image_id_string = str(image_id)
-            image_id_string_length = len(image_id_string)
-            image_default_string_length = 12
-            image_file_name = (image_default_string_length - image_id_string_length)*'0' + image_id_string + ".jpg"
-            if image_file_name[0] != '0':
-                image_file_name = '0' + image_file_name[1:]
-            if path.exists(path.abspath("../../Datasets/COCOSearch18/ta_trainval/images/"+image_file_name)):
-                fullpath = path.abspath("../../Datasets/COCOSearch18/ta_trainval/images/"+image_file_name)            
-            else:
-                fullpath = path.abspath("../../Datasets/COCOSearch18/tp_trainval/images/"+image_file_name)
-            with Image.open(fullpath) as im:                
-                self.images[image_id] = transform(im.resize((224,224))).to(device)
-                
-        self.x = torch.tensor(x,dtype=torch.float32,device=device)
-        self.y = torch.tensor(y,dtype=torch.float32,device=device)
-        self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.int32,device=device)
-        self.length = self.x.shape[0]
-        self.image_ids = image_ids
-        self.fix_X = fix_X
-        self.fix_Y = fix_Y
-        self.scanpath_ids = scanpath_ids
-    def __getitem__(self,idx):        
-        return self.x[idx],self.y[idx],self.fixation_nums[idx],self.scanpath_ids[idx],self.images[self.image_ids[idx]],self.fix_X[idx],self.fix_Y[idx]
-    def __len__(self):
-        return self.length
-    def get_labels(self):
-        return self.y
-    def get_groups(self):
-        return self.image_ids
-
-
-
+fix_size=52
 
 class PosteriorDataset(Dataset):
     def __init__(self,x,y,fixation_nums,image_ids,fix_X,fix_Y):
         sequence_start = np.where(fixation_nums == 1)[0]
         sequence_end = np.append(sequence_start[1:]-1,[fixation_nums.shape[0]-1])
-        sequence_intervals = np.stack((sequence_start,sequence_end),axis=1)
+        self.sequence_intervals = np.stack((sequence_start,sequence_end),axis=1)
         scanpath_ids = np.empty(shape=0)
-        for index in range(0,sequence_intervals.shape[0]):
-            scanpath_size = sequence_intervals[index][1] - sequence_intervals[index][0] + 1
+        for index in range(0,self.sequence_intervals.shape[0]):
+            scanpath_size = self.sequence_intervals[index][1] - self.sequence_intervals[index][0] + 1
             scanpath_ids = np.append(scanpath_ids,np.full(scanpath_size,index))
         self.x = torch.tensor(x,dtype=torch.float32,device=device)
         self.y = torch.tensor(y,dtype=torch.float32,device=device)
@@ -85,55 +42,73 @@ class PosteriorDataset(Dataset):
     def get_groups(self):
         return self.image_ids
 
-class DoublePosteriorDataset(Dataset):
-    def __init__(self,x,y,fixation_nums,image_ids,fix_X,fix_Y):
-        #obtengo los índices de comienzo y fin de scanpath
-        sequence_start = np.where(fixation_nums == 1)[0]
-        sequence_end = np.append(sequence_start[1:]-1,[fixation_nums.shape[0]-1])
-        sequence_intervals = np.stack((sequence_start,sequence_end))
-        scanpath_ids = np.empty(shape=0)
-        for index in range(0,sequence_intervals.shape[1]):
-            scanpath_size = sequence_intervals[1][index] - sequence_intervals[0][index] + 1
-            scanpath_ids = np.append(scanpath_ids,np.full(scanpath_size,index))
-        #filtro los de tamaño 1
-        non_size_1_intervals = np.where(sequence_intervals[0,:] != sequence_intervals[1,:])[0]
-        sequence_intervals = np.stack((sequence_intervals[0,:][non_size_1_intervals],sequence_intervals[1,:][non_size_1_intervals]),axis=1) #agrupo de a pares (principio, fin)
 
+class PosteriorDatasetWithImage(PosteriorDataset):
+    def __init__(self,x,y,fixation_nums,image_ids,fix_X,fix_Y):
+        super().__init__(x,y,fixation_nums,image_ids,fix_X,fix_Y)
+        self.images = {}
+        for image_id in np.unique(self.image_ids):
+            image_id_string = str(image_id)
+            image_id_string_length = len(image_id_string)
+            image_default_string_length = 12
+            image_file_name = (image_default_string_length - image_id_string_length)*'0' + image_id_string + ".jpg"
+            if image_file_name[0] != '0':
+                image_file_name = '0' + image_file_name[1:]
+            if path.exists(path.abspath("../../Datasets/COCOSearch18/ta_trainval/images/"+image_file_name)):
+                fullpath = path.abspath("../../Datasets/COCOSearch18/ta_trainval/images/"+image_file_name)            
+            else:
+                fullpath = path.abspath("../../Datasets/COCOSearch18/tp_trainval/images/"+image_file_name)
+            with Image.open(fullpath) as im:
+                self.images[image_id] = transform(im.resize((224,224))).to(device)
+    def __getitem__(self,idx):        
+        return self.x[idx],self.y[idx],self.fixation_nums[idx],self.scanpath_ids[idx],self.images[self.image_ids[idx]],self.fix_X[idx],self.fix_Y[idx]
+
+class PosteriorDatasetWithCroppedTarget(PosteriorDataset):
+    def __init__(self,x,y,fixation_nums,image_ids,fix_X,fix_Y):
+        super().__init__(x,y,fixation_nums,image_ids,fix_X,fix_Y)
+        self.images = torch.empty((self.length,3,fix_size,fix_size),dtype=torch.float32,device=device)
+        for idx in range(0,self.length):
+            image_id = self.image_ids[idx]
+            image_id_string = str(image_id)
+            image_id_string_length = len(image_id_string)
+            image_default_string_length = 12
+            image_file_name = (image_default_string_length - image_id_string_length)*'0' + image_id_string + ".jpg"
+            if image_file_name[0] != '0':
+                image_file_name = '0' + image_file_name[1:]
+            if path.exists(path.abspath("../../Datasets/COCOSearch18/ta_trainval/images/"+image_file_name)):
+                fullpath = path.abspath("../../Datasets/COCOSearch18/ta_trainval/images/"+image_file_name)            
+            else:
+                fullpath = path.abspath("../../Datasets/COCOSearch18/tp_trainval/images/"+image_file_name)
+            with Image.open(fullpath) as im:
+                im = im.crop((fix_Y[idx],fix_X[idx], fix_Y[idx]+fix_size,fix_X[idx]+fix_size))
+                self.images[idx] = transform(im).to(device)
+    def __getitem__(self,idx):        
+        return self.x[idx],self.y[idx],self.fixation_nums[idx],self.scanpath_ids[idx],self.images[idx],self.fix_X[idx],self.fix_Y[idx]
+
+
+class DoublePosteriorDataset(PosteriorDataset):
+    def __init__(self,x,y,fixation_nums,image_ids,fix_X,fix_Y):
+        super().__init__(x,y,fixation_nums,image_ids,fix_X,fix_Y)
+        #filtro los de tamaño 1
+        non_size_1_intervals = np.where(self.sequence_intervals[0,:] != self.sequence_intervals[1,:])[0]
+        sequence_intervals = np.stack((self.sequence_intervals[0,:][non_size_1_intervals],self.sequence_intervals[1,:][non_size_1_intervals]),axis=1) #agrupo de a pares (principio, fin)
         #obtengo los intervalos completos y después tomo de a pares consecutivos
         #por ej si tengo un scanpath de 4 fijaciones que arranca en el índice i obtengo los pares (i,i+1), (i+1,i+2), (i+2,i+3)  
         consecutive_elements = lambda x: [[x[i], x[i + 1]] for i in range(len(x) - 1)]
-        get_paired_sequences = lambda x: np.array(consecutive_elements(np.linspace(x[0],x[-1],1+x[-1]-x[0],dtype=np.int32)))
-        
+        get_paired_sequences = lambda x: np.array(consecutive_elements(np.linspace(x[0],x[-1],1+x[-1]-x[0],dtype=np.int32)))        
         full_intervals = np.concatenate(list(map(get_paired_sequences,sequence_intervals)))        
         self.intervals_indexes = full_intervals
-        self.x = torch.tensor(x,dtype=torch.float32,device=device)
-        self.y = torch.tensor(y,dtype=torch.float32,device=device)
-        self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.int32,device=device)
-        self.fix_X = fix_X
-        self.fix_Y = fix_Y
-        self.length = self.intervals_indexes.shape[0]  
-        self.image_ids = image_ids
-        self.scanpath_ids = scanpath_ids
     def __getitem__(self,idx):
         interval = self.intervals_indexes[idx]
         return self.x[interval[0]:interval[1]+1],self.y[interval[1]],self.fixation_nums[interval[1]],self.scanpath_ids[interval[1]],np.empty(0),self.fix_X[interval[1]],self.fix_Y[interval[1]]
-
-    def __len__(self):
-        return self.length
 
     def get_labels(self):
 
         return self.y[self.intervals_indexes.T[1]]
 
-    def get_groups(self):
-        return self.image_ids
-
-class SeqDataset(Dataset):
+class SeqDataset(PosteriorDataset):
     def __init__(self,x,y,fixation_nums,image_ids,fix_X,fix_Y):
-        #obtengo los índices de comienzo y fin de scanpath
-        sequence_start = np.where(fixation_nums == 1)[0]
-        sequence_end = np.append(sequence_start[1:]-1,[fixation_nums.shape[0]-1])
-        sequence_intervals = np.stack((sequence_start,sequence_end))
+        super().__init__(x,y,fixation_nums,image_ids,fix_X,fix_Y)
         #filtro los de tamaño 1
         non_size_1_intervals = np.where(sequence_intervals[0,:] != sequence_intervals[1,:])[0]
         sequence_intervals = np.stack((sequence_intervals[0,:][non_size_1_intervals],sequence_intervals[1,:][non_size_1_intervals]),axis=1) #agrupo de a pares (principio, fin)
@@ -141,26 +116,14 @@ class SeqDataset(Dataset):
         #obtengo los intervalos completos y después tomo de a pares consecutivos
         #por ej si tengo un scanpath de 4 fijaciones que arranca en el índice i obtengo los pares (i,i+1), (i+1,i+2), (i+2,i+3)  
         consecutive_elements = lambda x: [[x[i], x[i + 1]] for i in range(len(x) - 1)]
-        get_paired_sequences = lambda x: np.array(consecutive_elements(np.linspace(x[0],x[-1],1+x[-1]-x[0],dtype=np.int32)))
-        
+        get_paired_sequences = lambda x: np.array(consecutive_elements(np.linspace(x[0],x[-1],1+x[-1]-x[0],dtype=np.int32)))        
         full_intervals = np.concatenate(list(map(get_paired_sequences,sequence_intervals)))
-
-        self.x = torch.tensor(x,dtype=torch.float32,device=device)
-        self.y = torch.tensor(y,dtype=torch.int32,device=device)
-        self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.int32,device=device)
         self.intervals_indexes = full_intervals
-        self.length = self.intervals_indexes.shape[0]  
-        self.image_ids = image_ids
-        self.fix_X = fix_X
-        self.fix_Y = fix_Y
-        self.scanpath_ids = np.arange(len(sequence_start))
+        self.length = self.intervals_indexes.shape[0]
+        self.scanpath_ids = np.arange(len(self.sequence_intervals.T[0]))
     def __getitem__(self,idx):
         interval = self.intervals_indexes[idx]
-
         return self.x[interval[0]:interval[1]+1],self.y[interval[0]:interval[1]+1],self.fixation_nums[interval[0]:interval[1]+1],np.empty(0),self.fix_X[interval[0]:interval[1]+1],self.fix_Y[interval[0]:interval[1]+1]
-
-    def __len__(self):
-        return self.length
 
     def get_labels(self):
 

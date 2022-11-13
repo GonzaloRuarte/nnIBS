@@ -199,7 +199,7 @@ class TransferNetWithImage(models.ResNet):
         x = self.relu(x)
         x = self.avgpool2(x)
         x = torch.flatten(x,1)
-        
+        image = nn.functional.interpolate(image,size=(224,224))
         image = self.conv1_img(image)
         image = self.bn1(image)
         image = self.relu(image)
