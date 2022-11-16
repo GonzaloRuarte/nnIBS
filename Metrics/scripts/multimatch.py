@@ -25,14 +25,16 @@ class Multimatch:
         if number_of_models == 1: axs = [axs]
 
         ax_index = 0
-        for model in self.multimatch_values:
-            model_name = model
-            model_vs_human_multimatch = utils.get_random_subset(self.multimatch_values[model]['model_vs_humans'], size=self.number_of_images)
-            humans_multimatch         = utils.get_random_subset(self.multimatch_values[model]['human_mean'], size=self.number_of_images)
-            model_color               = self.multimatch_values[model]['plot_color']
 
-            self.add_to_plot(axs[ax_index], model_name, model_vs_human_multimatch, humans_multimatch, model_color)
-            ax_index += 1
+        for mss in self.multimatch_values:
+            for model in self.multimatch_values[mss]:
+                model_name = model + " MSS "+mss
+                model_vs_human_multimatch = self.multimatch_values[mss][model]['model_vs_humans']
+                humans_multimatch         = self.multimatch_values[mss][model]['human_mean']
+                model_color               = self.multimatch_values[mss][model]['plot_color']
+
+                self.add_to_plot(axs[ax_index], model_name, model_vs_human_multimatch, humans_multimatch, model_color)
+                ax_index += 1
 
         # Get plot limits
         min_x, max_x = (1, 0)
@@ -93,20 +95,20 @@ class Multimatch:
 
         dataset_metrics_file = path.join(save_path, filename)
         dataset_metrics      = utils.load_dict_from_json(dataset_metrics_file)
+        for mss in self.multimatch_values:
+            for model in self.multimatch_values[mss]:
+                model_vs_human_multimatch = self.multimatch_values[model][mss]['model_vs_humans']
+                humans_multimatch         = self.multimatch_values[model][mss]['human_mean']
 
-        for model in self.multimatch_values:
-            model_vs_human_multimatch = utils.get_random_subset(self.multimatch_values[model]['model_vs_humans'], size=self.number_of_images)
-            humans_multimatch         = utils.get_random_subset(self.multimatch_values[model]['human_mean'], size=self.number_of_images)
+                corr_coef_pvalue, mm_avg, model_vs_humans_mm, hmm_avg, humans_mm = self.process_results(model_vs_human_multimatch, humans_multimatch)
+                metrics  = {'Corr': corr_coef_pvalue[0], 'AvgMM': mm_avg, 'MMvec': model_vs_humans_mm[0], 'MMdir': model_vs_humans_mm[1], \
+                    'MMlen': model_vs_humans_mm[2], 'MMpos': model_vs_humans_mm[3]}
+                hmetrics = {'AvgMM': hmm_avg, 'MMvec': humans_mm[0], 'MMdir': humans_mm[1], 'MMlen': humans_mm[2], 'MMpos': humans_mm[3]}
 
-            corr_coef_pvalue, mm_avg, model_vs_humans_mm, hmm_avg, humans_mm = self.process_results(model_vs_human_multimatch, humans_multimatch)
-            metrics  = {'Corr': corr_coef_pvalue[0], 'AvgMM': mm_avg, 'MMvec': model_vs_humans_mm[0], 'MMdir': model_vs_humans_mm[1], \
-                'MMlen': model_vs_humans_mm[2], 'MMpos': model_vs_humans_mm[3]}
-            hmetrics = {'AvgMM': hmm_avg, 'MMvec': humans_mm[0], 'MMdir': humans_mm[1], 'MMlen': humans_mm[2], 'MMpos': humans_mm[3]}
-
-            utils.update_dict(dataset_metrics, model, metrics)
-            
-            # Subjects' score is computed in grid size
-            utils.update_dict(dataset_metrics, 'Humans', hmetrics)
+                utils.update_dict(dataset_metrics, model + " MSS "+mss, metrics)
+                
+                # Subjects' score is computed in grid size
+                utils.update_dict(dataset_metrics, 'Humans MSS ' +mss, hmetrics)
         
         utils.save_to_json(dataset_metrics_file, dataset_metrics)
     
@@ -180,19 +182,27 @@ class Multimatch:
 
                 model_trial_info   = model_scanpaths[image_name]
                 subject_trial_info = subject_scanpaths[image_name]
-
+                if not (subject_trial_info["memory_set"] == model_trial_info["memory_set"]):
+                    continue
+                if not ('memory_set' in subject_trial_info):
+                    mss = 1
+                else:
+                    mss = len(subject_trial_info["memory_set"])
                 receptive_size = utils.get_dims(model_trial_info, subject_trial_info, key='receptive')
                 screen_size    = utils.get_dims(model_trial_info, subject_trial_info, key='image')
-
-                self.add_multimatch_to_dict(image_name, subject_trial_info, model_trial_info, multimatch_model_vs_humans_mean_per_image,
+                if not multimatch_model_vs_humans_mean_per_image[mss]:
+                    multimatch_model_vs_humans_mean_per_image[mss] = {}
+                self.add_multimatch_to_dict(image_name, subject_trial_info, model_trial_info, multimatch_model_vs_humans_mean_per_image[mss],
                     total_values_per_image, screen_size, receptive_size)
 
         # Compute mean per image
-        for image_name in multimatch_model_vs_humans_mean_per_image:
-            multimatch_model_vs_humans_mean_per_image[image_name] = (np.divide(multimatch_model_vs_humans_mean_per_image[image_name], total_values_per_image[image_name])).tolist()
-
-        self.multimatch_values[model_name]['model_vs_humans'] = multimatch_model_vs_humans_mean_per_image
-        self.multimatch_values[model_name]['plot_color'] = model_color
+        for mss in multimatch_model_vs_humans_mean_per_image:
+            for image_name in multimatch_model_vs_humans_mean_per_image[mss]:
+                multimatch_model_vs_humans_mean_per_image[mss][image_name] = (np.divide(multimatch_model_vs_humans_mean_per_image[mss][image_name], total_values_per_image[image_name])).tolist()
+            if not self.multimatch_values[mss]:
+                self.multimatch_values[mss] = {}
+            self.multimatch_values[mss][model_name]['model_vs_humans'] = multimatch_model_vs_humans_mean_per_image[mss]
+            self.multimatch_values[mss][model_name]['plot_color'] = model_color
 
     def load_human_mean_per_image(self, model_name, model_scanpaths):
         " For each human subject, multimatch is computed against every other human subject, for each trial "
@@ -219,17 +229,24 @@ class Multimatch:
                 subject_scanpaths = utils.load_dict_from_json(path.join(self.human_scanpaths_dir, subject_filename))
                 for subject_to_compare_filename in subjects_scanpaths_files:
                     subject_to_compare_scanpaths = utils.load_dict_from_json(path.join(self.human_scanpaths_dir, subject_to_compare_filename))
+
                     for image_name in subject_scanpaths:
                         if not (image_name in subject_to_compare_scanpaths and image_name in model_scanpaths):
                             continue
 
                         subject_trial_info = subject_scanpaths[image_name]
                         subject_to_compare_trial_info = subject_to_compare_scanpaths[image_name]
-
+                        if not (subject_trial_info["memory_set"] == subject_to_compare_trial_info["memory_set"]):
+                            continue
+                        if not ('memory_set' in subject_trial_info):
+                            mss = 1
+                        else:
+                            mss = len(subject_trial_info["memory_set"])
                         receptive_size = utils.get_dims(model_scanpaths[image_name], subject_trial_info, key='receptive')
                         screen_size    = utils.get_dims(model_scanpaths[image_name], subject_trial_info, key='image')
-
-                        self.add_multimatch_to_dict(image_name, subject_trial_info, subject_to_compare_trial_info, multimatch_human_mean_per_image,
+                        if not multimatch_human_mean_per_image[mss]:
+                            multimatch_human_mean_per_image[mss] = {}
+                        self.add_multimatch_to_dict(image_name, subject_trial_info, subject_to_compare_trial_info, multimatch_human_mean_per_image[mss],
                             total_values_per_image, screen_size, receptive_size)
 
             # Compute mean per image

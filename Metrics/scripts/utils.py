@@ -136,9 +136,9 @@ def divide_by_memory_set_size(trials_dict):
         else:
             mss = len(val["memory_set"])
         if not mss in scanpaths_per_mss:
-            scanpaths_per_mss[len(val["memory_set"])] = {key : val}
+            scanpaths_per_mss[mss] = {key : val}
         else:
-            scanpaths_per_mss[len(val["memory_set"])][key] = val
+            scanpaths_per_mss[mss][key] = val
     return scanpaths_per_mss
 
 

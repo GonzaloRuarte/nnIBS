@@ -15,10 +15,24 @@ class CumulativePerformance:
     def add_model(self, model_name, model_scanpaths, model_color):
         if self.null_object:
             return
-
+        model_cumulative_performance = {}
         print('[Cumulative performance] Computing ' + model_name + ' mean for ' + self.dataset_name + ' dataset')
-        model_scanpaths = utils.get_random_subset(model_scanpaths, size=self.number_of_images)
-        model_cumulative_performance = self.compute_cumulative_performance(model_scanpaths)
+        model_scanpaths = utils.divide_by_memory_set_size(utils.get_random_subset(model_scanpaths, size=self.number_of_images))
+        mss_sorted = list(model_scanpaths.keys())
+        mss_sorted.sort()
+        for mss in mss_sorted:
+            if not mss in model_cumulative_performance:
+                model_cumulative_performance[mss] = []
+            else:
+                model_cumulative_performance[mss].append(self.compute_cumulative_performance(model_scanpaths[mss]))
+        total_cumulative_performance = 0
+        amount_mss = 0
+        for mss in model_cumulative_performance.keys():
+            model_cumulative_performance_mean = np.mean(np.array(model_cumulative_performance[mss]), axis=0)
+            self.subjects_cumulative_performance.append({'subject': model_name+' MSS '+str(mss), 'cumulative_performance': model_cumulative_performance_mean, 'color': model_color})
+            total_cumulative_performance += model_cumulative_performance_mean
+            amount_mss += 1
+        total_cumulative_performance /= amount_mss
         self.subjects_cumulative_performance.append({'subject': model_name, 'cumulative_performance': model_cumulative_performance, 'color': model_color})
     
     def add_human_mean(self, humans_scanpaths_dir, humans_color):

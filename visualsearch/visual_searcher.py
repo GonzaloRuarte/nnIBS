@@ -82,10 +82,9 @@ class VisualSearcher:
         self.image_size = (dataset_info['image_height'], dataset_info['image_width'])
 
         self.cell_size  = config['cell_size']
-        print(self.human_scanpaths)
         # Rescale human scanpaths' coordinates (if any) to those of the grid
         utils.rescale_scanpaths(self.grid, self.human_scanpaths)
-        print(self.human_scanpaths)
+
 
 
 
@@ -134,7 +133,7 @@ class VisualSearcher:
 
                 if trial_scanpath:
                     # If there were no errors, save the scanpath
-                    utils.add_scanpath_to_dict(image_name, trial_scanpath, target_bbox, trial['target_object'], self.grid, self.config, self.dataset_name, scanpaths)
+                    utils.add_scanpath_to_dict(image_name, trial_scanpath, target_bbox, trial['target_object'], self.grid, self.config, self.dataset_name, scanpaths,trial['memory_set'])
                     targets_found += trial_scanpath['target_found']
         except KeyboardInterrupt:
             time_elapsed = time.time() - start + previous_time
