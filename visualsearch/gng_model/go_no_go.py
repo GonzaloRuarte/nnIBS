@@ -115,7 +115,7 @@ class TransferNetWithFix(models.ResNet):
         self.conv2 = nn.Conv2d(512, 32, kernel_size=7, stride=2, padding=3, bias=False)
         self.bn2 = nn.BatchNorm2d(32)
         self.avgpool2 = nn.AvgPool2d((1,1))
-        self.dropout = nn.Dropout(0.5)
+        self.dropout = nn.Dropout(0.5) #no metí en ningún lado la dropout
         self.fc2 = nn.Linear(514,num_classes)
         
 
