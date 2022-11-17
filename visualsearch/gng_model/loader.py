@@ -133,7 +133,7 @@ class SeqDataset(PosteriorDataset):
         return self.image_ids[self.intervals_indexes.T[0]]
 
 class ModelLoader():
-    def __init__(self,dataset=None,num_classes=1,learning_rate=0.001,epochs=100,batch_size=128,loss_fn=nn.BCEWithLogitsLoss(),optim=torch.optim.Adam,scheduler= ReduceLROnPlateau,model=go_no_go.TransferNetWithImage):
+    def __init__(self,dataset=None,num_classes=4,learning_rate=0.001,epochs=100,batch_size=128,loss_fn=nn.CrossEntropyLoss(),optim=torch.optim.Adam,scheduler= ReduceLROnPlateau,model=go_no_go.TransferNetWithImage):
 
         self.model_class = model
         self.model = model(num_classes=num_classes)
@@ -149,7 +149,8 @@ class ModelLoader():
         self.scheduler_func=self.scheduler(self.optim_func, 'min')
         self.dataset = dataset
     def balanced_weights(self,y_data):
-        self.loss_fn = nn.BCEWithLogitsLoss(pos_weight=(y_data==0.).sum()/(y_data.sum()))
+        class_weights = torch.stack([(y_data==0.).sum(),(y_data==1.).sum(),(y_data==2.).sum(),(y_data==3.).sum()]) / y_data.sum()
+        self.loss_fn = nn.CrossEntropyLoss(class_weights)
 
     
     def load(self,model_dict_path):
@@ -390,7 +391,7 @@ class ModelLoader():
                 print('TNR after epoch %d: %.3f %%' % (epoch+1,100.0 * true_negatives / negatives))
                 print('Accuracy after epoch %d: %.3f %%' % (epoch+1,100.0 * correct / total))
                 print('Average loss for minibatches after epoch %d: %.3f' %(epoch+1, current_loss))
-                self.scheduler_func.step(loss.item())
+                #self.scheduler_func.step(loss.item()) comento porque uso adam
                 self.model.eval()
                 correct, total, true_positives, true_negatives, positives, negatives = 0, 0, 0, 0, 0, 0
                 amount_minibatches = 0

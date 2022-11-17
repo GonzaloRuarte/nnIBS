@@ -31,7 +31,7 @@ def parse_fixations(results_dir,target_present):
             scanpaths = json.load(json_file)
         probability_maps_folder = path.join(results_dir,subject,'probability_maps')
         for image_id in listdir(probability_maps_folder):
-            if target_present==1 and scanpaths[image_id+".jpg"]["target_found"] == False:
+            if target_present==1 and scanpaths[image_id+".jpg"]["target_found"] == False: #en principio dejo este filtro, después pregunto si cambio algo
                 trials_discarded+=1
                 continue
             else:
@@ -44,11 +44,14 @@ def parse_fixations(results_dir,target_present):
                 posterior_file = path.join(image_fixations_dir,posterior)
                 if posterior_idx == len(posterior_files) -1:
                     if target_present ==1:
-                        continue
+                        label = 3
                     else:
                         label = 1
                 else:
-                    label = 0
+                    if target_present ==1:
+                        label = 2
+                    else:
+                        label = 0
                 fixation_numbers = np.append(fixation_numbers,int(posterior[:-4].split('_')[1]))
                 labels = np.append(labels,int(label))
                 image_ids = np.append(image_ids,int(image_id))
