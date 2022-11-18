@@ -1,7 +1,7 @@
 from os import path
 # All paths are relative to root
-RESULTS_PATH  = '../Results'
-DATASETS_PATH = '../Datasets'
+RESULTS_PATH  = 'Results'
+DATASETS_PATH = 'Datasets'
 
 
 RANDOM_SEED = 1234

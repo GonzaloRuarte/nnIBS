@@ -5,7 +5,8 @@ import pandas as pd
 import numpy as np
 import shutil
 import numba
-import importlib
+
+
 
 """ Computes Human Scanpath Prediction on the visual search models for a given dataset. 
     See "Kümmerer, M. & Bethge, M. (2021), State-of-the-Art in Human Scanpath Prediction" for more information.
@@ -19,11 +20,11 @@ class HumanScanpathPrediction:
         self.number_of_images    = number_of_images
         self.human_scanpaths_dir = human_scanpaths_dir
         self.dataset_results_dir = dataset_results_dir
-        self.model_dir          = "../Models/nnIBS"
+
 
         self.null_object = not compute
 
-    def compute_metrics_for_model(self, model_name):
+    def compute_metrics_for_model(self, model_name,model):
         if self.null_object: return
 
         model_output_path     = self.dataset_results_dir 
@@ -34,13 +35,12 @@ class HumanScanpathPrediction:
         if average_results_per_image:
             print('[Human Scanpath Prediction] Found previously computed results for ' + model_name)
         else:
-            for subject in human_scanpaths_files:
-                subject_number = subject[4:6]
-
-                if not self.subject_already_processed(subject, subject_number, model_output_path):
-                    model = importlib.import_module(self.model_dir + '.main')
-                    print('[Human Scanpath Prediction] Running ' + model_name + ' on ' + self.dataset_name + ' dataset using subject ' + subject_number + ' scanpaths')
-                    model.main(self.dataset_name, int(subject_number))
+            for subject in human_scanpaths_files:             
+                subject_name = subject[:-15]
+                if not self.subject_already_processed(subject, subject_name, model_output_path):
+                    
+                    print('[Human Scanpath Prediction] Running ' + model_name + ' on ' + self.dataset_name + ' dataset using subject ' + subject_name + ' scanpaths')
+                    model.main(self.dataset_name, subject_name)
             
             average_results_per_image = self.get_model_average_per_image(model_output_path)
             utils.save_to_json(model_average_file, average_results_per_image)

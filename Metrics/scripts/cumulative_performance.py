@@ -23,8 +23,7 @@ class CumulativePerformance:
         for mss in mss_sorted:
             if not mss in model_cumulative_performance:
                 model_cumulative_performance[mss] = []
-            else:
-                model_cumulative_performance[mss].append(self.compute_cumulative_performance(model_scanpaths[mss]))
+            model_cumulative_performance[mss].append(self.compute_cumulative_performance(model_scanpaths[mss]))
         total_cumulative_performance = 0
         amount_mss = 0
         for mss in model_cumulative_performance.keys():
@@ -33,7 +32,7 @@ class CumulativePerformance:
             total_cumulative_performance += model_cumulative_performance_mean
             amount_mss += 1
         total_cumulative_performance /= amount_mss
-        self.subjects_cumulative_performance.append({'subject': model_name, 'cumulative_performance': model_cumulative_performance, 'color': model_color})
+        #self.subjects_cumulative_performance.append({'subject': model_name, 'cumulative_performance': model_cumulative_performance, 'color': model_color})
     
     def add_human_mean(self, humans_scanpaths_dir, humans_color):
         if self.null_object:
@@ -69,11 +68,11 @@ class CumulativePerformance:
                     subject_index += 1
             else:
                 humans_cumulative_performance_mean = np.mean(np.array(humans_cumulative_performance[mss]), axis=0)
-            self.subjects_cumulative_performance.append({'subject': 'Humans MSS '+str(mss), 'cumulative_performance': humans_cumulative_performance_mean, 'color': humans_color})
+            self.subjects_cumulative_performance.append({'subject': 'Humans MSS '+str(mss),'cumulative_performance': humans_cumulative_performance_mean, 'color': humans_color})
             total_cumulative_performance += humans_cumulative_performance_mean
             amount_mss += 1
         total_cumulative_performance /= amount_mss
-        self.subjects_cumulative_performance.append({'subject': 'Humans', 'cumulative_performance': total_cumulative_performance, 'color': humans_color})
+        #self.subjects_cumulative_performance.append({'subject': 'Humans', 'cumulative_performance': total_cumulative_performance, 'color': humans_color})
 
     def compute_cumulative_performance(self, scanpaths):
         """ At index i, this array holds the number of targets found in i or less fixations """
@@ -168,17 +167,15 @@ class CumulativePerformance:
         for subject in self.subjects_cumulative_performance:
             subject_name = subject['subject']
             subject_cumulative_performance = list(subject['cumulative_performance'])
-            start = 1
             if subject_name == 'Humans' and self.dataset_name == 'Interiors':
                 fixations = np.linspace(0, 1, num=len(subject_cumulative_performance))
                 for index, cum_perf in enumerate(subject_cumulative_performance):
                     subject_cumulative_performance[index] = np.mean(cum_perf)
                 
-                start = 0
+
             else:
-                fixations = np.linspace(0, 1, num=self.max_scanpath_length)
-            
-            auc = integrate.trapezoid(y=subject_cumulative_performance[start:], x=fixations)
+                fixations = np.linspace(0, 1, num=len(subject_cumulative_performance))
+            auc = integrate.trapezoid(y=subject_cumulative_performance, x=fixations)
             utils.update_dict(dataset_metrics, subject_name, {'AUCperf': np.round(auc, 3)})
         
         utils.save_to_json(dataset_metrics_file, dataset_metrics)

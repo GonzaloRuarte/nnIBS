@@ -60,7 +60,7 @@ def create_table(results_dict):
 
 def add_score(results_dict):
     # For each metric, different models are used as reference values
-    reference_models = {'AUCperf': 'Humans', 'AvgMM': 'Humans', \
+    reference_models = {'AUCperf': 'Humans MSS 1', 'AvgMM': 'Humans MSS 1', \
         'AUChsp': 'gold_standard', 'NSShsp': 'gold_standard', 'IGhsp': 'gold_standard', 'LLhsp': 'gold_standard'}
 
     # Only the average across dimensions is used for computing the score

@@ -1,10 +1,11 @@
-from scripts import constants
+from Metrics.scripts import constants
 import argparse
-from scripts.multimatch import Multimatch
-from scripts.human_scanpath_prediction import HumanScanpathPrediction
-from scripts.cumulative_performance import CumulativePerformance
-from scripts import utils
+from Metrics.scripts.multimatch import Multimatch
+from Metrics.scripts.human_scanpath_prediction import HumanScanpathPrediction
+from Metrics.scripts.cumulative_performance import CumulativePerformance
+from Metrics.scripts import utils
 from os import path,listdir
+import main as nnIBS
 
 def main(datasets, compute_cumulative_performance, compute_multimatch, compute_human_scanpath_prediction):
     datasets_results = {}
@@ -53,8 +54,7 @@ def main(datasets, compute_cumulative_performance, compute_multimatch, compute_h
             subjects_cumulative_performance.plot(save_path=path.join(config_folder,"Cumulative Performance.png"))
             multimatch.plot(save_path=config_folder)
 
-
-            human_scanpath_prediction.compute_metrics_for_model(model_name)
+            human_scanpath_prediction.compute_metrics_for_model(model_name,nnIBS)
 
             human_scanpath_prediction.add_baseline_models()
 

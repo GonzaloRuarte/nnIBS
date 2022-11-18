@@ -81,13 +81,10 @@ def load_dataset_info(dataset_path):
 def load_human_scanpaths(human_scanpaths_dir, human_subject):
     if human_subject is None:
         return {}
-
-    human_scanpaths_files = listdir(human_scanpaths_dir)
-    human_subject_str     = str(human_subject)
-    if human_subject < 10: human_subject_str = '0' + human_subject_str
-    human_subject_file    = 'subj' + human_subject_str + '_scanpaths.json'
+    human_scanpaths_files = listdir(human_scanpaths_dir)    
+    human_subject_file    = human_subject + '_scanpaths.json'
     if not human_subject_file in human_scanpaths_files:
-        raise NameError('Scanpaths for human subject ' + human_subject_str + ' not found!')
+        raise NameError('Scanpaths for human subject ' + human_subject + ' not found!')
     
     human_scanpaths = load_dict_from_json(path.join(human_scanpaths_dir, human_subject_file))
 
@@ -156,9 +153,7 @@ def create_output_folders(save_path, config_name, image_name, image_range, human
     if image_range is not None:
         output_path = path.join(output_path, 'range_' + str(image_range[0]) + '-' + str(image_range[1]))
     if human_subject is not None:
-        human_subject_str = str(human_subject)
-        if human_subject < 10: human_subject_str = '0' + human_subject_str
-        output_path = path.join(output_path, path.join('subjects_predictions', 'subject_' + human_subject_str))
+        output_path = path.join(output_path, path.join('subjects_predictions', 'subject_' + human_subject))
 
     makedirs(output_path, exist_ok=True)
 
