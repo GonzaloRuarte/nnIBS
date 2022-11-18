@@ -11,7 +11,8 @@ from sklearn.model_selection import GridSearchCV
 from . import constants
 
 def plot_table(df, title, save_path, filename):
-    fig, ax = plt.subplots()
+
+    fig, ax = plt.subplots(figsize=(12,3))
     fig.patch.set_visible(False)
     ax.axis('off')
     ax.axis('tight')
@@ -23,7 +24,7 @@ def plot_table(df, title, save_path, filename):
     table.scale(1.5, 1.5)
 
     fig.suptitle(title)
-    fig.set_size_inches(14, 5)
+
     plt.savefig(path.join(save_path, filename))
     plt.show()
 

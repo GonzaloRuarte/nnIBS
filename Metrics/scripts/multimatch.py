@@ -47,10 +47,11 @@ class Multimatch:
             lims = [np.min([min_x, min_y]), np.max([max_x, max_y])]
             ax.plot(lims, lims, linestyle='dashed', c='.3')
 
-            ax.set(xlabel='Model vs human multimatch mean', ylabel='Human multimatch mean')
+            
             ax.label_outer()
             ax.set_box_aspect(1)
-
+        axs[0].set(ylabel='Human multimatch mean')
+        axs[int(len(axs)/2)].set(xlabel='Model vs human multimatch mean')
         fig.suptitle(self.dataset_name + ' dataset')
         plt.savefig(path.join(save_path, 'Multimatch against humans.png'))
         plt.show()
