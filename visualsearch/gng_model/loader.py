@@ -4,6 +4,7 @@ from torch import nn
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 from os import path
 from sklearn.model_selection import StratifiedGroupKFold
+from sklearn.utils.class_weight import compute_class_weight
 import go_no_go
 import random
 import numpy as np
@@ -17,7 +18,7 @@ transform = transforms.ToTensor()
 fix_size=52
 
 class PosteriorDataset(Dataset):
-    def __init__(self,x,y,fixation_nums,image_ids,fix_X,fix_Y):
+    def __init__(self,x,y,fixation_nums,image_ids):
         sequence_start = np.where(fixation_nums == 1)[0]
         sequence_end = np.append(sequence_start[1:]-1,[fixation_nums.shape[0]-1])
         self.sequence_intervals = np.stack((sequence_start,sequence_end),axis=1)
@@ -26,15 +27,15 @@ class PosteriorDataset(Dataset):
             scanpath_size = self.sequence_intervals[index][1] - self.sequence_intervals[index][0] + 1
             scanpath_ids = np.append(scanpath_ids,np.full(scanpath_size,index))
         self.x = torch.tensor(x,dtype=torch.float32,device=device)
-        self.y = torch.tensor(y,dtype=torch.float32,device=device)
+        self.y = torch.tensor(y,dtype=torch.int32,device=device)
         self.fixation_nums = torch.tensor(fixation_nums,dtype=torch.int32,device=device)
         self.length = self.x.shape[0]
         self.image_ids = image_ids
-        self.fix_X = torch.tensor(fix_X,dtype=torch.float32,device=device)
-        self.fix_Y = torch.tensor(fix_Y,dtype=torch.float32,device=device)
+        #self.fix_X = torch.tensor(fix_X,dtype=torch.float32,device=device)
+        #self.fix_Y = torch.tensor(fix_Y,dtype=torch.float32,device=device)
         self.scanpath_ids = scanpath_ids
     def __getitem__(self,idx):
-        return self.x[idx],self.y[idx],self.fixation_nums[idx],self.scanpath_ids[idx],np.empty(0),self.fix_X[idx],self.fix_Y[idx]
+        return self.x[idx],self.y[idx],self.fixation_nums[idx],self.scanpath_ids[idx],np.empty(0)#,self.fix_X[idx],self.fix_Y[idx]
     def __len__(self):
         return self.length
     def get_labels(self):
@@ -44,8 +45,8 @@ class PosteriorDataset(Dataset):
 
 
 class PosteriorDatasetWithImage(PosteriorDataset):
-    def __init__(self,x,y,fixation_nums,image_ids,fix_X,fix_Y):
-        super().__init__(x,y,fixation_nums,image_ids,fix_X,fix_Y)
+    def __init__(self,x,y,fixation_nums,image_ids):
+        super().__init__(x,y,fixation_nums,image_ids)
         self.images = {}
         for image_id in np.unique(self.image_ids):
             image_id_string = str(image_id)
@@ -61,11 +62,11 @@ class PosteriorDatasetWithImage(PosteriorDataset):
             with Image.open(fullpath) as im:
                 self.images[image_id] = transform(im.resize((224,224))).to(device)
     def __getitem__(self,idx):        
-        return self.x[idx],self.y[idx],self.fixation_nums[idx],self.scanpath_ids[idx],self.images[self.image_ids[idx]],self.fix_X[idx],self.fix_Y[idx]
+        return self.x[idx],self.y[idx],self.fixation_nums[idx],self.scanpath_ids[idx],self.images[self.image_ids[idx]]
 
 class PosteriorDatasetWithCroppedTarget(PosteriorDataset):
     def __init__(self,x,y,fixation_nums,image_ids,fix_X,fix_Y):
-        super().__init__(x,y,fixation_nums,image_ids,fix_X,fix_Y)
+        super().__init__(x,y,fixation_nums,image_ids)
         self.images = torch.empty((self.length,3,fix_size,fix_size),dtype=torch.float32,device=device)
         for idx in range(0,self.length):
             image_id = self.image_ids[idx]
@@ -83,12 +84,12 @@ class PosteriorDatasetWithCroppedTarget(PosteriorDataset):
                 im = im.crop((fix_Y[idx],fix_X[idx], fix_Y[idx]+fix_size,fix_X[idx]+fix_size))
                 self.images[idx] = transform(im).to(device)
     def __getitem__(self,idx):        
-        return self.x[idx],self.y[idx],self.fixation_nums[idx],self.scanpath_ids[idx],self.images[idx],self.fix_X[idx],self.fix_Y[idx]
+        return self.x[idx],self.y[idx],self.fixation_nums[idx],self.scanpath_ids[idx],self.images[idx]
 
 
 class DoublePosteriorDataset(PosteriorDataset):
-    def __init__(self,x,y,fixation_nums,image_ids,fix_X,fix_Y):
-        super().__init__(x,y,fixation_nums,image_ids,fix_X,fix_Y)
+    def __init__(self,x,y,fixation_nums,image_ids):
+        super().__init__(x,y,fixation_nums,image_ids)
         #filtro los de tamaño 1
         non_size_1_intervals = np.where(self.sequence_intervals[0,:] != self.sequence_intervals[1,:])[0]
         sequence_intervals = np.stack((self.sequence_intervals[0,:][non_size_1_intervals],self.sequence_intervals[1,:][non_size_1_intervals]),axis=1) #agrupo de a pares (principio, fin)
@@ -100,15 +101,15 @@ class DoublePosteriorDataset(PosteriorDataset):
         self.intervals_indexes = full_intervals
     def __getitem__(self,idx):
         interval = self.intervals_indexes[idx]
-        return self.x[interval[0]:interval[1]+1],self.y[interval[1]],self.fixation_nums[interval[1]],self.scanpath_ids[interval[1]],np.empty(0),self.fix_X[interval[1]],self.fix_Y[interval[1]]
+        return self.x[interval[0]:interval[1]+1],self.y[interval[1]],self.fixation_nums[interval[1]],self.scanpath_ids[interval[1]],np.empty(0)
 
     def get_labels(self):
 
         return self.y[self.intervals_indexes.T[1]]
 
 class SeqDataset(PosteriorDataset):
-    def __init__(self,x,y,fixation_nums,image_ids,fix_X,fix_Y):
-        super().__init__(x,y,fixation_nums,image_ids,fix_X,fix_Y)
+    def __init__(self,x,y,fixation_nums,image_ids):
+        super().__init__(x,y,fixation_nums,image_ids)
         #filtro los de tamaño 1
         non_size_1_intervals = np.where(sequence_intervals[0,:] != sequence_intervals[1,:])[0]
         sequence_intervals = np.stack((sequence_intervals[0,:][non_size_1_intervals],sequence_intervals[1,:][non_size_1_intervals]),axis=1) #agrupo de a pares (principio, fin)
@@ -123,7 +124,7 @@ class SeqDataset(PosteriorDataset):
         self.scanpath_ids = np.arange(len(self.sequence_intervals.T[0]))
     def __getitem__(self,idx):
         interval = self.intervals_indexes[idx]
-        return self.x[interval[0]:interval[1]+1],self.y[interval[0]:interval[1]+1],self.fixation_nums[interval[0]:interval[1]+1],np.empty(0),self.fix_X[interval[0]:interval[1]+1],self.fix_Y[interval[0]:interval[1]+1]
+        return self.x[interval[0]:interval[1]+1],self.y[interval[0]:interval[1]+1],self.fixation_nums[interval[0]:interval[1]+1],np.empty(0)
 
     def get_labels(self):
 
@@ -133,7 +134,7 @@ class SeqDataset(PosteriorDataset):
         return self.image_ids[self.intervals_indexes.T[0]]
 
 class ModelLoader():
-    def __init__(self,dataset=None,num_classes=4,learning_rate=0.001,epochs=100,batch_size=128,loss_fn=nn.CrossEntropyLoss(),optim=torch.optim.Adam,scheduler= ReduceLROnPlateau,model=go_no_go.TransferNetWithImage):
+    def __init__(self,dataset=None,num_classes=4,learning_rate=0.001,epochs=50,batch_size=128,loss_fn=nn.CrossEntropyLoss(),optim=torch.optim.Adam,scheduler= ReduceLROnPlateau,model=go_no_go.TransferNet):
 
         self.model_class = model
         self.model = model(num_classes=num_classes)
@@ -149,8 +150,9 @@ class ModelLoader():
         self.scheduler_func=self.scheduler(self.optim_func, 'min')
         self.dataset = dataset
     def balanced_weights(self,y_data):
-        class_weights = torch.stack([(y_data==0.).sum(),(y_data==1.).sum(),(y_data==2.).sum(),(y_data==3.).sum()]) / y_data.sum()
-        self.loss_fn = nn.CrossEntropyLoss(class_weights)
+        class_weights = compute_class_weight(class_weight="balanced",classes=np.sort(np.unique(y_data.cpu().detach().numpy())),y=y_data.cpu().detach().numpy())
+
+        self.loss_fn = nn.CrossEntropyLoss(torch.tensor(class_weights,dtype=torch.float32,device=device))
 
     
     def load(self,model_dict_path):
@@ -212,8 +214,7 @@ class ModelLoader():
                     del  outputs, x_train, y_train, fixation_num_train, predictions
                 total = positives + negatives
                 correct = true_positives + true_negatives
-                print('TPR after epoch %d: %.3f %%' % (epoch+1,100.0 * true_positives / positives))
-                print('TNR after epoch %d: %.3f %%' % (epoch+1,100.0 * true_negatives / negatives))
+
                 print('Accuracy after epoch %d: %.3f %%' % (epoch+1,100.0 * correct / total))
                 self.scheduler_func.step(loss.item())
         torch.save(self.model.state_dict(), "GNG_model_dict.pth")
@@ -269,9 +270,7 @@ class ModelLoader():
 
             # Print accuracy
             print('Accuracy in testing set: %.3f %%' % (100.0 * correct / total))
-            print('TPR in testing set: %.3f %%' % (100.0 * true_positives / positives))
-            if negatives > 0:
-                print('TNR in testing set: %.3f %%' % (100.0 * true_negatives / negatives))
+
 
 
 
@@ -285,8 +284,7 @@ class ModelLoader():
         random.seed(seed)
         # For fold results
         results = {}
-        tprs = {}
-        tnrs = {}
+
         # Set fixed random number seed
         torch.manual_seed(seed)
         
@@ -340,9 +338,9 @@ class ModelLoader():
             fixation_num_validation= np.empty(shape=0)
             labels_validation= np.empty(shape=0)
             scanpath_ids_validation= np.empty(shape=0)
-            max_tpr = 0.0
+            min_loss = 0.0
             for epoch in range(self.epochs):
-                correct, total, true_positives, true_negatives, positives, negatives = 0, 0, 0, 0, 0, 0
+                correct, total = 0, 0
                 # Print epoch
                 print(f'Starting epoch {epoch+1}')
 
@@ -350,25 +348,25 @@ class ModelLoader():
                 current_loss = 0.0
                 current_loss_val = 0.0
                 amount_minibatches = 0
+                
                 self.model.train()
                 # Iterate over the DataLoader for training data
-                for j,(x_train,y_train,fixation_num_train,scanpath_id_train,image_train,fix_X,fix_Y) in enumerate(trainloader):
+                for j,(x_train,y_train,fixation_num_train,scanpath_id_train,image_train) in enumerate(trainloader):
 
                     # Zero the gradients
                     self.optim_func.zero_grad()
                     
                     # Perform forward pass
-                    outputs = self.model(x_train,fixation_num_train,image_train,fix_X,fix_Y)
-                    predictions = (torch.sigmoid(outputs) >= 0.5)
+                    outputs = self.model(x_train,fixation_num_train,image_train)
                     
+                    predictions = torch.argmax(outputs,1)
                     
-                    positives += (y_train ==1).sum().item()
-                    negatives += (y_train ==0).sum().item()
+                    correct += (predictions == y_train).sum().item()
+                    total += y_train.shape[0]
                     
-                    true_positives += torch.logical_and(predictions.flatten(),y_train).sum().item()
-                    true_negatives += torch.logical_and(torch.logical_not(predictions.flatten()),torch.logical_not(y_train)).sum().item()
+
                     # Compute loss
-                    loss = self.loss_fn(outputs, y_train.reshape(-1,1))
+                    loss = self.loss_fn(outputs, y_train.type(torch.LongTensor).to(device))
                     if epoch +1 == self.epochs:
                         fixation_num_training = np.append(fixation_num_training,fixation_num_train.cpu().detach().numpy())
                         labels_training = np.append(labels_training,y_train.cpu().detach().numpy())
@@ -383,51 +381,46 @@ class ModelLoader():
                     current_loss += loss.item()
                     del  outputs, x_train, y_train, fixation_num_train, predictions
                     
-                total = positives + negatives
                 current_loss /= amount_minibatches
-                correct = true_positives + true_negatives
-                training_info = pd.concat([training_info, pd.DataFrame({"n_fold": fold,"n_epoch": epoch+1,"acc": 100.0 * correct / total,"tpr": 100.0 * true_positives / positives,"tnr": 100.0 * true_negatives / negatives,"loss": current_loss,"train": 1,"valid": 0},index=[0])],ignore_index=True)
-                print('TPR after epoch %d: %.3f %%' % (epoch+1,100.0 * true_positives / positives))
-                print('TNR after epoch %d: %.3f %%' % (epoch+1,100.0 * true_negatives / negatives))
+                training_info = pd.concat([training_info, pd.DataFrame({"n_fold": fold,"n_epoch": epoch+1,"acc": 100.0 * correct / total,"loss": current_loss,"train": 1,"valid": 0},index=[0])],ignore_index=True)
+
                 print('Accuracy after epoch %d: %.3f %%' % (epoch+1,100.0 * correct / total))
                 print('Average loss for minibatches after epoch %d: %.3f' %(epoch+1, current_loss))
                 #self.scheduler_func.step(loss.item()) comento porque uso adam
                 self.model.eval()
-                correct, total, true_positives, true_negatives, positives, negatives = 0, 0, 0, 0, 0, 0
+                correct, total = 0, 0
                 amount_minibatches = 0
                 with torch.no_grad():
                     # Iterate over the test data and generate predictions
-                    for j,(x_test,y_test,fixation_num_test,scanpath_id_test,image_test,fix_X,fix_Y) in enumerate(testloader):
+                    for j,(x_test,y_test,fixation_num_test,scanpath_id_test,image_test) in enumerate(testloader):
                         # Generate outputs
-                        outputs = self.model(x_test,fixation_num_test,image_test,fix_X,fix_Y)
-                        loss = self.loss_fn(outputs, y_test.reshape(-1,1))
+                        outputs = self.model(x_test,fixation_num_test,image_test)
+                        loss = self.loss_fn(outputs, y_test.type(torch.LongTensor).to(device))
                         current_loss_val += loss.item()
                         amount_minibatches +=1
+
                         # Set total and correct
-                        predictions = (torch.sigmoid(outputs) >= 0.5)
+                        predictions = torch.argmax(outputs,1)
+                        correct += (predictions == y_test).sum().item()
+                        total += y_test.shape[0]
                         if epoch +1 == self.epochs:
                             fixation_num_validation = np.append(fixation_num_validation,fixation_num_test.cpu().detach().numpy())
                             labels_validation = np.append(labels_validation,y_test.cpu().detach().numpy())
                             validation_outputs = np.append(validation_outputs,outputs.cpu().detach().numpy())
                             scanpath_ids_validation = np.append(scanpath_ids_validation,scanpath_id_test.cpu().detach().numpy())
-                        positives += (y_test ==1).sum().item()
-                        negatives += (y_test ==0).sum().item()
 
-                        true_positives += torch.logical_and(predictions.flatten(),y_test).sum().item()
-                        true_negatives += torch.logical_and(torch.logical_not(predictions.flatten()),torch.logical_not(y_test)).sum().item()
                         
                         del predictions, x_test,y_test, fixation_num_test,outputs
                 # Print accuracy
                 current_loss_val /= amount_minibatches
-                total = positives + negatives
-                correct = true_positives + true_negatives
-                training_info = pd.concat([training_info, pd.DataFrame({"n_fold": fold,"n_epoch": epoch+1,"acc": 100.0 * correct / total,"tpr": 100.0 * true_positives / positives,"tnr": 100.0 * true_negatives / negatives,"loss": current_loss_val,"train": 0,"valid": 1},index=[0])],ignore_index=True)
-                print('TPR in validation set after epoch %d: %.3f %%' % (epoch+1, 100.0 * true_positives / positives))
-                print('TNR in validation set after epoch %d: %.3f %%' % (epoch+1, 100.0 * true_negatives / negatives))
+                
+                
+                training_info = pd.concat([training_info, pd.DataFrame({"n_fold": fold,"n_epoch": epoch+1,"acc": 100.0 * correct / total,"loss": current_loss_val,"train": 0,"valid": 1},index=[0])],ignore_index=True)
+
                 print('Accuracy in validation set after epoch %d: %.3f %%' % (epoch+1, 100.0 * correct / total))
                 print('Average loss for minibatches in validation after epoch after epoch %d: %.3f' %(epoch+1, current_loss_val))
-                if true_positives/positives > max_tpr:
-                    max_tpr = true_positives/positives
+                if current_loss_val < min_loss:
+                    min_loss = current_loss_val
                     early_stopping = copy.deepcopy(self.model.state_dict())
             # Process is complete.
             print('Training process has finished. Saving trained model.')
@@ -442,8 +435,7 @@ class ModelLoader():
 
             print('--------------------------------')
             results[fold] = 100.0 * (correct / total)
-            tprs[fold] = 100.0 * true_positives / positives
-            tnrs[fold] = 100.0 * true_negatives / negatives
+
             
         # Print fold results
         print(f'K-FOLD CROSS VALIDATION RESULTS FOR {k_folds} FOLDS')
@@ -454,5 +446,4 @@ class ModelLoader():
         training_info.to_csv(f'training_info_{self.model.__class__.__name__}.csv')
 
         print(f'Average Accuracy: {sum(results.values())/len(results.items())} %')
-        print(f'Average TPR: {sum(tprs.values())/len(tprs.items())} %')
-        print(f'Average TNR: {sum(tnrs.values())/len(tnrs.items())} %')
+

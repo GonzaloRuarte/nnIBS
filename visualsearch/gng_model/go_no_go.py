@@ -18,7 +18,7 @@ class RNNModel(nn.Module):
         # Fully connected layer
         self.fc = nn.Linear(hidden_dim, num_classes)
 
-    def forward(self, x, fixation_num,image,fix_X,fix_Y):
+    def forward(self, x, fixation_num,image):
         
         x = torch.flatten(x,2)
         # Initializing hidden state for first input with zeros
@@ -64,7 +64,7 @@ class TransferNet(models.ResNet):
         self.fc2 = nn.Linear(512,num_classes)
         
 
-    def forward(self, x, fixation_num,image,fix_X,fix_Y):
+    def forward(self, x, fixation_num,image):
         x = torch.squeeze(x)
         x = torch.unsqueeze(x, axis=1) #para incorporar el canal (que es uno solo en este caso)
 
@@ -177,7 +177,7 @@ class TransferNetWithImage(models.ResNet):
         self.fc2 = nn.Linear(1024,num_classes)
         
 
-    def forward(self, x, fixation_num,image,fix_X,fix_Y):
+    def forward(self, x, fixation_num,image):
         x = torch.squeeze(x)
         x = torch.unsqueeze(x, axis=1) #para incorporar el canal (que es uno solo en este caso)
 
@@ -239,7 +239,7 @@ class Net(nn.Module):
         self.fc2 = nn.Linear(512,num_classes)
         
 
-    def forward(self, x, fixation_num,image,fix_X,fix_Y):
+    def forward(self, x, fixation_num,image):
         #x = torch.squeeze(x)
         #x = torch.unsqueeze(x, axis=1) #para incorporar el canal (que es uno solo en este caso)
         x = nn.functional.interpolate(x,size=(224,224))

@@ -36,8 +36,8 @@ if __name__ == "__main__":
     tp_fixation_nums = tp_data["fixations"]
     tp_labels = tp_data["labels"]
     tp_image_ids = tp_data["image_ids"]    
-    tp_fix_x = tp_data["X"]
-    tp_fix_y = tp_data["Y"]
+    #tp_fix_x = tp_data["X"]
+    #tp_fix_y = tp_data["Y"]
 
     # load data target absent trials
 #    try:
@@ -49,8 +49,8 @@ if __name__ == "__main__":
     ta_fixation_nums = ta_data["fixations"]
     ta_labels = ta_data["labels"]
     ta_image_ids = ta_data["image_ids"] 
-    ta_fix_x = ta_data["X"]
-    ta_fix_y = ta_data["Y"]
+    #ta_fix_x = ta_data["X"]
+    #ta_fix_y = ta_data["Y"]
     
 
     
@@ -58,10 +58,10 @@ if __name__ == "__main__":
     labels = np.concatenate((tp_labels,ta_labels),axis=0)
     fixation_nums = np.concatenate((tp_fixation_nums,ta_fixation_nums),axis=0)
     image_ids = np.concatenate((tp_image_ids,ta_image_ids),axis=0)
-    fix_X = np.concatenate((tp_fix_x,ta_fix_x),axis=0)
-    fix_Y = np.concatenate((tp_fix_y,ta_fix_y),axis=0)
-    del ta_posteriors,ta_labels,tp_posteriors,tp_labels,tp_fixation_nums,ta_fixation_nums,ta_image_ids,tp_image_ids,ta_fix_x,ta_fix_y,tp_fix_x,tp_fix_y
+    #fix_X = np.concatenate((tp_fix_x,ta_fix_x),axis=0)
+    #fix_Y = np.concatenate((tp_fix_y,ta_fix_y),axis=0)
+    del ta_posteriors,ta_labels,tp_posteriors,tp_labels,tp_fixation_nums,ta_fixation_nums,ta_image_ids,tp_image_ids#,ta_fix_x,ta_fix_y,tp_fix_x,tp_fix_y
     #posteriors,labels,fixation_nums,image_ids = remove_short_scanpaths(posteriors,labels,fixation_nums,image_ids)
-    dataset = loader.PosteriorDatasetWithImage(posteriors,labels,fixation_nums,image_ids,fix_X,fix_Y)
+    dataset = loader.PosteriorDataset(posteriors,labels,fixation_nums,image_ids)
     model_loader = loader.ModelLoader(dataset=dataset)
     model_loader.cross_val()
