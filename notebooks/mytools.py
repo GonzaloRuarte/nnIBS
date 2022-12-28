@@ -6,9 +6,11 @@ import pandas as pd
 import cv2
 from itertools import chain
 import matplotlib.pyplot as plt
+from visualsearch.grid import Grid
 
 from scripts.loader import load_dict_from_json, load_human_scanpaths, load_trials_properties
 from matplotlib.patches import Rectangle, Circle
+import seaborn as sns
 
 #class Interiors():
 #    def __init__(self) -> None:
@@ -168,6 +170,17 @@ def get_responses_features(subjs):
     return pd.DataFrame(df)
 
 def create_scanpaths_df(dict_data, use_response=False):
+    """
+    Parse data from dict to pandas dataframe.
+
+    Args:
+        dict_data (dict): data from json file parsed by loader/load_human_scanpaths or load_dict_from_json.
+        use_response (bool, optional): Defaults to False.
+
+    Returns:
+        scanpaths_df (pd.DataFrane): dataset with scanpaths data, each row is a fixation. 
+                                    If use_response is True, the last fixation is the response.
+    """
     scanpath_df = []
     for subj in dict_data.keys():
         for img_f in dict_data[subj].keys():
@@ -183,6 +196,110 @@ def create_scanpaths_df(dict_data, use_response=False):
             
     scanpaths_df = pd.DataFrame(list(chain(*scanpath_df)), columns=('subj', 'img', 'fix_order', 'x', 'y', 't','target_found'))
     return scanpaths_df
+
+###
+# Funciones necesarias para cargar los datos de los modelos y visualizar los mapas de fijacion
+
+def load_fixation_maps(subj, img, path, fix_plot=False):
+    # Carga los mapas de probabilidad de cada fijacion del modelo siguiendo a un sujeto
+    maps = get_fixation_maps_path_(subj, img, path)
+    fix_maps = [pd.read_csv(m).values for m in maps]
+    #print(f'Total saccades: {len(fix_maps)}')
+    if fix_plot:
+        last_map = fix_maps[fix_plot]*255
+        with sns.plotting_context("talk"):
+            plt.imshow(last_map)
+    return np.array(fix_maps)
+
+def map_fix_to_grid_(fix, img_w, img_h, grid):
+    # Mapea una fijacion a la grilla de la imagen
+    new_size = grid.size()
+    fix_mapped_x = rescale_coordinate(fix[1], img_w, new_size[1])
+    fix_mapped_y = rescale_coordinate(fix[0], img_h, new_size[0])
+    return np.array([fix_mapped_y,fix_mapped_x])
+
+def get_fixation_maps_path_(subj, img, path):
+    # Devuelve los mapas de probabilidad calculados para cada fijacion del modelo siguiendo al sujeto
+    name = f'subject_{subj:02d}'
+    p = os.path.join(path, name, 'probability_maps', img[:-4])
+    fix_map_paths_ = sorted(os.listdir(p))
+    return [os.path.join(p,fix_map_) for fix_map_ in fix_map_paths_]
+
+def get_fixation_from_extended_(subj, img, path, nsacc=-1):
+    # Devuelve una fijacion del scanpath extendido del sujeto y la imagen
+    name = f'subject_{subj:02d}'
+    p = os.path.join(path, name, 'Subject_scanpaths.json')
+    d = load_dict_from_json(p)
+    fix_x = d[img]['X'][nsacc]
+    fix_y = d[img]['Y'][nsacc]
+    return np.array([fix_y, fix_x])
+
+def get_standarized_fixation_val_(fix, map, mean, std):
+    # Dada una fijacion y un mapa de probabilidad, devuelve el valor de la fijacion estandarizado
+    return (map[fix[0], fix[1]]-mean)/std
+
+def get_model_next_fix_(maps, nsacc):
+    # Calcular la siguiente fijacion del modelo
+    return np.array(np.unravel_index(np.argmax(maps[nsacc,], axis=None), maps[nsacc,].shape))
+
+def get_map_range_(maps, nsacc):
+    # Devuelve el rango de valores del mapa de probabilidad
+    return maps[nsacc].min(), maps[nsacc,].max()
+
+def create_scanpaths_df_metrics_models(df: pd.DataFrame, responses_data: pd.DataFrame, results_path: str,):
+
+    def distance_between_fix_(subj, img, nsacc, path, img_w = 1024, img_h = 768):
+        # TODO: Tengo que agregarle que cuando nsacc sea -2 compare no contra la respuesta sino contra la ultima fijacion
+        if nsacc == 'last': 
+            nsacc = -2
+        elif nsacc == 'response': 
+            nsacc = -1
+        else:
+            return -1
+        subject_fix = get_fixation_from_extended_(subj, img, path, nsacc) 
+        # me traigo la fijacion del modelo
+        maps      = load_fixation_maps(subj, img, path)
+        model_fix = get_model_next_fix_(maps, nsacc)
+        maps_mean, maps_std = maps.mean(axis=(1,2)), maps.std(axis=(1,2))
+        nss_subj  = get_standarized_fixation_val_(subject_fix, maps[nsacc,:,:], maps_mean[nsacc], maps_std[nsacc])
+        nss_model = get_standarized_fixation_val_(model_fix,   maps[nsacc,:,:], maps_mean[nsacc], maps_std[nsacc])
+        map_min, map_max = get_map_range_(maps, nsacc)
+        return np.linalg.norm(model_fix-subject_fix), nss_subj, nss_model, map_min, map_max, maps_mean[nsacc], maps_std[nsacc]
+    
+    df_aux = df[df.nsacc.isin(['last','response'])].copy()
+    subj_model_distance_aux = df_aux.apply(lambda x: distance_between_fix_(x.subj, x.img, x.nsacc, results_path), axis=1)
+    aux = pd.DataFrame(subj_model_distance_aux.tolist(), index=df_aux.index, columns=['subj_model_distance',
+                                                                                      'nss_subj',
+                                                                                      'nss_model',
+                                                                                      'map_min',
+                                                                                      'map_max',
+                                                                                      'map_mean',
+                                                                                      'map_std'])
+    # Agrego las nuevas columnas
+    print('Adding metrics for models...')
+    df_new = pd.concat([df_aux,aux],axis=1).copy()
+    # Mergeo con las información de las respuestas
+    print('Merging with responses data...')
+    df_new = df_new.merge(responses_data, on=['subj','img'])
+    # Agrego la columna de categoriad de target
+    def cat_trial(row):
+        if row['target_found'] and row['target_found_response']:
+            return 'TFO & TFR'
+        elif ~row['target_found'] and row['target_found_response']:
+            return '~TFO & TFR'
+        elif row['target_found'] and ~row['target_found_response']:
+            return 'TFO & ~TFR'
+        elif ~row['target_found'] and ~row['target_found_response']:
+            return '~TFO & ~TFR'
+        else:
+            return 'ERROR'
+    print('Adding category of trials...')
+    responses_data_auxiliar_col = []
+    for _, row in df_new.iterrows():
+        responses_data_auxiliar_col.append(cat_trial(row))
+    df_new['found_category'] = responses_data_auxiliar_col
+    
+    return df_new
 
 ##############
 # plot funcs
