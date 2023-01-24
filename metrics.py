@@ -28,47 +28,91 @@ def main(datasets, compute_cumulative_performance, compute_multimatch, compute_h
             # If desired, this number can be less than the total and the same random subset will be used for all models
             number_of_images    = dataset_info['number_of_images']
 
-            # Initialize objects
-            multimatch = Multimatch(dataset_name, human_scanpaths_dir, config_folder, number_of_images, compute_multimatch)
 
-            subjects_cumulative_performance = CumulativePerformance(dataset_name, number_of_images, max_scanpath_length, compute_cumulative_performance)
-            subjects_cumulative_performance.add_human_mean(human_scanpaths_dir, constants.HUMANS_COLOR)
+            if not path.exists(path.join(config_folder, 'Scanpaths.json')):
+                for history_folder in listdir(config_folder):
+                    save_path = path.join(config_folder, history_folder)
+                    if path.isdir(save_path):
+                        # Initialize objects
+                        multimatch = Multimatch(dataset_name, human_scanpaths_dir, config_folder, number_of_images, compute_multimatch)
 
-            human_scanpath_prediction = HumanScanpathPrediction(dataset_name, human_scanpaths_dir, config_folder,  number_of_images, compute_human_scanpath_prediction)
+                        subjects_cumulative_performance = CumulativePerformance(dataset_name, number_of_images, max_scanpath_length, compute_cumulative_performance)
+                        subjects_cumulative_performance.add_human_mean(human_scanpaths_dir, constants.HUMANS_COLOR)
 
-            # Compute models metrics and compare them with human subjects metrics
-            color_index = 0
+                        human_scanpath_prediction = HumanScanpathPrediction(dataset_name, human_scanpaths_dir, config_folder,  number_of_images, compute_human_scanpath_prediction)
+
+                        # Compute models metrics and compare them with human subjects metrics
+                        color_index = 0
+                        model_scanpaths_file = path.join(config_folder, history_folder+'/Scanpaths.json')
+                        model_scanpaths      = utils.load_dict_from_json(model_scanpaths_file)
+                        # Plot just the subjects
+                        subjects_cumulative_performance.plot(save_path=path.join(save_path,"Cumulative Performance Humans.png"))
+                        subjects_cumulative_performance.add_model(model_name, model_scanpaths, constants.MODELS_COLORS[color_index])
+
+                        subjects_cumulative_performance.save_results(save_path=save_path, filename=constants.FILENAME)
+
+                        # Human multimatch scores are different for each model, since each model uses different image sizes
+                        multimatch.load_human_mean_per_image(model_name, model_scanpaths)
+                        multimatch.add_model_vs_humans_mean_per_image(model_name, model_scanpaths, constants.MODELS_COLORS[color_index])
+                        multimatch.save_results(save_path=save_path, filename=constants.FILENAME)
+                        subjects_cumulative_performance.plot(save_path=path.join(save_path,"Cumulative Performance.png"))
+                        multimatch.plot(save_path=save_path)
+
+                        #human_scanpath_prediction.compute_metrics_for_model(model_name,nnIBS)
+
+                        #human_scanpath_prediction.add_baseline_models()
+
+                        
+                        
+                        #human_scanpath_prediction.save_results(save_path=save_path, filename=constants.FILENAME)
+
+                        dataset_results = utils.load_dict_from_json(path.join(save_path, constants.FILENAME))
+                        datasets_results[dataset_name] = dataset_results
 
 
-            model_scanpaths_file = path.join(config_folder, 'Scanpaths.json')
-            model_scanpaths      = utils.load_dict_from_json(model_scanpaths_file)
-            # Plot just the subjects
-            subjects_cumulative_performance.plot(save_path=path.join(config_folder,"Cumulative Performance Humans.png"))
-            subjects_cumulative_performance.add_model(model_name, model_scanpaths, constants.MODELS_COLORS[color_index])
-            subjects_cumulative_performance.save_results(save_path=config_folder, filename=constants.FILENAME)
 
-            # Human multimatch scores are different for each model, since each model uses different image sizes
-            multimatch.load_human_mean_per_image(model_name, model_scanpaths)
-            multimatch.add_model_vs_humans_mean_per_image(model_name, model_scanpaths, constants.MODELS_COLORS[color_index])
-            multimatch.save_results(save_path=config_folder, filename=constants.FILENAME)
-            subjects_cumulative_performance.plot(save_path=path.join(config_folder,"Cumulative Performance.png"))
-            multimatch.plot(save_path=config_folder)
+                        dataset_results_table = utils.create_table(dataset_results)
+                        utils.plot_table(dataset_results_table, title=dataset_name + ' dataset', save_path=save_path, filename='Table.png')
+            else:
+                # Initialize objects
+                multimatch = Multimatch(dataset_name, human_scanpaths_dir, config_folder, number_of_images, compute_multimatch)
 
-            human_scanpath_prediction.compute_metrics_for_model(model_name,nnIBS)
+                subjects_cumulative_performance = CumulativePerformance(dataset_name, number_of_images, max_scanpath_length, compute_cumulative_performance)
+                subjects_cumulative_performance.add_human_mean(human_scanpaths_dir, constants.HUMANS_COLOR)
 
-            human_scanpath_prediction.add_baseline_models()
+                human_scanpath_prediction = HumanScanpathPrediction(dataset_name, human_scanpaths_dir, config_folder,  number_of_images, compute_human_scanpath_prediction)
 
-            
-            
-            human_scanpath_prediction.save_results(save_path=config_folder, filename=constants.FILENAME)
+                # Compute models metrics and compare them with human subjects metrics
+                color_index = 0
+                model_scanpaths_file = path.join(config_folder, 'Scanpaths.json')
+                model_scanpaths      = utils.load_dict_from_json(model_scanpaths_file)
+                # Plot just the subjects
+                subjects_cumulative_performance.plot(save_path=path.join(config_folder,"Cumulative Performance Humans.png"))
+                subjects_cumulative_performance.add_model(model_name, model_scanpaths, constants.MODELS_COLORS[color_index])
+                subjects_cumulative_performance.save_results(save_path=config_folder, filename=constants.FILENAME)
 
-            dataset_results = utils.load_dict_from_json(path.join(config_folder, constants.FILENAME))
-            datasets_results[dataset_name] = dataset_results
+                # Human multimatch scores are different for each model, since each model uses different image sizes
+                multimatch.load_human_mean_per_image(model_name, model_scanpaths)
+                multimatch.add_model_vs_humans_mean_per_image(model_name, model_scanpaths, constants.MODELS_COLORS[color_index])
+                multimatch.save_results(save_path=config_folder, filename=constants.FILENAME)
+                subjects_cumulative_performance.plot(save_path=path.join(config_folder,"Cumulative Performance.png"))
+                multimatch.plot(save_path=config_folder)
+
+                human_scanpath_prediction.compute_metrics_for_model(model_name,nnIBS)
+
+                human_scanpath_prediction.add_baseline_models()
+
+                
+                
+                human_scanpath_prediction.save_results(save_path=config_folder, filename=constants.FILENAME)
+
+                dataset_results = utils.load_dict_from_json(path.join(config_folder, constants.FILENAME))
+                datasets_results[dataset_name] = dataset_results
 
 
 
-            dataset_results_table = utils.create_table(dataset_results)
-            utils.plot_table(dataset_results_table, title=dataset_name + ' dataset', save_path=config_folder, filename='Table.png')
+                dataset_results_table = utils.create_table(dataset_results)
+                utils.plot_table(dataset_results_table, title=dataset_name + ' dataset', save_path=config_folder, filename='Table.png')    
 
     if compute_cumulative_performance and compute_multimatch and compute_human_scanpath_prediction:
         final_table = utils.average_results(datasets_results, save_path=constants.RESULTS_PATH, filename='Scores.json')

@@ -24,16 +24,14 @@ class CumulativePerformance:
             if not mss in model_cumulative_performance:
                 model_cumulative_performance[mss] = []
             model_cumulative_performance[mss].append(self.compute_cumulative_performance(model_scanpaths[mss]))
-        total_cumulative_performance = 0
+
         amount_mss = 0
         for mss in model_cumulative_performance.keys():
             model_cumulative_performance_mean = np.mean(np.array(model_cumulative_performance[mss]), axis=0)
             self.subjects_cumulative_performance.append({'subject': model_name+' MSS '+str(mss), 'cumulative_performance': model_cumulative_performance_mean, 'color': model_color})
-            total_cumulative_performance += model_cumulative_performance_mean
+
             amount_mss += 1
-        total_cumulative_performance /= amount_mss
-        #self.subjects_cumulative_performance.append({'subject': model_name, 'cumulative_performance': model_cumulative_performance, 'color': model_color})
-    
+
     def add_human_mean(self, humans_scanpaths_dir, humans_color):
         if self.null_object:
             return
@@ -53,26 +51,25 @@ class CumulativePerformance:
                     humans_cumulative_performance[mss].append(self.compute_human_cumulative_performance_interiors(human_scanpaths[mss]))
                 else:
                     humans_cumulative_performance[mss].append(self.compute_cumulative_performance(human_scanpaths[mss]))
-        total_cumulative_performance = 0
+
         amount_mss = 0
         for mss in humans_cumulative_performance.keys():
             if self.dataset_name == 'Interiors':
                 number_of_subjects = len(humans_scanpaths_files)
                 humans_cumulative_performance_mean = [np.empty(n) for n in np.repeat(number_of_subjects, 4)]
                 subject_index = 0
-                for subject_cumulative_performance in humans_cumulative_performance:
-                    humans_cumulative_performance_mean[0][subject_index] = subject_cumulative_performance[1][3]
-                    humans_cumulative_performance_mean[1][subject_index] = subject_cumulative_performance[1][5]
-                    humans_cumulative_performance_mean[2][subject_index] = subject_cumulative_performance[1][9]
-                    humans_cumulative_performance_mean[3][subject_index] = subject_cumulative_performance[1][13]
+                for subject_cumulative_performance in humans_cumulative_performance[1]:
+                    humans_cumulative_performance_mean[0][subject_index] = subject_cumulative_performance[3]
+                    humans_cumulative_performance_mean[1][subject_index] = subject_cumulative_performance[5]
+                    humans_cumulative_performance_mean[2][subject_index] = subject_cumulative_performance[9]
+                    humans_cumulative_performance_mean[3][subject_index] = subject_cumulative_performance[13]
                     subject_index += 1
             else:
                 humans_cumulative_performance_mean = np.mean(np.array(humans_cumulative_performance[mss]), axis=0)
             self.subjects_cumulative_performance.append({'subject': 'Humans MSS '+str(mss),'cumulative_performance': humans_cumulative_performance_mean, 'color': humans_color})
-            total_cumulative_performance += humans_cumulative_performance_mean
+            
             amount_mss += 1
-        total_cumulative_performance /= amount_mss
-        #self.subjects_cumulative_performance.append({'subject': 'Humans', 'cumulative_performance': total_cumulative_performance, 'color': humans_color})
+
 
     def compute_cumulative_performance(self, scanpaths):
         """ At index i, this array holds the number of targets found in i or less fixations """
@@ -167,7 +164,7 @@ class CumulativePerformance:
         for subject in self.subjects_cumulative_performance:
             subject_name = subject['subject']
             subject_cumulative_performance = list(subject['cumulative_performance'])
-            if subject_name == 'Humans' and self.dataset_name == 'Interiors':
+            if subject_name == 'Humans MSS 1' and self.dataset_name == 'Interiors':
                 fixations = np.linspace(0, 1, num=len(subject_cumulative_performance))
                 for index, cum_perf in enumerate(subject_cumulative_performance):
                     subject_cumulative_performance[index] = np.mean(cum_perf)

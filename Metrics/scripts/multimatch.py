@@ -181,11 +181,12 @@ class Multimatch:
 
                 model_trial_info   = model_scanpaths[image_name]
                 subject_trial_info = subject_scanpaths[image_name]
-                if not (subject_trial_info["memory_set"] == model_trial_info["memory_set"]):
-                    continue
+                
                 if not ('memory_set' in subject_trial_info):
                     mss = 1
                 else:
+                    if not (subject_trial_info["memory_set"] == model_trial_info["memory_set"]):
+                        continue
                     mss = len(subject_trial_info["memory_set"])
                 receptive_size = utils.get_dims(model_trial_info, subject_trial_info, key='receptive')
                 screen_size    = utils.get_dims(model_trial_info, subject_trial_info, key='image')
@@ -235,11 +236,12 @@ class Multimatch:
 
                         subject_trial_info = subject_scanpaths[image_name]
                         subject_to_compare_trial_info = subject_to_compare_scanpaths[image_name]
-                        if not (subject_trial_info["memory_set"] == subject_to_compare_trial_info["memory_set"]):
-                            continue
+
                         if not ('memory_set' in subject_trial_info):
                             mss = 1
                         else:
+                            if not (subject_trial_info["memory_set"] == subject_to_compare_trial_info["memory_set"]):
+                                continue
                             mss = len(subject_trial_info["memory_set"])
                         receptive_size = utils.get_dims(model_scanpaths[image_name], subject_trial_info, key='receptive')
                         screen_size    = utils.get_dims(model_scanpaths[image_name], subject_trial_info, key='image')

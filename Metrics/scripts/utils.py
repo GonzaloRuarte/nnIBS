@@ -290,7 +290,6 @@ def search_bandwidth(values, shape, splits=5):
 
 def load_center_bias_fixations(model_size):
     center_bias_fixs = load_dict_from_json(constants.CENTER_BIAS_FIXATIONS)
-
     scanpaths_X = np.array([rescale_coordinate(x, constants.CENTER_BIAS_SIZE[1], model_size[1]) for x in center_bias_fixs['X']])
     scanpaths_Y = np.array([rescale_coordinate(y, constants.CENTER_BIAS_SIZE[0], model_size[0]) for y in center_bias_fixs['Y']])
 
