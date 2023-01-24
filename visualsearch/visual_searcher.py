@@ -97,66 +97,60 @@ class VisualSearcher:
         """
         
         print('Press Ctrl + C to interrupt execution and save a checkpoint \n')
-        path_old = self.output_path
-        for history_size in [4,6,8,10,12,None]:
-            self.history_size = history_size
-            if self.history_size is None:
-                self.output_path = path_old + "/history_inf"
-            else:
-                self.output_path = path_old + "/history_" + str(self.history_size)
-            # If resuming execution, load previously generated data
-            if not path.exists(self.output_path):
-                mkdir(path.abspath(self.output_path))
-            scanpaths, targets_found, previous_time = utils.load_data_from_checkpoint(self.output_path)
 
-            trial_number = len(scanpaths)
-            total_trials = len(self.trials_properties) + trial_number
-            start = time.time()
-            try:
-                for trial in self.trials_properties:
-                    trial_number += 1
-                    image_name  = trial['image']
-                        
-                    if not ('memory_set' in trial):
-                        target_name = trial['target']
-                        trial['memory_set'] = [target_name]
-                        
-                    memory_set = list(map(lambda x: utils.load_image(self.targets_dir,x),trial['memory_set']))
-                        
-                    print('Searching in image ' + image_name + ' (' + str(trial_number) + '/' + str(total_trials) + ')...')
+        # If resuming execution, load previously generated data
+        if not path.exists(self.output_path):
+            mkdir(path.abspath(self.output_path))
+        scanpaths, targets_found, previous_time = utils.load_data_from_checkpoint(self.output_path)
+
+        trial_number = len(scanpaths)
+        total_trials = len(self.trials_properties) + trial_number
+        start = time.time()
+        try:
+            for trial in self.trials_properties:
+                trial_number += 1
+                image_name  = trial['image']
                     
-                    image       = utils.load_image(self.images_dir, image_name, self.model_image_size)
-
-                    image_prior = prior.load(image, image_name, self.model_image_size, self.prior_name, self.saliency_dir)
+                if not ('memory_set' in trial):
+                    target_name = trial['target']
+                    trial['memory_set'] = [target_name]
                     
-                    initial_fixation = (trial['initial_fixation_row'], trial['initial_fixation_column'])
-                    initial_fixation = [utils.rescale_coordinate(initial_fixation[i], self.image_size[i], self.model_image_size[i]) for i in range(len(initial_fixation))]
-                    if "target_matched_row" in trial:
-                        target_bbox      = [trial['target_matched_row'], trial['target_matched_column'], \
-                                                trial['target_height'] + trial['target_matched_row'], trial['target_width'] + trial['target_matched_column']]
-                        target_bbox      = [utils.rescale_coordinate(target_bbox[i], self.image_size[i % 2 == 1], self.model_image_size[i % 2 == 1]) for i in range(len(target_bbox))]
-                    else:
-                        target_bbox = None
-                    trial_scanpath = self.search(image_name, image, image_prior, memory_set,trial['memory_set'], target_bbox, initial_fixation)
+                memory_set = list(map(lambda x: utils.load_image(self.targets_dir,x),trial['memory_set']))
+                    
+                print('Searching in image ' + image_name + ' (' + str(trial_number) + '/' + str(total_trials) + ')...')
+                
+                image       = utils.load_image(self.images_dir, image_name, self.model_image_size)
 
-                    if trial_scanpath:
-                        # If there were no errors, save the scanpath
-                        utils.add_scanpath_to_dict(image_name, trial_scanpath, target_bbox, trial['target_object'], self.grid, self.config, self.dataset_name, scanpaths,trial['memory_set'])
-                        targets_found += trial_scanpath['target_found']
-            except KeyboardInterrupt:
-                time_elapsed = time.time() - start + previous_time
-                utils.save_checkpoint(self.config, scanpaths, targets_found, self.trials_properties, time_elapsed, self.output_path)        
-                sys.exit(0)
+                image_prior = prior.load(image, image_name, self.model_image_size, self.prior_name, self.saliency_dir)
+                
+                initial_fixation = (trial['initial_fixation_row'], trial['initial_fixation_column'])
+                initial_fixation = [utils.rescale_coordinate(initial_fixation[i], self.image_size[i], self.model_image_size[i]) for i in range(len(initial_fixation))]
+                if "target_matched_row" in trial:
+                    target_bbox      = [trial['target_matched_row'], trial['target_matched_column'], \
+                                            trial['target_height'] + trial['target_matched_row'], trial['target_width'] + trial['target_matched_column']]
+                    target_bbox      = [utils.rescale_coordinate(target_bbox[i], self.image_size[i % 2 == 1], self.model_image_size[i % 2 == 1]) for i in range(len(target_bbox))]
+                else:
+                    target_bbox = None
+                trial_scanpath = self.search(image_name, image, image_prior, memory_set,trial['memory_set'], target_bbox, initial_fixation)
 
+                if trial_scanpath:
+                    # If there were no errors, save the scanpath
+                    utils.add_scanpath_to_dict(image_name, trial_scanpath, target_bbox, trial['target_object'], self.grid, self.config, self.dataset_name, scanpaths,trial['memory_set'])
+                    targets_found += trial_scanpath['target_found']
+        except KeyboardInterrupt:
             time_elapsed = time.time() - start + previous_time
-            if self.human_scanpaths:
-                utils.save_scanpaths(self.output_path, self.human_scanpaths, filename='Subject_scanpaths.json')
-            else:
-                utils.save_scanpaths(self.output_path, scanpaths)
-            utils.erase_checkpoint(self.output_path)
+            utils.save_checkpoint(self.config, scanpaths, targets_found, self.trials_properties, time_elapsed, self.output_path)        
+            sys.exit(0)
 
-            print('Total targets found: ' + str(targets_found) + '/' + str(len(scanpaths)))
-            print('Total time elapsed:  ' + str(round(time_elapsed, 4))   + ' seconds')
+        time_elapsed = time.time() - start + previous_time
+        if self.human_scanpaths:
+            utils.save_scanpaths(self.output_path, self.human_scanpaths, filename='Subject_scanpaths.json')
+        else:
+            utils.save_scanpaths(self.output_path, scanpaths)
+        utils.erase_checkpoint(self.output_path)
+
+        print('Total targets found: ' + str(targets_found) + '/' + str(len(scanpaths)))
+        print('Total time elapsed:  ' + str(round(time_elapsed, 4))   + ' seconds')
 
     
     
