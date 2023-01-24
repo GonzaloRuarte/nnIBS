@@ -34,12 +34,12 @@ def main(datasets, compute_cumulative_performance, compute_multimatch, compute_h
                     save_path = path.join(config_folder, history_folder)
                     if path.isdir(save_path):
                         # Initialize objects
-                        multimatch = Multimatch(dataset_name, human_scanpaths_dir, config_folder, number_of_images, compute_multimatch)
+                        multimatch = Multimatch(dataset_name, human_scanpaths_dir, save_path, number_of_images, compute_multimatch)
 
                         subjects_cumulative_performance = CumulativePerformance(dataset_name, number_of_images, max_scanpath_length, compute_cumulative_performance)
                         subjects_cumulative_performance.add_human_mean(human_scanpaths_dir, constants.HUMANS_COLOR)
 
-                        human_scanpath_prediction = HumanScanpathPrediction(dataset_name, human_scanpaths_dir, config_folder,  number_of_images, compute_human_scanpath_prediction)
+                        human_scanpath_prediction = HumanScanpathPrediction(dataset_name, human_scanpaths_dir, save_path,  number_of_images, compute_human_scanpath_prediction)
 
                         # Compute models metrics and compare them with human subjects metrics
                         color_index = 0
