@@ -34,7 +34,7 @@ def distance_to_last_fix(trial):
     y_target = trial['Y'][-1]
     return np.linalg.norm(np.array([x_target, y_target]) - np.array([trial['response_x'], trial['response_y']]))
 
-def distance_to_target(trial):
+def distance_response_to_target(trial):
     # trial is the json file of a single trial
     y_target = (trial['target_bbox'][2] - trial['target_bbox'][0]) / 2 + trial['target_bbox'][0]
     x_target = (trial['target_bbox'][3] - trial['target_bbox'][1]) / 2 + trial['target_bbox'][1]
@@ -52,7 +52,7 @@ def target_found_response(trial):
     y1, x1, y2, x2  = trial['target_bbox']
     side_target_x, side_target_y = x2 - x1, y2 - y1
     assert (side_target_x == side_target_y) & (side_target_y>0) & (side_target_x>0), 'Target box is not a square'
-    return bool(trial['distance_to_target'] <= (side_target_x/2 + trial['response_size']))
+    return bool(trial['distance_response_to_target'] <= (side_target_x/2 + trial['response_size']))
     
 def dimensions_check_scanpaths_dict(scanpaths_path, img_size_height=768, img_size_width=1024):
     subjs = load_human_scanpaths(scanpaths_path)
@@ -123,7 +123,7 @@ def add_responses(scanpaths_path, responses_path, save_path=None, change_scanpat
                 # agrego las respuestas como ultima fijacion
                 if change_scanpaths: val['X'].append(val['response_x']), val['Y'].append(val['response_y'])
                 if calculate_features:
-                    val['distance_to_target']    = distance_to_target(val)
+                    val['distance_response_to_target'] = distance_response_to_target(val)
                     val['distance_to_last_fix']  = distance_to_last_fix(val)
                     val['last_fix_dur']          = -1
                     val['target_found_response'] = target_found_response(val)
@@ -156,7 +156,7 @@ def get_responses_features(subjs):
                     'target_found': data['target_found'],
                     'target_found_response': data['target_found_response'],
                     'response_size': data['response_size'],
-                    'distance_to_target': data['distance_to_target'],
+                    'distance_response_to_target': data['distance_to_target'],
                     'distance_to_last_fix': data['distance_to_last_fix'],
                     'delta_time_response': data['delta_time_response'],
                     'response_x': data['response_x'],
@@ -169,7 +169,14 @@ def get_responses_features(subjs):
             df.append(upd)
     return pd.DataFrame(df)
 
-def create_scanpaths_df(dict_data, use_response=False):
+def distances_to_target(trial):
+    # funcion auxiliar para calcular la distancia de cada fijación al target
+    y_target = (trial['target_bbox'][2] - trial['target_bbox'][0]) / 2 + trial['target_bbox'][0]
+    x_target = (trial['target_bbox'][3] - trial['target_bbox'][1]) / 2 + trial['target_bbox'][1]
+    d = [np.linalg.norm(np.array([x_target, y_target]) - np.array([x, y])) for x, y in zip(trial['X'], trial['Y'])]
+    return d
+
+def create_scanpaths_df(dict_data):
     """
     Parse data from dict to pandas dataframe.
 
@@ -185,16 +192,21 @@ def create_scanpaths_df(dict_data, use_response=False):
     for subj in dict_data.keys():
         for img_f in dict_data[subj].keys():
             f = dict_data[subj][img_f]['target_found']
-            scanpath_df.append([(subj,img_f,idx,x,y,t,f) for idx, (x,y,t) in enumerate(zip(dict_data[subj][img_f]['X'], 
-                                                                                        dict_data[subj][img_f]['Y'],
-                                                                                        dict_data[subj][img_f]['T']))])
-            if use_response:
-                # agregar a la ultima lista la respuesta marcada como r
-                scanpath_df[-1].append((subj,img_f,'r', dict_data[subj][img_f]['response_x'],
-                                                        dict_data[subj][img_f]['response_y'],
-                                                        dict_data[subj][img_f]['response_size'],f))
+            distances = distances_to_target(dict_data[subj][img_f])
+            scanpath_df.append([(subj,img_f,idx,x,y,t,f, d) for idx, (x,y,t,d) in enumerate(zip(dict_data[subj][img_f]['X'], 
+                                                                                                dict_data[subj][img_f]['Y'],
+                                                                                                dict_data[subj][img_f]['T'],
+                                                                                                distances)
+                                                                                                )]
+                                                                                            )
+            # agregar a la ultima lista la respuesta marcada como r
+            scanpath_df[-1].append((subj,img_f,'r', dict_data[subj][img_f]['response_x'],
+                                                    dict_data[subj][img_f]['response_y'],
+                                                    dict_data[subj][img_f]['response_size'],
+                                                    f,distance_response_to_target(dict_data[subj][img_f])))               
+      
+    scanpaths_df = pd.DataFrame(list(chain(*scanpath_df)), columns=('subj', 'img', 'fix_order', 'x', 'y', 't','target_found', 'distance_to_target'))
             
-    scanpaths_df = pd.DataFrame(list(chain(*scanpath_df)), columns=('subj', 'img', 'fix_order', 'x', 'y', 't','target_found'))
     return scanpaths_df
 
 ###
@@ -247,7 +259,7 @@ def get_map_range_(maps, nsacc):
     return maps[nsacc].min(), maps[nsacc,].max()
 
 def create_scanpaths_df_metrics_models(df: pd.DataFrame, responses_data: pd.DataFrame, results_path: str,):
-
+    
     def distance_between_fix_(subj, img, nsacc, path, img_w = 1024, img_h = 768):
         # TODO: Tengo que agregarle que cuando nsacc sea -2 compare no contra la respuesta sino contra la ultima fijacion
         if nsacc == 'last': 
