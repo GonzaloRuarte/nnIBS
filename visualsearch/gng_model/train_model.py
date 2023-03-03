@@ -26,31 +26,19 @@ if __name__ == "__main__":
     parser.add_argument('-datapath', help="Path to the dataset, is a symlink", default='./../../Datasets/GNGposteriors/')
     args = parser.parse_args()
     
-    # load data target present trials
-#    try:
-#        tp_data = np.load(path.join(os.path.abspath(os.readlink(args.datapath)), 'target_present_data.npz'))
-#    except Exception as ex:
-#    print(ex)
+
     tp_data = np.load(path.abspath("target_present_data.npz"))
     tp_posteriors = tp_data["posteriors"]
     tp_fixation_nums = tp_data["fixations"]
     tp_labels = tp_data["labels"]
     tp_image_ids = tp_data["image_ids"]    
-    #tp_fix_x = tp_data["X"]
-    #tp_fix_y = tp_data["Y"]
 
-    # load data target absent trials
-#    try:
-#        ta_data = np.load(path.join(os.path.abspath(os.readlink(args.datapath)), 'target_absent_data.npz'))
-#    except Exception as ex:
-#        print(ex)
     ta_data = np.load(path.abspath("target_absent_data.npz"))
     ta_posteriors = ta_data["posteriors"]
     ta_fixation_nums = ta_data["fixations"]
     ta_labels = ta_data["labels"]
     ta_image_ids = ta_data["image_ids"] 
-    #ta_fix_x = ta_data["X"]
-    #ta_fix_y = ta_data["Y"]
+
     
 
     
@@ -58,10 +46,9 @@ if __name__ == "__main__":
     labels = np.concatenate((tp_labels,ta_labels),axis=0)
     fixation_nums = np.concatenate((tp_fixation_nums,ta_fixation_nums),axis=0)
     image_ids = np.concatenate((tp_image_ids,ta_image_ids),axis=0)
-    #fix_X = np.concatenate((tp_fix_x,ta_fix_x),axis=0)
-    #fix_Y = np.concatenate((tp_fix_y,ta_fix_y),axis=0)
-    del ta_posteriors,ta_labels,tp_posteriors,tp_labels,tp_fixation_nums,ta_fixation_nums,ta_image_ids,tp_image_ids#,ta_fix_x,ta_fix_y,tp_fix_x,tp_fix_y
-    #posteriors,labels,fixation_nums,image_ids = remove_short_scanpaths(posteriors,labels,fixation_nums,image_ids)
+
+    del ta_posteriors,ta_labels,tp_posteriors,tp_labels,tp_fixation_nums,ta_fixation_nums,ta_image_ids,tp_image_ids
+
     dataset = loader.PosteriorDataset(posteriors,labels,fixation_nums,image_ids)
     model_loader = loader.ModelLoader(dataset=dataset)
     model_loader.cross_val()
