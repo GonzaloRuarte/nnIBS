@@ -180,21 +180,17 @@ class ModelLoader():
                 current_loss = 0.0
                 self.model.train()
                 # Iterate over the DataLoader for training data
-                for j,(x_train,y_train,fixation_num_train,scanpath_id_train,image_train,fix_X,fix_Y) in enumerate(trainloader):
+                for j,(x_train,y_train,fixation_num_train,scanpath_id_train,image_train) in enumerate(trainloader):
 
                     # Zero the gradients
                     self.optim_func.zero_grad()
                     
                     # Perform forward pass
-                    outputs = self.model(x_train,fixation_num_train,image_train,fix_X,fix_Y)
-                    predictions = (torch.sigmoid(outputs) >= 0.5)                    
-                    positives += (y_train ==1).sum().item()
-                    negatives += (y_train ==0).sum().item()
-                    
-                    true_positives += torch.logical_and(predictions.flatten(),y_train).sum().item()
-                    true_negatives += torch.logical_and(torch.logical_not(predictions.flatten()),torch.logical_not(y_train)).sum().item()
+                    outputs = self.model(x_train,fixation_num_train,image_train)
+                    predictions = torch.argmax(outputs,1)                 
+
                     # Compute loss
-                    loss = self.loss_fn(outputs, y_train.reshape(-1,1))
+                    loss = self.loss_fn(outputs, y_train.type(torch.LongTensor).to(device))
                     
 
 
@@ -216,17 +212,17 @@ class ModelLoader():
                 correct = true_positives + true_negatives
 
                 print('Accuracy after epoch %d: %.3f %%' % (epoch+1,100.0 * correct / total))
-                self.scheduler_func.step(loss.item())
+                #self.scheduler_func.step(loss.item())
         torch.save(self.model.state_dict(), "GNG_model_dict.pth")
 
-    def continue_search(self,posterior,num_fixation):
+    def continue_search(self,posterior):
                 
         self.model.eval()
         
         with torch.no_grad():
-            prediction = self.model(torch.tensor(np.array([posterior]),dtype=torch.float32,device=device),torch.tensor(np.array([num_fixation]),dtype=torch.float32,device=device))
-        print(torch.sigmoid(prediction).item())
-        return (torch.sigmoid(prediction) >= 0.5).item()
+            prediction = self.model(torch.tensor(np.array([posterior]),dtype=torch.float32,device=device))
+
+        return (torch.argmax(prediction,1)).item()
 
 
     def reset_weights(self):
@@ -246,27 +242,25 @@ class ModelLoader():
         testloader = DataLoader(testset,self.batch_size,shuffle=False)
         self.model.eval()
 
-        correct, total, true_positives, true_negatives, positives, negatives = 0, 0, 0, 0, 0, 0
+        correct, total = 0, 0
         with torch.no_grad():
 
             # Iterate over the test data and generate predictions
-            for j,(x_test,y_test,fixation_num_test,scanpath_id_test,image_test,fix_X,fix_Y) in enumerate(testloader):
+            for j,(x_test,y_test,fixation_num_test,scanpath_id_test,image_test) in enumerate(testloader):
 
                 # Generate outputs
-                outputs = self.model(x_test,fixation_num_test,image_test,fix_X,fix_Y)
+                outputs = self.model(x_test,fixation_num_test,image_test)
                 
                 # Set total and correct
-                predictions = (torch.sigmoid(outputs) >= 0.5)
-                total += y_test.size(0)
-
-                positives += (y_test ==1).sum().item()
-                negatives += (y_test ==0).sum().item()
-
-                correct += (predictions.flatten() == y_test).sum().item()
-                true_positives += torch.logical_and(predictions.flatten(),y_test).sum().item()
-                true_negatives += torch.logical_and(torch.logical_not(predictions.flatten()),torch.logical_not(y_test)).sum().item()
                 
-                del predictions, x_test, y_test, fixation_num_test, outputs,scanpath_id_test
+                predictions = torch.argmax(outputs,1)
+                
+                correct += (predictions == y_test).sum().item()
+                total += y_test.shape[0]
+
+
+                
+                del predictions, x_test, y_test, fixation_num_test, outputs
 
             # Print accuracy
             print('Accuracy in testing set: %.3f %%' % (100.0 * correct / total))
