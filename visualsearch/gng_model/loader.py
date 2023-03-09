@@ -170,14 +170,17 @@ class ModelLoader():
         trainloader = DataLoader(trainset,self.batch_size,shuffle=False)                        
         self.model.train()
         self.balanced_weights(trainset.get_labels())
+        min_loss = 0.0    
         #forward loop
         for epoch in range(self.epochs):
-                correct, total, true_positives, true_negatives, positives, negatives = 0, 0, 0, 0, 0, 0
+                correct, total = 0, 0
                 # Print epoch
                 print(f'Starting epoch {epoch+1}')
 
                 # Set current loss value
                 current_loss = 0.0
+
+                amount_minibatches = 0
                 self.model.train()
                 # Iterate over the DataLoader for training data
                 for j,(x_train,y_train,fixation_num_train,scanpath_id_train,image_train) in enumerate(trainloader):
@@ -187,33 +190,32 @@ class ModelLoader():
                     
                     # Perform forward pass
                     outputs = self.model(x_train,fixation_num_train,image_train)
-                    predictions = torch.argmax(outputs,1)                 
+                    predictions = torch.argmax(outputs,1)
+                    
+                    correct += (predictions == y_train).sum().item()
+                    total += y_train.shape[0]               
 
                     # Compute loss
                     loss = self.loss_fn(outputs, y_train.type(torch.LongTensor).to(device))
-                    
 
 
                     # Perform backward pass
                     loss.backward()
-                    
+                    amount_minibatches +=1
                     # Perform optimization
                     self.optim_func.step()
-
-                    # Print statistics
                     current_loss += loss.item()
-                    if j % 500 == 499:
-                        print('Loss after mini-batch %5d: %.3f' %
-                            (j + 1, current_loss / 500))
-
-                        current_loss = 0.0
+                    
                     del  outputs, x_train, y_train, fixation_num_train, predictions
-                total = positives + negatives
-                correct = true_positives + true_negatives
-
+                    
+                current_loss /= amount_minibatches
+                if current_loss < min_loss:
+                    min_loss = current_loss
+                    early_stopping = copy.deepcopy(self.model.state_dict())
                 print('Accuracy after epoch %d: %.3f %%' % (epoch+1,100.0 * correct / total))
+                print('Average loss for minibatches after epoch %d: %.3f' %(epoch+1, current_loss))
                 #self.scheduler_func.step(loss.item())
-        torch.save(self.model.state_dict(), "GNG_model_dict.pth")
+        torch.save(early_stopping, "GNG_model_dict.pth")
 
     def continue_search(self,posterior):
                 
@@ -222,7 +224,7 @@ class ModelLoader():
         with torch.no_grad():
             prediction = self.model(torch.tensor(np.array([posterior]),dtype=torch.float32,device=device))
 
-        return (torch.argmax(prediction,1)).item()
+        return (torch.argmax(prediction,1)).item() == 0
 
 
     def reset_weights(self):
@@ -235,35 +237,34 @@ class ModelLoader():
     def predict(self):
         testset = self.dataset
 
-        self.load("gng-fold-1.pth")
-
-
         #DataLoader
         testloader = DataLoader(testset,self.batch_size,shuffle=False)
         self.model.eval()
-
         correct, total = 0, 0
+        current_loss_val = 0.0
+        amount_minibatches = 0
         with torch.no_grad():
-
             # Iterate over the test data and generate predictions
             for j,(x_test,y_test,fixation_num_test,scanpath_id_test,image_test) in enumerate(testloader):
-
                 # Generate outputs
                 outputs = self.model(x_test,fixation_num_test,image_test)
-                
+                loss = self.loss_fn(outputs, y_test.type(torch.LongTensor).to(device))
+                current_loss_val += loss.item()
+                amount_minibatches +=1
+
                 # Set total and correct
-                
                 predictions = torch.argmax(outputs,1)
-                
                 correct += (predictions == y_test).sum().item()
                 total += y_test.shape[0]
 
-
                 
-                del predictions, x_test, y_test, fixation_num_test, outputs
+                del predictions, x_test,y_test, fixation_num_test,outputs
+        # Print accuracy
+        current_loss_val /= amount_minibatches
+        
 
-            # Print accuracy
-            print('Accuracy in testing set: %.3f %%' % (100.0 * correct / total))
+        print('Accuracy in test set: %.3f %%' %( 100.0 * correct / total))
+        print('Average loss for minibatches in test set %d: %.3f' %( current_loss_val))
 
 
 
@@ -412,7 +413,7 @@ class ModelLoader():
                 training_info = pd.concat([training_info, pd.DataFrame({"n_fold": fold,"n_epoch": epoch+1,"acc": 100.0 * correct / total,"loss": current_loss_val,"train": 0,"valid": 1},index=[0])],ignore_index=True)
 
                 print('Accuracy in validation set after epoch %d: %.3f %%' % (epoch+1, 100.0 * correct / total))
-                print('Average loss for minibatches in validation after epoch after epoch %d: %.3f' %(epoch+1, current_loss_val))
+                print('Average loss for minibatches in validation after epoch %d: %.3f' %(epoch+1, current_loss_val))
                 if current_loss_val < min_loss:
                     min_loss = current_loss_val
                     early_stopping = copy.deepcopy(self.model.state_dict())
