@@ -7,7 +7,7 @@ import numpy as np
 import time
 import importlib
 from scipy.stats import entropy
-#from .gng_model import loader
+from .gng_model import loader
 #from os import path
 from .visibility_map import VisibilityMap
 from .grid import Grid
@@ -180,9 +180,9 @@ class VisualSearcher:
         # Sum probabilities
         image_prior = prior.sum(image_prior, self.init_max_saccades)
 
-        #gng_model = loader.ModelLoader()
+        gng_model = loader.ModelLoader()
 
-        #gng_model.load(path.abspath("visualsearch/gng_model/gng-fold-1.pth"))
+        gng_model.load(path.abspath("visualsearch/gng_model/GNG_model_dict.pth"))
         # Convert target bounding box to grid cells
         if target_bbox != None:
             target_bbox_in_grid = np.empty(len(target_bbox), dtype=np.int)
@@ -232,11 +232,11 @@ class VisualSearcher:
                 current_fixation = fixations[fixation_number]
 
             print(fixation_number + 1, end=' ')
-            if target_bbox != None:
-                if utils.are_within_boundaries(current_fixation, current_fixation, (target_bbox_in_grid[0], target_bbox_in_grid[1]), (target_bbox_in_grid[2] + 1, target_bbox_in_grid[3] + 1)):
-                    target_found = True
-                    fixations = fixations[:fixation_number + 1]
-                    break
+            #if target_bbox != None:
+                #if utils.are_within_boundaries(current_fixation, current_fixation, (target_bbox_in_grid[0], target_bbox_in_grid[1]), (target_bbox_in_grid[2] + 1, target_bbox_in_grid[3] + 1)):
+                    #target_found = True
+                    #fixations = fixations[:fixation_number + 1]
+                    #break
 
             # If the limit has been reached, don't compute the next fixation
             if fixation_number == self.max_saccades:
@@ -256,8 +256,11 @@ class VisualSearcher:
             marginal  = np.sum(likelihood_times_prior)
             
             posterior = likelihood_times_prior / marginal            
-            #if not gng_model.continue_search(posterior,fixation_number+1):
-                #break
+            
+            if not gng_model.continue_search(posterior,fixation_number+1):
+                target_found = True
+                fixations = fixations[:fixation_number + 1]
+                break
             fixations[fixation_number + 1] = self.search_model.next_fixation(posterior, image_name, fixation_number, self.output_path)
 
         end = time.time()
