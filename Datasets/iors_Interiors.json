@@ -1,0 +1,4985 @@
+{
+    "subj01_scanpaths": {
+        "grayscale_11_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "images_without_repetition": 122,
+        "grayscale_14_housebeautiful.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.6666666666666665,
+            "amount_iors": 3
+        },
+        "grayscale_4_other.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.5,
+            "amount_iors": 4
+        },
+        "grayscale_15_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_airbnb.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_5_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_34_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_75_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_3_kitchen.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.5,
+            "amount_iors": 2
+        },
+        "grayscale_38_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        }
+    },
+    "subj02_scanpaths": {
+        "images_without_repetition": 126,
+        "grayscale_13_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_15_kitchen.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_83_oliva.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.75,
+            "amount_iors": 4
+        },
+        "grayscale_27_housebeautiful.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 8.5,
+            "amount_iors": 2
+        },
+        "grayscale_43_oliva.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        }
+    },
+    "subj03_scanpaths": {
+        "images_without_repetition": 108,
+        "grayscale_21_kitchen.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.3333333333333335,
+            "amount_iors": 3
+        },
+        "grayscale_14_housebeautiful.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 3.5454545454545454,
+            "amount_iors": 11
+        },
+        "grayscale_6_other.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 3
+        },
+        "grayscale_13_kitchen.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_19_kitchen.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_21_opensource.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        },
+        "grayscale_50_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_45_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_27_opensource.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_2_housebeautiful.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.5,
+            "amount_iors": 2
+        },
+        "grayscale_11_kitchen.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_oliva.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.3333333333333335,
+            "amount_iors": 6
+        },
+        "grayscale_33_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_15_housebeautiful.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_35_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_62_oliva.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.25,
+            "amount_iors": 4
+        },
+        "grayscale_64_oliva.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.2,
+            "amount_iors": 5
+        },
+        "grayscale_10_kitchen.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_43_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_kitchen.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 4.5,
+            "amount_iors": 2
+        },
+        "grayscale_15_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        }
+    },
+    "subj04_scanpaths": {
+        "images_without_repetition": 125,
+        "grayscale_11_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_13_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_20_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_5_oliva.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        },
+        "grayscale_64_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_9_other.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_74_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 2
+        },
+        "grayscale_30_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        }
+    },
+    "subj05_scanpaths": {
+        "images_without_repetition": 111,
+        "grayscale_7_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 2
+        },
+        "grayscale_8_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_21_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_housebeautiful.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_other.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_13_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_73_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_45_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_88_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_53_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.5,
+            "amount_iors": 2
+        },
+        "grayscale_43_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.5,
+            "amount_iors": 2
+        },
+        "grayscale_10_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_8_other.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_5_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        }
+    },
+    "subj06_scanpaths": {
+        "images_without_repetition": 118,
+        "grayscale_1_opensource.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_70_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_54_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_10_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_17_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_35_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_83_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_27_housebeautiful.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_43_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_86_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_22_housebeautiful.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 1
+        },
+        "grayscale_9_other.jpg": {
+            "max_fixations_until_return": 10,
+            "min_fixations_until_return": 10,
+            "avg_fixations_until_return": 10.0,
+            "amount_iors": 1
+        },
+        "grayscale_94_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 3
+        },
+        "grayscale_4_kitchen.jpg": {
+            "max_fixations_until_return": 13,
+            "min_fixations_until_return": 13,
+            "avg_fixations_until_return": 13.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_kitchen.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 2
+        },
+        "grayscale_59_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        }
+    },
+    "subj07_scanpaths": {
+        "images_without_repetition": 115,
+        "grayscale_11_oliva.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_other.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_18_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_airbnb.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        },
+        "grayscale_45_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_60_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_airbnb.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 9,
+            "avg_fixations_until_return": 9.0,
+            "amount_iors": 1
+        },
+        "grayscale_56_oliva.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 6.5,
+            "amount_iors": 2
+        },
+        "grayscale_32_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_75_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_86_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_74_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_2_opensource.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 2
+        },
+        "grayscale_8_other.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        }
+    },
+    "subj08_scanpaths": {
+        "images_without_repetition": 123,
+        "grayscale_72_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_airbnb.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_50_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.3333333333333333,
+            "amount_iors": 3
+        },
+        "grayscale_49_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_62_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_39_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_3_other.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_1_housebeautiful.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        }
+    },
+    "subj09_scanpaths": {
+        "images_without_repetition": 98,
+        "grayscale_10_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_38_housebeautiful.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.7142857142857144,
+            "amount_iors": 7
+        },
+        "grayscale_10_kitchen.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_29_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_17_opensource.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 4.666666666666667,
+            "amount_iors": 3
+        },
+        "grayscale_3_other.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.5,
+            "amount_iors": 2
+        },
+        "grayscale_20_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_11_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        }
+    },
+    "subj10_scanpaths": {
+        "grayscale_11_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "images_without_repetition": 110,
+        "grayscale_18_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_11_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_other.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_18_opensource.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_13_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_21_opensource.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 3
+        },
+        "grayscale_4_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_60_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_54_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 2
+        },
+        "grayscale_75_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_83_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_62_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_10_kitchen.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_9_other.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_29_housebeautiful.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_74_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.6666666666666665,
+            "amount_iors": 3
+        },
+        "grayscale_94_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_kitchen.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.5,
+            "amount_iors": 2
+        },
+        "grayscale_10_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_30_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        }
+    },
+    "subj11_scanpaths": {
+        "images_without_repetition": 95,
+        "grayscale_16_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 2
+        },
+        "grayscale_5_opensource.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 3
+        },
+        "grayscale_70_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_7_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_10_oliva.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        },
+        "grayscale_30_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_75_oliva.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_49_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_62_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_5_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_65_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_16_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        }
+    },
+    "subj12_scanpaths": {
+        "images_without_repetition": 120,
+        "grayscale_72_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_21_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_45_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_housebeautiful.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 3.5,
+            "amount_iors": 2
+        },
+        "grayscale_17_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_49_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_15_housebeautiful.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.3333333333333335,
+            "amount_iors": 6
+        },
+        "grayscale_35_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_1_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 3
+        },
+        "grayscale_23_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_2_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_kitchen.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_73_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_7_opensource.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        }
+    },
+    "subj13_scanpaths": {
+        "images_without_repetition": 119,
+        "grayscale_58_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_60_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.6666666666666665,
+            "amount_iors": 3
+        },
+        "grayscale_18_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_airbnb.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_42_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_62_oliva.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "grayscale_16_opensource.jpg": {
+            "max_fixations_until_return": 10,
+            "min_fixations_until_return": 10,
+            "avg_fixations_until_return": 10.0,
+            "amount_iors": 1
+        },
+        "grayscale_30_opensource.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        }
+    },
+    "subj14_scanpaths": {
+        "images_without_repetition": 119,
+        "grayscale_13_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_28_oliva.jpg": {
+            "max_fixations_until_return": 10,
+            "min_fixations_until_return": 10,
+            "avg_fixations_until_return": 10.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_housebeautiful.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "grayscale_54_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_11_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_15_housebeautiful.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_27_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_43_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_29_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_94_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_15_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_30_opensource.jpg": {
+            "max_fixations_until_return": 11,
+            "min_fixations_until_return": 10,
+            "avg_fixations_until_return": 10.5,
+            "amount_iors": 2
+        },
+        "grayscale_5_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        }
+    },
+    "subj15_scanpaths": {
+        "images_without_repetition": 123,
+        "grayscale_21_opensource.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_68_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_54_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_20_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_airbnb.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_56_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_35_oliva.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 4.666666666666667,
+            "amount_iors": 3
+        },
+        "grayscale_4_kitchen.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 3
+        },
+        "grayscale_1_kitchen.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        }
+    },
+    "subj16_scanpaths": {
+        "images_without_repetition": 129,
+        "grayscale_18_housebeautiful.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.3333333333333335,
+            "amount_iors": 3
+        },
+        "grayscale_4_other.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 2
+        },
+        "grayscale_34_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_8_housebeautiful.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "grayscale_15_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        }
+    },
+    "subj17_scanpaths": {
+        "images_without_repetition": 104,
+        "grayscale_18_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_72_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_housebeautiful.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.6666666666666665,
+            "amount_iors": 3
+        },
+        "grayscale_98_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.75,
+            "amount_iors": 4
+        },
+        "grayscale_21_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_50_oliva.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.7142857142857144,
+            "amount_iors": 7
+        },
+        "grayscale_29_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_28_oliva.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 3.9285714285714284,
+            "amount_iors": 14
+        },
+        "grayscale_45_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_housebeautiful.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 3
+        },
+        "grayscale_63_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 2
+        },
+        "grayscale_47_oliva.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        },
+        "grayscale_20_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.6666666666666665,
+            "amount_iors": 3
+        },
+        "grayscale_8_housebeautiful.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "grayscale_11_kitchen.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_airbnb.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_85_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_83_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_1_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.5,
+            "amount_iors": 2
+        },
+        "grayscale_77_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_62_oliva.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "grayscale_43_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_29_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_94_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_20_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_55_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_30_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 2
+        },
+        "grayscale_3_other.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_5_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        }
+    },
+    "subj18_scanpaths": {
+        "images_without_repetition": 124,
+        "grayscale_18_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_13_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_50_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_housebeautiful.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.25,
+            "amount_iors": 4
+        },
+        "grayscale_60_oliva.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 1
+        },
+        "grayscale_42_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_23_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_59_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_30_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        }
+    },
+    "subj19_scanpaths": {
+        "images_without_repetition": 125,
+        "grayscale_100_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_98_oliva.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 1
+        },
+        "grayscale_8_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_89_oliva.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_35_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_9_other.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_kitchen.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_15_oliva.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        }
+    },
+    "subj20_scanpaths": {
+        "images_without_repetition": 102,
+        "grayscale_18_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_21_kitchen.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 2
+        },
+        "grayscale_14_housebeautiful.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.5,
+            "amount_iors": 4
+        },
+        "grayscale_1_opensource.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_11_oliva.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_other.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 2
+        },
+        "grayscale_18_opensource.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.5,
+            "amount_iors": 2
+        },
+        "grayscale_5_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_16_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 2
+        },
+        "grayscale_6_airbnb.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_13_kitchen.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "grayscale_29_oliva.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.75,
+            "amount_iors": 4
+        },
+        "grayscale_58_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_housebeautiful.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.5,
+            "amount_iors": 4
+        },
+        "grayscale_13_other.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.1666666666666665,
+            "amount_iors": 6
+        },
+        "grayscale_18_kitchen.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_63_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.6666666666666665,
+            "amount_iors": 3
+        },
+        "grayscale_6_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.5,
+            "amount_iors": 2
+        },
+        "grayscale_47_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_61_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_56_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_33_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_75_oliva.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_35_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.6666666666666665,
+            "amount_iors": 3
+        },
+        "grayscale_27_housebeautiful.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_77_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_39_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_8_other.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_kitchen.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_73_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_3_other.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 3.933333333333333,
+            "amount_iors": 15
+        }
+    },
+    "subj21_scanpaths": {
+        "images_without_repetition": 121,
+        "grayscale_18_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_16_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_airbnb.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_21_opensource.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 4.5,
+            "amount_iors": 4
+        },
+        "grayscale_45_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_other.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 2
+        },
+        "grayscale_56_oliva.jpg": {
+            "max_fixations_until_return": 11,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 7.333333333333333,
+            "amount_iors": 3
+        },
+        "grayscale_44_oliva.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "grayscale_62_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 2
+        },
+        "grayscale_74_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_30_opensource.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        }
+    },
+    "subj22_scanpaths": {
+        "grayscale_11_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "images_without_repetition": 116,
+        "grayscale_100_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_11_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 2
+        },
+        "grayscale_18_opensource.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_airbnb.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_13_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_other.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_13_other.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_60_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_17_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_airbnb.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        },
+        "grayscale_77_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_36_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.6666666666666667,
+            "amount_iors": 3
+        },
+        "grayscale_20_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_kitchen.jpg": {
+            "max_fixations_until_return": 13,
+            "min_fixations_until_return": 13,
+            "avg_fixations_until_return": 13.0,
+            "amount_iors": 1
+        },
+        "grayscale_3_other.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_7_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        }
+    },
+    "subj23_scanpaths": {
+        "images_without_repetition": 102,
+        "grayscale_6_airbnb.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_29_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_28_oliva.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 9,
+            "avg_fixations_until_return": 9.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_other.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_54_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_3_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_17_opensource.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 2
+        },
+        "grayscale_11_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_33_oliva.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.25,
+            "amount_iors": 4
+        },
+        "grayscale_32_opensource.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_other.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_35_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_35_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_81_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_27_housebeautiful.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 4
+        },
+        "grayscale_44_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_62_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 2
+        },
+        "grayscale_64_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.75,
+            "amount_iors": 4
+        },
+        "grayscale_38_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_22_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_74_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.6666666666666665,
+            "amount_iors": 3
+        },
+        "grayscale_16_opensource.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.6666666666666665,
+            "amount_iors": 3
+        },
+        "grayscale_36_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_15_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.3333333333333333,
+            "amount_iors": 3
+        },
+        "grayscale_55_oliva.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.5,
+            "amount_iors": 2
+        },
+        "grayscale_3_other.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        }
+    },
+    "subj24_scanpaths": {
+        "images_without_repetition": 107,
+        "grayscale_38_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_70_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_13_opensource.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.5,
+            "amount_iors": 2
+        },
+        "grayscale_6_housebeautiful.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 3.3333333333333335,
+            "amount_iors": 3
+        },
+        "grayscale_21_kitchen.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "grayscale_68_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_3_other.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.6666666666666665,
+            "amount_iors": 3
+        },
+        "grayscale_61_oliva.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_12_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_64_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.6666666666666665,
+            "amount_iors": 3
+        },
+        "grayscale_6_other.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_20_housebeautiful.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_55_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_23_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_5_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_29_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_2_housebeautiful.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 9,
+            "avg_fixations_until_return": 9.0,
+            "amount_iors": 1
+        },
+        "grayscale_32_opensource.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_18_opensource.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "grayscale_30_housebeautiful.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 3
+        }
+    },
+    "subj25_scanpaths": {
+        "images_without_repetition": 105,
+        "grayscale_14_housebeautiful.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.3333333333333335,
+            "amount_iors": 3
+        },
+        "grayscale_1_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_other.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.5,
+            "amount_iors": 2
+        },
+        "grayscale_6_airbnb.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_29_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_45_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_other.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 9,
+            "avg_fixations_until_return": 9.0,
+            "amount_iors": 1
+        },
+        "grayscale_52_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_63_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_27_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_15_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_17_opensource.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 3
+        },
+        "grayscale_7_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_75_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_other.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_35_housebeautiful.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_1_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_77_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_86_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_22_housebeautiful.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 2
+        },
+        "grayscale_2_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_71_oliva.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_kitchen.jpg": {
+            "max_fixations_until_return": 11,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 7.333333333333333,
+            "amount_iors": 3
+        },
+        "grayscale_15_oliva.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 6.5,
+            "amount_iors": 2
+        },
+        "grayscale_59_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_3_other.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 2
+        }
+    },
+    "subj26_scanpaths": {
+        "images_without_repetition": 118,
+        "grayscale_1_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_11_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_13_kitchen.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 2
+        },
+        "grayscale_45_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 2
+        },
+        "grayscale_38_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_11_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_32_opensource.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_75_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_15_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.5,
+            "amount_iors": 2
+        },
+        "grayscale_35_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_83_oliva.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        },
+        "grayscale_27_housebeautiful.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.6666666666666665,
+            "amount_iors": 3
+        },
+        "grayscale_10_kitchen.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        }
+    },
+    "subj27_scanpaths": {
+        "images_without_repetition": 128,
+        "grayscale_52_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.5,
+            "amount_iors": 2
+        },
+        "grayscale_56_oliva.jpg": {
+            "max_fixations_until_return": 12,
+            "min_fixations_until_return": 12,
+            "avg_fixations_until_return": 12.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_77_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.5,
+            "amount_iors": 2
+        },
+        "grayscale_73_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        }
+    },
+    "subj28_scanpaths": {
+        "images_without_repetition": 99,
+        "grayscale_33_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_74_oliva.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 2
+        },
+        "grayscale_13_kitchen.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_12_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_11_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_airbnb.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "grayscale_17_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        }
+    },
+    "subj29_scanpaths": {
+        "images_without_repetition": 101,
+        "grayscale_18_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.3333333333333333,
+            "amount_iors": 3
+        },
+        "grayscale_94_oliva.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 3
+        },
+        "grayscale_3_other.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_12_housebeautiful.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_75_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        }
+    },
+    "subj30_scanpaths": {
+        "images_without_repetition": 113,
+        "grayscale_100_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_13_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_housebeautiful.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_1_opensource.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_18_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_19_kitchen.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_29_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 2
+        },
+        "grayscale_4_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_45_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_68_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_other.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.5,
+            "amount_iors": 2
+        },
+        "grayscale_52_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_20_housebeautiful.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.6666666666666665,
+            "amount_iors": 3
+        },
+        "grayscale_7_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_63_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_47_oliva.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_airbnb.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_3_kitchen.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 4.75,
+            "amount_iors": 4
+        },
+        "grayscale_10_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_29_housebeautiful.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_71_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        }
+    },
+    "subj31_scanpaths": {
+        "images_without_repetition": 116,
+        "grayscale_6_airbnb.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_21_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_50_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_13_other.jpg": {
+            "max_fixations_until_return": 11,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 7.333333333333333,
+            "amount_iors": 3
+        },
+        "grayscale_62_oliva.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 5
+        },
+        "grayscale_22_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_16_opensource.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.6666666666666665,
+            "amount_iors": 3
+        },
+        "grayscale_4_kitchen.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_30_opensource.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "grayscale_3_other.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.6666666666666665,
+            "amount_iors": 3
+        },
+        "grayscale_1_kitchen.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        }
+    },
+    "subj32_scanpaths": {
+        "images_without_repetition": 118,
+        "grayscale_7_opensource.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_21_opensource.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "grayscale_74_oliva.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 3
+        },
+        "grayscale_77_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.5,
+            "amount_iors": 2
+        },
+        "grayscale_9_other.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_housebeautiful.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 4.333333333333333,
+            "amount_iors": 3
+        },
+        "grayscale_54_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_13_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_1_housebeautiful.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_17_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 2
+        },
+        "grayscale_28_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_9_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_16_oliva.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "grayscale_73_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_55_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_49_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        }
+    },
+    "subj33_scanpaths": {
+        "images_without_repetition": 126,
+        "grayscale_27_opensource.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 9,
+            "avg_fixations_until_return": 9.0,
+            "amount_iors": 1
+        },
+        "grayscale_8_housebeautiful.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_airbnb.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_35_oliva.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "grayscale_42_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_23_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_kitchen.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 7.5,
+            "amount_iors": 2
+        }
+    },
+    "subj34_scanpaths": {
+        "images_without_repetition": 118,
+        "grayscale_18_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_16_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_19_kitchen.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_21_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_50_oliva.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.3333333333333335,
+            "amount_iors": 3
+        },
+        "grayscale_29_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_12_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_15_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_5_oliva.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        },
+        "grayscale_44_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_62_oliva.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_43_oliva.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 5.5,
+            "amount_iors": 2
+        },
+        "grayscale_74_oliva.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 5.333333333333333,
+            "amount_iors": 3
+        },
+        "grayscale_8_other.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_30_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        }
+    },
+    "subj35_scanpaths": {
+        "grayscale_18_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "images_without_repetition": 126,
+        "grayscale_75_oliva.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.3333333333333335,
+            "amount_iors": 3
+        },
+        "grayscale_28_housebeautiful.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 9,
+            "avg_fixations_until_return": 9.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_housebeautiful.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_34_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_27_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 2
+        },
+        "grayscale_20_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_68_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.6666666666666665,
+            "amount_iors": 3
+        }
+    },
+    "subj36_scanpaths": {
+        "images_without_repetition": 94,
+        "grayscale_11_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_34_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_65_oliva.jpg": {
+            "max_fixations_until_return": 11,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 7.5,
+            "amount_iors": 2
+        },
+        "grayscale_2_opensource.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_15_housebeautiful.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_64_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_1_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_10_kitchen.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.666666666666667,
+            "amount_iors": 3
+        },
+        "grayscale_14_kitchen.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        }
+    },
+    "subj37_scanpaths": {
+        "images_without_repetition": 106,
+        "grayscale_6_other.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_13_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        }
+    },
+    "subj38_scanpaths": {
+        "images_without_repetition": 92,
+        "grayscale_16_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_32_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_5_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_11_kitchen.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_3_oliva.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        },
+        "grayscale_74_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_38_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_2_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_21_housebeautiful.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.1666666666666665,
+            "amount_iors": 6
+        },
+        "grayscale_13_kitchen.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_opensource.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 4.5,
+            "amount_iors": 2
+        },
+        "grayscale_3_kitchen.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.5,
+            "amount_iors": 2
+        }
+    },
+    "subj39_scanpaths": {
+        "grayscale_18_housebeautiful.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        },
+        "images_without_repetition": 123,
+        "grayscale_35_oliva.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        },
+        "grayscale_21_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_7_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_94_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 2
+        },
+        "grayscale_54_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 3
+        },
+        "grayscale_9_kitchen.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_85_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_29_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_3_kitchen.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 3
+        }
+    },
+    "subj40_scanpaths": {
+        "images_without_repetition": 118,
+        "grayscale_18_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_16_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_airbnb.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "grayscale_50_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 2
+        },
+        "grayscale_4_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_18_kitchen.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_75_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_15_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_27_housebeautiful.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 1
+        },
+        "grayscale_29_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        }
+    },
+    "subj41_scanpaths": {
+        "images_without_repetition": 106,
+        "grayscale_21_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.5,
+            "amount_iors": 2
+        },
+        "grayscale_13_kitchen.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 2
+        },
+        "grayscale_50_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_45_oliva.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 3.8333333333333335,
+            "amount_iors": 6
+        },
+        "grayscale_4_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_7_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_9_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_airbnb.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_32_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_75_oliva.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_27_housebeautiful.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.5,
+            "amount_iors": 4
+        },
+        "grayscale_1_oliva.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_64_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_43_oliva.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 2
+        },
+        "grayscale_9_other.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_29_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_74_oliva.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 2
+        },
+        "grayscale_4_kitchen.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 9,
+            "avg_fixations_until_return": 9.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_kitchen.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.5,
+            "amount_iors": 2
+        },
+        "grayscale_14_oliva.jpg": {
+            "max_fixations_until_return": 10,
+            "min_fixations_until_return": 10,
+            "avg_fixations_until_return": 10.0,
+            "amount_iors": 1
+        }
+    },
+    "subj42_scanpaths": {
+        "grayscale_11_opensource.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 2
+        },
+        "images_without_repetition": 107,
+        "grayscale_13_kitchen.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_other.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_housebeautiful.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 4.142857142857143,
+            "amount_iors": 7
+        },
+        "grayscale_18_kitchen.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_8_housebeautiful.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "grayscale_61_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.3333333333333333,
+            "amount_iors": 3
+        },
+        "grayscale_33_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.5,
+            "amount_iors": 2
+        },
+        "grayscale_34_housebeautiful.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 4.25,
+            "amount_iors": 4
+        },
+        "grayscale_7_kitchen.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.6666666666666665,
+            "amount_iors": 3
+        },
+        "grayscale_49_oliva.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "grayscale_32_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_75_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.5,
+            "amount_iors": 4
+        },
+        "grayscale_6_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_35_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_3_kitchen.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 3.6666666666666665,
+            "amount_iors": 6
+        },
+        "grayscale_42_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_1_oliva.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_77_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.5,
+            "amount_iors": 2
+        },
+        "grayscale_64_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 3
+        },
+        "grayscale_43_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_22_housebeautiful.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 3.3333333333333335,
+            "amount_iors": 3
+        },
+        "grayscale_29_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_74_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_71_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 3
+        },
+        "grayscale_4_kitchen.jpg": {
+            "max_fixations_until_return": 12,
+            "min_fixations_until_return": 12,
+            "avg_fixations_until_return": 12.0,
+            "amount_iors": 1
+        },
+        "grayscale_30_opensource.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 1
+        }
+    },
+    "subj43_scanpaths": {
+        "images_without_repetition": 103,
+        "grayscale_72_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_housebeautiful.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 2
+        },
+        "grayscale_1_opensource.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_11_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.5,
+            "amount_iors": 2
+        },
+        "grayscale_30_housebeautiful.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_airbnb.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 2
+        },
+        "grayscale_21_opensource.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_housebeautiful.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 2
+        },
+        "grayscale_7_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_47_oliva.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 3.3333333333333335,
+            "amount_iors": 3
+        },
+        "grayscale_20_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_8_housebeautiful.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        },
+        "grayscale_2_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_15_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_17_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_89_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 2
+        },
+        "grayscale_61_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_34_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_32_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_35_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_3_kitchen.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 7
+        },
+        "grayscale_27_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 3
+        },
+        "grayscale_42_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_1_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.3333333333333333,
+            "amount_iors": 3
+        },
+        "grayscale_77_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_74_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.3333333333333335,
+            "amount_iors": 3
+        },
+        "grayscale_8_other.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_59_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_30_opensource.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 2
+        }
+    },
+    "subj44_scanpaths": {
+        "grayscale_18_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "images_without_repetition": 122,
+        "grayscale_20_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_11_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_38_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_86_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_42_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_11_kitchen.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_32_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_housebeautiful.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_75_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        }
+    },
+    "subj45_scanpaths": {
+        "grayscale_11_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "images_without_repetition": 114,
+        "grayscale_18_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_13_kitchen.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_52_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_60_oliva.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 2
+        },
+        "grayscale_20_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_airbnb.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_34_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_35_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_83_oliva.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.3333333333333335,
+            "amount_iors": 3
+        },
+        "grayscale_3_kitchen.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.5,
+            "amount_iors": 2
+        },
+        "grayscale_4_kitchen.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        }
+    },
+    "subj46_scanpaths": {
+        "images_without_repetition": 119,
+        "grayscale_21_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_72_oliva.jpg": {
+            "max_fixations_until_return": 10,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 4.375,
+            "amount_iors": 8
+        },
+        "grayscale_6_airbnb.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_21_opensource.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 9,
+            "avg_fixations_until_return": 9.0,
+            "amount_iors": 1
+        },
+        "grayscale_50_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_28_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_89_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 3
+        },
+        "grayscale_83_oliva.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        }
+    },
+    "subj47_scanpaths": {
+        "images_without_repetition": 117,
+        "grayscale_1_housebeautiful.jpg": {
+            "max_fixations_until_return": 11,
+            "min_fixations_until_return": 11,
+            "avg_fixations_until_return": 11.0,
+            "amount_iors": 2
+        },
+        "grayscale_43_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_54_oliva.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 3
+        },
+        "grayscale_14_other.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_9_other.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_85_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_9_kitchen.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "grayscale_19_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_13_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_74_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_59_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_50_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        }
+    },
+    "subj48_scanpaths": {
+        "images_without_repetition": 108,
+        "grayscale_6_other.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_21_opensource.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 1
+        },
+        "grayscale_20_housebeautiful.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_13_other.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.5,
+            "amount_iors": 2
+        },
+        "grayscale_18_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_60_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_63_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.6666666666666665,
+            "amount_iors": 3
+        },
+        "grayscale_3_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_8_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_38_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 3
+        },
+        "grayscale_53_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_33_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_5_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_32_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.3333333333333333,
+            "amount_iors": 3
+        },
+        "grayscale_1_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.6666666666666667,
+            "amount_iors": 6
+        },
+        "grayscale_62_oliva.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 2
+        },
+        "grayscale_43_oliva.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_86_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.3333333333333333,
+            "amount_iors": 3
+        },
+        "grayscale_38_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_74_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_2_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_71_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_kitchen.jpg": {
+            "max_fixations_until_return": 11,
+            "min_fixations_until_return": 11,
+            "avg_fixations_until_return": 11.0,
+            "amount_iors": 1
+        },
+        "grayscale_55_oliva.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        }
+    },
+    "subj49_scanpaths": {
+        "images_without_repetition": 117,
+        "grayscale_1_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_83_oliva.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_1_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_43_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_19_kitchen.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_12_housebeautiful.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 4.5,
+            "amount_iors": 2
+        },
+        "grayscale_4_other.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_airbnb.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 2
+        },
+        "grayscale_54_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_56_oliva.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 1
+        },
+        "grayscale_29_housebeautiful.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_55_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        }
+    },
+    "subj50_scanpaths": {
+        "images_without_repetition": 129,
+        "grayscale_29_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_43_oliva.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 2
+        },
+        "grayscale_9_other.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_36_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_8_other.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 3
+        }
+    },
+    "subj51_scanpaths": {
+        "images_without_repetition": 116,
+        "grayscale_4_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_45_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_other.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_89_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_56_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_75_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_35_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 2
+        },
+        "grayscale_77_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.3333333333333333,
+            "amount_iors": 3
+        },
+        "grayscale_44_oliva.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_20_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_kitchen.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_10_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_kitchen.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        }
+    },
+    "subj52_scanpaths": {
+        "images_without_repetition": 124,
+        "grayscale_18_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_13_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_50_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_29_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_45_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_housebeautiful.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.25,
+            "amount_iors": 4
+        },
+        "grayscale_60_oliva.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 1
+        },
+        "grayscale_81_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_30_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        }
+    },
+    "subj53_scanpaths": {
+        "images_without_repetition": 111,
+        "grayscale_18_housebeautiful.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_11_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 2
+        },
+        "grayscale_4_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_60_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_83_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.3333333333333333,
+            "amount_iors": 3
+        },
+        "grayscale_27_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_1_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_20_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_kitchen.jpg": {
+            "max_fixations_until_return": 11,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 6
+        },
+        "grayscale_8_other.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_55_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_1_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_7_opensource.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 2
+        }
+    },
+    "subj54_scanpaths": {
+        "images_without_repetition": 106,
+        "grayscale_14_housebeautiful.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 3
+        },
+        "grayscale_5_opensource.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_airbnb.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_21_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_50_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_housebeautiful.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        },
+        "grayscale_12_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_60_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 2
+        },
+        "grayscale_17_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.3333333333333333,
+            "amount_iors": 3
+        },
+        "grayscale_89_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_airbnb.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.5,
+            "amount_iors": 2
+        },
+        "grayscale_34_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_75_oliva.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 4
+        },
+        "grayscale_35_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_83_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_3_kitchen.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.6666666666666665,
+            "amount_iors": 3
+        },
+        "grayscale_42_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_1_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_29_housebeautiful.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_kitchen.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_30_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_3_other.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_1_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        }
+    },
+    "subj55_scanpaths": {
+        "images_without_repetition": 109,
+        "grayscale_11_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_98_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_housebeautiful.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 4
+        },
+        "grayscale_18_kitchen.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_60_oliva.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "grayscale_61_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_75_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_27_housebeautiful.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 2
+        },
+        "grayscale_42_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_64_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_43_oliva.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_23_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_74_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 2
+        },
+        "grayscale_39_housebeautiful.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 3
+        },
+        "grayscale_4_kitchen.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_8_other.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_55_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_1_kitchen.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_7_opensource.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.5,
+            "amount_iors": 2
+        },
+        "grayscale_5_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        }
+    },
+    "subj56_scanpaths": {
+        "images_without_repetition": 121,
+        "grayscale_100_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_14_housebeautiful.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 2
+        },
+        "grayscale_11_oliva.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "grayscale_29_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_28_oliva.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 3
+        },
+        "grayscale_7_housebeautiful.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_60_oliva.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 1
+        },
+        "grayscale_99_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_housebeautiful.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 2
+        },
+        "grayscale_15_kitchen.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_8_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_64_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_43_oliva.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 1
+        }
+    },
+    "subj57_scanpaths": {
+        "images_without_repetition": 119,
+        "grayscale_21_opensource.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        },
+        "grayscale_60_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_20_oliva.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_33_oliva.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "grayscale_7_kitchen.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 3
+        },
+        "grayscale_15_housebeautiful.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "grayscale_6_opensource.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 2
+        },
+        "grayscale_35_housebeautiful.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.75,
+            "amount_iors": 4
+        },
+        "grayscale_35_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_77_oliva.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "grayscale_16_opensource.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "grayscale_4_kitchen.jpg": {
+            "max_fixations_until_return": 11,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 2
+        }
+    }
+}

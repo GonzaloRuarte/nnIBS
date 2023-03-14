@@ -1,0 +1,2337 @@
+{
+    "et_117969_scanpaths": {
+        "images_without_repetition": 98,
+        "cmp_shelves_109_teddybear_022.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_sanddunes_001_motorcycle_001.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "cmp_desks_003_plants_001.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_014_person_007.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.3333333333333335,
+            "amount_iors": 3
+        }
+    },
+    "et_123082_2_scanpaths": {
+        "images_without_repetition": 80,
+        "cmp_building_007_person_004.jpg": {
+            "max_fixations_until_return": 11,
+            "min_fixations_until_return": 11,
+            "avg_fixations_until_return": 11.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_020_remote_004.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.5,
+            "amount_iors": 2
+        },
+        "cmp_snow_002_animal_002.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "cmp_cakestand_001_food_001.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_022_sheep_010.jpg": {
+            "max_fixations_until_return": 10,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 2
+        },
+        "cmp_shelves_058_toys_017.jpg": {
+            "max_fixations_until_return": 13,
+            "min_fixations_until_return": 13,
+            "avg_fixations_until_return": 13.0,
+            "amount_iors": 1
+        },
+        "cmp_building_023_cat_010.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_020_cat_007.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_052_toys_011.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "cmp_building_006_person_003.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 5.666666666666667,
+            "amount_iors": 3
+        },
+        "cmp_shelves_042_toys_001.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.5,
+            "amount_iors": 2
+        },
+        "cmp_shelves_077_toys_036.jpg": {
+            "max_fixations_until_return": 20,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 9.0,
+            "amount_iors": 5
+        },
+        "cmp_building_054_bird_010.jpg": {
+            "max_fixations_until_return": 15,
+            "min_fixations_until_return": 11,
+            "avg_fixations_until_return": 13.0,
+            "amount_iors": 2
+        },
+        "cmp_shelves_100_teddybear_013.jpg": {
+            "max_fixations_until_return": 12,
+            "min_fixations_until_return": 12,
+            "avg_fixations_until_return": 12.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_017_sheep_005.jpg": {
+            "max_fixations_until_return": 18,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 13.0,
+            "amount_iors": 2
+        },
+        "cmp_shelves_081_knife_004.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_109_teddybear_022.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_032_book_005.jpg": {
+            "max_fixations_until_return": 13,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 7.5,
+            "amount_iors": 2
+        },
+        "cmp_shelves_050_toys_009.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 2
+        },
+        "cmp_shelves_039_book_012.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_105_teddybear_018.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_018_cat_005.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 2
+        }
+    },
+    "et_159640_scanpaths": {
+        "cmp_mountain_016_sheep_004.jpg": {
+            "max_fixations_until_return": 11,
+            "min_fixations_until_return": 11,
+            "avg_fixations_until_return": 11.0,
+            "amount_iors": 1
+        },
+        "images_without_repetition": 90,
+        "cmp_building_056_bird_012.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_022_sheep_010.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_020_remote_004.jpg": {
+            "max_fixations_until_return": 12,
+            "min_fixations_until_return": 9,
+            "avg_fixations_until_return": 10.5,
+            "amount_iors": 2
+        },
+        "cmp_snow_004_dog_001.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_building_021_cat_008.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_077_toys_036.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_building_007_person_004.jpg": {
+            "max_fixations_until_return": 18,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 9.333333333333334,
+            "amount_iors": 3
+        },
+        "cmp_building_051_bird_007.jpg": {
+            "max_fixations_until_return": 20,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 11.0,
+            "amount_iors": 2
+        },
+        "cmp_mountain_025_cow_005.jpg": {
+            "max_fixations_until_return": 13,
+            "min_fixations_until_return": 13,
+            "avg_fixations_until_return": 13.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_017_sheep_005.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        }
+    },
+    "et_179678_scanpaths": {
+        "images_without_repetition": 89,
+        "cmp_africansavanna_003_wildanimals_003.jpg": {
+            "max_fixations_until_return": 22,
+            "min_fixations_until_return": 9,
+            "avg_fixations_until_return": 15.5,
+            "amount_iors": 2
+        },
+        "cmp_building_014_person_007.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "cmp_building_023_cat_010.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_022_cat_009.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_056_toys_015.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.3333333333333335,
+            "amount_iors": 3
+        },
+        "cmp_shelves_049_toys_008.jpg": {
+            "max_fixations_until_return": 13,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 7.5,
+            "amount_iors": 4
+        },
+        "cmp_shelves_077_toys_036.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        },
+        "cmp_cakestand_001_food_001.jpg": {
+            "max_fixations_until_return": 14,
+            "min_fixations_until_return": 14,
+            "avg_fixations_until_return": 14.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_004_sheep_001.jpg": {
+            "max_fixations_until_return": 27,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 14.142857142857142,
+            "amount_iors": 7
+        },
+        "cmp_snow_004_dog_001.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_058_toys_017.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_063_toys_022.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_062_dog_019.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 9,
+            "avg_fixations_until_return": 9.0,
+            "amount_iors": 1
+        }
+    },
+    "et_200877_scanpaths": {
+        "images_without_repetition": 92,
+        "cmp_shelves_046_toys_005.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 2
+        },
+        "cmp_field_007_farmanimals_007.jpg": {
+            "max_fixations_until_return": 10,
+            "min_fixations_until_return": 10,
+            "avg_fixations_until_return": 10.0,
+            "amount_iors": 1
+        },
+        "cmp_building_022_cat_009.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_050_toys_009.jpg": {
+            "max_fixations_until_return": 18,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 10.0,
+            "amount_iors": 2
+        },
+        "cmp_shelves_105_teddybear_018.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_building_014_person_007.jpg": {
+            "max_fixations_until_return": 17,
+            "min_fixations_until_return": 17,
+            "avg_fixations_until_return": 17.0,
+            "amount_iors": 1
+        },
+        "cmp_building_044_dog_012.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_017_sheep_005.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        },
+        "cmp_beach_002_person_002.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_023_cat_010.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        }
+    },
+    "et_244108_scanpaths": {
+        "images_without_repetition": 87,
+        "cmp_shelves_056_toys_015.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_006_person_003.jpg": {
+            "max_fixations_until_return": 11,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 7.333333333333333,
+            "amount_iors": 3
+        },
+        "cmp_yard_001_birds_001.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_077_toys_036.jpg": {
+            "max_fixations_until_return": 16,
+            "min_fixations_until_return": 16,
+            "avg_fixations_until_return": 16.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_073_toys_032.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "cmp_cakestand_001_food_001.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_003_cow_001.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "cmp_meadow_003_dogs_002.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_050_toys_009.jpg": {
+            "max_fixations_until_return": 21,
+            "min_fixations_until_return": 21,
+            "avg_fixations_until_return": 21.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_063_toys_022.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.3333333333333335,
+            "amount_iors": 3
+        },
+        "cmp_mountain_019_sheep_007.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_004_sheep_001.jpg": {
+            "max_fixations_until_return": 12,
+            "min_fixations_until_return": 12,
+            "avg_fixations_until_return": 12.0,
+            "amount_iors": 1
+        },
+        "cmp_jungle_015_bird_015.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "cmp_building_023_cat_010.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        }
+    },
+    "et_244389_scanpaths": {
+        "images_without_repetition": 91,
+        "cmp_shelves_036_book_009.jpg": {
+            "max_fixations_until_return": 12,
+            "min_fixations_until_return": 12,
+            "avg_fixations_until_return": 12.0,
+            "amount_iors": 1
+        },
+        "cmp_snow_004_dog_001.jpg": {
+            "max_fixations_until_return": 16,
+            "min_fixations_until_return": 16,
+            "avg_fixations_until_return": 16.0,
+            "amount_iors": 2
+        },
+        "cmp_shelves_068_toys_027.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "cmp_sky_001_kite_001.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_032_book_005.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_081_knife_004.jpg": {
+            "max_fixations_until_return": 12,
+            "min_fixations_until_return": 9,
+            "avg_fixations_until_return": 10.5,
+            "amount_iors": 2
+        },
+        "cmp_mountain_019_sheep_007.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_yard_001_birds_001.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_056_toys_015.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_087_vase_006.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.3333333333333335,
+            "amount_iors": 3
+        }
+    },
+    "et_248301_scanpaths": {
+        "images_without_repetition": 86,
+        "cmp_meadow_003_dogs_002.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_101_teddybear_014.jpg": {
+            "max_fixations_until_return": 15,
+            "min_fixations_until_return": 15,
+            "avg_fixations_until_return": 15.0,
+            "amount_iors": 1
+        },
+        "cmp_building_014_person_007.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_056_toys_015.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "cmp_rooftop_001_cat_001.jpg": {
+            "max_fixations_until_return": 11,
+            "min_fixations_until_return": 11,
+            "avg_fixations_until_return": 11.0,
+            "amount_iors": 1
+        },
+        "cmp_yard_001_birds_001.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_019_sheep_007.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 2
+        },
+        "cmp_shelves_049_toys_008.jpg": {
+            "max_fixations_until_return": 10,
+            "min_fixations_until_return": 10,
+            "avg_fixations_until_return": 10.0,
+            "amount_iors": 1
+        },
+        "cmp_building_022_cat_009.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_077_toys_036.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "cmp_field_008_farmanimals_008.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_003_cow_001.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_office_001_pottedplant_001.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 9,
+            "avg_fixations_until_return": 9.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_063_toys_022.jpg": {
+            "max_fixations_until_return": 13,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 3
+        },
+        "cmp_mountain_004_sheep_001.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        }
+    },
+    "et_286470_scanpaths": {
+        "cmp_shelves_029_book_002.jpg": {
+            "max_fixations_until_return": 20,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 10.75,
+            "amount_iors": 4
+        },
+        "images_without_repetition": 90,
+        "cmp_mountain_025_cow_005.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_022_sheep_010.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_056_toys_015.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 1
+        },
+        "cmp_field_007_farmanimals_007.jpg": {
+            "max_fixations_until_return": 12,
+            "min_fixations_until_return": 12,
+            "avg_fixations_until_return": 12.0,
+            "amount_iors": 1
+        },
+        "cmp_yard_001_birds_001.jpg": {
+            "max_fixations_until_return": 17,
+            "min_fixations_until_return": 12,
+            "avg_fixations_until_return": 14.5,
+            "amount_iors": 2
+        },
+        "cmp_mountain_016_sheep_004.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_020_remote_004.jpg": {
+            "max_fixations_until_return": 10,
+            "min_fixations_until_return": 10,
+            "avg_fixations_until_return": 10.0,
+            "amount_iors": 1
+        },
+        "cmp_africansavanna_003_wildanimals_003.jpg": {
+            "max_fixations_until_return": 24,
+            "min_fixations_until_return": 24,
+            "avg_fixations_until_return": 24.0,
+            "amount_iors": 2
+        },
+        "cmp_cakestand_001_food_001.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_017_sheep_005.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_050_toys_009.jpg": {
+            "max_fixations_until_return": 10,
+            "min_fixations_until_return": 10,
+            "avg_fixations_until_return": 10.0,
+            "amount_iors": 1
+        }
+    },
+    "et_305138_scanpaths": {
+        "images_without_repetition": 87,
+        "cmp_building_010_cat_002.jpg": {
+            "max_fixations_until_return": 10,
+            "min_fixations_until_return": 10,
+            "avg_fixations_until_return": 10.0,
+            "amount_iors": 1
+        },
+        "cmp_desks_002_backpacks_001.jpg": {
+            "max_fixations_until_return": 14,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 9.333333333333334,
+            "amount_iors": 6
+        },
+        "cmp_meadow_003_dogs_002.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 2
+        },
+        "cmp_shelves_050_toys_009.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_018_remote_002.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "cmp_field_008_farmanimals_008.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_022_cat_009.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_sky_001_kite_001.jpg": {
+            "max_fixations_until_return": 13,
+            "min_fixations_until_return": 13,
+            "avg_fixations_until_return": 13.0,
+            "amount_iors": 2
+        },
+        "cmp_yard_001_birds_001.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 2
+        },
+        "cmp_building_018_cat_005.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_022_sheep_010.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_056_toys_015.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_093_vase_012.jpg": {
+            "max_fixations_until_return": 13,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 10.0,
+            "amount_iors": 2
+        },
+        "cmp_sanddunes_001_motorcycle_001.jpg": {
+            "max_fixations_until_return": 15,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 11.5,
+            "amount_iors": 2
+        }
+    },
+    "et_370500_scanpaths": {
+        "images_without_repetition": 91,
+        "cmp_jungle_015_bird_015.jpg": {
+            "max_fixations_until_return": 13,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 10.0,
+            "amount_iors": 2
+        },
+        "cmp_building_018_cat_005.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_077_toys_036.jpg": {
+            "max_fixations_until_return": 17,
+            "min_fixations_until_return": 17,
+            "avg_fixations_until_return": 17.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_073_toys_032.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_003_cow_001.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_desks_003_plants_001.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.5,
+            "amount_iors": 2
+        },
+        "cmp_building_051_bird_007.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 9,
+            "avg_fixations_until_return": 9.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_063_toys_022.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "cmp_building_044_dog_012.jpg": {
+            "max_fixations_until_return": 11,
+            "min_fixations_until_return": 11,
+            "avg_fixations_until_return": 11.0,
+            "amount_iors": 1
+        },
+        "cmp_building_054_bird_010.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        }
+    },
+    "et_373490_scanpaths": {
+        "cmp_meadow_003_dogs_002.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "images_without_repetition": 77,
+        "cmp_shelves_063_toys_022.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.5,
+            "amount_iors": 2
+        },
+        "cmp_jungle_015_bird_015.jpg": {
+            "max_fixations_until_return": 10,
+            "min_fixations_until_return": 10,
+            "avg_fixations_until_return": 10.0,
+            "amount_iors": 1
+        },
+        "cmp_rooftop_001_cat_001.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_046_sheep_001.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_yard_003_animal_002.jpg": {
+            "max_fixations_until_return": 12,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 2
+        },
+        "cmp_forest_005_bird_002.jpg": {
+            "max_fixations_until_return": 15,
+            "min_fixations_until_return": 14,
+            "avg_fixations_until_return": 14.5,
+            "amount_iors": 2
+        },
+        "cmp_yard_001_birds_001.jpg": {
+            "max_fixations_until_return": 27,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 15.0,
+            "amount_iors": 2
+        },
+        "cmp_building_030_person_016.jpg": {
+            "max_fixations_until_return": 11,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 6.5,
+            "amount_iors": 2
+        },
+        "cmp_building_060_dog_017.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 9,
+            "avg_fixations_until_return": 9.0,
+            "amount_iors": 1
+        },
+        "cmp_desks_003_plants_001.jpg": {
+            "max_fixations_until_return": 21,
+            "min_fixations_until_return": 21,
+            "avg_fixations_until_return": 21.0,
+            "amount_iors": 1
+        },
+        "cmp_yard_007_motorcycle_001.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_032_book_005.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_040_book_013.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "cmp_building_050_bird_006.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_036_book_009.jpg": {
+            "max_fixations_until_return": 16,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 9.0,
+            "amount_iors": 2
+        },
+        "cmp_building_010_cat_002.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_077_toys_036.jpg": {
+            "max_fixations_until_return": 11,
+            "min_fixations_until_return": 11,
+            "avg_fixations_until_return": 11.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_056_toys_015.jpg": {
+            "max_fixations_until_return": 32,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 16.5,
+            "amount_iors": 4
+        },
+        "cmp_building_062_dog_019.jpg": {
+            "max_fixations_until_return": 15,
+            "min_fixations_until_return": 15,
+            "avg_fixations_until_return": 15.0,
+            "amount_iors": 1
+        },
+        "cmp_building_056_bird_012.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_008_fruitvegetal_001.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_016_sheep_004.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 3
+        },
+        "cmp_beach_003_bird_001.jpg": {
+            "max_fixations_until_return": 22,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 12.5,
+            "amount_iors": 4
+        }
+    },
+    "et_389622_scanpaths": {
+        "images_without_repetition": 87,
+        "cmp_sanddunes_001_motorcycle_001.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_019_sheep_007.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_forest_005_bird_002.jpg": {
+            "max_fixations_until_return": 19,
+            "min_fixations_until_return": 19,
+            "avg_fixations_until_return": 19.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_077_toys_036.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 2
+        },
+        "cmp_cakestand_001_food_001.jpg": {
+            "max_fixations_until_return": 12,
+            "min_fixations_until_return": 12,
+            "avg_fixations_until_return": 12.0,
+            "amount_iors": 1
+        },
+        "cmp_building_051_bird_007.jpg": {
+            "max_fixations_until_return": 18,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 12.5,
+            "amount_iors": 2
+        },
+        "cmp_shelves_093_vase_012.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_056_toys_015.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_016_sheep_004.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_020_remote_004.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "cmp_building_014_person_007.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_063_toys_022.jpg": {
+            "max_fixations_until_return": 15,
+            "min_fixations_until_return": 15,
+            "avg_fixations_until_return": 15.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_003_cow_001.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 1
+        }
+    },
+    "et_400297_scanpaths": {
+        "cmp_shelves_067_toys_026.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 2
+        },
+        "images_without_repetition": 77,
+        "cmp_shelves_029_book_002.jpg": {
+            "max_fixations_until_return": 12,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 3
+        },
+        "cmp_mountain_025_cow_005.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_beach_002_person_002.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_052_toys_011.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_068_toys_027.jpg": {
+            "max_fixations_until_return": 34,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 19.4,
+            "amount_iors": 5
+        },
+        "cmp_building_051_bird_007.jpg": {
+            "max_fixations_until_return": 19,
+            "min_fixations_until_return": 19,
+            "avg_fixations_until_return": 19.0,
+            "amount_iors": 1
+        },
+        "cmp_sanddunes_001_motorcycle_001.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_yard_007_motorcycle_001.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "cmp_building_023_cat_010.jpg": {
+            "max_fixations_until_return": 17,
+            "min_fixations_until_return": 16,
+            "avg_fixations_until_return": 16.25,
+            "amount_iors": 4
+        },
+        "cmp_jungle_015_bird_015.jpg": {
+            "max_fixations_until_return": 13,
+            "min_fixations_until_return": 13,
+            "avg_fixations_until_return": 13.0,
+            "amount_iors": 2
+        },
+        "cmp_yard_001_birds_001.jpg": {
+            "max_fixations_until_return": 10,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 7.5,
+            "amount_iors": 2
+        },
+        "cmp_snow_001_person_001.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_building_044_dog_012.jpg": {
+            "max_fixations_until_return": 20,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 13.666666666666666,
+            "amount_iors": 3
+        },
+        "cmp_building_006_person_003.jpg": {
+            "max_fixations_until_return": 14,
+            "min_fixations_until_return": 14,
+            "avg_fixations_until_return": 14.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_003_cow_001.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_africansavanna_003_wildanimals_003.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_050_toys_009.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_032_book_005.jpg": {
+            "max_fixations_until_return": 20,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 13.5,
+            "amount_iors": 2
+        },
+        "cmp_building_018_cat_005.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 1
+        },
+        "cmp_building_021_cat_008.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_093_vase_012.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "cmp_beach_003_bird_001.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_020_cat_007.jpg": {
+            "max_fixations_until_return": 20,
+            "min_fixations_until_return": 15,
+            "avg_fixations_until_return": 17.666666666666668,
+            "amount_iors": 3
+        }
+    },
+    "et_419760_scanpaths": {
+        "images_without_repetition": 93,
+        "cmp_building_018_cat_005.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_jungle_015_bird_015.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_010_cat_002.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_063_toys_022.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_056_toys_015.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 4.5,
+            "amount_iors": 2
+        },
+        "cmp_mountain_017_sheep_005.jpg": {
+            "max_fixations_until_return": 11,
+            "min_fixations_until_return": 11,
+            "avg_fixations_until_return": 11.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_004_sheep_001.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_desks_002_backpacks_001.jpg": {
+            "max_fixations_until_return": 13,
+            "min_fixations_until_return": 12,
+            "avg_fixations_until_return": 12.5,
+            "amount_iors": 2
+        }
+    },
+    "et_501896_scanpaths": {
+        "images_without_repetition": 93,
+        "cmp_shelves_049_toys_008.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "cmp_building_039_dog_007.jpg": {
+            "max_fixations_until_return": 12,
+            "min_fixations_until_return": 12,
+            "avg_fixations_until_return": 12.0,
+            "amount_iors": 1
+        },
+        "cmp_field_008_farmanimals_008.jpg": {
+            "max_fixations_until_return": 12,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 6.666666666666667,
+            "amount_iors": 3
+        },
+        "cmp_building_006_person_003.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "cmp_building_003_person_001.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "cmp_meadow_004_animal_001.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_060_dog_017.jpg": {
+            "max_fixations_until_return": 13,
+            "min_fixations_until_return": 13,
+            "avg_fixations_until_return": 13.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_017_sheep_005.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        }
+    },
+    "et_533569_scanpaths": {
+        "images_without_repetition": 93,
+        "cmp_shelves_100_teddybear_013.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_042_toys_001.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "cmp_sky_003_kite_003.jpg": {
+            "max_fixations_until_return": 11,
+            "min_fixations_until_return": 11,
+            "avg_fixations_until_return": 11.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_063_toys_022.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "cmp_building_020_cat_007.jpg": {
+            "max_fixations_until_return": 19,
+            "min_fixations_until_return": 19,
+            "avg_fixations_until_return": 19.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_022_sheep_010.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        }
+    },
+    "et_573661_scanpaths": {},
+    "et_576470_scanpaths": {
+        "images_without_repetition": 92,
+        "cmp_forest_002_bird_001.jpg": {
+            "max_fixations_until_return": 18,
+            "min_fixations_until_return": 18,
+            "avg_fixations_until_return": 18.0,
+            "amount_iors": 1
+        },
+        "cmp_building_014_person_007.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_022_sheep_010.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.5,
+            "amount_iors": 2
+        },
+        "cmp_shelves_081_knife_004.jpg": {
+            "max_fixations_until_return": 15,
+            "min_fixations_until_return": 15,
+            "avg_fixations_until_return": 15.0,
+            "amount_iors": 1
+        },
+        "cmp_snow_002_animal_002.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_044_dog_012.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_desks_003_plants_001.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_050_toys_009.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_042_toys_001.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        }
+    },
+    "et_601753_scanpaths": {
+        "images_without_repetition": 88,
+        "cmp_shelves_049_toys_008.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_rooftop_001_cat_001.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_023_cat_010.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_077_toys_036.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.5,
+            "amount_iors": 2
+        },
+        "cmp_building_014_person_007.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "cmp_building_051_bird_007.jpg": {
+            "max_fixations_until_return": 13,
+            "min_fixations_until_return": 13,
+            "avg_fixations_until_return": 13.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_085_vase_004.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_068_toys_027.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_105_teddybear_018.jpg": {
+            "max_fixations_until_return": 18,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 10.5,
+            "amount_iors": 2
+        },
+        "cmp_shelves_052_toys_011.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 3
+        },
+        "cmp_building_006_person_003.jpg": {
+            "max_fixations_until_return": 22,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 13.6,
+            "amount_iors": 5
+        },
+        "cmp_shelves_056_toys_015.jpg": {
+            "max_fixations_until_return": 16,
+            "min_fixations_until_return": 16,
+            "avg_fixations_until_return": 16.0,
+            "amount_iors": 1
+        },
+        "cmp_snow_004_dog_001.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_snow_002_animal_002.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        }
+    },
+    "et_619958_scanpaths": {
+        "images_without_repetition": 86,
+        "cmp_desks_003_plants_001.jpg": {
+            "max_fixations_until_return": 23,
+            "min_fixations_until_return": 13,
+            "avg_fixations_until_return": 18.0,
+            "amount_iors": 2
+        },
+        "cmp_cakestand_001_food_001.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.5,
+            "amount_iors": 2
+        },
+        "cmp_building_046_sheep_001.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_building_010_cat_002.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_sky_001_kite_001.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_111_pottedplant_002.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_014_person_007.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_rooftop_001_cat_001.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.5,
+            "amount_iors": 2
+        },
+        "cmp_building_021_cat_008.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_yard_001_birds_001.jpg": {
+            "max_fixations_until_return": 18,
+            "min_fixations_until_return": 18,
+            "avg_fixations_until_return": 18.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_049_toys_008.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "cmp_building_020_cat_007.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_029_book_002.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_016_sheep_004.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_030_person_016.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        }
+    },
+    "et_629959_2_scanpaths": {
+        "images_without_repetition": 86,
+        "cmp_shelves_029_book_002.jpg": {
+            "max_fixations_until_return": 10,
+            "min_fixations_until_return": 10,
+            "avg_fixations_until_return": 10.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_017_sheep_005.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_030_person_016.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_025_cow_005.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "cmp_beach_003_bird_001.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 9,
+            "avg_fixations_until_return": 9.0,
+            "amount_iors": 1
+        },
+        "cmp_building_044_dog_012.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_049_toys_008.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_022_sheep_010.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.6666666666666665,
+            "amount_iors": 3
+        },
+        "cmp_desks_003_plants_001.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 2
+        },
+        "cmp_building_006_person_003.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "cmp_building_046_sheep_001.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.6666666666666665,
+            "amount_iors": 3
+        },
+        "cmp_shelves_056_toys_015.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_052_toys_011.jpg": {
+            "max_fixations_until_return": 10,
+            "min_fixations_until_return": 10,
+            "avg_fixations_until_return": 10.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_058_toys_017.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_062_dog_019.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        }
+    },
+    "et_664304_2_scanpaths": {
+        "images_without_repetition": 86,
+        "cmp_shelves_050_toys_009.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 2
+        },
+        "cmp_beach_003_bird_001.jpg": {
+            "max_fixations_until_return": 12,
+            "min_fixations_until_return": 12,
+            "avg_fixations_until_return": 12.0,
+            "amount_iors": 1
+        },
+        "cmp_snow_002_animal_002.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_056_toys_015.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 2
+        },
+        "cmp_building_018_cat_005.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_023_cat_010.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "cmp_desks_002_backpacks_001.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_100_teddybear_013.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "cmp_field_007_farmanimals_007.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_004_sheep_001.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_014_person_007.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_114_teddybear_024.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 4.666666666666667,
+            "amount_iors": 3
+        },
+        "cmp_shelves_068_toys_027.jpg": {
+            "max_fixations_until_return": 14,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 9.333333333333334,
+            "amount_iors": 3
+        },
+        "cmp_meadow_003_dogs_002.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 3
+        },
+        "cmp_forest_005_bird_002.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 2
+        }
+    },
+    "et_677251_scanpaths": {
+        "images_without_repetition": 98,
+        "cmp_yard_001_birds_001.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_085_vase_004.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 2
+        },
+        "cmp_snow_002_animal_002.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "cmp_desks_002_backpacks_001.jpg": {
+            "max_fixations_until_return": 13,
+            "min_fixations_until_return": 13,
+            "avg_fixations_until_return": 13.0,
+            "amount_iors": 1
+        }
+    },
+    "et_712871_scanpaths": {
+        "images_without_repetition": 89,
+        "cmp_yard_001_birds_001.jpg": {
+            "max_fixations_until_return": 25,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 11.333333333333334,
+            "amount_iors": 3
+        },
+        "cmp_building_044_dog_012.jpg": {
+            "max_fixations_until_return": 14,
+            "min_fixations_until_return": 14,
+            "avg_fixations_until_return": 14.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_056_toys_015.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_085_vase_004.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_006_person_003.jpg": {
+            "max_fixations_until_return": 16,
+            "min_fixations_until_return": 16,
+            "avg_fixations_until_return": 16.0,
+            "amount_iors": 1
+        },
+        "cmp_yard_007_motorcycle_001.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 2
+        },
+        "cmp_shelves_101_teddybear_014.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_022_sheep_010.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_077_toys_036.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_008_fruitvegetal_001.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_019_sheep_007.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "cmp_building_020_cat_007.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.5,
+            "amount_iors": 2
+        }
+    },
+    "et_719396_scanpaths": {
+        "images_without_repetition": 92,
+        "cmp_shelves_077_toys_036.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_072_toys_031.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_017_sheep_005.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_building_041_dog_009.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_050_toys_009.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_yard_001_birds_001.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_006_person_003.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_beach_002_person_002.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        }
+    },
+    "et_848643_scanpaths": {
+        "images_without_repetition": 80,
+        "cmp_mountain_022_sheep_010.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_006_person_003.jpg": {
+            "max_fixations_until_return": 17,
+            "min_fixations_until_return": 17,
+            "avg_fixations_until_return": 17.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_112_pottedplant_003.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_056_toys_015.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 2
+        },
+        "cmp_building_039_dog_007.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 9,
+            "avg_fixations_until_return": 9.0,
+            "amount_iors": 1
+        },
+        "cmp_building_030_person_016.jpg": {
+            "max_fixations_until_return": 13,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 7.5,
+            "amount_iors": 2
+        },
+        "cmp_building_014_person_007.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "cmp_building_056_bird_012.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_063_toys_022.jpg": {
+            "max_fixations_until_return": 16,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 10.5,
+            "amount_iors": 6
+        },
+        "cmp_building_054_bird_010.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_087_vase_006.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_building_051_bird_007.jpg": {
+            "max_fixations_until_return": 19,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 11.0,
+            "amount_iors": 2
+        },
+        "cmp_building_050_bird_006.jpg": {
+            "max_fixations_until_return": 10,
+            "min_fixations_until_return": 10,
+            "avg_fixations_until_return": 10.0,
+            "amount_iors": 1
+        },
+        "cmp_building_023_cat_010.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 2
+        },
+        "cmp_shelves_029_book_002.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_003_cow_001.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 2
+        },
+        "cmp_mountain_025_cow_005.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_forest_002_bird_001.jpg": {
+            "max_fixations_until_return": 19,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 12.666666666666666,
+            "amount_iors": 3
+        },
+        "cmp_meadow_003_dogs_002.jpg": {
+            "max_fixations_until_return": 10,
+            "min_fixations_until_return": 10,
+            "avg_fixations_until_return": 10.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_077_toys_036.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 2
+        },
+        "cmp_mountain_016_sheep_004.jpg": {
+            "max_fixations_until_return": 16,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 9.5,
+            "amount_iors": 2
+        },
+        "cmp_shelves_039_book_012.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 1
+        }
+    },
+    "et_862513_scanpaths": {
+        "images_without_repetition": 74,
+        "cmp_building_007_person_004.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_021_cat_008.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_003_cow_001.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_025_cow_005.jpg": {
+            "max_fixations_until_return": 22,
+            "min_fixations_until_return": 9,
+            "avg_fixations_until_return": 16.666666666666668,
+            "amount_iors": 3
+        },
+        "cmp_shelves_050_toys_009.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 5.333333333333333,
+            "amount_iors": 3
+        },
+        "cmp_building_023_cat_010.jpg": {
+            "max_fixations_until_return": 17,
+            "min_fixations_until_return": 17,
+            "avg_fixations_until_return": 17.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_052_toys_011.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_yard_005_animal_003.jpg": {
+            "max_fixations_until_return": 13,
+            "min_fixations_until_return": 13,
+            "avg_fixations_until_return": 13.0,
+            "amount_iors": 1
+        },
+        "cmp_building_056_bird_012.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_beach_003_bird_001.jpg": {
+            "max_fixations_until_return": 18,
+            "min_fixations_until_return": 18,
+            "avg_fixations_until_return": 18.0,
+            "amount_iors": 1
+        },
+        "cmp_building_020_cat_007.jpg": {
+            "max_fixations_until_return": 10,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 5.8,
+            "amount_iors": 5
+        },
+        "cmp_shelves_100_teddybear_013.jpg": {
+            "max_fixations_until_return": 11,
+            "min_fixations_until_return": 11,
+            "avg_fixations_until_return": 11.0,
+            "amount_iors": 1
+        },
+        "cmp_forest_002_bird_001.jpg": {
+            "max_fixations_until_return": 19,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 14.0,
+            "amount_iors": 3
+        },
+        "cmp_building_054_bird_010.jpg": {
+            "max_fixations_until_return": 19,
+            "min_fixations_until_return": 19,
+            "avg_fixations_until_return": 19.0,
+            "amount_iors": 1
+        },
+        "cmp_sky_001_kite_001.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "cmp_africansavanna_003_wildanimals_003.jpg": {
+            "max_fixations_until_return": 18,
+            "min_fixations_until_return": 18,
+            "avg_fixations_until_return": 18.0,
+            "amount_iors": 1
+        },
+        "cmp_building_062_dog_019.jpg": {
+            "max_fixations_until_return": 19,
+            "min_fixations_until_return": 19,
+            "avg_fixations_until_return": 19.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_004_sheep_001.jpg": {
+            "max_fixations_until_return": 13,
+            "min_fixations_until_return": 13,
+            "avg_fixations_until_return": 13.0,
+            "amount_iors": 1
+        },
+        "cmp_yard_007_motorcycle_001.jpg": {
+            "max_fixations_until_return": 12,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 2
+        },
+        "cmp_desks_002_backpacks_001.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_077_toys_036.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_snow_002_animal_002.jpg": {
+            "max_fixations_until_return": 16,
+            "min_fixations_until_return": 16,
+            "avg_fixations_until_return": 16.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_022_sheep_010.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_081_knife_004.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_101_teddybear_014.jpg": {
+            "max_fixations_until_return": 6,
+            "min_fixations_until_return": 6,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 1
+        },
+        "cmp_field_008_farmanimals_008.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_006_person_003.jpg": {
+            "max_fixations_until_return": 26,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 15.333333333333334,
+            "amount_iors": 6
+        },
+        "cmp_shelves_029_book_002.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 2
+        }
+    },
+    "et_963607_scanpaths": {
+        "images_without_repetition": 87,
+        "cmp_shelves_072_toys_031.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_044_dog_012.jpg": {
+            "max_fixations_until_return": 15,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 8.5,
+            "amount_iors": 2
+        },
+        "cmp_building_050_bird_006.jpg": {
+            "max_fixations_until_return": 13,
+            "min_fixations_until_return": 13,
+            "avg_fixations_until_return": 13.0,
+            "amount_iors": 1
+        },
+        "cmp_building_054_bird_010.jpg": {
+            "max_fixations_until_return": 17,
+            "min_fixations_until_return": 15,
+            "avg_fixations_until_return": 16.0,
+            "amount_iors": 2
+        },
+        "cmp_seabottom_001_bottle_001.jpg": {
+            "max_fixations_until_return": 15,
+            "min_fixations_until_return": 13,
+            "avg_fixations_until_return": 14.0,
+            "amount_iors": 2
+        },
+        "cmp_building_018_cat_005.jpg": {
+            "max_fixations_until_return": 20,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 10.5,
+            "amount_iors": 4
+        },
+        "cmp_building_020_cat_007.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_056_toys_015.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_036_book_009.jpg": {
+            "max_fixations_until_return": 17,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 9.5,
+            "amount_iors": 2
+        },
+        "cmp_shelves_081_knife_004.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 1
+        },
+        "cmp_mountain_022_sheep_010.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_shelves_016_cup_001.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_building_046_sheep_001.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_desks_003_plants_001.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "cmp_desks_002_backpacks_001.jpg": {
+            "max_fixations_until_return": 11,
+            "min_fixations_until_return": 11,
+            "avg_fixations_until_return": 11.0,
+            "amount_iors": 1
+        }
+    }
+}

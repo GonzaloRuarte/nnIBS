@@ -1,0 +1,392 @@
+{
+    "subj01_scanpaths": {
+        "images_without_repetition": 2434,
+        "000000276127.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "000000086020.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "000000508592.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "000000121661.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "000000261679.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        }
+    },
+    "subj02_scanpaths": {
+        "images_without_repetition": 2443,
+        "000000472733.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "000000510923.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "000000305460.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        },
+        "000000463464.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "000000558378.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "000000535786.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        }
+    },
+    "subj03_scanpaths": {
+        "images_without_repetition": 2437,
+        "000000541562.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "000000422611.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "000000086020.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "000000550324.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        }
+    },
+    "subj04_scanpaths": {
+        "images_without_repetition": 2363,
+        "000000493503.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "000000053425.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.6666666666666665,
+            "amount_iors": 3
+        },
+        "000000301147.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "000000116370.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "000000042416.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "000000451279.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "000000537944.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        }
+    },
+    "subj05_scanpaths": {
+        "images_without_repetition": 2405,
+        "000000530905.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "000000449394.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "000000324488.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "000000223474.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "000000121612.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "000000227061.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.5,
+            "amount_iors": 2
+        },
+        "000000543882.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        }
+    },
+    "subj06_scanpaths": {
+        "images_without_repetition": 2349,
+        "000000307039.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "000000564759.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 6.0,
+            "amount_iors": 3
+        },
+        "000000543882.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "100000350617.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "000000030401.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        }
+    },
+    "subj07_scanpaths": {
+        "images_without_repetition": 2448,
+        "000000053047.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "000000510652.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        }
+    },
+    "subj08_scanpaths": {
+        "images_without_repetition": 2405,
+        "000000328838.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "000000335233.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "000000501138.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "000000288610.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "000000040988.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 2
+        },
+        "100000531552.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "000000033295.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "000000458282.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        }
+    },
+    "subj09_scanpaths": {
+        "images_without_repetition": 2432,
+        "000000332968.jpg": {
+            "max_fixations_until_return": 5,
+            "min_fixations_until_return": 5,
+            "avg_fixations_until_return": 5.0,
+            "amount_iors": 1
+        },
+        "000000088950.jpg": {
+            "max_fixations_until_return": 7,
+            "min_fixations_until_return": 7,
+            "avg_fixations_until_return": 7.0,
+            "amount_iors": 1
+        },
+        "000000419653.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "000000307039.jpg": {
+            "max_fixations_until_return": 28,
+            "min_fixations_until_return": 28,
+            "avg_fixations_until_return": 28.0,
+            "amount_iors": 1
+        },
+        "000000093641.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "000000343634.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 8,
+            "avg_fixations_until_return": 8.0,
+            "amount_iors": 1
+        },
+        "100000520657.jpg": {
+            "max_fixations_until_return": 10,
+            "min_fixations_until_return": 10,
+            "avg_fixations_until_return": 10.0,
+            "amount_iors": 1
+        },
+        "000000051310.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.75,
+            "amount_iors": 4
+        },
+        "000000239013.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        },
+        "000000513855.jpg": {
+            "max_fixations_until_return": 8,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 5.333333333333333,
+            "amount_iors": 3
+        },
+        "000000487182.jpg": {
+            "max_fixations_until_return": 2,
+            "min_fixations_until_return": 2,
+            "avg_fixations_until_return": 2.0,
+            "amount_iors": 1
+        },
+        "000000230745.jpg": {
+            "max_fixations_until_return": 3,
+            "min_fixations_until_return": 3,
+            "avg_fixations_until_return": 3.0,
+            "amount_iors": 1
+        }
+    },
+    "subj10_scanpaths": {
+        "images_without_repetition": 2459,
+        "000000481162.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        },
+        "100000445411.jpg": {
+            "max_fixations_until_return": 1,
+            "min_fixations_until_return": 1,
+            "avg_fixations_until_return": 1.0,
+            "amount_iors": 1
+        },
+        "000000305460.jpg": {
+            "max_fixations_until_return": 9,
+            "min_fixations_until_return": 9,
+            "avg_fixations_until_return": 9.0,
+            "amount_iors": 1
+        },
+        "000000195918.jpg": {
+            "max_fixations_until_return": 4,
+            "min_fixations_until_return": 4,
+            "avg_fixations_until_return": 4.0,
+            "amount_iors": 1
+        }
+    }
+}
