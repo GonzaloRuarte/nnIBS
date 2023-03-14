@@ -65,9 +65,8 @@ class TransferNet(models.ResNet):
         
 
     def forward(self, x, fixation_num = None,image = None):
-        x = torch.squeeze(x)
+        #x = torch.squeeze(x)
         x = torch.unsqueeze(x, axis=1) #para incorporar el canal (que es uno solo en este caso)
-
         x = nn.functional.interpolate(x,size=(224,224))
 
         x = self.conv1(x)

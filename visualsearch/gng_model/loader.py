@@ -5,7 +5,7 @@ from torch.optim.lr_scheduler import ReduceLROnPlateau
 from os import path
 from sklearn.model_selection import StratifiedGroupKFold
 from sklearn.utils.class_weight import compute_class_weight
-import go_no_go
+from . import go_no_go
 import random
 import numpy as np
 import pandas as pd
@@ -170,7 +170,7 @@ class ModelLoader():
         trainloader = DataLoader(trainset,self.batch_size,shuffle=False)                        
         self.model.train()
         self.balanced_weights(trainset.get_labels())
-        min_loss = 0.0    
+        min_loss = 10.0    
         #forward loop
         for epoch in range(self.epochs):
                 correct, total = 0, 0
@@ -333,7 +333,7 @@ class ModelLoader():
             fixation_num_validation= np.empty(shape=0)
             labels_validation= np.empty(shape=0)
             scanpath_ids_validation= np.empty(shape=0)
-            min_loss = 0.0
+            min_loss = 10.0
             for epoch in range(self.epochs):
                 correct, total = 0, 0
                 # Print epoch

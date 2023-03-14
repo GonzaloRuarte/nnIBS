@@ -7,12 +7,13 @@ import numpy as np
 import time
 import importlib
 from scipy.stats import entropy
-from .gng_model import loader
+from .gng_model.loader import ModelLoader
 #from os import path
 from .visibility_map import VisibilityMap
 from .grid import Grid
 import sys
 from os import mkdir, path
+import torch
 
 class VisualSearcher: 
     def __init__(self, config, dataset_info, trials_properties, output_path, human_scanpaths,sigma):
@@ -180,7 +181,7 @@ class VisualSearcher:
         # Sum probabilities
         image_prior = prior.sum(image_prior, self.init_max_saccades)
 
-        gng_model = loader.ModelLoader()
+        gng_model = ModelLoader(num_classes=2)
 
         gng_model.load(path.abspath("visualsearch/gng_model/GNG_model_dict.pth"))
         # Convert target bounding box to grid cells
@@ -257,8 +258,10 @@ class VisualSearcher:
             
             posterior = likelihood_times_prior / marginal            
             
-            if not gng_model.continue_search(posterior,fixation_number+1):
-                target_found = True
+            if not gng_model.continue_search(posterior):
+                if target_bbox != None:
+                    if utils.are_within_boundaries(current_fixation, current_fixation, (target_bbox_in_grid[0], target_bbox_in_grid[1]), (target_bbox_in_grid[2] + 1, target_bbox_in_grid[3] + 1)):
+                        target_found = True
                 fixations = fixations[:fixation_number + 1]
                 break
             fixations[fixation_number + 1] = self.search_model.next_fixation(posterior, image_name, fixation_number, self.output_path)
