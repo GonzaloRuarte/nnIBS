@@ -38,7 +38,7 @@ for dataset in listdir("."):
             if amount_repetitions == 0:
                 images_without_repetition +=1
             else:
-                iors[participant[:-5]][image] ={"max_fixations_until_return" : max_ior_image_subject,"min_fixations_until_return" : min_ior_image_subject,"avg_fixations_until_return" :avg_ior_image_subject,"amount_iors":amount_repetitions}
+                iors[participant[:-5]][image] ={"max_fixations_until_return" : max_ior_image_subject,"min_fixations_until_return" : min_ior_image_subject,"avg_fixations_until_return" :avg_ior_image_subject,"amount_returns":amount_repetitions}
             iors[participant[:-5]]["images_without_repetition"] = images_without_repetition
-    with open(path.abspath("iors_"+dataset.split("\\")[0]+".json"), 'w') as json_file:
+    with open(path.abspath("returns_"+dataset.split("\\")[0]+".json"), 'w') as json_file:
         json.dump(iors,json_file, indent=4)
