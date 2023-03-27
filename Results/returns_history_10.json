@@ -1,222 +1,259 @@
 {
     "images_without_repetition": 97,
     "grayscale_1_oliva.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 3
     },
     "grayscale_2_oliva.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 1
     },
     "grayscale_2_opensource.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 1
     },
     "grayscale_3_kitchen.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 2
     },
     "grayscale_4_housebeautiful.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 1
     },
     "grayscale_4_kitchen.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 2
     },
     "grayscale_4_oliva.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 1
     },
     "grayscale_6_housebeautiful.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 2
     },
     "grayscale_6_other.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 1
     },
     "grayscale_8_oliva.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 4
     },
     "grayscale_8_other.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 2
     },
     "grayscale_10_oliva.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 1
     },
     "grayscale_13_kitchen.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 3,
         "avg_fixations_until_return": 7.5,
         "amount_returns": 2
     },
     "grayscale_14_airbnb.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 1
     },
     "grayscale_14_housebeautiful.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 6,
         "min_fixations_until_return": 6,
         "avg_fixations_until_return": 6.0,
         "amount_returns": 1
     },
     "grayscale_14_other.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 2
     },
     "grayscale_16_opensource.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 1
     },
     "grayscale_21_housebeautiful.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 3
     },
     "grayscale_24_oliva.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 2
     },
     "grayscale_28_housebeautiful.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 1
     },
     "grayscale_30_housebeautiful.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 3
     },
     "grayscale_34_housebeautiful.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 1
     },
     "grayscale_40_oliva.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 1
     },
     "grayscale_43_oliva.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 1
     },
     "grayscale_52_oliva.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 1
     },
     "grayscale_54_oliva.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 1
     },
     "grayscale_58_oliva.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 2
     },
     "grayscale_60_oliva.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 2
     },
     "grayscale_65_oliva.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 1
     },
     "grayscale_68_oliva.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 2
     },
     "grayscale_75_oliva.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 1
     },
     "grayscale_77_oliva.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 2
     },
     "grayscale_83_oliva.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 1
     },
     "grayscale_88_oliva.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 1
     },
     "grayscale_94_oliva.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 2
     },
     "grayscale_98_oliva.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
         "amount_returns": 1
     },
     "grayscale_99_oliva.jpg": {
+        "amount_leave_target": 0,
         "max_fixations_until_return": 12,
         "min_fixations_until_return": 12,
         "avg_fixations_until_return": 12.0,
