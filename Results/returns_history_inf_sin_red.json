@@ -1,0 +1,15 @@
+{
+    "images_without_repetition": 132,
+    "grayscale_13_kitchen.jpg": {
+        "max_fixations_until_return": 3,
+        "min_fixations_until_return": 3,
+        "avg_fixations_until_return": 3.0,
+        "amount_returns": 1
+    },
+    "grayscale_14_housebeautiful.jpg": {
+        "max_fixations_until_return": 6,
+        "min_fixations_until_return": 6,
+        "avg_fixations_until_return": 6.0,
+        "amount_returns": 1
+    }
+}
