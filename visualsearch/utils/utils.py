@@ -109,6 +109,7 @@ def add_scanpath_to_dict(image_name, image_scanpath, target_bbox, target_object,
     target_found = image_scanpath['target_found']
     scanpath_x   = image_scanpath['scanpath_x']
     scanpath_y   = image_scanpath['scanpath_y']
+    searched_object_indexes = image_scanpath['searched_object_indexes']
     if target_bbox != None:
         target_bbox_in_grid = np.empty(len(target_bbox), dtype=np.int)
         target_bbox_in_grid[0], target_bbox_in_grid[1] = grid.map_to_cell((target_bbox[0], target_bbox[1]))
@@ -118,7 +119,7 @@ def add_scanpath_to_dict(image_name, image_scanpath, target_bbox, target_object,
         target_bbox_in_grid = None
     dict_[image_name] = {'subject' : 'nnIBS Model', 'dataset' : dataset_name, 'image_height' : int(grid.size()[0]), 'image_width' : int(grid.size()[1]), \
         'receptive_height' : 1, 'receptive_width' : 1, 'target_found' : target_found, 'target_bbox' : target_bbox_in_grid, \
-                 'X' : list(map(int, scanpath_x)), 'Y' : list(map(int, scanpath_y)),'memory_set':memory_set, 'target_object' : target_object, 'max_fixations' : config['max_saccades'] + 1
+                 'X' : list(map(int, scanpath_x)), 'Y' : list(map(int, scanpath_y)),'memory_set':memory_set, 'searched_object_indexes':searched_object_indexes, 'target_object' : target_object, 'max_fixations' : config['max_saccades'] + 1
         }
 
 def are_within_boundaries(top_left_coordinates, bottom_right_coordinates, top_left_coordinates_to_compare, bottom_right_coordinates_to_compare):

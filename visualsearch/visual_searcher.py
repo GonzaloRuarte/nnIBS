@@ -181,9 +181,9 @@ class VisualSearcher:
         # Sum probabilities
         image_prior = prior.sum(image_prior, self.init_max_saccades)
 
-        gng_model = ModelLoader(num_classes=2)
+        #gng_model = ModelLoader(num_classes=2)
 
-        gng_model.load(path.abspath("visualsearch/gng_model/GNG_model_dict.pth"))
+        #gng_model.load(path.abspath("visualsearch/gng_model/GNG_model_dict.pth"))
         # Convert target bounding box to grid cells
         if target_bbox != None:
             target_bbox_in_grid = np.empty(len(target_bbox), dtype=np.int)
@@ -220,10 +220,15 @@ class VisualSearcher:
         # Initialize variables for computing each fixation        
         likelihood = np.zeros(shape=grid_size)
 
+        #target_selection_rate = 4 #o un random int
+
+        #fixations_until_target_renewal = 0
+
         # Search
         print('Fixation:', end=' ')
         target_found = False
         start = time.time()
+        searched_object_indexes = []
         if self.history_size != None:
             history_likelihoods = np.zeros(shape=(self.history_size,grid_size[0],grid_size[1]))
         for fixation_number in range(self.max_saccades + 1):
@@ -233,24 +238,33 @@ class VisualSearcher:
                 current_fixation = fixations[fixation_number]
 
             print(fixation_number + 1, end=' ')
-            #if target_bbox != None:
-                #if utils.are_within_boundaries(current_fixation, current_fixation, (target_bbox_in_grid[0], target_bbox_in_grid[1]), (target_bbox_in_grid[2] + 1, target_bbox_in_grid[3] + 1)):
-                    #target_found = True
-                    #fixations = fixations[:fixation_number + 1]
-                    #break
+            if target_bbox != None:
+                if utils.are_within_boundaries(current_fixation, current_fixation, (target_bbox_in_grid[0], target_bbox_in_grid[1]), (target_bbox_in_grid[2] + 1, target_bbox_in_grid[3] + 1)):
+                    target_found = True
+                    fixations = fixations[:fixation_number + 1]
+                    break
 
             # If the limit has been reached, don't compute the next fixation
             if fixation_number == self.max_saccades:
                 break
+            
             target_similarities = np.array(list(map(lambda x: x.at_fixation(current_fixation),target_similarity_map)))
-            minimum_entropy_likelihood_index = np.argmin(list(map(lambda x : entropy(x.flatten()),target_similarities)))
+            #if fixations_until_target_renewal == 0:
+                #fixations_until_target_renewal = target_selection_rate
+
+                #selected_likelihood_index = np.random.randint(len(memory_set)) #A random target similarity map is used
+            #fixations_until_target_renewal -= 1
+            
+            selected_likelihood_index = np.argmin(list(map(lambda x : entropy(x.flatten()),target_similarities))) #The target similarity map with minimum entropy is used
+            searched_object_indexes.append(selected_likelihood_index)
             if self.history_size != None:
                 history_likelihoods = np.append(history_likelihoods,[np.zeros(shape=grid_size)], axis=0)
-                history_likelihoods = history_likelihoods + (target_similarities[minimum_entropy_likelihood_index] * (np.square(self.visibility_map.at_fixation(current_fixation))))
+                history_likelihoods = history_likelihoods + (target_similarities[selected_likelihood_index] * (np.square(self.visibility_map.at_fixation(current_fixation))))
                 likelihood = history_likelihoods[0] #I remember the last n fixations and I also include the information gained in the current fixation
                 history_likelihoods = history_likelihoods[1:] #I discard the oldest fixation info
             else:
-                likelihood = likelihood + (target_similarities[minimum_entropy_likelihood_index] * (np.square(self.visibility_map.at_fixation(current_fixation))))
+                likelihood = likelihood + (target_similarities[selected_likelihood_index] * (np.square(self.visibility_map.at_fixation(current_fixation))))
+
 
             likelihood_times_prior = image_prior * np.exp(likelihood)
             
@@ -258,12 +272,12 @@ class VisualSearcher:
             
             posterior = likelihood_times_prior / marginal            
             
-            if not gng_model.continue_search(posterior):
-                if target_bbox != None:
-                    if utils.are_within_boundaries(current_fixation, current_fixation, (target_bbox_in_grid[0], target_bbox_in_grid[1]), (target_bbox_in_grid[2] + 1, target_bbox_in_grid[3] + 1)):
-                        target_found = True
-                fixations = fixations[:fixation_number + 1]
-                break
+            #if not gng_model.continue_search(posterior):
+                #if target_bbox != None:
+                    #if utils.are_within_boundaries(current_fixation, current_fixation, (target_bbox_in_grid[0], target_bbox_in_grid[1]), (target_bbox_in_grid[2] + 1, target_bbox_in_grid[3] + 1)):
+                        #target_found = True
+                #fixations = fixations[:fixation_number + 1]
+                #break
             fixations[fixation_number + 1] = self.search_model.next_fixation(posterior, image_name, fixation_number, self.output_path)
 
         end = time.time()
@@ -284,7 +298,7 @@ class VisualSearcher:
         if self.human_scanpaths:
             human_scanpath_prediction.save_scanpath_prediction_metrics(current_human_scanpath, image_name, self.output_path)
 
-        return { 'target_found' : target_found, 'scanpath_x' : scanpath_x_coordinates, 'scanpath_y' : scanpath_y_coordinates }
+        return { 'searched_object_indexes':searched_object_indexes,'target_found' : target_found, 'scanpath_x' : scanpath_x_coordinates, 'scanpath_y' : scanpath_y_coordinates }
     
     def get_coordinates(self, fixations, axis):
         fixations_as_list = np.array(fixations).flatten()
