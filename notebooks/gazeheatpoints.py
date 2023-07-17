@@ -97,7 +97,8 @@ def draw_heatmap(gazepoints,
                  savefigpath=None,
                  gaussianwh=100,
                  gaussiansd=None,
-                 title=''):
+                 title='',
+                 ancho=4):
     """Draws a heatmap of the provided fixations, optionally drawn over an
     image, and optionally allocating more weight to fixations with a higher
     duration.
@@ -191,7 +192,7 @@ def draw_heatmap(gazepoints,
     ax.invert_yaxis()
     
     # si no pongo esto a la hora de guardar el heatmap, no se guardan los axis (se puede sacar si se prefiere)
-    ax.set_axis_on()
+    #ax.set_axis_off()
     ax.set_title(title)
     
     # save the figure if a file name was provided
@@ -199,5 +200,18 @@ def draw_heatmap(gazepoints,
         #fig.tight_layout()
         fig.savefig(os.path.join(savefigpath, title.replace(' ','-') + '.png'), bbox_inches='tight')
     
+    # Get the current size of the Figure in inches
+    current_size = fig.get_size_inches()
+    # Calculate the original aspect ratio
+    original_aspect_ratio = ax.get_aspect()
+    # Set the new width while maintaining the aspect ratio
+    new_width = ancho  # New width in inches
+    new_height = new_width / original_aspect_ratio
+    # Set the new size of the Figure while maintaining the aspect ratio
+    fig.set_size_inches(new_width, new_height)
+    # Redraw the canvas to reflect the changes
+    fig.canvas.draw()
+    # Show or save the resized plot
+    plt.show()
 
     return fig, heatmap
