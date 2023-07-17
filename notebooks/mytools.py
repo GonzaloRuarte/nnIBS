@@ -317,8 +317,24 @@ def create_scanpaths_df_metrics_models(df: pd.DataFrame, responses_data: pd.Data
 # plot funcs
 # TODO sacar el hardcodeo del tamaño de la pantalla en alto
 # TODO pensar si sacar el resp path y agregar direcatamente el dataframe
-def plot_trial_subject_response(subj, image_name, data_path, resp_path, y_correction = False,
-                                show_scanpath = True, ax=None):
+def plot_trial_subject_response(subj, image_name, data_path, resp_path, y_correction=False,
+                                show_scanpath=True, ax=None, figsize=(15, 10)):
+    """
+    Plots the image with the target box and the response circle, along with the scanpath of a given subject and image.
+
+    Args:
+        subj (int): The subject ID.
+        image_name (str): The name of the image file.
+        data_path (str): The path to the data directory.
+        resp_path (str): The path to the response directory.
+        y_correction (bool, optional): Whether to apply a correction to the y-axis. Defaults to False.
+        show_scanpath (bool, optional): Whether to show the scanpath. Defaults to True.
+        ax (matplotlib.axes.Axes, optional): The axes to plot on. Defaults to None.
+        figsize (tuple, optional): The figure size. Defaults to (15, 10).
+
+    Returns:
+        None
+    """
 
     #subj = 41
     #image_name = 'grayscale_100_oliva.jpg' 
@@ -337,7 +353,7 @@ def plot_trial_subject_response(subj, image_name, data_path, resp_path, y_correc
     tmp = cv2.imread(tmp_files[0])
     
     if ax is None:
-        fig, ax = plt.subplots(1,2, figsize=(15,10), gridspec_kw={'width_ratios': [3, 1]})
+        fig, ax = plt.subplots(1,2, figsize=figsize, gridspec_kw={'width_ratios': [3, 1]})
     ax[0].imshow(img, cmap='gray');
     ax[0].add_patch(Rectangle((tx,ty), tmp.shape[1], tmp.shape[0], fill=False, edgecolor='red', linewidth=3))
     if y_correction:
@@ -353,16 +369,30 @@ def plot_trial_subject_response(subj, image_name, data_path, resp_path, y_correc
         
         ax[0].text(835,745, f'Target found: {target_f}', style='normal', fontsize=10, 
                     bbox={'facecolor': 'red', 'alpha': 0.7, 'pad': 10})
-        ax[1].text(4, 8, f'Saccadic threshold: {max_fix}, \nResponse found:{target_fr}', style='italic',
+        ax[1].text(-5, -10, f'Saccadic threshold: {max_fix}, \nResponse found:{target_fr}', style='italic',
                     bbox={'facecolor': 'red', 'alpha': 0.7, 'pad': 10})
         
     #ax[0].plot(x_init, y_init, 'g')
     ax[1].imshow(tmp, cmap='gray');
-    
-    return fig, ax
+    ax[0].set_axis_off()
+    ax[1].set_axis_off()
+    plt.show()
 
 def plot_image_responses(image_name, data_path, resp_path, y_correction = False, use='all',ax=None):
-    
+    """
+    Plots an image with the target box and response circles overlayed on it.
+
+    Args:
+    - image_name (str): The name of the image file to plot.
+    - data_path (str): The path to the directory containing the images.
+    - resp_path (str): The path to the directory containing the response data.
+    - y_correction (bool): Whether to apply a correction to the y-axis values(alignment).
+    - use (str): Which responses to plot. Must be one of "all", "target_found", or "target_not_found".
+    - ax (matplotlib.axes.Axes): The axes object to plot on. If None, a new figure and axes will be created.
+
+    Returns:
+    - None
+    """
     # plot image and overlay target box
     img = cv2.imread(os.path.join(data_path, 'images',image_name))
     subjs_response = load_human_scanpaths(os.path.join(resp_path, 'human_scanpaths'), human_subject='all')
@@ -409,7 +439,9 @@ def plot_image_responses(image_name, data_path, resp_path, y_correction = False,
             
     ax.text(20,30, f'N. subjs: {n_subjs}, considerados: {use}', style='normal', fontsize=14, 
                 bbox={'facecolor': 'red', 'alpha': 0.7, 'pad': 10});
-    return fig, ax
+    
+    ax.set_axis_off()
+    #plt.show()
 
     
 def plot_responses_vs_target_all(responses_df):
@@ -486,13 +518,17 @@ def fixpos2densemap(fix_arr, width, height, imgfile, alpha=0.5, threshold=10):
         return heatmap
 
 def plot_fixposmap(data, image_file=None, image_path = None, plot_save_path=None, name=''):
-    """_summary_
+    """
+    Plots a heatmap of the fixation points of all subjects for a given image file.
 
     Args:
-        image_file (str): image file name to plot
-        data (dict): the data loaded from the json file into a dictionary
-        plot_save_path (_type_, optional): _description_. Defaults to None.
-        image_path (str): image path
+        image_file (str): The name of the image file to plot.
+        data (dict): The data loaded from the json file into a dictionary.
+        plot_save_path (str, optional): The path to save the plot. Defaults to None.
+        image_path (str, optional): The path to the image file. Defaults to None.
+
+    Returns:
+        np.ndarray: The heatmap of the fixation points.
     """
     fix_list = []
     subj_num = 0
