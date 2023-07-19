@@ -49,6 +49,17 @@ def distance_response_to_target(trial):
         print(type(x_target))
 
 def target_found_response(trial):
+    """
+    This function receives a trial dictionary and returns a boolean indicating if the target was found or not.
+    The target is considered found if the distance between the response and the center of the target is less than or equal to
+    the half side of the target box (usually 32 px.) plus the radius of the response.
+
+    Args:
+        trial (dict): A dictionary containing the trial data.
+
+    Returns:
+        bool: True if the target was found within the response, False otherwise.
+    """
     y1, x1, y2, x2  = trial['target_bbox']
     side_target_x, side_target_y = x2 - x1, y2 - y1
     assert (side_target_x == side_target_y) & (side_target_y>0) & (side_target_x>0), 'Target box is not a square'
